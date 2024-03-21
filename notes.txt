@@ -1,0 +1,28 @@
+Fixes/improvements:
+- fix app crashing on add bookmark
+- remove necessity for undefined/null check in lastElement function
+- fix non-serializeable values error, i.e. nav passing as prop
+
+Features, planned:
+- add drawer menu, move links to bookmarks, etc. to there
+- add menuOpen state to homescreen/app
+! Swipe or tap on side of screen to move forward or back
+- display toast/message to inform user when updating, finished updating, network error, etc.
+
+Features, possible
+? Store comics by book/arc/year?
+
+Notes: 
+- Final comic doesn't have 'topnext' link
+
+Done:
+x Make update loop stop even if it returns undefined
+x replace scrollview with flatlist in listscreen
+x redo storage structure: add key for dates, key for bookmarks
+x Image behaviour: 
+x - on release pinch, stay at current zoom level. 
+x - on double-tap, if image is at normal size, go to maximum zoom centered on tap point
+x - on double-tap, if image is zoomed, zoom out to full size
+x Save dates as a file kept in the repository, so it doesn't have to fetch from the beginning
+x add current date to stored values
+x in dev mode, on app restart, it returns to the comic before the last one viewed
