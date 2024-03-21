@@ -3,11 +3,11 @@ import { DateContext } from "../context/DateContext";
 import { View, FlatList, StyleSheet } from "react-native";
 import BookmarkLink from "../components/BookmarkLink";
 
-export default function Bookmarks({ navigation }) {
+export default function Bookmarks({ navigation }: any) {
   const { getBookmarks } = useContext(DateContext);
   const bookmarks: string[] = getBookmarks();
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item, index }: {item: string, index: number}) => (
     <BookmarkLink key={index} date={item} nav={navigation} />
   );
 
