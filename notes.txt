@@ -4,6 +4,7 @@ Fixes/improvements:
 - fix non-serializeable values error, i.e. nav passing as prop
 
 Features, planned:
+- steampunk aesthetic, inspired by GG website
 - add drawer menu, move links to bookmarks, etc. to there
 - add menuOpen state to homescreen/app
 ! Swipe or tap on side of screen to move forward or back

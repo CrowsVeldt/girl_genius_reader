@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { DateContext } from "../context/DateContext";
-import { ImageZoom } from "@likashefqet/react-native-image-zoom";
+// import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import ComicNav from "../components/ComicNav";
 
 const screen: ScaledSize = Dimensions.get("screen");
@@ -29,11 +29,11 @@ export default function Home({ route, navigation }) {
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
-        <ImageZoom
+        {/* <ImageZoom
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
           isDoubleTapEnabled={true}
           doubleTapScale={1.8}
-        />
+        /> */}
       </ScrollView>
     </View>
   );
