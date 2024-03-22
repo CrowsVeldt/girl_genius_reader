@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { DateContext } from "../context/DateContext";
 // import { ImageZoom } from "@likashefqet/react-native-image-zoom";
+import ImageZoom from "../image_zoom_files/components/ImageZoom";
 import ComicNav from "../components/ComicNav";
 
 const screen: ScaledSize = Dimensions.get("screen");
@@ -18,6 +19,7 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home({ route, navigation }) {
   const { addBookmark, getCurrentDate } = useContext(DateContext);
   const date: string = getCurrentDate();
+  const imageRef = useRef<ImageZoomRef>();
 
   return (
     <View style={styles.comicPage}>
@@ -34,6 +36,14 @@ export default function Home({ route, navigation }) {
           isDoubleTapEnabled={true}
           doubleTapScale={1.8}
         /> */}
+        <ImageZoom
+          ref={imageRef}
+          uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
+          minScale={0.5}
+          minPanPointers={1}
+          isDoubleTapEnabled
+          resizeMode="cover"
+        />
       </ScrollView>
     </View>
   );

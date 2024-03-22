@@ -1,10 +1,10 @@
-import type { ImageProps, ImageSourcePropType } from 'react-native';
+import type { ImageProps, ImageSourcePropType } from "react-native";
 import type {
   GestureStateChangeEvent,
   PanGestureHandlerEventPayload,
   PinchGestureHandlerEventPayload,
-} from 'react-native-gesture-handler';
-import { AnimatableValue } from 'react-native-reanimated';
+} from "react-native-gesture-handler";
+import { AnimatableValue } from "react-native-reanimated";
 
 export type OnPinchStartCallback = (
   event: GestureStateChangeEvent<PinchGestureHandlerEventPayload>
@@ -25,11 +25,11 @@ export type OnPanEndCallback = (
 ) => void;
 
 export enum ANIMATION_VALUE {
-  SCALE = 'SCALE',
-  FOCAL_X = 'FOCAL_X',
-  FOCAL_Y = 'FOCAL_Y',
-  TRANSLATE_X = 'TRANSLATE_X',
-  TRANSLATE_Y = 'TRANSLATE_Y',
+  SCALE = "SCALE",
+  FOCAL_X = "FOCAL_X",
+  FOCAL_Y = "FOCAL_Y",
+  TRANSLATE_X = "TRANSLATE_X",
+  TRANSLATE_Y = "TRANSLATE_Y",
 }
 
 export type OnResetAnimationEndCallback = (
@@ -43,7 +43,7 @@ export type OnResetAnimationEndCallback = (
   >
 ) => void;
 
-export type ImageZoomProps = Omit<ImageProps, 'source'> & {
+export type ImageZoomProps = Omit<ImageProps, "source"> & {
   /**
    * The image's URI, which can be overridden by the `source` prop.
    * @default ''
@@ -59,6 +59,10 @@ export type ImageZoomProps = Omit<ImageProps, 'source'> & {
    * @default 5
    */
   maxScale?: number;
+  /* The value of the image scale when a double-tap gesture is detected.
+   * @default 3
+   */
+  doubleTapScale?: number;
   /**
    * The minimum number of pointers required to enable panning.
    * @default 2
@@ -79,6 +83,10 @@ export type ImageZoomProps = Omit<ImageProps, 'source'> & {
    * @default true
    */
   isPinchEnabled?: boolean;
+  /**
+   * Determines whether to reset the zoom level and pan position when the image interaction ends.
+   */
+  isDoubleTapEnabled?: boolean;
   /**
    * A callback triggered when the image interaction starts.
    */
@@ -114,9 +122,32 @@ export type ImageZoomProps = Omit<ImageProps, 'source'> & {
   source?: ImageSourcePropType;
 };
 
-export type ImageZoomUseLayoutProps = Pick<ImageZoomProps, 'onLayout'>;
+export type ImageZoomRef = {
+  /**
+   * Resets the image zoom level to its original scale.
+   */
+  reset(): void;
+};
+
+export type ImageZoomUseLayoutProps = Pick<ImageZoomProps, "onLayout">;
 
 export type ImageZoomLayoutState = {
+  /**
+   * The x-coordinate of the top-left corner of the image relative to the top-left corner of the container.
+   */
+  x: number;
+  /**
+   * The y-coordinate of the top-left corner of the image relative to the top-left corner of the container.
+   */
+  y: number;
+  /**
+   * The width of the image.
+   */
+  width: number;
+  /**
+   * The height of the image.
+   */
+  height: number;
   /**
    * An object containing the x and y coordinates of the center point of the image, relative to the top-left corner of the container.
    */
@@ -132,20 +163,24 @@ export type ImageZoomLayoutState = {
   };
 };
 
-export type ImageZoomUseGesturesProps = Pick<ImageZoomLayoutState, 'center'> &
+export type ImageZoomUseGesturesProps = Pick<
+  ImageZoomLayoutState,
+  "width" | "height" | "center"
+> &
   Pick<
     ImageZoomProps,
-    | 'minScale'
-    | 'maxScale'
-    | 'minPanPointers'
-    | 'maxPanPointers'
-    | 'isPanEnabled'
-    | 'isPinchEnabled'
-    | 'onInteractionStart'
-    | 'onInteractionEnd'
-    | 'onPinchStart'
-    | 'onPinchEnd'
-    | 'onPanStart'
-    | 'onPanEnd'
-    | 'onResetAnimationEnd'
+    | "minScale"
+    | "maxScale"
+    | "doubleTapScale"
+    | "minPanPointers"
+    | "maxPanPointers"
+    | "isPanEnabled"
+    | "isPinchEnabled"
+    | "isDoubleTapEnabled"
+    | "onInteractionStart"
+    | "onInteractionEnd"
+    | "onPinchStart"
+    | "onPinchEnd"
+    | "onPanStart"
+    | "onPanEnd"
   >;
