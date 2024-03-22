@@ -203,9 +203,7 @@ export const useGestures = ({
     .maxDuration(250)
     .onStart(
       (event: GestureStateChangeEvent<TapGestureHandlerEventPayload>) => {
-        console.log('Double tap!');
         if (scale.value === 1) {
-          console.log('Zoom in!');
           scale.value = withTiming(doubleTapScale);
           focal.x.value = withTiming(
             (center.x - event.x) * (doubleTapScale - 1)
@@ -214,7 +212,6 @@ export const useGestures = ({
             (center.y - event.y) * (doubleTapScale - 1)
           );
         } else {
-          console.log('Zoom out!');
           reset();
         }
       }

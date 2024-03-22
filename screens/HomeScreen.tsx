@@ -17,10 +17,10 @@ import ComicNav from "../components/ComicNav";
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
-export default function Home({ route, navigation }) {
+export default function Home({ navigation }: {navigation: any}) {
   const { addBookmark, getCurrentDate } = useContext(DateContext);
-  const date: string = getCurrentDate();
   const imageRef = useRef<ImageZoomRef>();
+  const date: string = getCurrentDate();
 
   return (
     <View style={styles.comicPage}>
@@ -35,10 +35,9 @@ export default function Home({ route, navigation }) {
         <ImageZoom
           ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
-          minScale={0.5}
           minPanPointers={1}
           isDoubleTapEnabled
-          resizeMode="center"
+          resizeMode="contain"
         />
       </ScrollView>
     </View>

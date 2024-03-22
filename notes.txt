@@ -1,5 +1,5 @@
 Fixes/improvements:
-- fix app crashing on add bookmark
+? fix app crashing on add bookmark
 - remove necessity for undefined/null check in lastElement function
 - fix non-serializeable values error, i.e. nav passing as prop
 
@@ -11,7 +11,7 @@ Features, planned:
 - display toast/message to inform user when updating, finished updating, network error, etc.
 
 Features, possible
-? Store comics by book/arc/year?
+? Store comics by volume/year?
 
 Notes: 
 - Final comic doesn't have 'topnext' link
@@ -27,3 +27,6 @@ x - on double-tap, if image is zoomed, zoom out to full size
 x Save dates as a file kept in the repository, so it doesn't have to fetch from the beginning
 x add current date to stored values
 x in dev mode, on app restart, it returns to the comic before the last one viewed
+
+Thanks to: 
+- https://github.com/likashefqet
