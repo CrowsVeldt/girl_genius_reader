@@ -20,7 +20,7 @@ export const DateContext = createContext<DateContextType>(
   null as unknown as DateContextType
 );
 
-const DateProvider = ({ children }) => {
+const DateProvider = ({ children }: {children: any}) => {
   const [dates, setDates] = useState<string[]>(dateFile);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
