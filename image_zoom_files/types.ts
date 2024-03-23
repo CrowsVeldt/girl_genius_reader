@@ -127,6 +127,7 @@ export type ImageZoomRef = {
    * Resets the image zoom level to its original scale.
    */
   reset(): void;
+  quickReset(): void;
 };
 
 export type ImageZoomUseLayoutProps = Pick<ImageZoomProps, "onLayout">;

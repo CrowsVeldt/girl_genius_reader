@@ -1,4 +1,5 @@
 Fixes/improvements:
+! on restart, page is treated as being before the first comic
 - prevent scrolling when image is zoomed out
 - use Pressable component to all pressing side of screen to change page
 

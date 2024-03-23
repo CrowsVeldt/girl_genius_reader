@@ -17,7 +17,7 @@ import ComicNav from "../components/ComicNav";
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
-export default function Home({ navigation }: {navigation: any}) {
+export default function Home({ navigation }: { navigation: any }) {
   const { addBookmark, getCurrentDate } = useContext(DateContext);
   const imageRef = useRef<ImageZoomRef>();
   const date: string = getCurrentDate();
@@ -38,6 +38,7 @@ export default function Home({ navigation }: {navigation: any}) {
           minPanPointers={1}
           isDoubleTapEnabled
           resizeMode="contain"
+          onLoadStart={() => imageRef.current?.quickReset()}
         />
       </ScrollView>
     </View>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: screen.height,
     width: screen.width,
-    //backgroundColor: '#124586'
+    backgroundColor: "#f9e6c9",
   },
   header: {
     flexDirection: "row",

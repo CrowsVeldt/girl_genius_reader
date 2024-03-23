@@ -38,7 +38,7 @@ export default forwardRef(function ImageZoom(
   ref
 ) {
   const { width, height, center, onImageLayout } = useImageLayout({ onLayout });
-  const { animatedStyle, gestures, reset } = useGestures({
+  const { animatedStyle, gestures, reset, quickReset } = useGestures({
     width,
     height,
     center,
@@ -65,9 +65,12 @@ export default forwardRef(function ImageZoom(
         reset() {
           reset();
         },
+        quickReset() {
+         quickReset()
+        }
       };
     },
-    [reset]
+    [reset, quickReset]
   );
   return (
     <GestureDetector gesture={gestures}>

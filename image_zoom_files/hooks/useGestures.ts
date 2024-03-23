@@ -112,6 +112,35 @@ export const useGestures = ({
     translate.y,
   ]);
 
+
+  const quickReset = useCallback(() => {
+    'worklet';
+    prevScale.value = 1;
+    scale.value = 1
+    initialFocal.x.value = 0;
+    initialFocal.y.value = 0;
+    prevFocal.x.value = 0;
+    prevFocal.y.value = 0;
+    focal.x.value = 0
+    focal.y.value = 0
+    prevTranslate.x.value = 0;
+    prevTranslate.y.value = 0;
+    translate.x.value = 0
+    translate.y.value = 0
+  }, [
+    focal.x,
+    focal.y,
+    initialFocal.x,
+    initialFocal.y,
+    prevFocal.x,
+    prevFocal.y,
+    prevScale,
+    prevTranslate.x,
+    prevTranslate.y,
+    scale,
+    translate.x,
+    translate.y,
+  ]);
   const onInteractionStarted = () => {
     if (!isInteracting.current) {
       isInteracting.current = true;
@@ -232,5 +261,5 @@ export const useGestures = ({
     ? Gesture.Race(doubleTapGesture, simultaneousGestures)
     : simultaneousGestures;
 
-  return { gestures, animatedStyle, reset };
+  return { gestures, animatedStyle, reset, quickReset };
 };
