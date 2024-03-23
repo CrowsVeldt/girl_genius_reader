@@ -3,9 +3,9 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { lastElement } from "../utils/utilFunctions";
 
-export default function ComicNav({ date, nav }: { date: string; nav: any }) {
-  const { getDates, changeCurrentDate } = useContext(DateContext);
-
+export default function ComicNav({ nav }: { nav: any }) {
+  const { getDates, changeCurrentDate, getCurrentDate } = useContext(DateContext);
+  const date = getCurrentDate()
   const dates: string[] = getDates();
 
   const index: number = dates.findIndex((element) => element === date);
