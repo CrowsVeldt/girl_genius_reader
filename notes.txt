@@ -1,7 +1,6 @@
 Fixes/improvements:
-- remove necessity for undefined/null check in lastElement function
-- fix non-serializeable values error, i.e. nav passing as prop
 - prevent scrolling when image is zoomed out
+- use Pressable component to all pressing side of screen to change page
 
 Features, planned:
 - steampunk aesthetic, inspired by GG website
@@ -28,6 +27,7 @@ x add current date to stored values
 x in dev mode, on app restart, it returns to the comic before the last one viewed
 x fix app crashing on add bookmark
 x Final comic doesn't have 'topnext' link
+x fix non-serializeable values error, i.e. nav passing as prop
 
 Thanks to: 
 - https://github.com/likashefqet
