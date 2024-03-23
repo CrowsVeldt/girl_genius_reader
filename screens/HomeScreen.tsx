@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: screen.height,
     width: screen.width,
+    //backgroundColor: '#124586'
   },
   header: {
     flexDirection: "row",

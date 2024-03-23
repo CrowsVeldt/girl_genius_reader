@@ -21,17 +21,29 @@ export default function App() {
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ title: "Home" }}
+                options={{
+                  title: "Home",
+                  headerStyle: { backgroundColor: "#00152d" },
+                  headerTitleStyle: { color: "white" },
+                }}
               />
               <Stack.Screen
                 name="Bookmarks"
                 component={BookmarkScreen}
-                options={{ title: "Bookmarks" }}
+                options={{
+                  title: "Bookmarks",
+                  headerStyle: { backgroundColor: "#00152d" },
+                  headerTitleStyle: { color: "white" },
+                }}
               />
               <Stack.Screen
                 name="List"
                 component={ListScreen}
-                options={{ title: "List" }}
+                options={{
+                  title: "List",
+                  headerStyle: { backgroundColor: "#00152d" },
+                  headerTitleStyle: { color: "white" },
+                }}
               />
             </Stack.Navigator>
           </DateProvider>

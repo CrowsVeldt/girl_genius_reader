@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { lastElement } from "../utils/utilFunctions";
 
-export default function ComicNav({ date, nav }) {
+export default function ComicNav({ date, nav }: { date: string; nav: any }) {
   const { getDates, changeCurrentDate } = useContext(DateContext);
 
   const dates: string[] = getDates();
@@ -16,7 +16,7 @@ export default function ComicNav({ date, nav }) {
         style={styles.arrowButton}
         onPress={() => changeCurrentDate("20021104")}
       >
-        <Text>{"<<"}</Text>
+        <Text style={styles.buttonText}>{"<<"}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -25,14 +25,14 @@ export default function ComicNav({ date, nav }) {
           changeCurrentDate(index - 1 >= 0 ? dates[index - 1] : date)
         }
       >
-        <Text>{"<"}</Text>
+        <Text style={styles.buttonText}>{"<"}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.arrowButton}
         onPress={() => nav.navigate("Bookmarks")}
       >
-        <Text>{"Bookmarks"}</Text>
+        <Text style={styles.buttonText}>{"Bookmarks"}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -44,14 +44,14 @@ export default function ComicNav({ date, nav }) {
             ) /* I don't know why this works but it does */
         }
       >
-        <Text>{">"}</Text>
+        <Text style={styles.buttonText}>{">"}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.arrowButton}
         onPress={() => changeCurrentDate(lastElement(dates))}
       >
-        <Text>{">>"}</Text>
+        <Text style={styles.buttonText}>{">>"}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -67,6 +67,12 @@ const styles = StyleSheet.create({
     width: 82,
     height: 36,
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "#9b7434",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#220f07",
+  },
+  buttonText: {
+    color: "#dbbd69",
   },
 });
