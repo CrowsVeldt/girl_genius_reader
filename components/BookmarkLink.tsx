@@ -24,11 +24,7 @@ export default function BookmarkLink({
       >
         <Text style={styles.linkText}>{date}</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          removeBookmark(date);
-        }}
-      >
+      <TouchableOpacity onPress={() => removeBookmark(date)}>
         <Text>X</Text>
       </TouchableOpacity>
     </View>
