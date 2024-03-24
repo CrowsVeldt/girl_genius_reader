@@ -1,4 +1,6 @@
 Fixes/improvements:
+! add drawer menu button to title bar, display over screen (not sure how)
+- show toast only when bookmark is successfully added or removed
 - on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
 - prevent scrolling when image is zoomed out
 - use Pressable component to all pressing side of screen to change page
@@ -9,7 +11,6 @@ Features, planned:
 - option to display two pages side-by-side in landscape mode
 
 Features, minor
-- add drawer menu, move links to bookmarks, etc. to there
 - display toast/message to inform user when updating, finished updating, network error, etc.
 
 Features, possible

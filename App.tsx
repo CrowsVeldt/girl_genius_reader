@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -17,23 +18,19 @@ export default function App() {
       <NavigationContainer>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DateProvider>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{
-                  title: "Home",
-                  headerStyle: { backgroundColor: "#00152d" },
-                  headerTitleStyle: { color: "white" },
-                }}
-              />
+            <Stack.Navigator
+              initialRouteName="Girl Genius"
+              screenOptions={{
+                headerStyle: { backgroundColor: "#00152d" },
+                headerTitleStyle: { color: "white" },
+              }}
+            >
+              <Stack.Screen name="Girl Genius" component={HomeScreen} />
               <Stack.Screen
                 name="Bookmarks"
                 component={BookmarkScreen}
                 options={{
                   title: "Bookmarks",
-                  headerStyle: { backgroundColor: "#00152d" },
-                  headerTitleStyle: { color: "white" },
                 }}
               />
               <Stack.Screen
@@ -41,8 +38,6 @@ export default function App() {
                 component={ListScreen}
                 options={{
                   title: "List",
-                  headerStyle: { backgroundColor: "#00152d" },
-                  headerTitleStyle: { color: "white" },
                 }}
               />
             </Stack.Navigator>
