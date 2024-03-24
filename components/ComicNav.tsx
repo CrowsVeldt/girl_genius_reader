@@ -1,13 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { lastElement } from "../utils/utilFunctions";
 
 export default function ComicNav({ nav }: { nav: any }) {
   const { getDates, changeCurrentDate, getCurrentDate } = useContext(DateContext);
+  // const [date, setDate] = useState('')
+
+  // useEffect(() => {
+  //   setDate(getCurrentDate())
+  // }, [])
+
   const date = getCurrentDate()
   const dates: string[] = getDates();
-
   const index: number = dates.findIndex((element) => element === date);
 
   return (
