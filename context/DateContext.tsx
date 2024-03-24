@@ -6,6 +6,7 @@ import {
   currentDateKey,
 } from "../utils/storage";
 import dateFile from "../public/dates.json";
+import Toast from "react-native-root-toast";
 
 type DateContextType = {
   getDates: () => string[];
@@ -62,12 +63,14 @@ const DateProvider = ({ children }: {children: any}) => {
     const filteredBookmarks: Set<string> = new Set(newBookmarks);
     const filteredBookmarksArray: string[] = Array.from(filteredBookmarks);
     setBookmarks(filteredBookmarksArray);
+    Toast.show(`Added ${newBookmarkDate} to bookmarks`)
     saveData(bookmarkKey, filteredBookmarksArray);
   };
 
   const removeBookmark: (date: string) => void = async (date) => {
     const newBookmarks: string[] = bookmarks.filter((a) => a !== date);
     setBookmarks(newBookmarks);
+    Toast.show(`Removed ${date} from bookmarks`)
     saveData(bookmarkKey, newBookmarks);
   };
 

@@ -1,8 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { DateContext } from "../context/DateContext";
-import Toast from "react-native-root-toast";
 
 export default function BookmarkLink({
   date,
@@ -13,6 +12,7 @@ export default function BookmarkLink({
 }) {
   const { removeBookmark, changeCurrentDate } = useContext(DateContext);
 
+  useEffect(() => {});
   return (
     <View>
       <TouchableOpacity
@@ -26,7 +26,6 @@ export default function BookmarkLink({
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          Toast.show(`Removed ${date} from bookmarks`)
           removeBookmark(date);
         }}
       >
