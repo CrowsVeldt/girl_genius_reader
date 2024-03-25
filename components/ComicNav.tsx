@@ -1,15 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { lastElement } from "../utils/utilFunctions";
 
 export default function ComicNav({ date }: { date: string }) {
-  const { getDates, changeCurrentDate, addBookmark, removeBookmark } =
+  const { getDates, changeCurrentDate, addBookmark, removeBookmark, dateBookmarked } =
     useContext(DateContext);
   const [bookmarked, setBookmarked] = useState(false);
 
-  const dates: string[] = getDates();
+  useEffect(() => {
+    setBookmarked(dateBookmarked(date))
+}, [date])
 
+  const dates: string[] = getDates();
   const index: number = dates.findIndex((element) => element === date);
 
   return (
