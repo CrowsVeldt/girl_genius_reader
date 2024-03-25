@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
 import HomeScreen from "./screens/HomeScreen";
@@ -11,6 +12,7 @@ import ListScreen from "./screens/ListScreen";
 import DateProvider from "./context/DateContext";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
@@ -18,29 +20,11 @@ export default function App() {
       <NavigationContainer>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DateProvider>
-            <Stack.Navigator
-              initialRouteName="Girl Genius"
-              screenOptions={{
-                headerStyle: { backgroundColor: "#00152d" },
-                headerTitleStyle: { color: "white" },
-              }}
-            >
-              <Stack.Screen name="Girl Genius" component={HomeScreen} />
-              <Stack.Screen
-                name="Bookmarks"
-                component={BookmarkScreen}
-                options={{
-                  title: "Bookmarks",
-                }}
-              />
-              <Stack.Screen
-                name="List"
-                component={ListScreen}
-                options={{
-                  title: "List",
-                }}
-              />
-            </Stack.Navigator>
+            <Drawer.Navigator initialRouteName="Girl Genius">
+              <Drawer.Screen name="Home" component={HomeScreen} />
+              <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
+              <Drawer.Screen name="Comic List" component={ListScreen} />
+            </Drawer.Navigator>
           </DateProvider>
         </GestureHandlerRootView>
       </NavigationContainer>
