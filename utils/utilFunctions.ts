@@ -7,3 +7,6 @@ export const lastElement: (array: any[]) => any = (array) => {
     return last;
   }
 };
+
+export const formatDate: (date: string) => string = (date) =>
+  `${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6)}`;

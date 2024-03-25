@@ -11,6 +11,7 @@ import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../image_zoom_files/types";
 import ImageZoom from "../image_zoom_files/components/ImageZoom";
 import ComicNav from "../components/ComicNav";
+import { formatDate } from "../utils/utilFunctions";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -24,7 +25,7 @@ export default function Home({ navigation }: { navigation: any }) {
     <View style={styles.comicPage}>
       <ComicNav date={date} />
       <View style={styles.header}>
-        <Text>{date}</Text>
+        <Text>{formatDate(typeof date === 'string' ? date : '')}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <ImageZoom
