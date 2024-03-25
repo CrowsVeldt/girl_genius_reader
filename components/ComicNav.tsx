@@ -4,13 +4,18 @@ import { DateContext } from "../context/DateContext";
 import { lastElement } from "../utils/utilFunctions";
 
 export default function ComicNav({ date }: { date: string }) {
-  const { getDates, changeCurrentDate, addBookmark, removeBookmark, dateBookmarked } =
-    useContext(DateContext);
+  const {
+    getDates,
+    changeCurrentDate,
+    addBookmark,
+    removeBookmark,
+    dateBookmarked,
+  } = useContext(DateContext);
   const [bookmarked, setBookmarked] = useState(false);
 
   useEffect(() => {
-    setBookmarked(dateBookmarked(date))
-}, [date])
+    setBookmarked(dateBookmarked(date));
+  }, [date]);
 
   const dates: string[] = getDates();
   const index: number = dates.findIndex((element) => element === date);

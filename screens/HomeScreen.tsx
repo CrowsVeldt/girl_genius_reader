@@ -4,12 +4,10 @@ import {
   View,
   ScaledSize,
   Dimensions,
-  TouchableOpacity,
   Text,
   ScrollView,
 } from "react-native";
 import { DateContext } from "../context/DateContext";
-// import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import { ImageZoomRef } from "../image_zoom_files/types";
 import ImageZoom from "../image_zoom_files/components/ImageZoom";
 import ComicNav from "../components/ComicNav";
@@ -18,7 +16,7 @@ const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { addBookmark, getCurrentDate } = useContext(DateContext);
+  const { getCurrentDate } = useContext(DateContext);
   const imageRef = useRef<ImageZoomRef>();
   const date: string = getCurrentDate();
 

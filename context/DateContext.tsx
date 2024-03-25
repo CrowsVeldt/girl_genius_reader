@@ -15,14 +15,14 @@ type DateContextType = {
   getBookmarks: () => string[];
   addBookmark: (newBookmark: string) => void;
   removeBookmark: (date: string) => void;
-  dateBookmarked: (date: string) => boolean
+  dateBookmarked: (date: string) => boolean;
 };
 
 export const DateContext = createContext<DateContextType>(
   null as unknown as DateContextType
 );
 
-const DateProvider = ({ children }: {children: any}) => {
+const DateProvider = ({ children }: { children: any }) => {
   const [dates, setDates] = useState<string[]>(dateFile);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
@@ -64,20 +64,20 @@ const DateProvider = ({ children }: {children: any}) => {
     const filteredBookmarks: Set<string> = new Set(newBookmarks);
     const filteredBookmarksArray: string[] = Array.from(filteredBookmarks);
     setBookmarks(filteredBookmarksArray);
-    Toast.show(`Added ${newBookmarkDate} to bookmarks`)
+    Toast.show(`Added ${newBookmarkDate} to bookmarks`);
     saveData(bookmarkKey, filteredBookmarksArray);
   };
 
   const removeBookmark: (date: string) => void = async (date) => {
     const newBookmarks: string[] = bookmarks.filter((a) => a !== date);
     setBookmarks(newBookmarks);
-    Toast.show(`Removed ${date} from bookmarks`)
+    Toast.show(`Removed ${date} from bookmarks`);
     saveData(bookmarkKey, newBookmarks);
   };
 
   const dateBookmarked: (date: string) => boolean = (date) => {
-    return bookmarks.includes(date)
-  }
+    return bookmarks.includes(date);
+  };
 
   const value = {
     getDates,
@@ -86,7 +86,7 @@ const DateProvider = ({ children }: {children: any}) => {
     getBookmarks,
     addBookmark,
     removeBookmark,
-    dateBookmarked
+    dateBookmarked,
   };
   return <DateContext.Provider value={value}>{children}</DateContext.Provider>;
 };
