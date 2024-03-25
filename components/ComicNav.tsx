@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { lastElement } from "../utils/utilFunctions";
 
-export default function ComicNav({ date, nav }: { date: string; nav: any }) {
-  const { getDates, changeCurrentDate } = useContext(DateContext);
+export default function ComicNav({ date }: { date: string }) {
+  const { getDates, changeCurrentDate, addBookmark, removeBookmark } =
+    useContext(DateContext);
+  const [bookmarked, setBookmarked] = useState(false);
 
   const dates: string[] = getDates();
 
@@ -30,9 +32,16 @@ export default function ComicNav({ date, nav }: { date: string; nav: any }) {
 
       <TouchableOpacity
         style={styles.arrowButton}
-        onPress={() => nav.navigate("Bookmarks")}
+        onPress={() => {
+          if (bookmarked) {
+            removeBookmark(date);
+          } else {
+            addBookmark(date);
+          }
+          setBookmarked(!bookmarked);
+        }}
       >
-        <Text style={styles.buttonText}>{"Bookmarks"}</Text>
+        <Text style={styles.buttonText}>{bookmarked ? "★" : "☆"}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity

@@ -24,7 +24,7 @@ export default function Home({ navigation }: { navigation: any }) {
 
   return (
     <View style={styles.comicPage}>
-      <ComicNav date={date} nav={navigation} />
+      <ComicNav date={date} />
       <View style={styles.header}>
         <Text>{date}</Text>
         <TouchableOpacity onPress={() => addBookmark(date)}>
