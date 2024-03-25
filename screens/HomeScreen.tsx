@@ -27,9 +27,6 @@ export default function Home({ navigation }: { navigation: any }) {
       <ComicNav date={date} />
       <View style={styles.header}>
         <Text>{date}</Text>
-        <TouchableOpacity onPress={() => addBookmark(date)}>
-          <Text>Add Bookmark</Text>
-        </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <ImageZoom
