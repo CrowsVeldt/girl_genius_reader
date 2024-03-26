@@ -22,7 +22,8 @@ const TitleProvider = ({ children }: { children: any }) => {
         item[1].includes("Final") ||
         item[1].includes("Volume") ||
         item[1].includes("VOLUME") ||
-        item[1].includes("BOOK")
+        item[1].includes("BOOK") ||
+        item[1].includes("---Jump to a Scene---")
       );
     });
 
