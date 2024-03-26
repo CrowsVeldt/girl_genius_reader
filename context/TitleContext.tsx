@@ -1,12 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
-import {
-  retrieveData,
-  saveData,
-} from "../utils/storage";
-import titleFile from '../public/titles.json'
+import { retrieveData, saveData } from "../utils/storage";
+import titleFile from "../public/titles.json";
 
 type TitleContextType = {
-    getTitles: () => string[][]
+  getTitles: () => string[][];
+  getVolumes: () => string[][];
 };
 
 export const TitleContext = createContext<TitleContextType>(
@@ -15,20 +13,37 @@ export const TitleContext = createContext<TitleContextType>(
 
 const TitleProvider = ({ children }: { children: any }) => {
   const [titles, setTitles] = useState<string[][]>(titleFile);
+  const [volumes, setVolumes] = useState<string[][]>([]);
 
   useEffect(() => {
-    (async () => {})();
+    (async () => {
+      const volumeList = titles.filter((item) => {
+        return (
+          !item[1].includes("Final") &&
+          (item[1].includes("Volume") ||
+            item[1].includes("VOLUME") ||
+            item[1].includes("BOOK"))
+        );
+      });
+      setVolumes(volumeList);
+    })();
   }, []);
 
-  const getTitles: () => string[][] = () => {
+  const getTitles = () => {
     return titles;
   };
 
+  const getVolumes = () => {
+    return volumes;
+  };
 
   const value = {
     getTitles,
+    getVolumes,
   };
-  return <TitleContext.Provider value={value}>{children}</TitleContext.Provider>;
+  return (
+    <TitleContext.Provider value={value}>{children}</TitleContext.Provider>
+  );
 };
 
 export default TitleProvider;

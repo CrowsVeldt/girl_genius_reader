@@ -9,6 +9,7 @@ import BookmarkScreen from "./screens/BookmarksScreen";
 import ListScreen from "./screens/ListScreen";
 
 import DateProvider from "./context/DateContext";
+import TitleProvider from "./context/TitleContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,11 +19,13 @@ export default function App() {
       <NavigationContainer>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <DateProvider>
-            <Drawer.Navigator initialRouteName="Girl Genius">
-              <Drawer.Screen name="Home" component={HomeScreen} />
-              <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
-              <Drawer.Screen name="Comic List" component={ListScreen} />
-            </Drawer.Navigator>
+            <TitleProvider>
+              <Drawer.Navigator initialRouteName="Girl Genius">
+                <Drawer.Screen name="Home" component={HomeScreen} />
+                <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
+                <Drawer.Screen name="Comic List" component={ListScreen} />
+              </Drawer.Navigator>
+            </TitleProvider>
           </DateProvider>
         </GestureHandlerRootView>
       </NavigationContainer>
