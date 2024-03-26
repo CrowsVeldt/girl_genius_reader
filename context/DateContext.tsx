@@ -15,7 +15,7 @@ type DateContextType = {
   getBookmarks: () => string[];
   addBookmark: (newBookmark: string) => void;
   removeBookmark: (date: string) => void;
-  dateBookmarked: (date: string) => boolean;
+  isDateBookmarked: (date: string) => boolean;
 };
 
 export const DateContext = createContext<DateContextType>(
@@ -75,7 +75,7 @@ const DateProvider = ({ children }: { children: any }) => {
     saveData(bookmarkKey, newBookmarks);
   };
 
-  const dateBookmarked: (date: string) => boolean = (date) => {
+  const isDateBookmarked: (date: string) => boolean = (date) => {
     return bookmarks.includes(date);
   };
 
@@ -86,7 +86,7 @@ const DateProvider = ({ children }: { children: any }) => {
     getBookmarks,
     addBookmark,
     removeBookmark,
-    dateBookmarked,
+    isDateBookmarked,
   };
   return <DateContext.Provider value={value}>{children}</DateContext.Provider>;
 };

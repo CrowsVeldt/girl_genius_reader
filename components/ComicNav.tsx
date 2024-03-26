@@ -9,12 +9,12 @@ export default function ComicNav({ date }: { date: string }) {
     changeCurrentDate,
     addBookmark,
     removeBookmark,
-    dateBookmarked,
+    isDateBookmarked,
   } = useContext(DateContext);
   const [bookmarked, setBookmarked] = useState(false);
 
   useEffect(() => {
-    setBookmarked(dateBookmarked(date));
+    setBookmarked(isDateBookmarked(date));
   }, [date]);
 
   const dates: string[] = getDates();

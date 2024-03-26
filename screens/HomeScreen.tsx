@@ -25,7 +25,7 @@ export default function Home({ navigation }: { navigation: any }) {
     <View style={styles.comicPage}>
       <ComicNav date={date} />
       <View style={styles.header}>
-        <Text>{formatDate(typeof date === 'string' ? date : '')}</Text>
+        <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <ImageZoom
