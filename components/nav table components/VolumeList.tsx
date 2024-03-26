@@ -13,6 +13,9 @@ export const VolumeList = ({
 }) => {
   const { volume, titles, dates } = currentVolume;
 
+    // add titles and dates under volume header
+    // align titles with the date they share
+
   return (
     <View>
       <Text>{`Volume ${index}`}</Text>
