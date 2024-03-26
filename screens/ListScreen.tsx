@@ -2,14 +2,19 @@ import { useContext } from "react";
 import { DateContext } from "../context/DateContext";
 import ComicLink from "../components/ComicLink";
 import { View, FlatList, StyleSheet } from "react-native";
+import { TitleContext } from "../context/TitleContext";
 
 export default function DateList({ navigation }: { navigation: any }) {
   const { getDates } = useContext(DateContext);
+  const {getTitles, getVolumes} = useContext(TitleContext)
   const dates: string[] = getDates();
 
   const renderItem = ({ item, index }: { item: any; index: number }) => (
     <ComicLink key={index} date={item} nav={navigation} />
   );
+
+  // make table with act, volume, title, date
+  // start with table collapsed, open on click
 
   return (
     <View style={styles.list}>
