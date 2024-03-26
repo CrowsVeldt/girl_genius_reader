@@ -11,11 +11,22 @@ export const TitleContext = createContext<TitleContextType>(
 );
 
 const TitleProvider = ({ children }: { children: any }) => {
-  const [titles, setTitles] = useState<string[][]>(titleFile);
+  const [titles, setTitles] = useState<string[][]>([]);
   const [volumes, setVolumes] = useState<string[][]>([]);
 
   useEffect(() => {
-    const volumeList: string[][] = titles.filter((item) => {
+    const list = titleFile;
+
+    const titleList: string[][] = list.filter((item) => {
+      return !(
+        item[1].includes("Final") ||
+        item[1].includes("Volume") ||
+        item[1].includes("VOLUME") ||
+        item[1].includes("BOOK")
+      );
+    });
+
+    const volumeList: string[][] = list.filter((item) => {
       return (
         !item[1].includes("Final") &&
         (item[1].includes("Volume") ||
@@ -23,6 +34,8 @@ const TitleProvider = ({ children }: { children: any }) => {
           item[1].includes("BOOK"))
       );
     });
+
+    setTitles(titleList);
     setVolumes(volumeList);
   }, []);
 
