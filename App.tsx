@@ -23,7 +23,7 @@ export default function App() {
               <Drawer.Navigator initialRouteName="Girl Genius">
                 <Drawer.Screen name="Home" component={HomeScreen} />
                 <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
-                <Drawer.Screen name="Comic List" component={ListScreen} />
+                <Drawer.Screen name="List" component={ListScreen} />
               </Drawer.Navigator>
             </TitleProvider>
           </DateProvider>

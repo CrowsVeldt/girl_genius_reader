@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import { retrieveData, saveData } from "../utils/storage";
 import titleFile from "../public/titles.json";
 
 type TitleContextType = {
@@ -16,17 +15,15 @@ const TitleProvider = ({ children }: { children: any }) => {
   const [volumes, setVolumes] = useState<string[][]>([]);
 
   useEffect(() => {
-    (async () => {
-      const volumeList = titles.filter((item) => {
-        return (
-          !item[1].includes("Final") &&
-          (item[1].includes("Volume") ||
-            item[1].includes("VOLUME") ||
-            item[1].includes("BOOK"))
-        );
-      });
-      setVolumes(volumeList);
-    })();
+    const volumeList: string[][] = titles.filter((item) => {
+      return (
+        !item[1].includes("Final") &&
+        (item[1].includes("Volume") ||
+          item[1].includes("VOLUME") ||
+          item[1].includes("BOOK"))
+      );
+    });
+    setVolumes(volumeList);
   }, []);
 
   const getTitles = () => {
