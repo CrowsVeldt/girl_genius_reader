@@ -7,7 +7,10 @@ import { TitleContext } from "../context/TitleContext";
 export default function DateList({ navigation }: { navigation: any }) {
   const { getDates } = useContext(DateContext);
   const { getTitles, getVolumes } = useContext(TitleContext);
+  
   const dates: string[] = getDates();
+  const titles: string[][] = getTitles();
+  const volumes: string[][] = getVolumes();
 
   // make table with act, volume, title, date
   // start with table collapsed, open on click

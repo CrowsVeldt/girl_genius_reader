@@ -8,9 +8,12 @@ Bugs:
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 
 Features, planned:
+- Comic list: 
+- - List comics in a collapsing tree/table
+- - (act) > volume > page/date  
+- - have page titles displayed next to the page/date
 - Swipe or tap on side of screen to move forward or back
 - option to display two pages side-by-side in landscape mode
-- list comics by volume
 ? steampunk aesthetic, inspired by GG website
 
 Features, minor
