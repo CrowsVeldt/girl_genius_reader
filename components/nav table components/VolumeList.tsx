@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import { volumeObject } from "../../utils/types";
 import { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
+import { formatDate } from "../../utils/utilFunctions";
 
 const renderItem = (date: string, title: string) => (
   <Text>
@@ -10,7 +11,7 @@ const renderItem = (date: string, title: string) => (
 );
 
 export const VolumeList = ({
-  currentVolume, 
+  currentVolume,
   index,
 }: {
   currentVolume: volumeObject;
@@ -24,13 +25,17 @@ export const VolumeList = ({
     return title ? title : [date, ""];
   });
 
+  // make renderItems links to the comics
+  // offset scene titles to make them clearly separate from the dates
+  // display dates
+
   return (
     <View>
       <Text>{`Volume ${index + 1}`}</Text>
       <FlatList
         data={datesAndTitles}
         renderItem={({ item, index, separators }) =>
-          open ? renderItem(item[0], item[1]) : null
+          open ? renderItem(formatDate(item[0]), item[1]) : null
         }
       />
     </View>
