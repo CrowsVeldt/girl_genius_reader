@@ -3,7 +3,11 @@ import { volumeObject } from "../../utils/types";
 import { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 
-const renderItem = (data: string) => <Text>{data}</Text>;
+const renderItem = (date: string, title: string) => (
+  <Text>
+    {date}, {title}
+  </Text>
+);
 
 export const VolumeList = ({
   currentVolume,
@@ -15,20 +19,18 @@ export const VolumeList = ({
   const [open, setOpen] = useState(false);
   const { volume, titles, dates } = currentVolume;
 
-    // for each date find if a title matches it
-    // if yes, return item = [date, title]
-    // else return item = [date, null]
-
-    // if item[1] != null, render 'date-title'
-    // else render 'date'
+  const datesAndTitles = dates.map((date) => {
+    const title = titles.find((item) => item[0] === date);
+    return title ? title : [date, ""];
+  });
 
   return (
     <View>
       <Text>{`Volume ${index}`}</Text>
       <FlatList
-        data={dates}
+        data={datesAndTitles}
         renderItem={({ item, index, separators }) =>
-          open ? renderItem(item) : null
+          open ? renderItem(item[0], item[1]) : null
         }
       />
     </View>
