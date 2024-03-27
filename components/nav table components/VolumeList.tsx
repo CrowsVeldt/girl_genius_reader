@@ -27,7 +27,6 @@ export const VolumeList = ({
 
   // make renderItems links to the comics
   // offset scene titles to make them clearly separate from the dates
-  // display dates
 
   return (
     <View>
