@@ -10,13 +10,13 @@ const renderItem = (date: string, title: string) => (
 );
 
 export const VolumeList = ({
-  currentVolume,
+  currentVolume, 
   index,
 }: {
   currentVolume: volumeObject;
   index: number;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const { volume, titles, dates } = currentVolume;
 
   const datesAndTitles = dates.map((date) => {
@@ -26,7 +26,7 @@ export const VolumeList = ({
 
   return (
     <View>
-      <Text>{`Volume ${index}`}</Text>
+      <Text>{`Volume ${index + 1}`}</Text>
       <FlatList
         data={datesAndTitles}
         renderItem={({ item, index, separators }) =>
