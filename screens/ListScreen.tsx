@@ -41,7 +41,8 @@ export default function DateList({ navigation }: { navigation: any }) {
       {collectedVolumes.map((volume: volumeObject, index: number) => {
         return (
           <VolumeList
-            currentVolume={volume} 
+            nav={navigation}
+            currentVolume={volume}
             index={index}
             key={index}
           />
@@ -50,7 +51,6 @@ export default function DateList({ navigation }: { navigation: any }) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   list: {
