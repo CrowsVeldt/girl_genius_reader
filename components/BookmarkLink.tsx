@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { DateContext } from "../context/DateContext";
+import { formatDate } from "../utils/utilFunctions";
 
 export default function BookmarkLink({
   date,
@@ -22,7 +23,7 @@ export default function BookmarkLink({
           nav.navigate("Home");
         }}
       >
-        <Text style={styles.linkText}>{date}</Text>
+        <Text style={styles.linkText}>{formatDate(date)}</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => removeBookmark(date)}>
         <Text>X</Text>
