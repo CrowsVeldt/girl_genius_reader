@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { volumeObject } from "../../utils/types";
 import { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
@@ -23,14 +23,16 @@ export const VolumeList = ({
   });
 
   const renderItem = (date: string, title: string) => (
-    <ComicLink date={date} nav={nav}/>
+    <ComicLink date={date} nav={nav} />
   );
   // make renderItems links to the comics
   // offset scene titles to make them clearly separate from the dates
 
   return (
     <View>
-      <Text>{`Volume ${index + 1}`}</Text>
+      <TouchableOpacity onPress={() => {setOpen(!open)}}>
+        <Text>{`Volume ${index + 1}`}</Text>
+      </TouchableOpacity>
       <FlatList
         data={datesAndTitles}
         renderItem={({ item, index, separators }) =>
