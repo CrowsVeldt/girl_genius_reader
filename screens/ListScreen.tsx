@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     alignSelf: "center",
-    width: "40%",
+    alignContent: "center",
+    width: "90%",
   },
 });
