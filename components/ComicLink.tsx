@@ -4,7 +4,17 @@ import { StyleSheet } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { formatDate } from "../utils/utilFunctions";
 
-export default function ComicLink({ date, nav }: { date: string; nav: any }) {
+export default function ComicLink({
+  date,
+  nav,
+  num,
+  title,
+}: {
+  date: string;
+  nav: any;
+  num: number;
+  title?: string;
+}) {
   const { changeCurrentDate } = useContext(DateContext);
   return (
     <TouchableOpacity
@@ -14,15 +24,18 @@ export default function ComicLink({ date, nav }: { date: string; nav: any }) {
         nav.navigate("Home");
       }}
     >
+      <Text>{`Page ${num}`}</Text>
       <Text style={styles.linkText}>{formatDate(date)}</Text>
+      <Text>{title}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   linkButton: {
-    borderColor: "black",
-    borderWidth: 1,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   linkText: {
     textAlign: "center",
