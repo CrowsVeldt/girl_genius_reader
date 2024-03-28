@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { useContext } from "react";
 import { DateContext } from "../context/DateContext";
 import { TitleContext } from "../context/TitleContext";
-import { VolumeList } from "../components/nav table components/VolumeList";
+import { VolumeList } from "../components/VolumeList";
 import { volumeObject } from "../utils/types";
 
 const collectVolumes = (
