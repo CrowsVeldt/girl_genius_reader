@@ -1,8 +1,12 @@
-Fixes/improvements:
+Fixes/improvements, functionality:
 - show toast only when bookmark is successfully added or removed
 - prevent scrolling when image is zoomed out
 - use Pressable component to allow pressing side of screen to change page
 - speed up list view opening and closing
+
+Fixes/improvements, UX/UI:
+- display toast/message to inform user when updating, finished updating, network error, etc.
+? steampunk aesthetic, inspired by GG website
 
 Bugs: 
 ! on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
@@ -11,10 +15,6 @@ Bugs:
 Features, planned:
 - Swipe or tap on side of screen to move forward or back
 - option to display two pages side-by-side in landscape mode
-? steampunk aesthetic, inspired by GG website
-
-Features, minor
-- display toast/message to inform user when updating, finished updating, network error, etc.
 
 Done:
 x Make update loop stop even if it returns undefined

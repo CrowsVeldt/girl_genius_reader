@@ -7,7 +7,7 @@ export default function Bookmarks({ navigation }: any) {
   const { getBookmarks } = useContext(DateContext);
   const bookmarks: string[] = getBookmarks();
 
-  const renderItem = ({ item, index }: {item: string, index: number}) => (
+  const renderItem = ({ item, index }: { item: string; index: number }) => (
     <BookmarkLink key={index} date={item} nav={navigation} />
   );
 
