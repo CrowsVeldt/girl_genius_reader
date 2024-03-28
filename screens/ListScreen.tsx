@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import { useContext } from "react";
 import { DateContext } from "../context/DateContext";
 import { TitleContext } from "../context/TitleContext";
@@ -37,7 +37,7 @@ export default function DateList({ navigation }: { navigation: any }) {
   const collectedVolumes = collectVolumes(volumes, titles, dates);
 
   return (
-    <View style={styles.list}>
+    <ScrollView style={styles.list}>
       {collectedVolumes.map((volume: volumeObject, index: number) => {
         return (
           <VolumeList
@@ -48,7 +48,7 @@ export default function DateList({ navigation }: { navigation: any }) {
           />
         );
       })}
-    </View>
+    </ScrollView>
   );
 }
 
