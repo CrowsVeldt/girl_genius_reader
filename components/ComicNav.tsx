@@ -7,6 +7,8 @@ export default function ComicNav({ date }: { date: string }) {
   const {
     getDates,
     changeCurrentDate,
+    goToNextPage,
+    goToPreviousPage,
     addBookmark,
     removeBookmark,
     isDateBookmarked,
@@ -31,9 +33,7 @@ export default function ComicNav({ date }: { date: string }) {
 
       <TouchableOpacity
         style={styles.arrowButton}
-        onPress={() =>
-          changeCurrentDate(index - 1 >= 0 ? dates[index - 1] : date)
-        }
+        onPress={() => goToPreviousPage(date)}
       >
         <Text style={styles.buttonText}>{"<"}</Text>
       </TouchableOpacity>
@@ -54,12 +54,7 @@ export default function ComicNav({ date }: { date: string }) {
 
       <TouchableOpacity
         style={styles.arrowButton}
-        onPress={
-          () =>
-            changeCurrentDate(
-              dates[index + 1] ? dates[index + 1] : date
-            ) /* I don't know why this works but it does */
-        }
+        onPress={() => goToNextPage(date)}
       >
         <Text style={styles.buttonText}>{">"}</Text>
       </TouchableOpacity>

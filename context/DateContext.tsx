@@ -16,6 +16,8 @@ type DateContextType = {
   addBookmark: (newBookmark: string) => void;
   removeBookmark: (date: string) => void;
   isDateBookmarked: (date: string) => boolean;
+  goToNextPage: (date: string) => void
+  goToPreviousPage: (date: string) => void
 };
 
 export const DateContext = createContext<DateContextType>(
@@ -79,6 +81,16 @@ const DateProvider = ({ children }: { children: any }) => {
     return bookmarks.includes(date);
   };
 
+  const goToNextPage: (date: string) => void = (date) => {
+    const index: number = dates.findIndex((element) => element === date);
+    changeCurrentDate(dates[index + 1] ? dates[index + 1] : date);
+  };
+
+  const goToPreviousPage: (date: string) => void = (date) => {
+    const index: number = dates.findIndex((element) => element === date);
+    changeCurrentDate(index - 1 >= 0 ? dates[index - 1] : date);
+  };
+
   const value = {
     getDates,
     getCurrentDate,
@@ -87,6 +99,8 @@ const DateProvider = ({ children }: { children: any }) => {
     addBookmark,
     removeBookmark,
     isDateBookmarked,
+    goToNextPage,
+    goToPreviousPage
   };
   return <DateContext.Provider value={value}>{children}</DateContext.Provider>;
 };
