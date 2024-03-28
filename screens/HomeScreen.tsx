@@ -6,6 +6,7 @@ import {
   Dimensions,
   Text,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../image_zoom_files/types";
@@ -17,7 +18,8 @@ const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { getCurrentDate } = useContext(DateContext);
+  const { getCurrentDate, goToNextPage, goToPreviousPage } =
+    useContext(DateContext);
   const imageRef = useRef<ImageZoomRef>();
   const date: string = getCurrentDate();
 
@@ -28,6 +30,7 @@ export default function Home({ navigation }: { navigation: any }) {
         <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
+        <Pressable style={styles.sideButton} onPress={() => goToPreviousPage(date)} />
         <ImageZoom
           ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
@@ -36,6 +39,7 @@ export default function Home({ navigation }: { navigation: any }) {
           resizeMode="contain"
           onLoadStart={() => imageRef.current?.quickReset()}
         />
+        <Pressable style={styles.sideButton} onPress={() => goToNextPage(date)} />
       </ScrollView>
     </View>
   );
@@ -55,5 +59,10 @@ const styles = StyleSheet.create({
   comicContainer: {
     height: window.height - 250,
     width: window.width,
+    flexDirection: "row",
+  },
+  sideButton: {
+    height: "100%",
+    width: 20,
   },
 });
