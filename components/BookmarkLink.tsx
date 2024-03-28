@@ -15,7 +15,7 @@ export default function BookmarkLink({
 
   useEffect(() => {});
   return (
-    <View>
+    <View style={styles.bookmark}>
       <TouchableOpacity
         style={styles.linkButton}
         onPress={() => {
@@ -25,7 +25,10 @@ export default function BookmarkLink({
       >
         <Text style={styles.linkText}>{formatDate(date)}</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => removeBookmark(date)}>
+      <TouchableOpacity
+        style={styles.removeButton}
+        onPress={() => removeBookmark(date)}
+      >
         <Text>X</Text>
       </TouchableOpacity>
     </View>
@@ -33,11 +36,25 @@ export default function BookmarkLink({
 }
 
 const styles = StyleSheet.create({
+  bookmark: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    height: 35,
+  },
+  removeButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    width: 30,
+  },
   linkButton: {
-    borderColor: "black",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    flexGrow: 1,
     borderWidth: 1,
   },
-  linkText: {
-    textAlign: "center",
-  },
+  linkText: {},
 });
