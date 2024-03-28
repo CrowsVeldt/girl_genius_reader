@@ -2,13 +2,12 @@ Fixes/improvements:
 - show toast only when bookmark is successfully added or removed
 - prevent scrolling when image is zoomed out
 - use Pressable component to allow pressing side of screen to change page
-- make whole list screen scrollable
-- in list add 'page %' in addition to/instead of the date
+- speed up list view opening and closing
 
 Bugs: 
 ! on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
- 
+
 Features, planned:
 - Swipe or tap on side of screen to move forward or back
 - option to display two pages side-by-side in landscape mode
@@ -34,8 +33,10 @@ x fix non-serializeable values error, i.e. nav passing as prop
 x add drawer menu button to title bar, display over screen (not sure how)
 x Comic list: 
 x - List comics in a collapsing tree/table
-x - (act) > volume > page/date 
+x - (act) > volume > page/date  
 x - have page titles displayed next to the page/date
+x make whole list screen scrollable
+x in list add 'page %' in addition to the date
 
 Thanks to: 
 - https://github.com/likashefqet

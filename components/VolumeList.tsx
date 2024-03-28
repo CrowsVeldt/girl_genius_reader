@@ -35,6 +35,7 @@ export const VolumeList = ({
   return (
     <View style={styles.list}>
       <TouchableOpacity
+        style={styles.title}
         onPress={() => {
           setOpen(!open);
         }}
@@ -62,6 +63,9 @@ const styles = StyleSheet.create({
   list: {
     minHeight: 30,
     borderWidth: 1,
+  },
+  title: {
+    borderBottomWidth: 1
   },
   entry: {
     width: "80%",
