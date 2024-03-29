@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     width: "100%",
-    backgroundColor: "#f9e6c9",
+    backgroundColor: process.env.EXPO_PUBLIC_BG_COLOR,
   },
 });

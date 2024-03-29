@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: screen.height,
     width: screen.width,
-    backgroundColor: "#f9e6c9",
+    backgroundColor: process.env.EXPO_PUBLIC_BG_COLOR,
+
   },
   header: {
     flexDirection: "row",
