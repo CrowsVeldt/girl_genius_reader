@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef } from "react";
 import {
   Gesture,
   GestureStateChangeEvent,
@@ -6,17 +6,17 @@ import {
   PanGestureHandlerEventPayload,
   PinchGestureHandlerEventPayload,
   TapGestureHandlerEventPayload,
-} from 'react-native-gesture-handler';
+} from "react-native-gesture-handler";
 import {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import { clamp } from '../utils/clamp';
+import { clamp } from "../utils/clamp";
 
-import type { ImageZoomUseGesturesProps } from '../types';
+import type { ImageZoomUseGesturesProps } from "../types";
 
 export const useGestures = ({
   width,
@@ -50,7 +50,8 @@ export const useGestures = ({
   const translate = { x: useSharedValue(0), y: useSharedValue(0) };
 
   const moveIntoView = () => {
-    'worklet';
+    "worklet";
+
     if (scale.value > 1) {
       const rightLimit = (width * (scale.value - 1)) / 2;
       const leftLimit = -rightLimit;
@@ -84,7 +85,7 @@ export const useGestures = ({
   };
 
   const reset = useCallback(() => {
-    'worklet';
+    "worklet";
     prevScale.value = 1;
     scale.value = withTiming(1);
     initialFocal.x.value = 0;
@@ -112,21 +113,20 @@ export const useGestures = ({
     translate.y,
   ]);
 
-
   const quickReset = useCallback(() => {
-    'worklet';
+    "worklet";
     prevScale.value = 1;
-    scale.value = 1
+    scale.value = 1;
     initialFocal.x.value = 0;
     initialFocal.y.value = 0;
     prevFocal.x.value = 0;
     prevFocal.y.value = 0;
-    focal.x.value = 0
-    focal.y.value = 0
+    focal.x.value = 0;
+    focal.y.value = 0;
     prevTranslate.x.value = 0;
     prevTranslate.y.value = 0;
-    translate.x.value = 0
-    translate.y.value = 0
+    translate.x.value = 0;
+    translate.y.value = 0;
   }, [
     focal.x,
     focal.y,
@@ -190,12 +190,16 @@ export const useGestures = ({
     .maxPointers(maxPanPointers)
     .onStart(() => {
       runOnJS(onPanStarted)();
-      prevTranslate.x.value = translate.x.value;
-      prevTranslate.y.value = translate.y.value;
+      if (scale.value > 1) {
+        prevTranslate.x.value = translate.x.value;
+        prevTranslate.y.value = translate.y.value;
+      }
     })
     .onUpdate((event: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
-      translate.x.value = prevTranslate.x.value + event.translationX;
-      translate.y.value = prevTranslate.y.value + event.translationY;
+      if (scale.value > 1) {
+        translate.x.value = prevTranslate.x.value + event.translationX;
+        translate.y.value = prevTranslate.y.value + event.translationY;
+      }
     })
     .onEnd(() => {
       runOnJS(onPanEnded)();
