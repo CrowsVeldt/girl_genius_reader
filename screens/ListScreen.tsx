@@ -37,7 +37,7 @@ export default function DateList({ navigation }: { navigation: any }) {
   const collectedVolumes = collectVolumes(volumes, titles, dates);
 
   return (
-    <ScrollView style={styles.list}>
+    <ScrollView contentContainerStyle={styles.list}>
       {collectedVolumes.map((volume: volumeObject, index: number) => {
         return (
           <VolumeList
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     alignSelf: "center",
-    alignContent: "center",
-    width: "90%",
+    alignItems: "center",
+    width: "100%",
     backgroundColor: "#f9e6c9",
   },
 });

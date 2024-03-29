@@ -26,12 +26,6 @@ export const VolumeList = ({
     return title ? title : [date, ""];
   });
 
-  const renderItem = (date: string, title: string, index: number) => (
-    <View style={styles.entry}>
-      <ComicLink date={date} nav={nav} num={index} title={title ? title : ""} />
-    </View>
-  );
-
   return (
     <View style={styles.list}>
       <TouchableOpacity
@@ -63,13 +57,13 @@ const styles = StyleSheet.create({
   list: {
     minHeight: 30,
     borderWidth: 1,
+    alignItems: "center",
+    width: "90%",
+    paddingHorizontal: 10
   },
   title: {
-    borderBottomWidth: 1
-  },
-  entry: {
-    width: "80%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    borderWidth: 1,
+    alignItems: "center",
+    width: "30%"
   },
 });

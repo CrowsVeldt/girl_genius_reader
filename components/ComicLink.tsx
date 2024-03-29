@@ -24,9 +24,9 @@ export default function ComicLink({
         nav.navigate("Home");
       }}
     >
-      <Text>{`Page ${num}`}</Text>
+      <Text style={styles.linkNumber}>{`Page ${num}`}</Text>
       <Text style={styles.linkText}>{formatDate(date)}</Text>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
 }
@@ -37,7 +37,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  linkText: {
-    textAlign: "center",
+  linkNumber: {
+    flex: 1
   },
+  linkText: {
+    flex: 1
+  },
+  title: {
+    flex: 2,
+    overflow: "visible"
+  }
 });
