@@ -11,7 +11,6 @@ import {
 import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../image_zoom_files/types";
 import ImageZoom from "../image_zoom_files/components/ImageZoom";
-import ComicNav from "../components/ComicNav";
 import { formatDate } from "../utils/utilFunctions";
 import FavoriteButton from "../components/FavoriteButton";
 
