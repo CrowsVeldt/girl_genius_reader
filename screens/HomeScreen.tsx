@@ -31,7 +31,7 @@ export default function Home({ navigation }: { navigation: any }) {
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <Pressable
-          style={styles.sideButton}
+          style={styles.leftSideButton}
           onPress={() => goToPreviousPage(date)}
         />
         <ImageZoom
@@ -43,7 +43,7 @@ export default function Home({ navigation }: { navigation: any }) {
           onLoadStart={() => imageRef.current?.quickReset()}
         />
         <Pressable
-          style={styles.sideButton}
+          style={styles.rightSideButton}
           onPress={() => goToNextPage(date)}
         />
       </ScrollView>
@@ -67,8 +67,18 @@ const styles = StyleSheet.create({
     width: window.width,
     flexDirection: "row",
   },
-  sideButton: {
+  leftSideButton: {
     height: "100%",
-    width: 20,
+    width: 70,
+    left: 0,
+    zIndex: 1,
+    position: "absolute",
+  },
+  rightSideButton: {
+    height: "100%",
+    width: 70,
+    right: -0,
+    zIndex: 1,
+    position: "absolute",
   },
 });
