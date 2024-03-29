@@ -3,7 +3,6 @@ Fixes/improvements, functionality:
 - speed up list view opening and closing
 
 Bugs: 
-! on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 ! toasts show even when bookmark add/remove is unsuccessful
 ! Volume 9 is rolled into volume 10, need to check them all
@@ -40,6 +39,7 @@ x make whole list screen scrollable
 x in list add 'page %' in addition to the date
 x use Pressable component to allow pressing side of screen to change page
 x prevent scrolling when image is zoomed out
+x on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
 
 Thanks to: 
 - https://github.com/likashefqet

@@ -37,7 +37,7 @@ const DateProvider = ({ children }: { children: any }) => {
         setBookmarks(savedBookmarks);
       }
       if (savedCurrentDate != null) {
-        setCurrentDate(savedCurrentDate);
+        setCurrentDate(savedCurrentDate.toString());
       }
     })();
   }, []);
