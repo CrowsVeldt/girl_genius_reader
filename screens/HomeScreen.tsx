@@ -13,6 +13,7 @@ import { ImageZoomRef } from "../image_zoom_files/types";
 import ImageZoom from "../image_zoom_files/components/ImageZoom";
 import ComicNav from "../components/ComicNav";
 import { formatDate } from "../utils/utilFunctions";
+import FavoriteButton from "../components/FavoriteButton";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -25,7 +26,7 @@ export default function Home({ navigation }: { navigation: any }) {
 
   return (
     <View style={styles.comicPage}>
-      <ComicNav date={date} />
+      <FavoriteButton date={date} />
       <View style={styles.header}>
         <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
       </View>
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingTop: 80
   },
   comicContainer: {
     height: window.height - 250,

@@ -11,6 +11,7 @@ Bugs:
 Fixes/improvements, UX/UI:
 - display toast/message to inform user when updating, finished updating, network error, etc.
 ? steampunk aesthetic, inspired by GG website
+? add bookmark button to header?
 
 Features, planned:
 - Swipe or tap on side of screen to move forward or back
