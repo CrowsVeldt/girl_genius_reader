@@ -1,12 +1,12 @@
 import { useContext, useRef } from "react";
 import {
-  StyleSheet,
-  View,
-  ScaledSize,
   Dimensions,
-  Text,
-  ScrollView,
   Pressable,
+  ScaledSize,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../image_zoom_files/types";
@@ -30,7 +30,10 @@ export default function Home({ navigation }: { navigation: any }) {
         <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
-        <Pressable style={styles.sideButton} onPress={() => goToPreviousPage(date)} />
+        <Pressable
+          style={styles.sideButton}
+          onPress={() => goToPreviousPage(date)}
+        />
         <ImageZoom
           ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
@@ -39,7 +42,10 @@ export default function Home({ navigation }: { navigation: any }) {
           resizeMode="contain"
           onLoadStart={() => imageRef.current?.quickReset()}
         />
-        <Pressable style={styles.sideButton} onPress={() => goToNextPage(date)} />
+        <Pressable
+          style={styles.sideButton}
+          onPress={() => goToNextPage(date)}
+        />
       </ScrollView>
     </View>
   );

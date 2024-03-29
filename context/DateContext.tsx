@@ -16,8 +16,8 @@ type DateContextType = {
   addBookmark: (newBookmark: string) => void;
   removeBookmark: (date: string) => void;
   isDateBookmarked: (date: string) => boolean;
-  goToNextPage: (date: string) => void
-  goToPreviousPage: (date: string) => void
+  goToNextPage: (date: string) => void;
+  goToPreviousPage: (date: string) => void;
 };
 
 export const DateContext = createContext<DateContextType>(
@@ -100,7 +100,7 @@ const DateProvider = ({ children }: { children: any }) => {
     removeBookmark,
     isDateBookmarked,
     goToNextPage,
-    goToPreviousPage
+    goToPreviousPage,
   };
   return <DateContext.Provider value={value}>{children}</DateContext.Provider>;
 };

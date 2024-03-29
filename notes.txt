@@ -1,7 +1,6 @@
 Fixes/improvements, functionality:
 - show toast only when bookmark is successfully added or removed
 - prevent scrolling when image is zoomed out
-- use Pressable component to allow pressing side of screen to change page
 - speed up list view opening and closing
 
 Fixes/improvements, UX/UI:
@@ -37,6 +36,7 @@ x - (act) > volume > page/date
 x - have page titles displayed next to the page/date
 x make whole list screen scrollable
 x in list add 'page %' in addition to the date
+x use Pressable component to allow pressing side of screen to change page
 
 Thanks to: 
 - https://github.com/likashefqet
