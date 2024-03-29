@@ -23,7 +23,7 @@ export default function BookmarkLink({
           nav.navigate("Home");
         }}
       >
-        <Text style={styles.linkText}>{formatDate(date)}</Text>
+        <Text>{formatDate(date)}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.removeButton}
@@ -39,8 +39,10 @@ const styles = StyleSheet.create({
   bookmark: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignSelf: "center",
     borderWidth: 1,
     height: 35,
+    width: "80%"
   },
   removeButton: {
     flexDirection: "row",
@@ -56,5 +58,4 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     borderWidth: 1,
   },
-  linkText: {},
 });
