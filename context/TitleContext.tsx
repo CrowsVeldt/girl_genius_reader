@@ -28,9 +28,10 @@ const TitleProvider = ({ children }: { children: any }) => {
     });
 
     const volumeList: string[][] = list.filter((item) => {
+      // list of conditions and exceptions to find the beginnings of volumes
       return (
         !item[1].includes("Final") &&
-        !item[1].includes("NINE") &&
+        !item[1].includes("Volume NINE") &&
         (item[1].includes("Volume") ||
           item[1].includes("VOLUME") ||
           item[1].includes("BOOK") ||
