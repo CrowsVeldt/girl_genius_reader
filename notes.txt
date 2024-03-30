@@ -3,11 +3,10 @@ Bugs:
 ! toasts show even when bookmark add/remove is unsuccessful
 
 Fixes/improvements, functionality:
-- show toast only when bookmark is successfully added or removed
 
 Fixes/improvements, UX/UI:
 - display toast/message to inform user when updating, finished updating, network error, etc.
-- Slide page horizontally when swiping to next/previous page
+- Slide page horizontally when swiping to next/previous page, both cause it looks good and to provide visual feedback to the user
 ? steampunk aesthetic, inspired by GG website
 ? add bookmark button to header?
 ? speed up list view opening and closing
