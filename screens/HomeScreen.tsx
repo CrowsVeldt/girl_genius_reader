@@ -71,14 +71,14 @@ const styles = StyleSheet.create({
   },
   leftSideButton: {
     height: "100%",
-    width: 70,
+    width: 50,
     left: 0,
     zIndex: 1,
     position: "absolute",
   },
   rightSideButton: {
     height: "100%",
-    width: 70,
+    width: 50,
     right: -0,
     zIndex: 1,
     position: "absolute",
