@@ -35,13 +35,14 @@ const styles = StyleSheet.create({
   linkButton: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    borderBottomWidth: 1
   },
   linkNumber: {
     flex: 1
   },
   linkText: {
-    flex: 1
+    flex: 2
   },
   title: {
     flex: 2,
