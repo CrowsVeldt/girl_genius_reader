@@ -12,7 +12,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { DateContext } from "../context/DateContext";
 
-export default function App(props: any) {
+export default function PageTurn(props: any) {
   const { getCurrentDate, goToPreviousPage, goToNextPage } =
     useContext(DateContext);
   const { side } = props;
@@ -21,7 +21,7 @@ export default function App(props: any) {
   const position: SharedValue<number> = useSharedValue(0);
   const END_POSITION: number = side === "left" ? 50 : -50;
 
-  const panGesture = Gesture.Pan()
+  const pan = Gesture.Pan()
     .onUpdate((e) => {
       if (onSide.value) {
         position.value = clamp(
@@ -41,6 +41,17 @@ export default function App(props: any) {
       onSide.value = true;
     });
 
+  const tap = Gesture.Tap()
+    .maxDuration(250)
+    .numberOfTaps(1)
+    .onStart((e) => {
+      if (side === "left") {
+        runOnJS(goToPreviousPage)(date);
+      } else if (side === "right") {
+        runOnJS(goToNextPage)(date);
+      }
+    });
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: position.value }],
     left: side === "left" ? 0 : null,
@@ -55,11 +66,11 @@ export default function App(props: any) {
     ),
     transform: [side === "left" ? { rotate: "45deg" } : { rotate: "-135deg" }],
     left: side === "left" ? 0 : null,
-    right: side === "right" ? 22.5 : null
+    right: side === "right" ? 22.5 : null,
   }));
 
   return (
-    <GestureDetector gesture={panGesture}>
+    <GestureDetector gesture={Gesture.Exclusive(pan, tap)}>
       <Animated.View style={[styles.box, animatedStyle]}>
         <Animated.View style={[styles.arrow, arrowAnimatedStyle]} />
       </Animated.View>

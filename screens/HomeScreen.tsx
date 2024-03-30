@@ -1,7 +1,6 @@
 import { useContext, useRef } from "react";
 import {
   Dimensions,
-  Pressable,
   ScaledSize,
   ScrollView,
   StyleSheet,
@@ -13,14 +12,13 @@ import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import { formatDate } from "../utils/utilFunctions";
 import FavoriteButton from "../components/FavoriteButton";
-import PanSwipe from "../components/PanSwipe";
+import PageTurn from "../components/PageTurn";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { getCurrentDate, goToNextPage, goToPreviousPage } =
-    useContext(DateContext);
+  const { getCurrentDate } = useContext(DateContext);
   const imageRef = useRef<ImageZoomRef>();
   const date: string = getCurrentDate();
 
@@ -31,11 +29,7 @@ export default function Home({ navigation }: { navigation: any }) {
         <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
-        <PanSwipe side={"left"} />
-        <Pressable
-          style={styles.leftSideButton}
-          onPress={() => goToPreviousPage(date)}
-        />
+        <PageTurn side={"left"} />
         <ImageZoom
           ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
@@ -44,11 +38,7 @@ export default function Home({ navigation }: { navigation: any }) {
           resizeMode="contain"
           onLoadStart={() => imageRef.current?.quickReset()}
         />
-        <PanSwipe side={"right"} />
-        <Pressable
-          style={styles.rightSideButton}
-          onPress={() => goToNextPage(date)}
-        />
+        <PageTurn side={"right"} />
       </ScrollView>
     </View>
   );
@@ -70,19 +60,5 @@ const styles = StyleSheet.create({
     height: window.height - 250,
     width: window.width,
     flexDirection: "row",
-  },
-  leftSideButton: {
-    height: "100%",
-    width: 50,
-    left: 0,
-    zIndex: 1,
-    position: "absolute",
-  },
-  rightSideButton: {
-    height: "100%",
-    width: 50,
-    right: -0,
-    zIndex: 1,
-    position: "absolute",
   },
 });
