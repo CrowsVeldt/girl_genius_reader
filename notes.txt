@@ -1,19 +1,18 @@
-Fixes/improvements, functionality:
-- show toast only when bookmark is successfully added or removed
-- speed up list view opening and closing
-
 Bugs: 
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 ! toasts show even when bookmark add/remove is unsuccessful
-! Volume 9 is rolled into volume 10, need to check them all
+
+Fixes/improvements, functionality:
+- show toast only when bookmark is successfully added or removed
 
 Fixes/improvements, UX/UI:
 - display toast/message to inform user when updating, finished updating, network error, etc.
+- Slide page horizontally when swiping to next/previous page
 ? steampunk aesthetic, inspired by GG website
 ? add bookmark button to header?
+? speed up list view opening and closing
 
 Features, planned:
-- Swipe or tap on side of screen to move forward or back
 - option to display two pages side-by-side in landscape mode
 
 Done:
@@ -40,6 +39,8 @@ x in list add 'page %' in addition to the date
 x use Pressable component to allow pressing side of screen to change page
 x prevent scrolling when image is zoomed out
 x on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
+x Swipe or tap on side of screen to move forward or back
+x Volume 9 is rolled into volume 10, need to check them all
 
 Thanks to: 
 - https://github.com/likashefqet

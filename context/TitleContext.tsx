@@ -30,9 +30,11 @@ const TitleProvider = ({ children }: { children: any }) => {
     const volumeList: string[][] = list.filter((item) => {
       return (
         !item[1].includes("Final") &&
+        !item[1].includes("NINE") &&
         (item[1].includes("Volume") ||
           item[1].includes("VOLUME") ||
-          item[1].includes("BOOK"))
+          item[1].includes("BOOK") ||
+          item[1].includes("Wallpaper"))
       );
     });
 
