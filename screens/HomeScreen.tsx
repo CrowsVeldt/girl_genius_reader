@@ -9,10 +9,11 @@ import {
   View,
 } from "react-native";
 import { DateContext } from "../context/DateContext";
-import { ImageZoomRef } from "../image_zoom_files/types";
-import ImageZoom from "../image_zoom_files/components/ImageZoom";
+import { ImageZoomRef } from "../components/image_zoom_files/types";
+import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import { formatDate } from "../utils/utilFunctions";
 import FavoriteButton from "../components/FavoriteButton";
+import Swipe from "../components/Swipe";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -34,6 +35,7 @@ export default function Home({ navigation }: { navigation: any }) {
           style={styles.leftSideButton}
           onPress={() => goToPreviousPage(date)}
         />
+        <Swipe side="left" style={styles.leftSideButton} />
         <ImageZoom
           ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
@@ -46,6 +48,7 @@ export default function Home({ navigation }: { navigation: any }) {
           style={styles.rightSideButton}
           onPress={() => goToNextPage(date)}
         />
+        <Swipe side="right" styles={styles.rightSideButton} />
       </ScrollView>
     </View>
   );
@@ -57,12 +60,11 @@ const styles = StyleSheet.create({
     height: screen.height,
     width: screen.width,
     backgroundColor: process.env.EXPO_PUBLIC_BG_COLOR,
-
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingTop: 80
+    paddingTop: 80,
   },
   comicContainer: {
     height: window.height - 250,
