@@ -13,7 +13,7 @@ import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import { formatDate } from "../utils/utilFunctions";
 import FavoriteButton from "../components/FavoriteButton";
-import Swipe from "../components/Swipe";
+import PanSwipe from "../components/PanSwipe";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -31,11 +31,11 @@ export default function Home({ navigation }: { navigation: any }) {
         <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
+        <PanSwipe side={"left"} />
         <Pressable
           style={styles.leftSideButton}
           onPress={() => goToPreviousPage(date)}
         />
-        <Swipe side="left" style={styles.leftSideButton} />
         <ImageZoom
           ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
@@ -44,11 +44,11 @@ export default function Home({ navigation }: { navigation: any }) {
           resizeMode="contain"
           onLoadStart={() => imageRef.current?.quickReset()}
         />
+        <PanSwipe side={"right"} />
         <Pressable
           style={styles.rightSideButton}
           onPress={() => goToNextPage(date)}
         />
-        <Swipe side="right" styles={styles.rightSideButton} />
       </ScrollView>
     </View>
   );
