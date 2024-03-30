@@ -5,14 +5,12 @@ import Animated, {
   useSharedValue,
   withTiming,
   useAnimatedStyle,
-  interpolateColor,
+  interpolate,
   runOnJS,
   clamp,
   SharedValue,
 } from "react-native-reanimated";
 import { DateContext } from "../context/DateContext";
-
-const bg = process.env.EXPO_PUBLIC_BG_COLOR;
 
 export default function App(props: any) {
   const { getCurrentDate, goToPreviousPage, goToNextPage } =
@@ -25,7 +23,6 @@ export default function App(props: any) {
 
   const panGesture = Gesture.Pan()
     .onUpdate((e) => {
-      console.log(position.value);
       if (onSide.value) {
         position.value = clamp(
           e.translationX,
@@ -46,22 +43,26 @@ export default function App(props: any) {
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: position.value }],
-    borderColor: interpolateColor(
-      position.value,
-      [0, side === "left" ? 50 : -50],
-      [bg as string, "black"]
-    ),
     left: side === "left" ? 0 : null,
     right: side === "right" ? 0 : null,
-    marginLeft: side === "left" ? 0 : 20,
-    marginRight: side === "right" ? 0 : 20,
-    borderStartWidth: side === "right" ? 0 : 10,
-    borderEndWidth: side === "left" ? 0 : 10,
+  }));
+
+  const arrowAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      position.value,
+      side === "left" ? [0, 50] : [0, -50],
+      [0, 1]
+    ),
+    transform: [side === "left" ? { rotate: "45deg" } : { rotate: "-135deg" }],
+    left: side === "left" ? 0 : null,
+    right: side === "right" ? 22.5 : null
   }));
 
   return (
     <GestureDetector gesture={panGesture}>
-      <Animated.View style={[styles.box, animatedStyle]} />
+      <Animated.View style={[styles.box, animatedStyle]}>
+        <Animated.View style={[styles.arrow, arrowAnimatedStyle]} />
+      </Animated.View>
     </GestureDetector>
   );
 }
@@ -72,5 +73,15 @@ const styles = StyleSheet.create({
     width: 20,
     position: "absolute",
     zIndex: 1,
+    opacity: 1,
+  },
+  arrow: {
+    height: 45,
+    width: 45,
+    borderStartWidth: 5,
+    borderBottomWidth: 5,
+    borderColor: "black",
+    position: "relative",
+    top: 250,
   },
 });
