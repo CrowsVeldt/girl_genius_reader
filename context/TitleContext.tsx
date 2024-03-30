@@ -34,7 +34,7 @@ const TitleProvider = ({ children }: { children: any }) => {
         (item[1].includes("Volume") ||
           item[1].includes("VOLUME") ||
           item[1].includes("BOOK") ||
-          item[1].includes("Wallpaper"))
+          item[1].includes("Volume Nine Web Cover & Wallpaper"))
       );
     });
 
