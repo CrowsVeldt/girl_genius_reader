@@ -8,6 +8,7 @@ import Animated, {
   interpolateColor,
   runOnJS,
   clamp,
+  SharedValue,
 } from "react-native-reanimated";
 import { DateContext } from "../context/DateContext";
 
@@ -17,16 +18,20 @@ export default function App(props: any) {
   const { getCurrentDate, goToPreviousPage, goToNextPage } =
     useContext(DateContext);
   const { side } = props;
-  const date = getCurrentDate();
-  const onSide = useSharedValue(true);
-  const position = useSharedValue(0);
-  const END_POSITION = side === "left" ? 50 : -50;
+  const date: string = getCurrentDate();
+  const onSide: SharedValue<boolean> = useSharedValue(true);
+  const position: SharedValue<number> = useSharedValue(0);
+  const END_POSITION: number = side === "left" ? 50 : -50;
 
   const panGesture = Gesture.Pan()
     .onUpdate((e) => {
       console.log(position.value);
       if (onSide.value) {
-        position.value = clamp(e.translationX, side === "left" ? 0 : -50 , side === "left" ? 50 : 0);
+        position.value = clamp(
+          e.translationX,
+          side === "left" ? 0 : -50,
+          side === "left" ? 50 : 0
+        );
       }
     })
     .onEnd((e) => {
@@ -43,7 +48,7 @@ export default function App(props: any) {
     transform: [{ translateX: position.value }],
     borderColor: interpolateColor(
       position.value,
-      [side === "left" ? 0 : -0, side === "left" ? 50 : -50],
+      [0, side === "left" ? 50 : -50],
       [bg as string, "black"]
     ),
     left: side === "left" ? 0 : null,

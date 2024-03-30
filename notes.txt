@@ -1,10 +1,12 @@
 Bugs: 
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 ! toasts show even when bookmark add/remove is unsuccessful
+! List screen not scrolling
 
 Fixes/improvements, functionality:
 
 Fixes/improvements, UX/UI:
+- make panswipe indicator an arrow centered in the screen
 - display toast/message to inform user when updating, finished updating, network error, etc.
 - Slide page horizontally when swiping to next/previous page, both cause it looks good and to provide visual feedback to the user
 ? steampunk aesthetic, inspired by GG website
