@@ -1,8 +1,6 @@
 Bugs: 
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 ! toasts show even when bookmark add/remove is unsuccessful
-! check all volume lists for accuracy, pretty sure there's something wrong with 16/17 
-! date #20141226 not displaying comic
 
 Fixes/improvements, UX/UI:
 - add loading indicator for page/screen transitions
@@ -12,9 +10,14 @@ Fixes/improvements, UX/UI:
 ? steampunk aesthetic, inspired by GG website
 ? add bookmark button to header?
 ? speed up list view opening and closing
+- better display/organize volume lists
 
 Features, planned:
 - option to display two pages side-by-side in landscape mode
+
+- Date exceptions:
+- - 20030106>20030106b (20030106 points to the wrong comic)
+- - 20141226a-20141226b (a is the comic, b is a wallpaper)
 
 Done:
 x Make update loop stop even if it returns undefined
