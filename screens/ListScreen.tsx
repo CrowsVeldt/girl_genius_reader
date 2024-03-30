@@ -54,7 +54,6 @@ export default function DateList({ navigation }: { navigation: any }) {
 
 const styles = StyleSheet.create({
   list: {
-    flex: 1,
     alignSelf: "center",
     alignItems: "center",
     width: "100%",

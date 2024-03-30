@@ -1,14 +1,12 @@
 Bugs: 
 ! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 ! toasts show even when bookmark add/remove is unsuccessful
-! List screen not scrolling
-
-Fixes/improvements, functionality:
+! check all volume lists for accuracy, pretty sure there's something wrong with 16/17 
 
 Fixes/improvements, UX/UI:
-- make panswipe indicator an arrow centered in the screen
 - display toast/message to inform user when updating, finished updating, network error, etc.
 - Slide page horizontally when swiping to next/previous page, both cause it looks good and to provide visual feedback to the user
+- allow for closing VolumeLists, perhaps by double-tapping
 ? steampunk aesthetic, inspired by GG website
 ? add bookmark button to header?
 ? speed up list view opening and closing
@@ -42,6 +40,8 @@ x prevent scrolling when image is zoomed out
 x on restart, date is first set to 20021104, before date is loaded from memory, but date in comicnav is already set
 x Swipe or tap on side of screen to move forward or back
 x Volume 9 is rolled into volume 10, need to check them all
+x make panswipe indicator an arrow centered in the screen
+X List screen not scrolling
 
 Thanks to: 
 - https://github.com/likashefqet
