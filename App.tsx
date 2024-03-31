@@ -19,7 +19,15 @@ export default function App() {
           <TitleProvider>
             <Drawer.Navigator
               initialRouteName="Girl Genius"
-              screenOptions={{ swipeEnabled: false }}
+              screenOptions={{
+                swipeEnabled: false,
+                drawerStyle: {
+                  backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
+                },
+                headerStyle: {
+                  backgroundColor: process.env.EXPO_PUBLIC_LIGHT_HEAD_COLOR,
+                },
+              }}
             >
               <Drawer.Screen name="Home" component={HomeScreen} />
               <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
