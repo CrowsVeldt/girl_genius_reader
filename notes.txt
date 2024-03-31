@@ -1,12 +1,10 @@
 Bugs: 
-! removing bookmark from bookmarks page doesn't reset star button on home page (?)
 ! toasts show even when bookmark add/remove is unsuccessful
 ! fix parse issue with saving dates with letters
 
 Fixes/improvements, UX/UI:
-- add loading indicator for page/screen transitions
-- display toast/message to inform user when updating, finished updating, network error, etc.
-- Slide page horizontally when swiping to next/previous page, both cause it looks good and to provide visual feedback to the user
+- add vol# & page# to header
+- show scene title on homescreen9
 - better display/organize volume lists
 - optimize animations and transitions for speed
 ? add bookmark button to header?
@@ -15,7 +13,9 @@ Fixes/improvements, UX/UI:
 
 Features, planned:
 - option to display two pages side-by-side in landscape mode
-- add title/page#/date to homescreen title/header(?)
+- add loading indicator for page/screen transitions
+- display toast/message to inform user when updating, finished updating, network error, etc.
+- Slide page horizontally when swiping to next/previous page, both cause it looks good and to provide visual feedback to the user
 
 - Date exceptions:
 - - 20030106>20030106b (20030106 points to the wrong comic)
@@ -50,6 +50,7 @@ x Volume 9 is rolled into volume 10, need to check them all
 x make panswipe indicator an arrow centered in the screen
 X List screen not scrolling
 x allow for closing VolumeLists, perhaps by double-tapping
+x removing bookmark from bookmarks page doesn't reset star button on home page (?)
 
 Thanks to: 
 - https://github.com/likashefqet
