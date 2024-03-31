@@ -4,13 +4,11 @@ import {
   ScaledSize,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
-import { formatDate } from "../utils/utilFunctions";
 import FavoriteButton from "../components/FavoriteButton";
 import PageTurn from "../components/PageTurn";
 

@@ -9,7 +9,7 @@ export default function FavoriteButton({ date }: { date: string }) {
 
   useEffect(() => {
     setBookmarked(isDateBookmarked(date));
-  }, [date]);
+  }, [isDateBookmarked(date)]);
 
   return (
     <TouchableOpacity

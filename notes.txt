@@ -12,8 +12,10 @@ Fixes/improvements, UX/UI:
 ? add bookmark button to header?
 ? have star button fade after a period of inactivity
 
+
 Features, planned:
 - option to display two pages side-by-side in landscape mode
+- add title/page#/date to homescreen title/header(?)
 
 - Date exceptions:
 - - 20030106>20030106b (20030106 points to the wrong comic)
