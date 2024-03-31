@@ -7,9 +7,10 @@ Fixes/improvements, UX/UI:
 - add loading indicator for page/screen transitions
 - display toast/message to inform user when updating, finished updating, network error, etc.
 - Slide page horizontally when swiping to next/previous page, both cause it looks good and to provide visual feedback to the user
-? add bookmark button to header?
 - better display/organize volume lists
 - optimize animations and transitions for speed
+? add bookmark button to header?
+? have star button fade after a period of inactivity
 
 Features, planned:
 - option to display two pages side-by-side in landscape mode

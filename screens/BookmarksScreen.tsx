@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     width: "100%",
-    backgroundColor: process.env.EXPO_PUBLIC_BG_COLOR,
+    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
 });

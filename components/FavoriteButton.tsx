@@ -12,19 +12,19 @@ export default function FavoriteButton({ date }: { date: string }) {
   }, [date]);
 
   return (
-      <TouchableOpacity
-        style={styles.favoriteButton}
-        onPress={() => {
-          if (bookmarked) {
-            removeBookmark(date);
-          } else {
-            addBookmark(date);
-          }
-          setBookmarked(!bookmarked);
-        }}
-      >
-        <Text style={styles.buttonText}>{bookmarked ? "★" : "☆"}</Text>
-      </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.favoriteButton}
+      onPress={() => {
+        if (bookmarked) {
+          removeBookmark(date);
+        } else {
+          addBookmark(date);
+        }
+        setBookmarked(!bookmarked);
+      }}
+    >
+      <Text style={styles.buttonText}>{bookmarked ? "★" : "☆"}</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -32,10 +32,6 @@ const styles = StyleSheet.create({
   favoriteButton: {
     height: 40,
     width: 40,
-    position: "absolute",
-    right: 10,
-    top: 10,
-    zIndex: 1,
   },
   buttonText: {
     color: "#dbbd69",

@@ -66,8 +66,8 @@ export default forwardRef(function ImageZoom(
           reset();
         },
         quickReset() {
-         quickReset()
-        }
+          quickReset();
+        },
       };
     },
     [reset, quickReset]

@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingTop: 30,
     paddingBottom: 60,
-    backgroundColor: process.env.EXPO_PUBLIC_BG_COLOR,
+    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
 });

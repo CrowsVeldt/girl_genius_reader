@@ -25,9 +25,6 @@ export default function Home({ navigation }: { navigation: any }) {
   return (
     <View style={styles.comicPage}>
       <FavoriteButton date={date} />
-      <View style={styles.header}>
-        <Text>{formatDate(typeof date === "string" ? date : "")}</Text>
-      </View>
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <PageTurn side={"left"} />
         <ImageZoom
@@ -35,7 +32,7 @@ export default function Home({ navigation }: { navigation: any }) {
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
           minPanPointers={1}
           isDoubleTapEnabled
-          resizeMode="contain"
+          resizeMode="cover"
           onLoadStart={() => imageRef.current?.quickReset()}
         />
         <PageTurn side={"right"} />
@@ -46,19 +43,13 @@ export default function Home({ navigation }: { navigation: any }) {
 
 const styles = StyleSheet.create({
   comicPage: {
-    alignItems: "center",
+    paddingTop: 50,
     height: screen.height,
     width: screen.width,
-    backgroundColor: process.env.EXPO_PUBLIC_BG_COLOR,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingTop: 80,
+    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
     height: window.height - 250,
     width: window.width,
-    flexDirection: "row",
   },
 });
