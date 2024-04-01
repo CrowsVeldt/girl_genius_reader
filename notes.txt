@@ -1,4 +1,8 @@
-TODO: organize volumes, titles, and dates in title context. retrieve from there to listScreen, add getVolume/title/page methods
+
+
+TODO: 
+- COMBINE DateContext & TitleContext into ComicContext
+- organize volumes, titles, and dates in title context. retrieve from there to listScreen, add getVolume/title/page methods
 
 Fixes/improvements, UX/UI:
 - add vol# & page# to header
