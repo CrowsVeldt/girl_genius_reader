@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { DateContext } from "../context/DateContext";
 
-export default function FavoriteButton({ date }: { date: string }) {
+export default function StarButton({ date }: { date: string }) {
   const { addBookmark, removeBookmark, isDateBookmarked } =
     useContext(DateContext);
   const [bookmarked, setBookmarked] = useState(false);

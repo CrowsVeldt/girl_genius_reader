@@ -8,6 +8,7 @@ import ListScreen from "./screens/ListScreen";
 
 import DateProvider from "./context/DateContext";
 import TitleProvider from "./context/TitleContext";
+import CustomHeader from "./components/CustomHeader";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,7 +25,16 @@ export default function App() {
                 drawerStyle: {
                   backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
                 },
+                header: ({ navigation, options, route, layout }) => (
+                  <CustomHeader
+                    navigation={navigation}
+                    options={options}
+                    route={route}
+                    layout={layout}
+                  />
+                ),
                 headerStyle: {
+                  height: 60,
                   backgroundColor: process.env.EXPO_PUBLIC_LIGHT_HEAD_COLOR,
                 },
               }}

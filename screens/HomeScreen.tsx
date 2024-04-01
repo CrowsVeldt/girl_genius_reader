@@ -9,7 +9,6 @@ import {
 import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
-import FavoriteButton from "../components/FavoriteButton";
 import PageTurn from "../components/PageTurn";
 
 const screen: ScaledSize = Dimensions.get("screen");
@@ -22,7 +21,6 @@ export default function Home({ navigation }: { navigation: any }) {
 
   return (
     <View style={styles.comicPage}>
-      <FavoriteButton date={date} />
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <PageTurn side={"left"} />
         <ImageZoom
