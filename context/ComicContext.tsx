@@ -6,20 +6,18 @@ import {
   currentDateKey,
 } from "../utils/storage";
 import dateFile from "../public/dates.json";
+import titleFile from "../public/titles.json";
 import Toast from "react-native-root-toast";
 
-// Data structure: {volume: number, page: {date: string, scene: string}}
-
 type ComicDataType = {
-  volumeNumber: string,
+  volumeNumber: string;
   pages: {
-    date: string,
-    title: string
-  }
-}
+    date: string;
+    title: string;
+  };
+};
 
-type DateContextType = {
-  getDates: () => string[];
+type ComicContextType = {
   getCurrentDate: () => string;
   changeCurrentDate: (date: string) => void;
   getBookmarks: () => string[];
@@ -30,11 +28,13 @@ type DateContextType = {
   goToPreviousPage: (date: string) => void;
 };
 
-export const DateContext = createContext<DateContextType>(
-  null as unknown as DateContextType
+export const ComicContext = createContext<ComicContextType>(
+  null as unknown as ComicContextType
 );
 
-const DateProvider = ({ children }: { children: any }) => {
+const ComicProvider = ({ children }: { children: any }) => {
+  const [titles, setTitles] = useState<string[][]>([]);
+  const [volumes, setVolumes] = useState<string[][]>([]);
   const [dates, setDates] = useState<string[]>(dateFile);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
@@ -52,9 +52,34 @@ const DateProvider = ({ children }: { children: any }) => {
     })();
   }, []);
 
-  const getDates: () => string[] = () => {
-    return dates;
-  };
+  useEffect(() => {
+    const list = titleFile;
+
+    const titleList: string[][] = list.filter((item) => {
+      return !(
+        item[1].includes("Final") ||
+        item[1].includes("Volume") ||
+        item[1].includes("VOLUME") ||
+        item[1].includes("BOOK") ||
+        item[1].includes("---Jump to a Scene---")
+      );
+    });
+
+    const volumeList: string[][] = list.filter((item) => {
+      // list of conditions and exceptions to find the beginnings of volumes
+      return (
+        !item[1].includes("Final") &&
+        !item[1].includes("Volume NINE") &&
+        (item[1].includes("Volume") ||
+          item[1].includes("VOLUME") ||
+          item[1].includes("BOOK") ||
+          item[1].includes("Volume Nine Web Cover & Wallpaper"))
+      );
+    });
+
+    setTitles(titleList);
+    setVolumes(volumeList);
+  }, []);
 
   const getBookmarks: () => string[] = () => {
     return bookmarks;
@@ -102,7 +127,6 @@ const DateProvider = ({ children }: { children: any }) => {
   };
 
   const value = {
-    getDates,
     getCurrentDate,
     changeCurrentDate,
     getBookmarks,
@@ -112,7 +136,9 @@ const DateProvider = ({ children }: { children: any }) => {
     goToNextPage,
     goToPreviousPage,
   };
-  return <DateContext.Provider value={value}>{children}</DateContext.Provider>;
+  return (
+    <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
+  );
 };
 
-export default DateProvider;
+export default ComicProvider;
