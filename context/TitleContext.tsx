@@ -43,6 +43,11 @@ const TitleProvider = ({ children }: { children: any }) => {
     setVolumes(volumeList);
   }, []);
 
+
+  // TODO: Combine DateContext and TitleContext into ComicContext
+  // Organize volumes into objects {Volume#: {date# : [page#, sceneTitle]}}
+  // add getVolumeForDate(date), getTitleForDate(date), and getPageNumForDate(date)
+
   const getTitles = () => {
     return titles;
   };
@@ -61,3 +66,25 @@ const TitleProvider = ({ children }: { children: any }) => {
 };
 
 export default TitleProvider;
+
+// const collectVolumes = (
+//   volumes: string[][],
+//   titles: string[][],
+//   dates: string[]
+// ) => {
+//   return volumes.map((volume, index) => {
+//     const endDate =
+//       volumes[index + 1] != undefined ? volumes[index + 1][0] : "end";
+
+//     const volumeDates = dates.slice(
+//       dates.indexOf(volume[0]),
+//       dates.indexOf(endDate)
+//     );
+
+//     const volumeTitles = titles.filter((title) =>
+//       volumeDates.includes(title[0])
+//     );
+
+//     return { volume: volume, dates: volumeDates, titles: volumeTitles };
+//   });
+// };

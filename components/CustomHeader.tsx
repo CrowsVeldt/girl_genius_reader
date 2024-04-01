@@ -2,6 +2,7 @@ import { View, Text, Button, StyleSheet, StatusBar } from "react-native";
 import StarButton from "./StarButton";
 import { useContext } from "react";
 import { DateContext } from "../context/DateContext";
+import { TitleContext } from "../context/TitleContext";
 export default function CustomHeader({
   navigation,
   route,
@@ -16,6 +17,9 @@ export default function CustomHeader({
   const { getCurrentDate } = useContext(DateContext);
   const date = getCurrentDate()
   const title = route.name;
+
+    // Get Volume#, Page#, and scene title from titleContext
+
   return (
     <View style={[options.headerStyle, styles.header]}>
       <Button title={"≡"} onPress={() => navigation.openDrawer()} />
