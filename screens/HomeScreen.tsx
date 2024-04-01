@@ -30,7 +30,7 @@ export default function Home({ navigation }: { navigation: any }) {
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
           minPanPointers={1}
           isDoubleTapEnabled
-          resizeMode="cover"
+          resizeMode="contain"
           onLoadStart={() => imageRef.current?.quickReset()}
         />
         <PageTurn side={"right"} />
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
-    height: window.height - 250,
+    height: window.height - 150,
     width: window.width,
   },
-});
+})
