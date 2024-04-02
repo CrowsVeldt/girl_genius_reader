@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     height: window.height - 150,
     width: window.width,
   },
-})
+});

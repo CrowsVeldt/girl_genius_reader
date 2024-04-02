@@ -1,5 +1,3 @@
-
-
 TODO: 
 - COMBINE DateContext & TitleContext into ComicContext
 - organize volumes, titles, and dates in title context. retrieve from there to listScreen, add getVolume/title/page methods
@@ -11,6 +9,7 @@ Fixes/improvements, UX/UI:
 - optimize animations and transitions for speed
 ? add bookmark button to header?
 ? have star button fade after a period of inactivity
+- if comic is zoomed out than swipe from anywhere in the screen will change page
 
 - Date exceptions:
 - - 20030106>20030106b (20030106 points to the wrong comic)

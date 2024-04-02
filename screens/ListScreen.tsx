@@ -5,7 +5,6 @@ import { TitleContext } from "../context/TitleContext";
 import { VolumeList } from "../components/VolumeList";
 import { volumeObject } from "../utils/types";
 
-  // Get volume/page/title info from titleContext
 
 const collectVolumes = (
   volumes: string[][],
