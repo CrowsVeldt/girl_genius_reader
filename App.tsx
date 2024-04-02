@@ -5,10 +5,11 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import HomeScreen from "./screens/HomeScreen";
 import BookmarkScreen from "./screens/BookmarksScreen";
 import ListScreen from "./screens/ListScreen";
+import CustomHeader from "./components/CustomHeader";
 
 import DateProvider from "./context/DateContext";
 import TitleProvider from "./context/TitleContext";
-import CustomHeader from "./components/CustomHeader";
+import ComicProvider from "./context/ComicContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,31 +19,33 @@ export default function App() {
       <NavigationContainer>
         <DateProvider>
           <TitleProvider>
-            <Drawer.Navigator
-              initialRouteName="Girl Genius"
-              screenOptions={{
-                swipeEnabled: false,
-                drawerStyle: {
-                  backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
-                },
-                header: ({ navigation, options, route, layout }) => (
-                  <CustomHeader
-                    navigation={navigation}
-                    options={options}
-                    route={route}
-                    layout={layout}
-                  />
-                ),
-                headerStyle: {
-                  height: 60,
-                  backgroundColor: process.env.EXPO_PUBLIC_LIGHT_HEAD_COLOR,
-                },
-              }}
-            >
-              <Drawer.Screen name="Home" component={HomeScreen} />
-              <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
-              <Drawer.Screen name="List" component={ListScreen} />
-            </Drawer.Navigator>
+            <ComicProvider>
+              <Drawer.Navigator
+                initialRouteName="Girl Genius"
+                screenOptions={{
+                  swipeEnabled: false,
+                  drawerStyle: {
+                    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
+                  },
+                  header: ({ navigation, options, route, layout }) => (
+                    <CustomHeader
+                      navigation={navigation}
+                      options={options}
+                      route={route}
+                      layout={layout}
+                    />
+                  ),
+                  headerStyle: {
+                    height: 60,
+                    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_HEAD_COLOR,
+                  },
+                }}
+              >
+                <Drawer.Screen name="Home" component={HomeScreen} />
+                <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
+                <Drawer.Screen name="List" component={ListScreen} />
+              </Drawer.Navigator>
+            </ComicProvider>
           </TitleProvider>
         </DateProvider>
       </NavigationContainer>
