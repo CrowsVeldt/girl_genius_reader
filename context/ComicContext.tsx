@@ -10,11 +10,13 @@ import titleFile from "../public/titles.json";
 import Toast from "react-native-root-toast";
 
 type ComicDataType = {
-  volumeNumber: string;
+  volumeStart: string;
+  volumeNumber: number;
   pages: {
     date: string;
     title: string;
-  };
+    page: number;
+  }[];
 };
 
 type ComicContextType = {
@@ -26,6 +28,50 @@ type ComicContextType = {
   isDateBookmarked: (date: string) => boolean;
   goToNextPage: (date: string) => void;
   goToPreviousPage: (date: string) => void;
+  getVolumes: () => ComicDataType[]
+};
+
+const returnTitles = (dates: string[], titles: string[][]) => {
+  let currentTitle: string;
+  return dates.map((date) => {
+    const title = titles.forEach((title) => {
+      return title[0] === date
+        ? (currentTitle = title[1])
+        : (currentTitle = currentTitle);
+    });
+
+    return { date: date, title: currentTitle };
+  });
+};
+
+const collectVolumes = (
+  volumes: string[][],
+  dates: string[],
+  titles: string[][]
+) => {
+  const volumesList = volumes.map((volume, index) => {
+    const endDate =
+      volumes[index + 1] != undefined ? volumes[index + 1][0] : "end";
+
+    const volumeDates = dates.slice(
+      dates.indexOf(volume[0]),
+      dates.indexOf(endDate)
+    );
+
+    const volumeTitles = returnTitles(volumeDates, titles);
+
+    const volumePages = volumeTitles.map((date, index) => {
+      return { page: index + 1, date: date.date, title: date.title };
+    });
+
+    return {
+      volumeStart: volume[0],
+      volumeNumber: index + 1,
+      pages: volumePages,
+    };
+  });
+
+  return volumesList;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -33,8 +79,7 @@ export const ComicContext = createContext<ComicContextType>(
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
-  const [titles, setTitles] = useState<string[][]>([]);
-  const [volumes, setVolumes] = useState<string[][]>([]);
+  const [volumes, setVolumes] = useState<ComicDataType[]>([]);
   const [dates, setDates] = useState<string[]>(dateFile);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
@@ -77,8 +122,8 @@ const ComicProvider = ({ children }: { children: any }) => {
       );
     });
 
-    setTitles(titleList);
-    setVolumes(volumeList);
+    const collectedVolumes = collectVolumes(volumeList, dates, titleList);
+    setVolumes(collectedVolumes);
   }, []);
 
   const getBookmarks: () => string[] = () => {
@@ -126,6 +171,10 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentDate(index - 1 >= 0 ? dates[index - 1] : date);
   };
 
+  const getVolumes = () => {
+    return volumes;
+  };
+
   const value = {
     getCurrentDate,
     changeCurrentDate,
@@ -135,6 +184,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     isDateBookmarked,
     goToNextPage,
     goToPreviousPage,
+    getVolumes
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
