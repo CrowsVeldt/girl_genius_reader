@@ -30,6 +30,7 @@ const collectVolumes = (
   dates: string[],
   titles: string[][]
 ) => {
+  let pages: PageType[] = [];
   const volumesList = volumes.map((volume, volumeIndex) => {
     const endDate =
       volumes[volumeIndex + 1] != undefined
@@ -51,6 +52,8 @@ const collectVolumes = (
       };
     });
 
+    pages = [...pages, ...volumePages];
+
     return {
       volumeStart: volume[0],
       volumeNumber: volumeIndex + 1,
@@ -58,7 +61,7 @@ const collectVolumes = (
     };
   });
 
-  return volumesList;
+  return [volumesList, pages];
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -68,13 +71,14 @@ export const ComicContext = createContext<ComicContextType>(
 const ComicProvider = ({ children }: { children: any }) => {
   const [volumes, setVolumes] = useState<ComicDataType[]>([]);
   const [dates, setDates] = useState<string[]>(dateFile);
+  const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
   const [currentPage, setCurrentPage] = useState<PageType>({
-    date: "20021104",
+    date: "",
     title: "",
-    pageNumber: 1,
-    volume: 1,
+    pageNumber: 0,
+    volume: 0,
   });
 
   useEffect(() => {
@@ -99,6 +103,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     const list = titleFile;
 
     const titleList: string[][] = list.filter((item) => {
+      // all titles that aren't volume start or end dates
       return !(
         item[1].includes("Final") ||
         item[1].includes("Volume") ||
@@ -121,7 +126,8 @@ const ComicProvider = ({ children }: { children: any }) => {
     });
 
     const collectedVolumes = collectVolumes(volumeList, dates, titleList);
-    setVolumes(collectedVolumes);
+    setVolumes(collectedVolumes[0]);
+    setPages(collectedVolumes[1]);
   }, []);
 
   const getBookmarks: () => string[] = () => bookmarks;
@@ -130,6 +136,11 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const changeCurrentDate: (date: string) => void = async (date) => {
     setCurrentDate(date);
+    const page = pages.find((item) => item.date === date);
+
+    if (page) {
+      changeCurrentPage(page)
+    }
     saveData(currentDateKey, date);
   };
 
@@ -165,9 +176,19 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentDate(dates[index + 1] ? dates[index + 1] : date);
   };
 
+  const goToNextPageNew: (page: PageType) => void = (page) => {
+    const index: number = pages.findIndex((element) => element.date === page.date);
+    changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
+  };
+
   const goToPreviousPage: (date: string) => void = (date) => {
     const index: number = dates.findIndex((element) => element === date);
     changeCurrentDate(index - 1 >= 0 ? dates[index - 1] : date);
+  };
+
+  const goToPreviousPageNew: (page: PageType) => void = (page) => {
+    const index: number = pages.findIndex((element) => element.date === page.date);
+    changeCurrentPage(index - 1 >= 0 ? pages[index + 1] : page);
   };
 
   const getVolumes = () => {
@@ -184,7 +205,9 @@ const ComicProvider = ({ children }: { children: any }) => {
     removeBookmark,
     isDateBookmarked,
     goToNextPage,
+    goToNextPageNew,
     goToPreviousPage,
+    goToPreviousPageNew,
     getVolumes,
   };
   return (
