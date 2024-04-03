@@ -20,13 +20,10 @@ export default function CustomHeader({
   options: any;
   layout: any;
 }) {
-  const { getCurrentDate, getCurrentPage } = useContext(ComicContext);
+  const { getCurrentPage } = useContext(ComicContext);
 
-  const date = getCurrentDate();
   const page = getCurrentPage()
   const routeName = route.name;
-
-  // Get Volume# and Page# from ComicContext
 
   return (
     <View style={[options.headerStyle, styles.header]}>
@@ -36,8 +33,8 @@ export default function CustomHeader({
       >
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
-      <Text>{`Volume ${page.volume}, Page ${page.pageNumber}`}</Text>
-      {routeName === "Home" && <StarButton date={date} />}
+      <Text>{routeName === "Home" ? `Volume ${page.volume}, Page ${page.pageNumber}`: routeName}</Text>
+      {routeName === "Home" && <StarButton date={page.date} />}
     </View>
   );
 }
