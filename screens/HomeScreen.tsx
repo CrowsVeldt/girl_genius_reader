@@ -10,14 +10,16 @@ import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
 import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../utils/types";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { getCurrentDate } = useContext(ComicContext);
+  const { getCurrentDate, getCurrentPage } = useContext(ComicContext);
   const imageRef = useRef<ImageZoomRef>();
   const date: string = getCurrentDate();
+  const page: PageType = getCurrentPage();
 
   return (
     <View style={styles.comicPage}>
@@ -25,7 +27,7 @@ export default function Home({ navigation }: { navigation: any }) {
         <PageTurn side={"left"} />
         <ImageZoom
           ref={imageRef}
-          uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`}
+          uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
           minPanPointers={1}
           isDoubleTapEnabled
           resizeMode="contain"
