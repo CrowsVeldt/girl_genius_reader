@@ -1,5 +1,9 @@
-export type volumeObject = {
-    volume: string[]
-    titles: string[][]
-    dates: string[]
-}
+export type ComicDataType = {
+  volumeStart: string;
+  volumeNumber: number;
+  pages: {
+    date: string;
+    title: string;
+    pageNumber: number;
+  }[];
+};

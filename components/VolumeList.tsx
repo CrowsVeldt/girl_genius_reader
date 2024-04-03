@@ -5,34 +5,26 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { volumeObject } from "../utils/types";
 import { useState } from "react";
 import ComicLink from "./ComicLink";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
+import { ComicDataType } from "../utils/types";
 
 export const VolumeList = ({
-  currentVolume,
-  index,
+  volume,
   nav,
 }: {
-  currentVolume: volumeObject;
-  index: number;
+  volume: ComicDataType;
   nav: any;
 }) => {
   const [open, setOpen] = useState(false);
-  const { volume, titles, dates } = currentVolume;
-
-  const datesAndTitles = dates.map((date) => {
-    const title = titles.find((item) => item[0] === date);
-    return title ? title : [date, ""];
-  });
 
   const doubleTap = Gesture.Tap()
     .maxDuration(250)
     .numberOfTaps(2)
     .onStart(() => {
-      runOnJS(setOpen)(false)
+      runOnJS(setOpen)(false);
     });
 
   return (
@@ -44,16 +36,16 @@ export const VolumeList = ({
             setOpen(!open);
           }}
         >
-          <Text>{`Volume ${index + 1}`}</Text>
+          <Text>{volume.volumeNumber}</Text>
         </TouchableOpacity>
         <ScrollView>
-          {datesAndTitles.map((item, index) =>
+          {volume.pages.map((page, index) =>
             open ? (
               <ComicLink
-                date={item[0]}
+                date={page.date}
                 nav={nav}
-                num={index + 1}
-                title={item[1]}
+                num={page.pageNumber}
+                title={page.title}
                 key={index}
               />
             ) : null

@@ -8,16 +8,7 @@ import {
 import dateFile from "../public/dates.json";
 import titleFile from "../public/titles.json";
 import Toast from "react-native-root-toast";
-
-type ComicDataType = {
-  volumeStart: string;
-  volumeNumber: number;
-  pages: {
-    date: string;
-    title: string;
-    page: number;
-  }[];
-};
+import { ComicDataType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentDate: () => string;
@@ -28,20 +19,7 @@ type ComicContextType = {
   isDateBookmarked: (date: string) => boolean;
   goToNextPage: (date: string) => void;
   goToPreviousPage: (date: string) => void;
-  getVolumes: () => ComicDataType[]
-};
-
-const returnTitles = (dates: string[], titles: string[][]) => {
-  let currentTitle: string;
-  return dates.map((date) => {
-    const title = titles.forEach((title) => {
-      return title[0] === date
-        ? (currentTitle = title[1])
-        : (currentTitle = currentTitle);
-    });
-
-    return { date: date, title: currentTitle };
-  });
+  getVolumes: () => ComicDataType[];
 };
 
 const collectVolumes = (
@@ -58,10 +36,13 @@ const collectVolumes = (
       dates.indexOf(endDate)
     );
 
-    const volumeTitles = returnTitles(volumeDates, titles);
-
-    const volumePages = volumeTitles.map((date, index) => {
-      return { page: index + 1, date: date.date, title: date.title };
+    const volumePages = volumeDates.map((date, index) => {
+      const title = titles.find((title) => title[0] === date);
+      return {
+        pageNumber: index + 1,
+        date: date,
+        title: title ? title[1] : "",
+      };
     });
 
     return {
@@ -184,7 +165,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     isDateBookmarked,
     goToNextPage,
     goToPreviousPage,
-    getVolumes
+    getVolumes,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
