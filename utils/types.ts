@@ -5,8 +5,8 @@ export type ComicDataType = {
 };
 
 export type PageType = {
-  date: string
-  title: string
-  pageNumber: number
-  volume: number
-}
+  date: string;
+  title: string;
+  pageNumber: number;
+  volume: number;
+};

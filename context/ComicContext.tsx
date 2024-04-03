@@ -13,9 +13,9 @@ import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentDate: () => string;
-  getCurrentPage: () => PageType
+  getCurrentPage: () => PageType;
   changeCurrentDate: (date: string) => void;
-  changeCurrentPage: (page: PageType) => void
+  changeCurrentPage: (page: PageType) => void;
   getBookmarks: () => string[];
   addBookmark: (newBookmark: string) => void;
   removeBookmark: (date: string) => void;
@@ -30,9 +30,11 @@ const collectVolumes = (
   dates: string[],
   titles: string[][]
 ) => {
-  const volumesList = volumes.map((volume, index) => {
+  const volumesList = volumes.map((volume, volumeIndex) => {
     const endDate =
-      volumes[index + 1] != undefined ? volumes[index + 1][0] : "end";
+      volumes[volumeIndex + 1] != undefined
+        ? volumes[volumeIndex + 1][0]
+        : "end";
 
     const volumeDates = dates.slice(
       dates.indexOf(volume[0]),
@@ -45,13 +47,13 @@ const collectVolumes = (
         pageNumber: index + 1,
         date: date,
         title: title ? title[1] : "",
-        volume: volume
+        volume: volumeIndex + 1,
       };
     });
 
     return {
       volumeStart: volume[0],
-      volumeNumber: index + 1,
+      volumeNumber: volumeIndex + 1,
       pages: volumePages,
     };
   });
@@ -72,7 +74,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     date: "20021104",
     title: "",
     pageNumber: 1,
-    volume: 1
+    volume: 1,
   });
 
   useEffect(() => {
