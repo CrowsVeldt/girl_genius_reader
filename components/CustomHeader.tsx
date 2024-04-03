@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   StatusBar,
   TouchableOpacity,
@@ -21,11 +20,11 @@ export default function CustomHeader({
   options: any;
   layout: any;
 }) {
-  const { getCurrentDate } = useContext(ComicContext);
+  const { getCurrentDate, getCurrentPage } = useContext(ComicContext);
 
   const date = getCurrentDate();
-  console.log(date)
-  const title = route.name;
+  const page = getCurrentPage()
+  const routeName = route.name;
 
   // Get Volume# and Page# from ComicContext
 
@@ -37,8 +36,8 @@ export default function CustomHeader({
       >
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
-      <Text>{title}</Text>
-      {title === "Home" && <StarButton date={date} />}
+      <Text>{`Volume ${page.volume}, Page ${page.pageNumber}`}</Text>
+      {routeName === "Home" && <StarButton date={date} />}
     </View>
   );
 }

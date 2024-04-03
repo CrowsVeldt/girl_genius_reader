@@ -1,7 +1,6 @@
 Fixes/improvements:
 - rework date orginization/storage: use page:pageType rather than date:string to save the current page?
 - add vol# & page# to header
-- show scene title on homescreen?
 - better display/organize volume lists
 - optimize animations and transitions for speed
 - if comic is zoomed out than swipe from anywhere in the screen will change page
@@ -44,6 +43,7 @@ x add bookmark button to header?
 X have star button fade after a period of inactivity
 x replace DateContext with ComicContext
 x show star button *only* on homescreen
+X show scene title on homescreen?
 
 Thanks to: 
 - https://github.com/likashefqet

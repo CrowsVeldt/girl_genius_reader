@@ -4,7 +4,6 @@ import {
   saveData,
   bookmarkKey,
   currentDateKey,
-  currentVolumeKey,
   currentPageKey,
 } from "../utils/storage";
 import dateFile from "../public/dates.json";
@@ -14,10 +13,8 @@ import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentDate: () => string;
-  getCurrentVolume: () => number
   getCurrentPage: () => PageType
   changeCurrentDate: (date: string) => void;
-  changeCurrentVolume: (volume: number) => void
   changeCurrentPage: (page: PageType) => void
   getBookmarks: () => string[];
   addBookmark: (newBookmark: string) => void;
@@ -48,6 +45,7 @@ const collectVolumes = (
         pageNumber: index + 1,
         date: date,
         title: title ? title[1] : "",
+        volume: volume
       };
     });
 
@@ -70,28 +68,23 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dates, setDates] = useState<string[]>(dateFile);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
-  const [currentVolume, setCurrentVolume] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<PageType>({
-    date: "",
+    date: "20021104",
     title: "",
-    pageNumber: 0,
+    pageNumber: 1,
+    volume: 1
   });
 
   useEffect(() => {
     (async () => {
       const savedBookmarks: string[] = await retrieveData(bookmarkKey);
       const savedCurrentDate: string = await retrieveData(currentDateKey);
-      const savedCurrentVolume: number = await retrieveData(currentVolumeKey);
       const savedCurrentPage: PageType = await retrieveData(currentPageKey);
       if (savedBookmarks != null) {
         setBookmarks(savedBookmarks);
       }
       if (savedCurrentDate != null) {
         setCurrentDate(savedCurrentDate.toString());
-      }
-
-      if (savedCurrentVolume != null) {
-        setCurrentVolume(savedCurrentVolume);
       }
 
       if (savedCurrentPage != null) {
@@ -131,17 +124,11 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => string[] = () => bookmarks;
   const getCurrentDate: () => string = () => currentDate;
-  const getCurrentVolume: () => number = () => currentVolume;
   const getCurrentPage: () => PageType = () => currentPage;
 
   const changeCurrentDate: (date: string) => void = async (date) => {
     setCurrentDate(date);
     saveData(currentDateKey, date);
-  };
-
-  const changeCurrentVolume: (volume: number) => void = async (volume) => {
-    setCurrentVolume(volume);
-    saveData(currentVolumeKey, currentVolume);
   };
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
@@ -187,10 +174,8 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const value = {
     getCurrentDate,
-    getCurrentVolume,
     getCurrentPage,
     changeCurrentDate,
-    changeCurrentVolume,
     changeCurrentPage,
     getBookmarks,
     addBookmark,
