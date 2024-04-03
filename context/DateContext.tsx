@@ -10,14 +10,6 @@ import Toast from "react-native-root-toast";
 
 // Data structure: {volume: number, page: {date: string, scene: string}}
 
-type ComicDataType = {
-  volumeNumber: string,
-  pages: {
-    date: string,
-    title: string
-  }
-}
-
 type DateContextType = {
   getDates: () => string[];
   getCurrentDate: () => string;
