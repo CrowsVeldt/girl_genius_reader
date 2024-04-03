@@ -6,16 +6,16 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { DateContext } from "../context/DateContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
+import { ComicContext } from "../context/ComicContext";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { getCurrentDate } = useContext(DateContext);
+  const { getCurrentDate } = useContext(ComicContext);
   const imageRef = useRef<ImageZoomRef>();
   const date: string = getCurrentDate();
 

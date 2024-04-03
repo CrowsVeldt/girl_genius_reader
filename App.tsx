@@ -7,7 +7,6 @@ import BookmarkScreen from "./screens/BookmarksScreen";
 import ListScreen from "./screens/ListScreen";
 import CustomHeader from "./components/CustomHeader";
 
-import DateProvider from "./context/DateContext";
 import ComicProvider from "./context/ComicContext";
 
 const Drawer = createDrawerNavigator();
@@ -16,7 +15,6 @@ export default function App() {
   return (
     <RootSiblingParent>
       <NavigationContainer>
-        <DateProvider>
             <ComicProvider>
               <Drawer.Navigator
                 initialRouteName="Girl Genius"
@@ -44,7 +42,6 @@ export default function App() {
                 <Drawer.Screen name="List" component={ListScreen} />
               </Drawer.Navigator>
             </ComicProvider>
-        </DateProvider>
       </NavigationContainer>
     </RootSiblingParent>
   );

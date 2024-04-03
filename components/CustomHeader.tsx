@@ -1,8 +1,8 @@
 import { View, Text, Button, StyleSheet, StatusBar } from "react-native";
 import StarButton from "./StarButton";
 import { useContext } from "react";
-import { DateContext } from "../context/DateContext";
-import { TitleContext } from "../context/TitleContext";
+import { ComicContext } from "../context/ComicContext";
+
 export default function CustomHeader({
   navigation,
   route,
@@ -14,11 +14,12 @@ export default function CustomHeader({
   options: any;
   layout: any;
 }) {
-  const { getCurrentDate } = useContext(DateContext);
+  const { getCurrentDate } = useContext(ComicContext);
+
   const date = getCurrentDate()
   const title = route.name;
 
-    // Get Volume#, Page#, and scene title from titleContext
+    // Get Volume# and Page# from ComicContext
 
   return (
     <View style={[options.headerStyle, styles.header]}>

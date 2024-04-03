@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { DateContext } from "../context/DateContext";
 import { formatDate } from "../utils/utilFunctions";
+import { ComicContext } from "../context/ComicContext";
 
 export default function BookmarkLink({
   date,
@@ -11,7 +11,7 @@ export default function BookmarkLink({
   date: string;
   nav: any;
 }) {
-  const { removeBookmark, changeCurrentDate } = useContext(DateContext);
+  const { removeBookmark, changeCurrentDate } = useContext(ComicContext);
 
   useEffect(() => {});
   return (

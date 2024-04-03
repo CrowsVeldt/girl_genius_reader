@@ -10,11 +10,11 @@ import Animated, {
   clamp,
   SharedValue,
 } from "react-native-reanimated";
-import { DateContext } from "../context/DateContext";
+import { ComicContext } from "../context/ComicContext";
 
 export default function PageTurn(props: any) {
   const { getCurrentDate, goToPreviousPage, goToNextPage } =
-    useContext(DateContext);
+    useContext(ComicContext);
   const { side } = props;
   const date: string = getCurrentDate();
   const onSide: SharedValue<boolean> = useSharedValue(true);

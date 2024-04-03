@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
-import { DateContext } from "../context/DateContext";
 import { formatDate } from "../utils/utilFunctions";
+import { ComicContext } from "../context/ComicContext";
 
 export default function ComicLink({
   date,
@@ -15,7 +15,7 @@ export default function ComicLink({
   num: number;
   title?: string;
 }) {
-  const { changeCurrentDate } = useContext(DateContext);
+  const { changeCurrentDate } = useContext(ComicContext);
   return (
     <TouchableOpacity
       style={styles.linkButton}

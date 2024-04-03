@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { DateContext } from "../context/DateContext";
+import { ComicContext } from "../context/ComicContext";
 
 export default function StarButton({ date }: { date: string }) {
   const { addBookmark, removeBookmark, isDateBookmarked } =
-    useContext(DateContext);
+    useContext(ComicContext);
   const [bookmarked, setBookmarked] = useState(false);
 
   useEffect(() => {

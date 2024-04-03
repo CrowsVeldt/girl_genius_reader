@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { DateContext } from "../context/DateContext";
 import { View, FlatList, StyleSheet } from "react-native";
 import BookmarkLink from "../components/BookmarkLink";
+import { ComicContext } from "../context/ComicContext";
 
 export default function Bookmarks({ navigation }: any) {
-  const { getBookmarks } = useContext(DateContext);
+  const { getBookmarks } = useContext(ComicContext);
   const bookmarks: string[] = getBookmarks();
 
   const renderItem = ({ item, index }: { item: string; index: number }) => (
