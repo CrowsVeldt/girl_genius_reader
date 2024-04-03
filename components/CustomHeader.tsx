@@ -38,7 +38,7 @@ export default function CustomHeader({
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
       <Text>{title}</Text>
-      <StarButton date={date} />
+      {title === "Home" && <StarButton date={date} />}
     </View>
   );
 }
