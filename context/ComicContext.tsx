@@ -4,15 +4,21 @@ import {
   saveData,
   bookmarkKey,
   currentDateKey,
+  currentVolumeKey,
+  currentPageKey,
 } from "../utils/storage";
 import dateFile from "../public/dates.json";
 import titleFile from "../public/titles.json";
 import Toast from "react-native-root-toast";
-import { ComicDataType } from "../utils/types";
+import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentDate: () => string;
+  getCurrentVolume: () => number
+  getCurrentPage: () => PageType
   changeCurrentDate: (date: string) => void;
+  changeCurrentVolume: (volume: number) => void
+  changeCurrentPage: (page: PageType) => void
   getBookmarks: () => string[];
   addBookmark: (newBookmark: string) => void;
   removeBookmark: (date: string) => void;
@@ -64,16 +70,32 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dates, setDates] = useState<string[]>(dateFile);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [currentDate, setCurrentDate] = useState<string>("20021104");
+  const [currentVolume, setCurrentVolume] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<PageType>({
+    date: "",
+    title: "",
+    pageNumber: 0,
+  });
 
   useEffect(() => {
     (async () => {
       const savedBookmarks: string[] = await retrieveData(bookmarkKey);
       const savedCurrentDate: string = await retrieveData(currentDateKey);
+      const savedCurrentVolume: number = await retrieveData(currentVolumeKey);
+      const savedCurrentPage: PageType = await retrieveData(currentPageKey);
       if (savedBookmarks != null) {
         setBookmarks(savedBookmarks);
       }
       if (savedCurrentDate != null) {
         setCurrentDate(savedCurrentDate.toString());
+      }
+
+      if (savedCurrentVolume != null) {
+        setCurrentVolume(savedCurrentVolume);
+      }
+
+      if (savedCurrentPage != null) {
+        setCurrentPage(savedCurrentPage);
       }
     })();
   }, []);
@@ -107,17 +129,24 @@ const ComicProvider = ({ children }: { children: any }) => {
     setVolumes(collectedVolumes);
   }, []);
 
-  const getBookmarks: () => string[] = () => {
-    return bookmarks;
-  };
-
-  const getCurrentDate: () => string = () => {
-    return currentDate;
-  };
+  const getBookmarks: () => string[] = () => bookmarks;
+  const getCurrentDate: () => string = () => currentDate;
+  const getCurrentVolume: () => number = () => currentVolume;
+  const getCurrentPage: () => PageType = () => currentPage;
 
   const changeCurrentDate: (date: string) => void = async (date) => {
     setCurrentDate(date);
     saveData(currentDateKey, date);
+  };
+
+  const changeCurrentVolume: (volume: number) => void = async (volume) => {
+    setCurrentVolume(volume);
+    saveData(currentVolumeKey, currentVolume);
+  };
+
+  const changeCurrentPage: (page: PageType) => void = async (page) => {
+    setCurrentPage(page);
+    saveData(currentPageKey, currentPage);
   };
 
   const addBookmark: (newBookmarkDate: string) => void = async (
@@ -158,7 +187,11 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const value = {
     getCurrentDate,
+    getCurrentVolume,
+    getCurrentPage,
     changeCurrentDate,
+    changeCurrentVolume,
+    changeCurrentPage,
     getBookmarks,
     addBookmark,
     removeBookmark,

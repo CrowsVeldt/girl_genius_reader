@@ -24,6 +24,7 @@ export default function CustomHeader({
   const { getCurrentDate } = useContext(ComicContext);
 
   const date = getCurrentDate();
+  console.log(date)
   const title = route.name;
 
   // Get Volume# and Page# from ComicContext

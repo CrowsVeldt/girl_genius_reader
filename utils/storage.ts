@@ -1,9 +1,12 @@
 import ass from "@react-native-async-storage/async-storage";
+import { PageType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentDateKey: string = "@GGAppCurrent";
+export const currentVolumeKey: string = "@GGAppVolume";
+export const currentPageKey: string = "@GGAppPage";
 
-export const saveData: (key: string, value: string | string[]) => void = async (
+export const saveData: (key: string, value: string | string[] | number | PageType ) => void = async (
   key,
   value
 ) => {

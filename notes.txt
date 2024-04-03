@@ -1,5 +1,5 @@
 Fixes/improvements:
-- replace DateContext with ComicContext
+- rework date orginization/storage: use page:pageType rather than date:string to save the current page?
 - show star button *only* on homescreen
 - add vol# & page# to header
 - show scene title on homescreen?
@@ -43,6 +43,7 @@ x allow for closing VolumeLists, perhaps by double-tapping
 x removing bookmark from bookmarks page doesn't reset star button on home page (?)
 x add bookmark button to header?
 X have star button fade after a period of inactivity
+x replace DateContext with ComicContext
 
 Thanks to: 
 - https://github.com/likashefqet
