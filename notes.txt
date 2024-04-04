@@ -1,6 +1,6 @@
 Fixes/improvements:
-- fix bookmarks saving/adding/checking
 - better display/organize volume lists
+- fix bookmarks saving/adding/checking
 - optimize animations and transitions for speed
 - if comic is zoomed out than swipe from anywhere in the screen will change page
 

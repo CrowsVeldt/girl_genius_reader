@@ -36,7 +36,7 @@ export const VolumeList = ({
             setOpen(!open);
           }}
         >
-          <Text>{volume.volumeNumber}</Text>
+          <Text>{`Volume ${volume.volumeNumber}`}</Text>
         </TouchableOpacity>
         <ScrollView>
           {volume.pages.map((page, index) =>
@@ -51,14 +51,12 @@ export const VolumeList = ({
 const styles = StyleSheet.create({
   list: {
     minHeight: 30,
-    borderWidth: 1,
-    alignItems: "center",
     width: "90%",
     paddingHorizontal: 10,
   },
   title: {
-    borderWidth: 1,
     alignItems: "center",
-    width: "30%",
+    borderBottomWidth: 1,
+    marginBottom: 10,
   },
 });

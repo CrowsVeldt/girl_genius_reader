@@ -27,16 +27,16 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomWidth: 1,
   },
   linkNumber: {
+    marginRight: 6,
     flex: 1,
   },
   linkText: {
     flex: 2,
   },
   title: {
-    flex: 2,
+    flex:3,
     overflow: "visible",
   },
 });
