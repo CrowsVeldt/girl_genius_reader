@@ -138,11 +138,13 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const addBookmark: (newBookmark: PageType) => void = async (newBookmark) => {
     const newBookmarks: PageType[] = [...bookmarks, newBookmark];
-    const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
-    const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
-    setBookmarks(filteredBookmarksArray);
+    // const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
+    // const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
+    // setBookmarks(filteredBookmarksArray);
+    setBookmarks(newBookmarks);
     Toast.show(`Added ${newBookmark.date} to bookmarks`);
-    saveData(bookmarkKey, filteredBookmarksArray);
+    // saveData(bookmarkKey, filteredBookmarksArray);
+    saveData(bookmarkKey, newBookmarks);
   };
 
   const removeBookmark: (page: PageType) => void = async (page) => {
@@ -153,7 +155,8 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const isPageBookmarked: (page: PageType) => boolean = (page) => {
-    return bookmarks.includes(page);
+    const test = bookmarks.find((item) => item.date === page.date) != undefined;
+    return test;
   };
 
   const goToNextPage: (page: PageType) => void = (page) => {
