@@ -10,3 +10,8 @@ export type PageType = {
   pageNumber: number;
   volume: number;
 };
+
+export type CollectedVolumeType = [
+  volumesList: ComicDataType[],
+  pages: PageType[]
+];

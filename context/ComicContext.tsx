@@ -8,7 +8,7 @@ import {
 import dateFile from "../public/dates.json";
 import titleFile from "../public/titles.json";
 import Toast from "react-native-root-toast";
-import { ComicDataType, PageType } from "../utils/types";
+import { ComicDataType, PageType, CollectedVolumeType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -22,25 +22,28 @@ type ComicContextType = {
   getVolumes: () => ComicDataType[];
 };
 
-const collectVolumes = (
+const collectVolumes: (
   volumes: string[][],
   dates: string[],
   titles: string[][]
-) => {
+) => CollectedVolumeType = (volumes, dates, titles) => {
   let pages: PageType[] = [];
-  const volumesList = volumes.map((volume, volumeIndex) => {
-    const endDate =
+
+  const volumesList: ComicDataType[] = volumes.map((volume, volumeIndex) => {
+    const endDate: string =
       volumes[volumeIndex + 1] != undefined
         ? volumes[volumeIndex + 1][0]
         : "end";
 
-    const volumeDates = dates.slice(
+    const volumeDates: string[] = dates.slice(
       dates.indexOf(volume[0]),
       dates.indexOf(endDate)
     );
 
-    const volumePages = volumeDates.map((date, index) => {
-      const title = titles.find((title) => title[0] === date);
+    const volumePages: PageType[] = volumeDates.map((date, index) => {
+      const title: string[] | undefined = titles.find(
+        (title) => title[0] === date
+      );
       return {
         pageNumber: index + 1,
         date: date,
@@ -91,7 +94,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   }, []);
 
   useEffect(() => {
-    const list = titleFile;
+    const list: string[][] = titleFile;
 
     const titleList: string[][] = list.filter((item) => {
       // all titles that aren't volume start or end dates
@@ -116,7 +119,11 @@ const ComicProvider = ({ children }: { children: any }) => {
       );
     });
 
-    const collectedVolumes = collectVolumes(volumeList, dates, titleList);
+    const collectedVolumes: CollectedVolumeType = collectVolumes(
+      volumeList,
+      dates,
+      titleList
+    );
     setVolumes(collectedVolumes[0]);
     setPages(collectedVolumes[1]);
   }, []);
@@ -163,7 +170,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
   };
 
-  const getVolumes = () => {
+  const getVolumes: () => ComicDataType[] = () => {
     return volumes;
   };
 
