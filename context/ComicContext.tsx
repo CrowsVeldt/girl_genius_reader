@@ -134,14 +134,14 @@ const ComicProvider = ({ children }: { children: any }) => {
     const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
     const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
     setBookmarks(filteredBookmarksArray);
-    Toast.show(`Added ${newBookmark} to bookmarks`);
+    Toast.show(`Added ${newBookmark.date} to bookmarks`);
     saveData(bookmarkKey, filteredBookmarksArray);
   };
 
   const removeBookmark: (page: PageType) => void = async (page) => {
     const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
     setBookmarks(newBookmarks);
-    Toast.show(`Removed ${page} from bookmarks`);
+    Toast.show(`Removed ${page.date} from bookmarks`);
     saveData(bookmarkKey, newBookmarks);
   };
 
