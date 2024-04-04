@@ -33,12 +33,13 @@ export default function CustomHeader({
       >
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
-      <Text>
+      <Text style={styles.headerTitle}>
         {routeName === "Home"
           ? `Volume ${page.volume}, Page ${page.pageNumber}`
           : routeName}
       </Text>
       {routeName === "Home" && <StarButton page={page} />}
+      {routeName !== "Home" && <View style={styles.placeholderBox}></View>}
     </View>
   );
 }
@@ -46,16 +47,29 @@ export default function CustomHeader({
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     marginTop: StatusBar.currentHeight,
+  },
+  headerTitle: {
+    textAlignVertical: "center",
+    textAlign: "center",
+    fontSize: 18,
+    flexGrow: 1,
   },
   button: {
     backgroundColor: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
     width: 50,
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {
     fontSize: 30,
+  },
+  placeholderBox: {
+    height: 40,
+    width: 40,
+    marginRight: 10,
   },
 });

@@ -14,7 +14,7 @@ export default function StarButton({ page }: { page: PageType }) {
 
   return (
     <TouchableOpacity
-      style={styles.favoriteButton}
+      style={styles.starButton}
       onPress={() => {
         if (bookmarked) {
           removeBookmark(page);
@@ -24,19 +24,21 @@ export default function StarButton({ page }: { page: PageType }) {
         setBookmarked(!bookmarked);
       }}
     >
-      <Text style={styles.buttonText}>{bookmarked ? "★" : "☆"}</Text>
+      <Text style={styles.star}>{bookmarked ? "★" : "☆"}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  favoriteButton: {
+  starButton: {
     height: 40,
     width: 40,
+    marginRight: 10,
   },
-  buttonText: {
-    color: "#dbbd69",
+  star: {
+    color: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
     fontSize: 40,
     lineHeight: 40,
+    fontWeight: "bold",
   },
 });
