@@ -2,13 +2,14 @@ import { useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import BookmarkLink from "../components/BookmarkLink";
 import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../utils/types";
 
 export default function Bookmarks({ navigation }: any) {
   const { getBookmarks } = useContext(ComicContext);
-  const bookmarks: string[] = getBookmarks();
+  const bookmarks: PageType[] = getBookmarks();
 
-  const renderItem = ({ item, index }: { item: string; index: number }) => (
-    <BookmarkLink key={index} date={item} nav={navigation} />
+  const renderItem = ({ item, index }: { item: PageType; index: number }) => (
+    <BookmarkLink key={index} page={item} nav={navigation} />
   );
 
   return (

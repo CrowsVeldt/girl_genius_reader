@@ -22,7 +22,7 @@ export default function CustomHeader({
 }) {
   const { getCurrentPage } = useContext(ComicContext);
 
-  const page = getCurrentPage()
+  const page = getCurrentPage();
   const routeName = route.name;
 
   return (
@@ -33,8 +33,12 @@ export default function CustomHeader({
       >
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
-      <Text>{routeName === "Home" ? `Volume ${page.volume}, Page ${page.pageNumber}`: routeName}</Text>
-      {routeName === "Home" && <StarButton date={page.date} />}
+      <Text>
+        {routeName === "Home"
+          ? `Volume ${page.volume}, Page ${page.pageNumber}`
+          : routeName}
+      </Text>
+      {routeName === "Home" && <StarButton page={page} />}
     </View>
   );
 }
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
     width: 50,
-    alignItems:'center',
+    alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {

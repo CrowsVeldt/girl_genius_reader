@@ -3,7 +3,6 @@ import {
   retrieveData,
   saveData,
   bookmarkKey,
-  currentDateKey,
   currentPageKey,
 } from "../utils/storage";
 import dateFile from "../public/dates.json";
@@ -12,18 +11,14 @@ import Toast from "react-native-root-toast";
 import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
-  getCurrentDate: () => string;
   getCurrentPage: () => PageType;
-  changeCurrentDate: (date: string) => void;
   changeCurrentPage: (page: PageType) => void;
-  getBookmarks: () => string[];
-  addBookmark: (newBookmark: string) => void;
-  removeBookmark: (date: string) => void;
-  isDateBookmarked: (date: string) => boolean;
-  goToNextPage: (date: string) => void;
-  goToNextPageNew: (page: PageType) => void;
-  goToPreviousPage: (date: string) => void;
-  goToPreviousPageNew: (page: PageType) => void;
+  getBookmarks: () => PageType[];
+  addBookmark: (newBookmark: PageType) => void;
+  removeBookmark: (page: PageType) => void;
+  isPageBookmarked: (page: PageType) => boolean;
+  goToNextPage: (page: PageType) => void;
+  goToPreviousPage: (page: PageType) => void;
   getVolumes: () => ComicDataType[];
 };
 
@@ -74,8 +69,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [volumes, setVolumes] = useState<ComicDataType[]>([]);
   const [dates, setDates] = useState<string[]>(dateFile);
   const [pages, setPages] = useState<PageType[]>([]);
-  const [bookmarks, setBookmarks] = useState<string[]>([]);
-  const [currentDate, setCurrentDate] = useState<string>("20021104");
+  const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentPage, setCurrentPage] = useState<PageType>({
     date: "",
     title: "",
@@ -85,16 +79,11 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      const savedBookmarks: string[] = await retrieveData(bookmarkKey);
-      const savedCurrentDate: string = await retrieveData(currentDateKey);
+      const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
       const savedCurrentPage: PageType = await retrieveData(currentPageKey);
       if (savedBookmarks != null) {
         setBookmarks(savedBookmarks);
       }
-      if (savedCurrentDate != null) {
-        setCurrentDate(savedCurrentDate.toString());
-      }
-
       if (savedCurrentPage != null) {
         setCurrentPage(savedCurrentPage);
       }
@@ -132,65 +121,46 @@ const ComicProvider = ({ children }: { children: any }) => {
     setPages(collectedVolumes[1]);
   }, []);
 
-  const getBookmarks: () => string[] = () => bookmarks;
-  const getCurrentDate: () => string = () => currentDate;
+  const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
-
-  const changeCurrentDate: (date: string) => void = async (date) => {
-    setCurrentDate(date);
-    const page = pages.find((item) => item.date === date);
-
-    if (page) {
-      changeCurrentPage(page)
-    }
-    saveData(currentDateKey, date);
-  };
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     setCurrentPage(page);
     saveData(currentPageKey, page);
   };
 
-  const addBookmark: (newBookmarkDate: string) => void = async (
-    newBookmarkDate
-  ) => {
-    const newBookmarks: string[] = [...bookmarks, newBookmarkDate];
-    const filteredBookmarks: Set<string> = new Set(newBookmarks);
-    const filteredBookmarksArray: string[] = Array.from(filteredBookmarks);
+  const addBookmark: (newBookmark: PageType) => void = async (newBookmark) => {
+    const newBookmarks: PageType[] = [...bookmarks, newBookmark];
+    const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
+    const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
     setBookmarks(filteredBookmarksArray);
-    Toast.show(`Added ${newBookmarkDate} to bookmarks`);
+    Toast.show(`Added ${newBookmark} to bookmarks`);
     saveData(bookmarkKey, filteredBookmarksArray);
   };
 
-  const removeBookmark: (date: string) => void = async (date) => {
-    const newBookmarks: string[] = bookmarks.filter((a) => a !== date);
+  const removeBookmark: (page: PageType) => void = async (page) => {
+    const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
     setBookmarks(newBookmarks);
-    Toast.show(`Removed ${date} from bookmarks`);
+    Toast.show(`Removed ${page} from bookmarks`);
     saveData(bookmarkKey, newBookmarks);
   };
 
-  const isDateBookmarked: (date: string) => boolean = (date) => {
-    return bookmarks.includes(date);
+  const isPageBookmarked: (page: PageType) => boolean = (page) => {
+    return bookmarks.includes(page);
   };
 
-  const goToNextPage: (date: string) => void = (date) => {
-    const index: number = dates.findIndex((element) => element === date);
-    changeCurrentDate(dates[index + 1] ? dates[index + 1] : date);
-  };
-
-  const goToNextPageNew: (page: PageType) => void = (page) => {
-    const index: number = pages.findIndex((element) => element.date === page.date);
+  const goToNextPage: (page: PageType) => void = (page) => {
+    const index: number = pages.findIndex(
+      (element) => element.date === page.date
+    );
     changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
   };
 
-  const goToPreviousPage: (date: string) => void = (date) => {
-    const index: number = dates.findIndex((element) => element === date);
-    changeCurrentDate(index - 1 >= 0 ? dates[index - 1] : date);
-  };
-
-  const goToPreviousPageNew: (page: PageType) => void = (page) => {
-    const index: number = pages.findIndex((element) => element.date === page.date);
-    changeCurrentPage(index - 1 >= 0 ? pages[index + 1] : page);
+  const goToPreviousPage: (page: PageType) => void = (page) => {
+    const index: number = pages.findIndex(
+      (element) => element.date === page.date
+    );
+    changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
   };
 
   const getVolumes = () => {
@@ -198,18 +168,14 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const value = {
-    getCurrentDate,
     getCurrentPage,
-    changeCurrentDate,
     changeCurrentPage,
     getBookmarks,
     addBookmark,
     removeBookmark,
-    isDateBookmarked,
+    isPageBookmarked,
     goToNextPage,
-    goToNextPageNew,
     goToPreviousPage,
-    goToPreviousPageNew,
     getVolumes,
   };
   return (

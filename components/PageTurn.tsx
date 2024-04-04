@@ -11,12 +11,13 @@ import Animated, {
   SharedValue,
 } from "react-native-reanimated";
 import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../utils/types";
 
 export default function PageTurn(props: any) {
-  const { getCurrentDate, goToPreviousPage, goToNextPage } =
+  const { getCurrentPage, goToNextPage, goToPreviousPage } =
     useContext(ComicContext);
   const { side } = props;
-  const date: string = getCurrentDate();
+  const page: PageType = getCurrentPage();
   const onSide: SharedValue<boolean> = useSharedValue(true);
   const position: SharedValue<number> = useSharedValue(0);
   const END_POSITION: number = side === "left" ? 50 : -50;
@@ -33,9 +34,9 @@ export default function PageTurn(props: any) {
     })
     .onEnd((e) => {
       if (side === "left" && position.value >= END_POSITION) {
-        runOnJS(goToPreviousPage)(date);
+        runOnJS(goToPreviousPage)(page);
       } else if (side === "right" && position.value <= END_POSITION) {
-        runOnJS(goToNextPage)(date);
+        runOnJS(goToNextPage)(page);
       }
       position.value = withTiming(0, { duration: 100 });
       onSide.value = true;
@@ -46,9 +47,9 @@ export default function PageTurn(props: any) {
     .numberOfTaps(1)
     .onStart((e) => {
       if (side === "left") {
-        runOnJS(goToPreviousPage)(date);
+        runOnJS(goToPreviousPage)(page);
       } else if (side === "right") {
-        runOnJS(goToNextPage)(date);
+        runOnJS(goToNextPage)(page);
       }
     });
 

@@ -1,24 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../utils/types";
 
-export default function StarButton({ date }: { date: string }) {
-  const { addBookmark, removeBookmark, isDateBookmarked } =
+export default function StarButton({ page }: { page: PageType }) {
+  const { addBookmark, removeBookmark, isPageBookmarked } =
     useContext(ComicContext);
   const [bookmarked, setBookmarked] = useState(false);
 
   useEffect(() => {
-    setBookmarked(isDateBookmarked(date));
-  }, [isDateBookmarked(date)]);
+    setBookmarked(isPageBookmarked(page));
+  }, [isPageBookmarked(page)]);
 
   return (
     <TouchableOpacity
       style={styles.favoriteButton}
       onPress={() => {
         if (bookmarked) {
-          removeBookmark(date);
+          removeBookmark(page);
         } else {
-          addBookmark(date);
+          addBookmark(page);
         }
         setBookmarked(!bookmarked);
       }}

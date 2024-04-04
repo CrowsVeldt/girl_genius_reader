@@ -3,31 +3,31 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { formatDate } from "../utils/utilFunctions";
 import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../utils/types";
 
 export default function BookmarkLink({
-  date,
+  page,
   nav,
 }: {
-  date: string;
+  page: PageType;
   nav: any;
 }) {
-  const { removeBookmark, changeCurrentDate } = useContext(ComicContext);
+  const { removeBookmark, changeCurrentPage } = useContext(ComicContext);
 
-  useEffect(() => {});
   return (
     <View style={styles.bookmark}>
       <TouchableOpacity
         style={styles.linkButton}
         onPress={() => {
-          changeCurrentDate(date);
+          changeCurrentPage(page);
           nav.navigate("Home");
         }}
       >
-        <Text>{formatDate(date)}</Text>
+        <Text>{formatDate(page.date)}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.removeButton}
-        onPress={() => removeBookmark(date)}
+        onPress={() => removeBookmark(page)}
       >
         <Text>X</Text>
       </TouchableOpacity>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderWidth: 1,
     height: 35,
-    width: "80%"
+    width: "80%",
   },
   removeButton: {
     flexDirection: "row",

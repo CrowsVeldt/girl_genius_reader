@@ -5,10 +5,10 @@ export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentDateKey: string = "@GGAppCurrent";
 export const currentPageKey: string = "@GGAppPage";
 
-export const saveData: (key: string, value: string | string[] | number | PageType ) => void = async (
-  key,
-  value
-) => {
+export const saveData: (
+  key: string,
+  value: string | string[] | number | PageType | PageType[]
+) => void = async (key, value) => {
   try {
     if (typeof value === "string") {
       await ass.setItem(key, value);
