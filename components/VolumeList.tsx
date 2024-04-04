@@ -40,15 +40,7 @@ export const VolumeList = ({
         </TouchableOpacity>
         <ScrollView>
           {volume.pages.map((page, index) =>
-            open ? (
-              <ComicLink
-                date={page.date}
-                nav={nav}
-                num={page.pageNumber}
-                title={page.title}
-                key={index}
-              />
-            ) : null
+            open ? <ComicLink page={page} nav={nav} key={index} /> : null
           )}
         </ScrollView>
       </View>

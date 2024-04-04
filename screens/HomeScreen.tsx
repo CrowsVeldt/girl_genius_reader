@@ -16,9 +16,8 @@ const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { getCurrentDate, getCurrentPage } = useContext(ComicContext);
+  const { getCurrentPage } = useContext(ComicContext);
   const imageRef = useRef<ImageZoomRef>();
-  const date: string = getCurrentDate();
   const page: PageType = getCurrentPage();
 
   return (

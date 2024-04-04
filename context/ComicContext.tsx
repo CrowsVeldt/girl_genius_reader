@@ -21,7 +21,9 @@ type ComicContextType = {
   removeBookmark: (date: string) => void;
   isDateBookmarked: (date: string) => boolean;
   goToNextPage: (date: string) => void;
+  goToNextPageNew: (page: PageType) => void;
   goToPreviousPage: (date: string) => void;
+  goToPreviousPageNew: (page: PageType) => void;
   getVolumes: () => ComicDataType[];
 };
 
@@ -146,7 +148,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     setCurrentPage(page);
-    saveData(currentPageKey, currentPage);
+    saveData(currentPageKey, page);
   };
 
   const addBookmark: (newBookmarkDate: string) => void = async (

@@ -1,5 +1,5 @@
 Fixes/improvements:
-- rework date orginization/storage: use page:pageType rather than date:string to save the current page?
+- finish replacing currentDate with currentPage wherever it is used
 - better display/organize volume lists
 - optimize animations and transitions for speed
 - if comic is zoomed out than swipe from anywhere in the screen will change page
