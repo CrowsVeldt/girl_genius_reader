@@ -1,8 +1,11 @@
-Fixes/improvements:
-- better display/organize volume lists
+Fixes:
 - fix bookmarks saving/adding/checking
-- optimize animations and transitions for speed
 - if comic is zoomed out than swipe from anywhere in the screen will change page
+
+Improvements:
+- improve list ui
+- improve bookmarks ui
+- optimize animations and transitions for speed
 
 - Date exceptions:
 - - 20030106>20030106b (20030106 points to the wrong comic)

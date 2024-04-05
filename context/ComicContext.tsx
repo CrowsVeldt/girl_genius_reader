@@ -74,10 +74,10 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentPage, setCurrentPage] = useState<PageType>({
-    date: "",
+    date: "20021104",
     title: "",
-    pageNumber: 0,
-    volume: 0,
+    pageNumber: 1,
+    volume: 1,
   });
 
   useEffect(() => {
@@ -138,13 +138,11 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const addBookmark: (newBookmark: PageType) => void = async (newBookmark) => {
     const newBookmarks: PageType[] = [...bookmarks, newBookmark];
-    // const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
-    // const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
-    // setBookmarks(filteredBookmarksArray);
-    setBookmarks(newBookmarks);
+    const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
+    const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
+    setBookmarks(filteredBookmarksArray);
     Toast.show(`Added ${newBookmark.date} to bookmarks`);
-    // saveData(bookmarkKey, filteredBookmarksArray);
-    saveData(bookmarkKey, newBookmarks);
+    saveData(bookmarkKey, filteredBookmarksArray);
   };
 
   const removeBookmark: (page: PageType) => void = async (page) => {
