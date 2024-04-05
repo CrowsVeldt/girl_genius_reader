@@ -2,19 +2,14 @@ import ass from "@react-native-async-storage/async-storage";
 import { PageType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
-export const currentDateKey: string = "@GGAppCurrent";
 export const currentPageKey: string = "@GGAppPage";
 
 export const saveData: (
   key: string,
-  value: string | string[] | number | PageType | PageType[]
+  value: number | PageType | PageType[]
 ) => void = async (key, value) => {
   try {
-    if (typeof value === "string") {
-      await ass.setItem(key, value);
-    } else {
-      await ass.setItem(key, JSON.stringify(value));
-    }
+    await ass.setItem(key, JSON.stringify(value));
   } catch (error) {
     console.warn("error saving data");
     console.warn(error);

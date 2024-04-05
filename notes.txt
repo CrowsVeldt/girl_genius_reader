@@ -1,5 +1,5 @@
 Fixes:
-- fix bookmarks saving/adding/checking
+!!! _ - try making dev build that wipes bookmarks on startup, see if that stops the crashing
 - if comic is zoomed out than swipe from anywhere in the screen will change page
 
 Improvements:

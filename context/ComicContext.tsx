@@ -9,6 +9,7 @@ import dateFile from "../public/dates.json";
 import titleFile from "../public/titles.json";
 import Toast from "react-native-root-toast";
 import { ComicDataType, PageType, CollectedVolumeType } from "../utils/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -97,7 +98,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     const list: string[][] = titleFile;
 
     const titleList: string[][] = list.filter((item) => {
-      // all titles that aren't volume start or end dates
+      // return all titles that aren't volume start or end dates
       return !(
         item[1].includes("Final") ||
         item[1].includes("Volume") ||
