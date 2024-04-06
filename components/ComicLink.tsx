@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   title: {
-    flex:3,
+    flex: 3,
     overflow: "visible",
   },
 });
