@@ -197,8 +197,23 @@ export const useGestures = ({
     })
     .onUpdate((event: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
       if (scale.value > 1) {
-        translate.x.value = prevTranslate.x.value + event.translationX;
-        translate.y.value = prevTranslate.y.value + event.translationY;
+        const rightLimit = (width * (scale.value - 1)) / 2;
+        const leftLimit = -rightLimit;
+
+        const bottomLimit = (height * (scale.value - 1)) / 2;
+        const topLimit = -bottomLimit;
+        if (
+          event.translationX + prevTranslate.x.value <= rightLimit &&
+          event.translationX + prevTranslate.x.value >= leftLimit
+        ) {
+          translate.x.value = prevTranslate.x.value + event.translationX;
+        }
+        if (
+          event.translationY + prevTranslate.y.value <= bottomLimit &&
+          event.translationY + prevTranslate.y.value >= topLimit
+        ) {
+          translate.y.value = prevTranslate.y.value + event.translationY;
+        }
       }
     })
     .onEnd(() => {
