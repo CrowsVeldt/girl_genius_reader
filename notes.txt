@@ -1,5 +1,4 @@
 Fixes:
-!!! _ - try making dev build that wipes bookmarks on startup, see if that stops the crashing
 - if comic is zoomed out than swipe from anywhere in the screen will change page
 
 Improvements:
@@ -48,6 +47,7 @@ x show star button *only* on homescreen
 X show scene title on homescreen?
 x add vol# & page# to header
 x impove styles of header
+x!! _ - try making dev build that wipes bookmarks on startup, see if that stops the crashing
 
 Thanks to: 
 - https://github.com/likashefqet

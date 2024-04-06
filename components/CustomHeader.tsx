@@ -35,7 +35,7 @@ export default function CustomHeader({
       </TouchableOpacity>
       <Text style={styles.headerTitle}>
         {routeName === "Home"
-          ? `Volume ${page.volume}, Page ${page.pageNumber}`
+          ? `Volume ${page.volume} - Page ${page.pageNumber}`
           : routeName}
       </Text>
       {routeName === "Home" && <StarButton page={page} />}
