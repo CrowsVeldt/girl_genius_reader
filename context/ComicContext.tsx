@@ -7,9 +7,10 @@ import {
 } from "../utils/storage";
 import dateFile from "../public/dates.json";
 import titleFile from "../public/titles.json";
+import volumeFile from "../public/volumeList.json"
+import pageFile from "../public/pageList.json"
 import Toast from "react-native-root-toast";
 import { ComicDataType, PageType, CollectedVolumeType } from "../utils/types";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -23,56 +24,56 @@ type ComicContextType = {
   getVolumes: () => ComicDataType[];
 };
 
-const collectVolumes: (
-  volumes: string[][],
-  dates: string[],
-  titles: string[][]
-) => CollectedVolumeType = (volumes, dates, titles) => {
-  let pages: PageType[] = [];
+// const collectVolumes: (
+//   volumes: string[][],
+//   dates: string[],
+//   titles: string[][]
+// ) => CollectedVolumeType = (volumes, dates, titles) => {
+//   let pages: PageType[] = [];
 
-  const volumesList: ComicDataType[] = volumes.map((volume, volumeIndex) => {
-    const endDate: string =
-      volumes[volumeIndex + 1] != undefined
-        ? volumes[volumeIndex + 1][0]
-        : "end";
+//   const volumesList: ComicDataType[] = volumes.map((volume, volumeIndex) => {
+//     const endDate: string =
+//       volumes[volumeIndex + 1] != undefined
+//         ? volumes[volumeIndex + 1][0]
+//         : "end";
 
-    const volumeDates: string[] = dates.slice(
-      dates.indexOf(volume[0]),
-      dates.indexOf(endDate)
-    );
+//     const volumeDates: string[] = dates.slice(
+//       dates.indexOf(volume[0]),
+//       dates.indexOf(endDate)
+//     );
 
-    const volumePages: PageType[] = volumeDates.map((date, index) => {
-      const title: string[] | undefined = titles.find(
-        (title) => title[0] === date
-      );
-      return {
-        pageNumber: index + 1,
-        date: date,
-        title: title ? title[1] : "",
-        volume: volumeIndex + 1,
-      };
-    });
+//     const volumePages: PageType[] = volumeDates.map((date, index) => {
+//       const title: string[] | undefined = titles.find(
+//         (title) => title[0] === date
+//       );
+//       return {
+//         pageNumber: index + 1,
+//         date: date,
+//         title: title ? title[1] : "",
+//         volume: volumeIndex + 1,
+//       };
+//     });
 
-    pages = [...pages, ...volumePages];
+//     pages = [...pages, ...volumePages];
 
-    return {
-      volumeStart: volume[0],
-      volumeNumber: volumeIndex + 1,
-      pages: volumePages,
-    };
-  });
+//     return {
+//       volumeStart: volume[0],
+//       volumeNumber: volumeIndex + 1,
+//       pages: volumePages,
+//     };
+//   });
 
-  return [volumesList, pages];
-};
+//   return [volumesList, pages];
+// };
 
 export const ComicContext = createContext<ComicContextType>(
   null as unknown as ComicContextType
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
-  const [volumes, setVolumes] = useState<ComicDataType[]>([]);
+  const [volumes, setVolumes] = useState<ComicDataType[]>(volumeFile);
   const [dates, setDates] = useState<string[]>(dateFile);
-  const [pages, setPages] = useState<PageType[]>([]);
+  const [pages, setPages] = useState<PageType[]>(pageFile);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentPage, setCurrentPage] = useState<PageType>({
     date: "20021104",
@@ -94,40 +95,40 @@ const ComicProvider = ({ children }: { children: any }) => {
     })();
   }, []);
 
-  useEffect(() => {
-    const list: string[][] = titleFile;
+  // useEffect(() => {
+  //   const list: string[][] = titleFile;
 
-    const titleList: string[][] = list.filter((item) => {
-      // return all titles that aren't volume start or end dates
-      return !(
-        item[1].includes("Final") ||
-        item[1].includes("Volume") ||
-        item[1].includes("VOLUME") ||
-        item[1].includes("BOOK") ||
-        item[1].includes("---Jump to a Scene---")
-      );
-    });
+  //   const titleList: string[][] = list.filter((item) => {
+  //     // return all titles that aren't volume start or end dates
+  //     return !(
+  //       item[1].includes("Final") ||
+  //       item[1].includes("Volume") ||
+  //       item[1].includes("VOLUME") ||
+  //       item[1].includes("BOOK") ||
+  //       item[1].includes("---Jump to a Scene---")
+  //     );
+  //   });
 
-    const volumeList: string[][] = list.filter((item) => {
-      // list of conditions and exceptions to find the beginnings of volumes
-      return (
-        !item[1].includes("Final") &&
-        !item[1].includes("Volume NINE") &&
-        (item[1].includes("Volume") ||
-          item[1].includes("VOLUME") ||
-          item[1].includes("BOOK") ||
-          item[1].includes("Volume Nine Web Cover & Wallpaper"))
-      );
-    });
+  //   const volumeList: string[][] = list.filter((item) => {
+  //     // list of conditions and exceptions to find the beginnings of volumes
+  //     return (
+  //       !item[1].includes("Final") &&
+  //       !item[1].includes("Volume NINE") &&
+  //       (item[1].includes("Volume") ||
+  //         item[1].includes("VOLUME") ||
+  //         item[1].includes("BOOK") ||
+  //         item[1].includes("Volume Nine Web Cover & Wallpaper"))
+  //     );
+  //   });
 
-    const collectedVolumes: CollectedVolumeType = collectVolumes(
-      volumeList,
-      dates,
-      titleList
-    );
-    setVolumes(collectedVolumes[0]);
-    setPages(collectedVolumes[1]);
-  }, []);
+  //   const collectedVolumes: CollectedVolumeType = collectVolumes(
+  //     volumeList,
+  //     dates,
+  //     titleList
+  //   );
+  //   setVolumes(collectedVolumes[0]);
+  //   setPages(collectedVolumes[1]);
+  // }, []);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
