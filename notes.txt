@@ -6,7 +6,8 @@ Improvements:
 - improve bookmarks ui
 - optimize animations and transitions for speed
 
-- Date exceptions:
+- Date & Page exceptions:
+- - Volume 4 starts with page 4
 - - 20030106>20030106b (20030106 points to the wrong comic)
 - - 20141226a-20141226b (a is the comic, b is a wallpaper)
 
