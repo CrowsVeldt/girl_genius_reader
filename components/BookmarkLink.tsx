@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { formatDate } from "../utils/utilFunctions";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
 

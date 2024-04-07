@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   View,
   Text,
@@ -6,8 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import StarButton from "./StarButton";
-import { useContext } from "react";
 import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../utils/types";
 
 export default function CustomHeader({
   navigation,
@@ -22,8 +23,8 @@ export default function CustomHeader({
 }) {
   const { getCurrentPage } = useContext(ComicContext);
 
-  const page = getCurrentPage();
-  const routeName = route.name;
+  const page: PageType = getCurrentPage();
+  const routeName: string = route.name;
 
   return (
     <View style={[options.headerStyle, styles.header]}>

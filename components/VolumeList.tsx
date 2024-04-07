@@ -6,9 +6,9 @@ import {
   ScrollView,
 } from "react-native";
 import { useState } from "react";
-import ComicLink from "./ComicLink";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
+import ComicLink from "./ComicLink";
 import { ComicDataType } from "../utils/types";
 
 export const VolumeList = ({

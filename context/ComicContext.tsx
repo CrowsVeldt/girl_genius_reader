@@ -8,7 +8,7 @@ import {
 import volumeFile from "../public/volumeList.json";
 import pageFile from "../public/pageList.json";
 import Toast from "react-native-root-toast";
-import { ComicDataType, PageType, CollectedVolumeType } from "../utils/types";
+import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -52,6 +52,10 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
+  const getVolumes: () => ComicDataType[] = () => volumes;
+
+  const isPageBookmarked: (page: PageType) => boolean = (page) =>
+    bookmarks.find((item) => item.date === page.date) != undefined;
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     setCurrentPage(page);
@@ -74,11 +78,6 @@ const ComicProvider = ({ children }: { children: any }) => {
     saveData(bookmarkKey, newBookmarks);
   };
 
-  const isPageBookmarked: (page: PageType) => boolean = (page) => {
-    const test = bookmarks.find((item) => item.date === page.date) != undefined;
-    return test;
-  };
-
   const goToNextPage: (page: PageType) => void = (page) => {
     const index: number = pages.findIndex(
       (element) => element.date === page.date
@@ -91,10 +90,6 @@ const ComicProvider = ({ children }: { children: any }) => {
       (element) => element.date === page.date
     );
     changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
-  };
-
-  const getVolumes: () => ComicDataType[] = () => {
-    return volumes;
   };
 
   const value = {
