@@ -1,8 +1,8 @@
 import { StyleSheet, ScrollView } from "react-native";
 import { useContext } from "react";
 import { ComicContext } from "../context/ComicContext";
-import { ComicDataType } from "../src/utils/types";
-import { VolumeList } from "../src/components/VolumeList";
+import { ComicDataType } from "../utils/types";
+import { VolumeList } from "../components/VolumeList";
 
 export default function DateList({ navigation }: { navigation: any }) {
   const { getVolumes } = useContext(ComicContext);
