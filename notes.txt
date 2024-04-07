@@ -5,6 +5,8 @@ Improvements:
 - improve list ui
 - improve bookmarks ui
 - optimize animations and transitions for speed
+- remove redundancy from page/volumeList
+- add tests/testing
 
 Done:
 x Make update loop stop even if it returns undefined
