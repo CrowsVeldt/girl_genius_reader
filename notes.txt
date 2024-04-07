@@ -6,7 +6,7 @@ Improvements:
 - improve bookmarks ui
 - optimize animations and transitions for speed
 - remove redundancy from page/volumeList
-- add tests/testing
+- add tests for async storage (https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil)
 
 Done:
 x Make update loop stop even if it returns undefined
