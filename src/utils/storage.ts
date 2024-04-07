@@ -17,12 +17,15 @@ export const saveData: (
 };
 
 // haven't specified return value type because it's a headache
-export const retrieveData = async (key: string) => {
+export const retrieveData: (
+  key: string
+) => Promise<PageType | PageType[]> = async (key) => {
+  let data;
   try {
-    const data = await ass.getItem(key);
-    return data != null ? JSON.parse(data) : null;
+    data = await ass.getItem(key);
   } catch (error) {
     console.warn("error saving data");
     console.warn(error);
   }
+  return data != null ? JSON.parse(data) : null;
 };
