@@ -2,12 +2,12 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
-import HomeScreen from "./screens/HomeScreen";
-import BookmarkScreen from "./screens/BookmarksScreen";
-import ListScreen from "./screens/ListScreen";
-import CustomHeader from "./components/CustomHeader";
+import HomeScreen from "./src/screens/HomeScreen";
+import BookmarkScreen from "./src/screens/BookmarksScreen";
+import ListScreen from "./src/screens/ListScreen";
+import CustomHeader from "./src/components/CustomHeader";
 
-import ComicProvider from "./context/ComicContext";
+import ComicProvider from "./src/context/ComicContext";
 
 const Drawer = createDrawerNavigator();
 

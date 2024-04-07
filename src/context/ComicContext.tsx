@@ -5,8 +5,8 @@ import {
   bookmarkKey,
   currentPageKey,
 } from "../utils/storage";
-import volumeFile from "../public/volumeList.json";
-import pageFile from "../public/pageList.json";
+import volumeFile from "../../public/volumeList.json";
+import pageFile from "../../public/pageList.json";
 import Toast from "react-native-root-toast";
 import { ComicDataType, PageType } from "../utils/types";
 

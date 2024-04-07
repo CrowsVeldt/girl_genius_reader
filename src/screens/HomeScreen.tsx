@@ -6,11 +6,11 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { ImageZoomRef } from "../components/image_zoom_files/types";
-import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
-import PageTurn from "../components/PageTurn";
+import { ImageZoomRef } from "../src/components/image_zoom_files/types";
+import ImageZoom from "../src/components/image_zoom_files/components/ImageZoom";
+import PageTurn from "../src/components/PageTurn";
 import { ComicContext } from "../context/ComicContext";
-import { PageType } from "../utils/types";
+import { PageType } from "../src/utils/types";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
