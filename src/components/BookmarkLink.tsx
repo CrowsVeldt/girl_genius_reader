@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderWidth: 1,
     height: 35,
-    width: "80%",
+    width: "100%",
   },
   removeButton: {
     flexDirection: "row",

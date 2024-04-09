@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: StatusBar.currentHeight,
+    width: "100%",
   },
   headerTitle: {
     textAlignVertical: "center",

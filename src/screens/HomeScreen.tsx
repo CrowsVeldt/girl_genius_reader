@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     height: screen.height,
     width: screen.width,
+    alignContent: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
