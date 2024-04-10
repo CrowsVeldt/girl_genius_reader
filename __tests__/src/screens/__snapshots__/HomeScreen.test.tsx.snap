@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> renders without change 1`] = `
+<View
+  style={
+    {
+      "alignContent": "center",
+      "backgroundColor": undefined,
+      "height": 1334,
+      "paddingTop": 50,
+      "width": 750,
+    }
+  }
+>
+  <RCTScrollView
+    contentContainerStyle={
+      {
+        "height": 1184,
+        "width": 750,
+      }
+    }
+  >
+    <View>
+      <View
+        animatedStyle={
+          {
+            "value": {
+              "left": 0,
+              "right": null,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+              ],
+            },
+          }
+        }
+        collapsable={false}
+        style={
+          {
+            "height": "100%",
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": null,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+            ],
+            "width": 20,
+            "zIndex": 1,
+          }
+        }
+      >
+        <View
+          animatedStyle={
+            {
+              "value": {
+                "left": 0,
+                "opacity": 0,
+                "right": null,
+                "transform": [
+                  {
+                    "rotate": "45deg",
+                  },
+                ],
+              },
+            }
+          }
+          collapsable={false}
+          style={
+            {
+              "borderBottomWidth": 5,
+              "borderColor": "white",
+              "borderStartWidth": 5,
+              "height": 45,
+              "left": 0,
+              "opacity": 0,
+              "position": "relative",
+              "right": null,
+              "top": 250,
+              "transform": [
+                {
+                  "rotate": "45deg",
+                },
+              ],
+              "width": 45,
+            }
+          }
+        />
+      </View>
+      <Image
+        animatedStyle={
+          {
+            "value": {
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+                {
+                  "scale": 1,
+                },
+              ],
+            },
+          }
+        }
+        collapsable={false}
+        onLayout={[Function]}
+        onLoadStart={[Function]}
+        resizeMode="contain"
+        source={
+          {
+            "uri": "https://www.girlgeniusonline.com/ggmain/strips/ggmain20021104.jpg",
+          }
+        }
+        style={
+          {
+            "flex": 1,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": 0,
+              },
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": 0,
+              },
+              {
+                "scale": 1,
+              },
+            ],
+          }
+        }
+      />
+      <View
+        animatedStyle={
+          {
+            "value": {
+              "left": null,
+              "right": 0,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+              ],
+            },
+          }
+        }
+        collapsable={false}
+        style={
+          {
+            "height": "100%",
+            "left": null,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+            ],
+            "width": 20,
+            "zIndex": 1,
+          }
+        }
+      >
+        <View
+          animatedStyle={
+            {
+              "value": {
+                "left": null,
+                "opacity": 0,
+                "right": 22.5,
+                "transform": [
+                  {
+                    "rotate": "-135deg",
+                  },
+                ],
+              },
+            }
+          }
+          collapsable={false}
+          style={
+            {
+              "borderBottomWidth": 5,
+              "borderColor": "white",
+              "borderStartWidth": 5,
+              "height": 45,
+              "left": null,
+              "opacity": 0,
+              "position": "relative",
+              "right": 22.5,
+              "top": 250,
+              "transform": [
+                {
+                  "rotate": "-135deg",
+                },
+              ],
+              "width": 45,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

@@ -15,7 +15,7 @@ import { PageType } from "../utils/types";
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
-export default function Home({ navigation }: { navigation: any }) {
+export default function Home() {
   const { getCurrentPage } = useContext(ComicContext);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
