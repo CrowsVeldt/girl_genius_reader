@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ComicLink /> renders the same as last time 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "flex": 1,
+        "marginRight": 6,
+      }
+    }
+  >
+    Page 1
+  </Text>
+  <Text
+    style={
+      {
+        "flex": 2,
+      }
+    }
+  >
+    2002-11-04
+  </Text>
+  <Text
+    style={
+      {
+        "flex": 3,
+        "overflow": "visible",
+      }
+    }
+  />
+</View>
+`;
