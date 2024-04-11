@@ -39,13 +39,13 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
-      const savedCurrentPage: PageType = await retrieveData(currentPageKey);
+      const savedBookmarks: any = await retrieveData(bookmarkKey);
+      const savedCurrentPage: any = await retrieveData(currentPageKey);
       if (savedBookmarks != null) {
-        setBookmarks(savedBookmarks);
+        setBookmarks(savedBookmarks as PageType[]);
       }
       if (savedCurrentPage != null) {
-        setCurrentPage(savedCurrentPage);
+        setCurrentPage(savedCurrentPage as PageType);
       }
     })();
   }, []);

@@ -16,10 +16,7 @@ export const saveData: (
   }
 };
 
-// haven't specified return value type because it's a headache
-export const retrieveData: (
-  key: string
-) => Promise<PageType | PageType[]> = async (key) => {
+export const retrieveData: (key: string) => Promise<any> = async (key) => {
   let data;
   try {
     data = await ass.getItem(key);

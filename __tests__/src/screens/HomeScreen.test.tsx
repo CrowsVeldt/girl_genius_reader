@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import Home from "../../../src/screens/HomeScreen";
-import ComicProvider, { ComicContext } from "../../../src/context/ComicContext";
+import ComicProvider from "../../../src/context/ComicContext";
 
 describe("<Home />", () => {
   it("renders without change", () => {
