@@ -32,7 +32,7 @@ export default function PageTurn(props: any) {
         );
       }
     })
-    .onEnd((e) => {
+    .onEnd(() => {
       if (side === "left" && position.value >= END_POSITION) {
         runOnJS(goToPreviousPage)(page);
       } else if (side === "right" && position.value <= END_POSITION) {
@@ -45,7 +45,7 @@ export default function PageTurn(props: any) {
   const tap = Gesture.Tap()
     .maxDuration(250)
     .numberOfTaps(1)
-    .onStart((e) => {
+    .onStart(() => {
       if (side === "left") {
         runOnJS(goToPreviousPage)(page);
       } else if (side === "right") {

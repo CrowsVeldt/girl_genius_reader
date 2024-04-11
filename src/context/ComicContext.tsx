@@ -55,7 +55,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getVolumes: () => ComicDataType[] = () => volumes;
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
-    bookmarks.find((item) => item.date === page.date) != undefined;
+    bookmarks.find((item: PageType) => item.date === page.date) != undefined;
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     setCurrentPage(page);
@@ -80,14 +80,14 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const goToNextPage: (page: PageType) => void = (page) => {
     const index: number = pages.findIndex(
-      (element) => element.date === page.date
+      (element: PageType) => element.date === page.date
     );
     changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
   };
 
   const goToPreviousPage: (page: PageType) => void = (page) => {
     const index: number = pages.findIndex(
-      (element) => element.date === page.date
+      (element: PageType) => element.date === page.date
     );
     changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
   };
