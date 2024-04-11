@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { formatDate, lastElement } from "../../src/utils/utilFunctions";
+import { formatDate, lastElement } from "../../../src/utils/utilFunctions";
 
 describe("lastElement: ", () => {
   const example = [1, 2, 3, 4, undefined, null];

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StarButton /> renders the same as last time 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "height": 40,
+      "marginRight": 10,
+      "opacity": 1,
+      "width": 40,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": undefined,
+        "fontSize": 40,
+        "fontWeight": "bold",
+        "lineHeight": 40,
+      }
+    }
+  >
+    ☆
+  </Text>
+</View>
+`;

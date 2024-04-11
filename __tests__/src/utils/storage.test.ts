@@ -4,8 +4,8 @@ import {
   retrieveData,
   bookmarkKey,
   currentPageKey,
-} from "../../src/utils/storage";
-import { PageType } from "../../src/utils/types";
+} from "../../../src/utils/storage";
+import { PageType } from "../../../src/utils/types";
 
 // https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil
 
