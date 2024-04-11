@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ComicLink /> renders the same as last time 1`] = `
+exports[`<CustomHeader /> renders the same as last time 1`] = `
 <View
   style={
     [

@@ -1,16 +1,8 @@
 import renderer from "react-test-renderer";
-import ComicLink from "../../../src/components/CustomHeader";
 import ComicProvider from "../../../src/context/ComicContext";
 import CustomHeader from "../../../src/components/CustomHeader";
 
-describe("<ComicLink />", () => {
-  const testPage = {
-    date: "20021104",
-    title: "",
-    pageNumber: 1,
-    volume: 1,
-  };
-
+describe("<CustomHeader />", () => {
   it("renders the same as last time", () => {
     const tree = renderer.create(
       <ComicProvider>
