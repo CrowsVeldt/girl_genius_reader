@@ -11,6 +11,7 @@ import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
+import OnEdgeProvider from "../context/OnEdgeContext";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -23,16 +24,18 @@ export default function Home() {
   return (
     <View style={styles.comicPage}>
       <ScrollView contentContainerStyle={styles.comicContainer}>
-        <PageTurn side={"left"} />
-        <ImageZoom
-          ref={imageRef}
-          uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
-          minPanPointers={1}
-          isDoubleTapEnabled
-          resizeMode="contain"
-          onLoadStart={() => imageRef.current?.quickReset()}
-        />
-        <PageTurn side={"right"} />
+        <OnEdgeProvider>
+          <PageTurn side={"left"} />
+          <ImageZoom
+            ref={imageRef}
+            uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+            minPanPointers={1}
+            isDoubleTapEnabled
+            resizeMode="contain"
+            onLoadStart={() => imageRef.current?.quickReset()}
+          />
+          <PageTurn side={"right"} />
+        </OnEdgeProvider>
       </ScrollView>
     </View>
   );

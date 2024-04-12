@@ -1,5 +1,5 @@
 Fixes:
-- if comic is zoomed out than swipe from anywhere in the screen will change page
+- swipe to turn should only activate when the edge of the comic is reached
 - remove unused files from "assets" folder
 
 Improvements:
