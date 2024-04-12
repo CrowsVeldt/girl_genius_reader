@@ -82,7 +82,7 @@ export default function PageTurn(props: any) {
 const styles = StyleSheet.create({
   box: {
     height: "100%",
-    width: 20,
+    width: 35,
     position: "absolute",
     zIndex: 1,
     opacity: 1,

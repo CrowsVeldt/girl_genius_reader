@@ -1,12 +1,13 @@
 Fixes:
 - if comic is zoomed out than swipe from anywhere in the screen will change page
+- remove unused files from "assets" folder
 
 Improvements:
+- seperate tap and swipe page turn?
 - improve list ui
 - improve bookmarks ui
 - optimize animations and transitions for speed
 - remove redundancy from page/volumeList
-- add tests for async storage (https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil)
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -46,6 +47,7 @@ X show scene title on homescreen?
 x add vol# & page# to header
 x impove styles of header
 x!! _ - try making dev build that wipes bookmarks on startup, see if that stops the crashing
+x add tests for async storage (https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil)
 
 x Date & Page exceptions:
 x - 20030106>20030106b (20030106 points to the wrong comic)
