@@ -1,4 +1,5 @@
 Fixes:
+- prevent double-tap-to-zoom under pageTurn
 - swipe to turn should only activate when the edge of the comic is reached
 - remove unused files from "assets" folder
 

@@ -51,7 +51,7 @@ export default function PageTurn(props: any) {
     .onStart(() => {
       if (side === "left") {
         runOnJS(goToPreviousPage)(page);
-      } else if (side === "right") {
+      } else {
         runOnJS(goToNextPage)(page);
       }
     });
