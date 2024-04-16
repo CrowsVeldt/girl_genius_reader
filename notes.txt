@@ -2,8 +2,11 @@ Fixes:
 - prevent double-tap-to-zoom under pageTurn
 - swipe to turn should only activate when the edge of the comic is reached
 - remove unused files from "assets" folder
+- status bar is covered on production app?
 
 Improvements:
+- add 'Go to First/Last' buttons to menu(?)
+- add acknowledgments, privacy policy pages
 - seperate tap and swipe page turn?
 - improve list ui
 - improve bookmarks ui

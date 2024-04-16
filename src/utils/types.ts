@@ -8,5 +8,5 @@ export type PageType = {
   date: string;
   title: string;
   pageNumber: number;
-  volume: number;
+  volumeNumber: number;
 };
