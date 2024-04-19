@@ -12,6 +12,7 @@ import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
+  getLatestPage: () => PageType;
   changeCurrentPage: (page: PageType) => void;
   getBookmarks: () => PageType[];
   addBookmark: (newBookmark: PageType) => void;
@@ -52,6 +53,9 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
+
+  const getLatestPage: () => PageType = () => pages[pages.length -1];
+
   const getVolumes: () => ComicDataType[] = () => volumes;
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
@@ -94,6 +98,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const value = {
     getCurrentPage,
+    getLatestPage,
     changeCurrentPage,
     getBookmarks,
     addBookmark,
