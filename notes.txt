@@ -1,10 +1,11 @@
+- check for updated lists on startup, fetch new lists if found
+- add new icons in place of what was in "assets/"
+
 Fixes:
-- prevent double-tap-to-zoom under pageTurn
-- swipe to turn should only activate when the edge of the comic is reached
-- remove unused files from "assets" folder
 - status bar is covered on production app?
 
 Improvements:
+- swipe to turn should only activate when the edge of the comic is reached
 - add 'Go to First/Last' buttons to menu(?)
 - add acknowledgments, privacy policy pages
 - seperate tap and swipe page turn?
@@ -12,6 +13,7 @@ Improvements:
 - improve bookmarks ui
 - optimize animations and transitions for speed
 - remove redundancy from page/volumeList
+- prevent double-tap-to-zoom under pageTurn(?)
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -56,6 +58,8 @@ x add tests for async storage (https://dev.to/tiaeastwood/how-to-mock-and-test-a
 x Date & Page exceptions:
 x - 20030106>20030106b (20030106 points to the wrong comic)
 x - 20141226a-20141226b (a is the comic, b is a wallpaper)
+
+x remove unused files from "assets" folder
 
 Thanks to: 
 - https://github.com/likashefqet
