@@ -12,6 +12,7 @@ import PageTurn from "../components/PageTurn";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
 import OnEdgeProvider from "../context/OnEdgeContext";
+import { checkForNewData, getData } from "../utils/network";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -20,6 +21,9 @@ export default function Home() {
   const { getCurrentPage } = useContext(ComicContext);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
+
+  // getData()
+  checkForNewData(page.date)
 
   return (
     <View style={styles.comicPage}>
