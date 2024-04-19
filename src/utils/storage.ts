@@ -3,10 +3,12 @@ import { PageType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
+export const pageListKey: string = "@GGAppPageList";
+export const volumeListKey: string = "@GGAppVolumeList";
 
 export const saveData: (
   key: string,
-  value: number | PageType | PageType[]
+  value: any
 ) => void = async (key, value) => {
   try {
     await ass.setItem(key, JSON.stringify(value));

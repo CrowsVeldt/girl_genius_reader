@@ -4,11 +4,15 @@ import {
   saveData,
   bookmarkKey,
   currentPageKey,
+  pageListKey,
+  volumeListKey
 } from "../utils/storage";
 import volumeFile from "../../public/volumeList.json";
 import pageFile from "../../public/pageList.json";
 import Toast from "react-native-root-toast";
 import { ComicDataType, PageType } from "../utils/types";
+import { update } from "../utils/network";
+import { AxiosResponse } from "axios";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -35,28 +39,47 @@ const ComicProvider = ({ children }: { children: any }) => {
     date: "20021104",
     title: "",
     pageNumber: 1,
-    volume: 1,
+    volumeNumber: 1,
   });
 
   useEffect(() => {
     (async () => {
-      const savedBookmarks: any = await retrieveData(bookmarkKey);
-      const savedCurrentPage: any = await retrieveData(currentPageKey);
-      if (savedBookmarks != null) {
-        setBookmarks(savedBookmarks as PageType[]);
+
+      const latest: PageType = getLatestPage();
+      const updateAttempt: AxiosResponse<any, any> | undefined = await update(latest.date);
+      if (updateAttempt != null) {
+        saveData(pageListKey, updateAttempt.data.pages)
+        saveData(volumeListKey, updateAttempt.data.volumes)
       }
-      if (savedCurrentPage != null) {
-        setCurrentPage(savedCurrentPage as PageType);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const savedPageList: any = await retrieveData(pageListKey)
+        const savedVolumeList: any = await retrieveData(volumeListKey)
+        const savedBookmarks: any = await retrieveData(bookmarkKey);
+        const savedCurrentPage: any = await retrieveData(currentPageKey);
+        if (savedBookmarks != null) {
+          setBookmarks(savedBookmarks as PageType[]);
+        }
+        if (savedCurrentPage != null) {
+          setCurrentPage(savedCurrentPage as PageType);
+        }
+        if (savedPageList != null) {
+          console.log(savedPageList)
+        }
+      } catch (err) {
+        console.error(err)
       }
     })();
   }, []);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
-
-  const getLatestPage: () => PageType = () => pages[pages.length -1];
-
   const getVolumes: () => ComicDataType[] = () => volumes;
+  const getLatestPage: () => PageType = () => pages[pages.length - 1];
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
