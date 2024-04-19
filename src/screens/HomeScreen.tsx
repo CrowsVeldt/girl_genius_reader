@@ -12,18 +12,19 @@ import PageTurn from "../components/PageTurn";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
 import OnEdgeProvider from "../context/OnEdgeContext";
-import { checkForNewData, getData } from "../utils/network";
+import { update } from "../utils/network";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
-  const { getCurrentPage } = useContext(ComicContext);
+  const { getCurrentPage, getLatestPage } = useContext(ComicContext);
   const imageRef = useRef<ImageZoomRef>();
+  const latestPage: PageType = getLatestPage();
   const page: PageType = getCurrentPage();
 
-  // getData()
-  checkForNewData("20240408")
+  console.log(update(latestPage.date))
+  //console.log(update("20240408"));
 
   return (
     <View style={styles.comicPage}>
