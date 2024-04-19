@@ -12,9 +12,13 @@ export const checkForNewData = async (date: string) => {
 };
 
 export const update = async (date: string) => {
-  const check = await checkForNewData(date)
-  if (check.data) {
-    const newData = await getData()
+  try {
+    const check = await checkForNewData(date);
+    if (check.data) {
+      const newData = await getData();
+      return newData;
+    }
+  } catch (error) {
+    console.error(error);
   }
-
-}
+};
