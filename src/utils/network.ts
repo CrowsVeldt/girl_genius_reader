@@ -13,6 +13,7 @@ export const getData = async () => {
 export const checkForNewData = async (date: string) => {
   const link = `https://data-collector-yuw1.onrender.com/check?date=${date}`;
   const res = await axios.get(link);
-  console.log(res);
-  return res;
+  console.log(res.data);
+
+  return res.data;
 };

@@ -23,7 +23,7 @@ export default function Home() {
   const page: PageType = getCurrentPage();
 
   // getData()
-  checkForNewData(page.date)
+  checkForNewData("20240408")
 
   return (
     <View style={styles.comicPage}>
