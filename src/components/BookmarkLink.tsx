@@ -22,7 +22,7 @@ export default function BookmarkLink({
           nav.navigate("Home");
         }}
       >
-        <Text>{`Volume ${page.volume} - Page ${page.pageNumber}`}</Text>
+        <Text>{`Volume ${page.volumeNumber} - Page ${page.pageNumber}`}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.removeButton}
