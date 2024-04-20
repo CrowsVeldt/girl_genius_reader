@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.girlgeniusreader"
+    namespace 'com.crows.girl_genius_reader'
     defaultConfig {
-        applicationId "com.girlgeniusreader"
+        applicationId 'com.crows.girl_genius_reader'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 7
