@@ -1,5 +1,5 @@
 import ass from "@react-native-async-storage/async-storage";
-import { PageType } from "./types";
+// import { PageType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
