@@ -5,7 +5,7 @@ import {
   bookmarkKey,
   currentPageKey,
   pageListKey,
-  volumeListKey
+  volumeListKey,
 } from "../utils/storage";
 import volumeFile from "../../public/volumeList.json";
 import pageFile from "../../public/pageList.json";
@@ -44,12 +44,13 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-
       const latest: PageType = getLatestPage();
-      const updateAttempt: AxiosResponse<any, any> | undefined = await update(latest.date);
+      const updateAttempt: AxiosResponse<any, any> | undefined = await update(
+        latest.date
+      );
       if (updateAttempt != null) {
-        saveData(pageListKey, updateAttempt.data.pages)
-        saveData(volumeListKey, updateAttempt.data.volumes)
+        saveData(pageListKey, updateAttempt.data.pages);
+        saveData(volumeListKey, updateAttempt.data.volumes);
       }
     })();
   }, []);
@@ -57,10 +58,11 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        const savedPageList: any = await retrieveData(pageListKey)
-        const savedVolumeList: any = await retrieveData(volumeListKey)
+        const savedPageList: any = await retrieveData(pageListKey);
+        const savedVolumeList: any = await retrieveData(volumeListKey);
         const savedBookmarks: any = await retrieveData(bookmarkKey);
         const savedCurrentPage: any = await retrieveData(currentPageKey);
+
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks as PageType[]);
         }
@@ -68,10 +70,13 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage as PageType);
         }
         if (savedPageList != null) {
-          console.log(savedPageList)
+          setPages(savedPageList as PageType[]);
+        }
+        if (savedVolumeList != null) {
+          setVolumes(savedVolumeList);
         }
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     })();
   }, []);
