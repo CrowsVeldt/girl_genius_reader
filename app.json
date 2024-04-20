@@ -4,27 +4,29 @@
     "slug": "girl_genius_reader",
     "version": "0.0.2",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 6,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "",
         "backgroundColor": "#ffffff"
       },
       "package": "com.crows.girl_genius_reader"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": ""
     },
     "extra": {
       "eas": {
