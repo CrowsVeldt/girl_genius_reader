@@ -2,9 +2,9 @@
   "expo": {
     "name": "girl_genius_reader",
     "slug": "girl_genius_reader",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "",
+    "icon": "icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "",
@@ -18,7 +18,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 7,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "",
         "backgroundColor": "#ffffff"
