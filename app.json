@@ -4,10 +4,10 @@
     "slug": "girl_genius_reader",
     "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "",
+      "image": "splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
     "android": {
       "versionCode": 9,
       "adaptiveIcon": {
-        "foregroundImage": "",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.crows.girl_genius_reader"
