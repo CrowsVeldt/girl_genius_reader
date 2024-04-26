@@ -12,7 +12,7 @@ import { ComicContext } from '../context/ComicContext';
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
         <DrawerItem
-        label={"Latest"}
+        label={"Go to Latest"}
         onPress={() => {
             changeCurrentPage(getLatestPage())
             props.navigation.navigate("Home")

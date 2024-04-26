@@ -1,5 +1,4 @@
 TODO: Think about next steps, make a list:
-- add 'Go to First/Last' buttons to menu(?)
 - add acknowledgments, privacy policy pages
 - swipe to turn should only activate when the edge of the comic is reached
 - status bar is covered on production app?
