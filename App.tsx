@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import DrawerContent from "./src/components/Drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
 import HomeScreen from "./src/screens/HomeScreen";
 import BookmarkScreen from "./src/screens/BookmarksScreen";
@@ -16,7 +17,7 @@ export default function App() {
     <RootSiblingParent>
       <NavigationContainer>
         <ComicProvider>
-          <Drawer.Navigator
+          <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props}/>}
             initialRouteName="Girl Genius"
             screenOptions={{
               swipeEnabled: false,
