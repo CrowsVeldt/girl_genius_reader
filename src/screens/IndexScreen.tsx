@@ -4,7 +4,7 @@ import { ComicContext } from "../context/ComicContext";
 import { ComicDataType } from "../utils/types";
 import { VolumeList } from "../components/VolumeList";
 
-export default function DateList({ navigation }: { navigation: any }) {
+export default function ComicIndex({ navigation }: { navigation: any }) {
   const { getVolumes } = useContext(ComicContext);
 
   const volumes: ComicDataType[] = getVolumes();
