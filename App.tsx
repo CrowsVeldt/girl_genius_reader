@@ -3,10 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import DrawerContent from "./src/components/Drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
-import HomeScreen from "./src/screens/HomeScreen";
-import BookmarkScreen from "./src/screens/BookmarksScreen";
-import IndexScreen from "./src/screens/IndexScreen";
 import CustomHeader from "./src/components/CustomHeader";
+import AckScreen from "./src/screens/AckScreen"
+import BookmarkScreen from "./src/screens/BookmarksScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import IndexScreen from "./src/screens/IndexScreen";
+import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
 
@@ -17,7 +19,8 @@ export default function App() {
     <RootSiblingParent>
       <NavigationContainer>
         <ComicProvider>
-          <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props}/>}
+          <Drawer.Navigator
+            drawerContent={(props) => <DrawerContent {...props} />}
             initialRouteName="Girl Genius"
             screenOptions={{
               swipeEnabled: false,
@@ -41,6 +44,8 @@ export default function App() {
             <Drawer.Screen name="Home" component={HomeScreen} />
             <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
             <Drawer.Screen name="Index" component={IndexScreen} />
+            <Drawer.Screen name="Privacy Policy" component={PrivacyScreen} />
+            <Drawer.Screen name="Acknowledgements" component={AckScreen} />
           </Drawer.Navigator>
         </ComicProvider>
       </NavigationContainer>

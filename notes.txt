@@ -1,5 +1,5 @@
 TODO: Think about next steps, make a list:
-- add acknowledgments, privacy policy pages
+- Make new build with "latest" link
 - swipe to turn should only activate when the edge of the comic is reached
 - status bar is covered on production app?
 
@@ -58,6 +58,10 @@ x - 20141226a-20141226b (a is the comic, b is a wallpaper)
 x remove unused files from "assets" folder
 x check for updated lists on startup, fetch new lists if found
 x add new icons in place of what was in "assets/"
+x add 'Go to First/Last' buttons to menu(?)
+x rename "list" to "index"
+x check comic updated correctly
+x add acknowledgments, privacy policy pages
 
 Thanks to: 
 - https://github.com/likashefqet
