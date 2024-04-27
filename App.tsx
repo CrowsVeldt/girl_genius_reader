@@ -1,6 +1,10 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  DrawerItem,
+  DrawerItemList,
+  createDrawerNavigator,
+} from "@react-navigation/drawer";
 import DrawerContent from "./src/components/Drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
 import CustomHeader from "./src/components/CustomHeader";
@@ -41,9 +45,21 @@ export default function App() {
               },
             }}
           >
-            <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="Bookmarks" component={BookmarkScreen} />
-            <Drawer.Screen name="Index" component={IndexScreen} />
+            <Drawer.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ drawerItemStyle: { borderBottomWidth: 1 } }}
+            />
+            <Drawer.Screen
+              name="Bookmarks"
+              component={BookmarkScreen}
+              options={{ drawerItemStyle: { borderBottomWidth: 1 } }}
+            />
+            <Drawer.Screen
+              name="Index"
+              component={IndexScreen}
+              options={{ drawerItemStyle: { borderBottomWidth: 1 } }}
+            />
             <Drawer.Screen
               name="Privacy Policy"
               component={PrivacyScreen}

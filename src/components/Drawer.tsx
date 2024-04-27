@@ -15,14 +15,16 @@ export default function DrawerContent(props: any) {
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
-        label={"Go to Latest Comic >>>"}
+        label={">>> Go to Latest Comic >>>"}
+        labelStyle={styles.latestLabel}
+        style={styles.latest}
         onPress={() => {
           changeCurrentPage(getLatestPage());
           props.navigation.navigate("Home");
         }}
       />
       <DrawerItem
-        label={`Other ${open ? "" : "+"}`}
+        label={`${open ? "I" : "-"} Other`}
         onPress={() => {
           setOpen(!open);
         }}
@@ -53,4 +55,10 @@ const styles = StyleSheet.create({
   subItem: {
     marginStart: 30,
   },
+  latest: {
+    paddingStart: "7%"
+  },
+  latestLabel: {
+    textAlign: "center"
+  }
 });
