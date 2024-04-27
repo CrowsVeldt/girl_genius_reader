@@ -1,23 +1,56 @@
 import {
-    DrawerContentScrollView,
-    DrawerItem,
-    DrawerItemList,
-  } from '@react-navigation/drawer';
-import { useContext } from 'react';
-import { ComicContext } from '../context/ComicContext';
-  
-  export default function DrawerContent(props: any) {
-    const {changeCurrentPage, getLatestPage} = useContext(ComicContext)
-    return (
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
-        <DrawerItem
-        label={"Go to Latest"}
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import { useContext, useState } from "react";
+import { ComicContext } from "../context/ComicContext";
+import { StyleSheet } from "react-native";
+
+export default function DrawerContent(props: any) {
+  const [open, setOpen] = useState(false);
+  const { changeCurrentPage, getLatestPage } = useContext(ComicContext);
+
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label={"Go to Latest Comic >>>"}
         onPress={() => {
-            changeCurrentPage(getLatestPage())
-            props.navigation.navigate("Home")
+          changeCurrentPage(getLatestPage());
+          props.navigation.navigate("Home");
         }}
+      />
+      <DrawerItem
+        label={`Other ${open ? "" : "+"}`}
+        onPress={() => {
+          setOpen(!open);
+        }}
+      />
+      {open && (
+        <DrawerItem
+          label={"- Privacy Policy"}
+          style={styles.subItem}
+          onPress={() => {
+            props.navigation.navigate("Privacy Policy");
+          }}
         />
-      </DrawerContentScrollView>
-    );
-  }
+      )}
+      {open && (
+        <DrawerItem
+          label={"- Acknowledgements"}
+          style={styles.subItem}
+          onPress={() => {
+            props.navigation.navigate("Acknowledgements");
+          }}
+        />
+      )}
+    </DrawerContentScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  subItem: {
+    marginStart: 30,
+  },
+});
