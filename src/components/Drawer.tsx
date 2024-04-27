@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
     marginStart: 30,
   },
   latest: {
-    paddingStart: "7%"
+    paddingStart: "7%",
   },
   latestLabel: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

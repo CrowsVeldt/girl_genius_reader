@@ -1,10 +1,6 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  DrawerItem,
-  DrawerItemList,
-  createDrawerNavigator,
-} from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import DrawerContent from "./src/components/Drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
 import CustomHeader from "./src/components/CustomHeader";
