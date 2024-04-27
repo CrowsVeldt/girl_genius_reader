@@ -1,7 +1,9 @@
 TODO: Think about next steps, make a list:
-- Make new build with "latest" link
+- add pull to refresh, which should check for updates, and refresh the page
+- clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
 - swipe to turn should only activate when the edge of the comic is reached
 - status bar is covered on production app?
+- add react-toastify for toasts?
 
 Improvements:
 - improve list ui
@@ -62,6 +64,9 @@ x add 'Go to First/Last' buttons to menu(?)
 x rename "list" to "index"
 x check comic updated correctly
 x add acknowledgments, privacy policy pages
+x Make new build with "latest" link
+x figure out how to track load state of zoom image
+x Add loading animation to all screen transitions 
 
 Thanks to: 
 - https://github.com/likashefqet

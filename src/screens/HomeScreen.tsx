@@ -1,5 +1,6 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
+  ActivityIndicator,
   Dimensions,
   ScaledSize,
   ScrollView,
@@ -18,11 +19,17 @@ const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
   const { getCurrentPage } = useContext(ComicContext);
+  const [loaded, setLoaded] = useState(false);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
 
   return (
     <View style={styles.comicPage}>
+      {!loaded && (
+        <View style={styles.spinner}>
+          <ActivityIndicator size={"large"} color={"gray"} />
+        </View>
+      )}
       <ScrollView contentContainerStyle={styles.comicContainer}>
         <OnEdgeProvider>
           <PageTurn side={"left"} />
@@ -32,7 +39,13 @@ export default function Home() {
             minPanPointers={1}
             isDoubleTapEnabled
             resizeMode="contain"
-            onLoadStart={() => imageRef.current?.quickReset()}
+            onLoadStart={() => {
+              setLoaded(false);
+              imageRef.current?.quickReset();
+            }}
+            onLoadEnd={() => {
+              setLoaded(true);
+            }}
           />
           <PageTurn side={"right"} />
         </OnEdgeProvider>
@@ -52,5 +65,14 @@ const styles = StyleSheet.create({
   comicContainer: {
     height: window.height - 150,
     width: window.width,
+  },
+  spinner: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    justifyContent: "center",
+    alignItems: "center"
   },
 });
