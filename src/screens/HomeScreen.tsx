@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -12,7 +12,6 @@ import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
-import OnEdgeProvider from "../context/OnEdgeContext";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -31,24 +30,22 @@ export default function Home() {
         </View>
       )}
       <ScrollView contentContainerStyle={styles.comicContainer}>
-        <OnEdgeProvider>
-          <PageTurn side={"left"} />
-          <ImageZoom
-            ref={imageRef}
-            uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
-            minPanPointers={1}
-            isDoubleTapEnabled
-            resizeMode="contain"
-            onLoadStart={() => {
-              setLoaded(false);
-              imageRef.current?.quickReset();
-            }}
-            onLoadEnd={() => {
-              setLoaded(true);
-            }}
-          />
-          <PageTurn side={"right"} />
-        </OnEdgeProvider>
+        <PageTurn side={"left"} />
+        <ImageZoom
+          ref={imageRef}
+          uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+          minPanPointers={1}
+          isDoubleTapEnabled
+          resizeMode="contain"
+          onLoadStart={() => {
+            setLoaded(false);
+            imageRef.current?.quickReset();
+          }}
+          onLoadEnd={() => {
+            setLoaded(true);
+          }}
+        />
+        <PageTurn side={"right"} />
       </ScrollView>
     </View>
   );
@@ -73,6 +70,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
 });

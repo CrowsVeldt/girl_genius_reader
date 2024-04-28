@@ -12,13 +12,10 @@ import Animated, {
 } from "react-native-reanimated";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
-import { OnEdgeContext } from "../context/OnEdgeContext";
 
 export default function PageTurn(props: any) {
   const { getCurrentPage, goToNextPage, goToPreviousPage } =
     useContext(ComicContext);
-  const { getOnEdge, changeOnEdge } = useContext(OnEdgeContext);
-  const onEdge: boolean = getOnEdge();
   const { side } = props;
   const page: PageType = getCurrentPage();
   const onSide: SharedValue<boolean> = useSharedValue(true);
@@ -27,7 +24,7 @@ export default function PageTurn(props: any) {
 
   const pan = Gesture.Pan()
     .onUpdate((e) => {
-      if (onSide.value && onEdge) {
+      if (onSide.value) {
         position.value = clamp(
           e.translationX,
           side === "left" ? 0 : -50,
