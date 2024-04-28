@@ -25,6 +25,7 @@ type ComicContextType = {
   goToNextPage: (page: PageType) => void;
   goToPreviousPage: (page: PageType) => void;
   getVolumes: () => ComicDataType[];
+  runUpdate: () => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -32,6 +33,7 @@ export const ComicContext = createContext<ComicContextType>(
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
+  const [refresh, setRefresh] = useState<boolean>(false)
   const [volumes, setVolumes] = useState<ComicDataType[]>(volumeFile);
   const [pages, setPages] = useState<PageType[]>(pageFile);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
@@ -44,14 +46,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      const latest: PageType = getLatestPage();
-      const updateAttempt: AxiosResponse<any, any> | undefined = await update(
-        latest.date
-      );
-      if (updateAttempt != null) {
-        saveData(pageListKey, updateAttempt.data.pages);
-        saveData(volumeListKey, updateAttempt.data.volumes);
-      }
+      runUpdate();
     })();
   }, []);
 
@@ -79,7 +74,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         console.error(err);
       }
     })();
-  }, []);
+  }, [refresh]);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
@@ -124,6 +119,18 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
   };
 
+  const runUpdate: () => void = async () => {
+    const latest: PageType = getLatestPage();
+    const updateAttempt: AxiosResponse<any, any> | undefined = await update(
+      latest.date
+    );
+    if (updateAttempt != null) {
+      saveData(pageListKey, updateAttempt.data.pages);
+      saveData(volumeListKey, updateAttempt.data.volumes);
+      setRefresh(!refresh)
+    }
+  };
+
   const value = {
     getCurrentPage,
     getLatestPage,
@@ -135,6 +142,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     goToNextPage,
     goToPreviousPage,
     getVolumes,
+    runUpdate,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
