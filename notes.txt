@@ -1,5 +1,10 @@
 - status bar is covered on production app?
 
+Releases:
+- Enervated Echidna
+- - added loading spinner to comic page
+- - cleaned up code
+
 Improvements:
 - improve list ui
 - improve bookmarks ui
