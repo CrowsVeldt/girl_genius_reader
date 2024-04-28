@@ -6,7 +6,7 @@ import { PageType } from "../utils/types";
 export default function StarButton({ page }: { page: PageType }) {
   const { addBookmark, removeBookmark, isPageBookmarked } =
     useContext(ComicContext);
-  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarked, setBookmarked] = useState<boolean>(false);
 
   useEffect(() => {
     setBookmarked(isPageBookmarked(page));

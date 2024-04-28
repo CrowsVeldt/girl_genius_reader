@@ -8,7 +8,7 @@ import { ComicContext } from "../context/ComicContext";
 import { StyleSheet } from "react-native";
 
 export default function DrawerContent(props: any) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const { changeCurrentPage, getLatestPage } = useContext(ComicContext);
 
   return (

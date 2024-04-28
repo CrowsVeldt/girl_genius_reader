@@ -18,7 +18,7 @@ export const VolumeList = ({
   volume: ComicDataType;
   nav: any;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const doubleTap = Gesture.Tap()
     .maxDuration(250)
