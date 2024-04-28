@@ -1,9 +1,4 @@
-TODO: Think about next steps, make a list:
-- add pull to refresh, which should check for updates, and refresh the page
-- clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
-- swipe to turn should only activate when the edge of the comic is reached
 - status bar is covered on production app?
-- add react-toastify for toasts?
 
 Improvements:
 - improve list ui
@@ -12,6 +7,9 @@ Improvements:
 - remove redundancy from page/volumeList?
 - prevent double-tap-to-zoom under pageTurn(?)
 - seperate tap and swipe page turn?
+- add react-toastify for toasts?
+- clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
+- redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -67,6 +65,8 @@ x add acknowledgments, privacy policy pages
 x Make new build with "latest" link
 x figure out how to track load state of zoom image
 x Add loading animation to all screen transitions 
+x add pull to refresh, which should check for updates, and refresh the page
+x swipe to turn should only activate when the edge of the comic is reached
 
 Thanks to: 
 - https://github.com/likashefqet
