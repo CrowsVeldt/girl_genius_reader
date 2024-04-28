@@ -20,13 +20,13 @@ const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
   const { getCurrentPage } = useContext(ComicContext);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
 
   return (
     <View style={styles.comicPage}>
-      <PullToRefresh/>
+      <PullToRefresh />
       {!loaded && (
         <View style={styles.spinner}>
           <ActivityIndicator size={"large"} color={"gray"} />
