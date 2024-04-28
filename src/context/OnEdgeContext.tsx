@@ -10,7 +10,7 @@ export const OnEdgeContext = createContext<OnEdgeContextType>(
 );
 
 const OnEdgeProvider = ({ children }: { children: any }) => {
-  const [onEdge, setOnEdge] = useState(true);
+  const [onEdge, setOnEdge] = useState<boolean>(true);
 
   const getOnEdge = () => {
     return onEdge;

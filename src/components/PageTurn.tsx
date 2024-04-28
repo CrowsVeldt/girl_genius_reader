@@ -36,9 +36,9 @@ export default function PageTurn(props: any) {
       }
     })
     .onEnd(() => {
-      if (side === "left" && position.value >= END_POSITION) {
+      if (side === "left" && position.value >= END_POSITION && onEdge) {
         runOnJS(goToPreviousPage)(page);
-      } else if (side === "right" && position.value <= END_POSITION) {
+      } else if (side === "right" && position.value <= END_POSITION && onEdge) {
         runOnJS(goToNextPage)(page);
       }
       position.value = withTiming(0, { duration: 100 });
