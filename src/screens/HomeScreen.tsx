@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -7,12 +7,13 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { ComicContext } from "../context/ComicContext";
+import OnEdgeProvider from "../context/OnEdgeContext";
+import { PageType } from "../utils/types";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
-import { ComicContext } from "../context/ComicContext";
-import { PageType } from "../utils/types";
-import OnEdgeProvider from "../context/OnEdgeContext";
+import PullToRefresh from "../components/PullToRefresh";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -25,6 +26,7 @@ export default function Home() {
 
   return (
     <View style={styles.comicPage}>
+      <PullToRefresh/>
       {!loaded && (
         <View style={styles.spinner}>
           <ActivityIndicator size={"large"} color={"gray"} />

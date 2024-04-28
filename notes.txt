@@ -1,5 +1,7 @@
 TODO: Think about next steps, make a list:
-- add pull to refresh, which should check for updates, and refresh the page
+- add pull to refresh to comic page
+- add pull to refresh to index page
+- - both should run update as well as refresh the page?
 - clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
 - swipe to turn should only activate when the edge of the comic is reached
 - status bar is covered on production app?
