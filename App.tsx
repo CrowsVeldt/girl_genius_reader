@@ -1,9 +1,11 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import DrawerContent from "./src/components/Drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
+
+import DrawerContent from "./src/components/Drawer";
 import CustomHeader from "./src/components/CustomHeader";
+
 import AckScreen from "./src/screens/AckScreen";
 import BookmarkScreen from "./src/screens/BookmarksScreen";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -20,6 +22,7 @@ export default function App() {
       <NavigationContainer>
         <ComicProvider>
           <Drawer.Navigator
+            // Custom drawer content
             drawerContent={(props) => <DrawerContent {...props} />}
             initialRouteName="Girl Genius"
             screenOptions={{
@@ -28,6 +31,7 @@ export default function App() {
                 backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
               },
               header: ({ navigation, options, route, layout }) => (
+                // Custom header
                 <CustomHeader
                   navigation={navigation}
                   options={options}
