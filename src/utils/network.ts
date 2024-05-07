@@ -1,4 +1,4 @@
-import axios, { AxiosDefaults, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export const getData: () => Promise<AxiosResponse> = async () => {
   // Fetch data from collector

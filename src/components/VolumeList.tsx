@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -5,8 +6,8 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { useState } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { TapGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/tapGesture";
 import { runOnJS } from "react-native-reanimated";
 import ComicLink from "./ComicLink";
 import { ComicDataType } from "../utils/types";
@@ -20,7 +21,7 @@ export const VolumeList = ({
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const doubleTap = Gesture.Tap()
+  const doubleTap: TapGesture = Gesture.Tap()
     .maxDuration(250)
     .numberOfTaps(2)
     .onStart(() => {

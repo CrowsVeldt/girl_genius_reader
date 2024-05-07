@@ -1,5 +1,4 @@
 import ass from "@react-native-async-storage/async-storage";
-// import { PageType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -11,6 +10,7 @@ export const saveData: (
   value: any
 ) => void = async (key, value) => {
   try {
+    // display message "x saved"
     await ass.setItem(key, JSON.stringify(value));
   } catch (error) {
     console.warn("error saving data");

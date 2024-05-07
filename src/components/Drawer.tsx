@@ -4,8 +4,8 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { useContext, useState } from "react";
-import { ComicContext } from "../context/ComicContext";
 import { StyleSheet } from "react-native";
+import { ComicContext } from "../context/ComicContext";
 
 export default function DrawerContent(props: any) {
   const [open, setOpen] = useState<boolean>(false);

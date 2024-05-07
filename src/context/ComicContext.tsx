@@ -1,4 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
+import Toast from "react-native-root-toast";
+import { AxiosResponse } from "axios";
+import volumeFile from "../../public/volumeList.json";
+import pageFile from "../../public/pageList.json";
 import {
   retrieveData,
   saveData,
@@ -7,12 +11,8 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-import volumeFile from "../../public/volumeList.json";
-import pageFile from "../../public/pageList.json";
-import Toast from "react-native-root-toast";
-import { ComicDataType, PageType } from "../utils/types";
 import { update } from "../utils/network";
-import { AxiosResponse } from "axios";
+import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;

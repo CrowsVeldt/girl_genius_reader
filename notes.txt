@@ -5,6 +5,9 @@ Releases:
 - - added loading spinner to comic page
 - - cleaned up code
 
+- add react-toastify for toasts?
+- - display toasts with network request outcomes
+
 Improvements:
 - improve list ui
 - improve bookmarks ui
@@ -12,7 +15,6 @@ Improvements:
 - remove redundancy from page/volumeList?
 - prevent double-tap-to-zoom under pageTurn(?)
 - seperate tap and swipe page turn?
-- add react-toastify for toasts?
 - clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 

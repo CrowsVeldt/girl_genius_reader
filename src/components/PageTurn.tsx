@@ -16,7 +16,7 @@ import { PageType } from "../utils/types";
 export default function PageTurn(props: any) {
   const { getCurrentPage, goToNextPage, goToPreviousPage } =
     useContext(ComicContext);
-  const { side } = props;
+  const { side }: any = props;
   const page: PageType = getCurrentPage();
   const onSide: SharedValue<boolean> = useSharedValue(true);
   const position: SharedValue<number> = useSharedValue(0);
