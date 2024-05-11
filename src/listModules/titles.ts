@@ -1,18 +1,17 @@
-import { AxiosResponse } from "axios";
-import { getPage } from "../utils/network";
+import axios, { AxiosResponse } from "axios";
 import { DateAndTitleType } from "../utils/types";
 
 const getTitles = async () => {
-  const res: AxiosResponse = await getPage();
-  const startIndex: number = res.data.indexOf("<option value='20021104'>");
-  const endIndex: number = res.data.indexOf("---Jump to a Scene---<");
-  const titles: string = res.data.substring(startIndex, endIndex);
+  const page: AxiosResponse = await axios.get(
+    `http://www.girlgeniusonline.com/comic.php?date=20021104`
+  );
+  const startIndex: number = page.data.indexOf("<option value='20021104'>");
+  const endIndex: number = page.data.indexOf("---Jump to a Scene---<");
+  const titles: string = page.data.substring(startIndex, endIndex);
   return titles;
 };
 
-export const parseTitles: () => Promise<
-  DateAndTitleType[]
-> = async () => {
+export const parseTitles: () => Promise<DateAndTitleType[]> = async () => {
   const res: string = await getTitles();
   const regex: RegExp = new RegExp(/^(.*)(<\/option>)/g);
   const list: string[] = res.split("<option value='");
