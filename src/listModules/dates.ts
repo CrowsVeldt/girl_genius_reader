@@ -3,7 +3,7 @@ import { getRss } from "../utils/network";
 
 export const fetchDates: () => Promise<boolean> = async () => {
   try {
-    const dateList = await fs
+    const dateList: string[] = await fs
       .readAsStringAsync(`${fs.documentDirectory}lists/dateList.json`)
       .then((res) => {
         if (typeof res === "string") return JSON.parse(res);

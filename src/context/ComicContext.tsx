@@ -43,16 +43,16 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      const datesUpdated = await fetchDates();
+      const datesUpdated: boolean = await fetchDates();
 ;
       if (datesUpdated) {
         collectVolumes();
       }
 
-      const pageList = await fs.readAsStringAsync(
+      const pageList: string = await fs.readAsStringAsync(
         `${fs.documentDirectory}lists/pageList.json`
       );
-      const volumeList = await fs.readAsStringAsync(
+      const volumeList: string = await fs.readAsStringAsync(
         `${fs.documentDirectory}lists/volumeList.json`
       );
 

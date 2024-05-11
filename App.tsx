@@ -24,11 +24,6 @@ import * as fs from "expo-file-system";
   } catch (error) {
     // prevent annoying notice that promise may have been rejected
   }
-
-  fs.writeAsStringAsync(
-    `${fs.documentDirectory}lists/dateList.json`,
-    JSON.stringify(dateList)
-  );
 })();
 
 const Drawer = createDrawerNavigator();

@@ -11,6 +11,7 @@ Releases:
 Improvements:
 - add react-toastify for toasts?
 - - display toasts with network request outcomes
+- redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - improve list ui
 - improve bookmarks ui
 - optimize animations and transitions for speed
@@ -18,7 +19,6 @@ Improvements:
 - prevent double-tap-to-zoom under pageTurn(?)
 - seperate tap and swipe page turn?
 - clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
-- redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 
 Done:
 x Make update loop stop even if it returns undefined
