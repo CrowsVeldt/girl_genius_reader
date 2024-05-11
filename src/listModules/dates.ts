@@ -1,16 +1,25 @@
-import FS from "node:fs/promises" 
-import PATH from "node:path"
-import dateList from "../../public/dateList.json"
-import { getRss } from "../utils/network"
+import * as fs from "expo-file-system";
+import { getRss } from "../utils/network";
 
-const fetchDates: () => void = async () => {
-  const root: string = PATH.resolve("./");
-  const dates: string[] = dateList.length > 0 ? dateList : ["20021104"];
-  const rssFeed: any[] = await getRss()
-  const onlyNewDates: string[] = rssFeed.slice(rssFeed.indexOf(dates[dates.length - 1]) + 1)
-  const newList: string[] = [...dates, ...onlyNewDates]
+export const fetchDates: () => Promise<boolean> = async () => {
+  try {
+    const dateList = await fs
+      .readAsStringAsync(`${fs.documentDirectory}lists/dateList.json`)
+      .then((res) => {
+        if (typeof res === "string") return JSON.parse(res);
+      });
 
-  FS.writeFile(`${root}/lists/dateList.json`, JSON.stringify(newList));
+    const onlyNewDates: string[] = await getRss().then((res) => {
+      return res.slice(res.indexOf(dateList[dateList.length - 1]) + 1);
+    });
+    const newList: string[] = [...dateList, ...onlyNewDates];
+    fs.writeAsStringAsync(
+      `${fs.documentDirectory}lists/dateList.json`,
+      JSON.stringify(newList)
+    );
+  } catch (error) {
+    console.error(error);
+  }
+
+  return true;
 };
-
-module.exports = { fetchDates };
