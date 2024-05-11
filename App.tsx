@@ -14,6 +14,23 @@ import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
 
+import dateList from "./public/dateList.json";
+import * as fs from "expo-file-system";
+
+// Initialize local files
+(async () => {
+  try {
+    await fs.makeDirectoryAsync(fs.documentDirectory + "lists");
+  } catch (error) {
+    // prevent annoying notice that promise may have been rejected
+  }
+
+  fs.writeAsStringAsync(
+    `${fs.documentDirectory}lists/dateList.json`,
+    JSON.stringify(dateList)
+  );
+})();
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {

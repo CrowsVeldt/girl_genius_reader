@@ -1,8 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
-// import { AxiosResponse } from "axios";
-import volumeFile from "../../public/volumeList.json";
-import pageFile from "../../public/pageList.json";
+import * as fs from "expo-file-system";
 import {
   retrieveData,
   saveData,
@@ -11,8 +9,9 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-// import { update } from "../utils/network";
-import { ComicDataType, PageType } from "../utils/types";
+import { ComicDataType, PageType, VolumeType } from "../utils/types";
+import { fetchDates } from "../listModules/dates";
+import { collectVolumes } from "../listModules/volumes";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -32,8 +31,8 @@ export const ComicContext = createContext<ComicContextType>(
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
-  const [volumes, setVolumes] = useState<ComicDataType[]>(volumeFile);
-  const [pages, setPages] = useState<PageType[]>(pageFile);
+  const [volumes, setVolumes] = useState<ComicDataType[]>([]);
+  const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentPage, setCurrentPage] = useState<PageType>({
     date: "20021104",
@@ -44,14 +43,21 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      const latest: PageType = getLatestPage();
-      // const updateAttempt: AxiosResponse<any, any> | undefined = await update(
-        // latest.date
-      // );
-      // if (updateAttempt != null) {
-        // saveData(pageListKey, updateAttempt.data.pages);
-        // saveData(volumeListKey, updateAttempt.data.volumes);
-      // }
+      const datesUpdated = await fetchDates();
+;
+      if (datesUpdated) {
+        collectVolumes();
+      }
+
+      const pageList = await fs.readAsStringAsync(
+        `${fs.documentDirectory}lists/pageList.json`
+      );
+      const volumeList = await fs.readAsStringAsync(
+        `${fs.documentDirectory}lists/volumeList.json`
+      );
+
+      saveData(pageListKey, pageList);
+      saveData(volumeListKey, volumeList);
     })();
   }, []);
 
@@ -70,10 +76,10 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage as PageType);
         }
         if (savedPageList != null) {
-          setPages(savedPageList as PageType[]);
+          setPages(JSON.parse(savedPageList) as PageType[]);
         }
         if (savedVolumeList != null) {
-          setVolumes(savedVolumeList);
+          setVolumes(JSON.parse(savedVolumeList) as VolumeType[]);
         }
       } catch (err) {
         console.error(err);

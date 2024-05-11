@@ -1,14 +1,12 @@
-Rss:
-- on startup check rss feed for new dates
-- if any are found add to date list
-- then fetch title/volume data and update volume/page lists
-
 Important:
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
+- cut down on lag when changing comic pages
 
 Releases:
 - Frumious Fennic:
+- - Replace calls to dataCollector with accessing GG's RSS feed
+- - Regression: First page flashes before current page is loaded
 
 Improvements:
 - add react-toastify for toasts?
@@ -81,6 +79,11 @@ x swipe to turn should only activate when the edge of the comic is reached
 x Enervated Echidna
 x - added loading spinner to comic page
 x - cleaned up code
+x Rss:
+x on startup check rss feed for new dates
+x if any are found add to date list
+x then fetch title/volume data and update volume/page lists
+
 
 Thanks to: 
 - https://github.com/likashefqet
