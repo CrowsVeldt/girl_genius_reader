@@ -14,10 +14,9 @@ import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
 
-import dateList from "./public/dateList.json";
 import * as fs from "expo-file-system";
 
-// Initialize local files
+// Initialize local directory
 (async () => {
   try {
     await fs.makeDirectoryAsync(fs.documentDirectory + "lists");
