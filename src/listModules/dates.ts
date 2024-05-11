@@ -1,7 +1,7 @@
 import FS from "node:fs/promises" 
 import PATH from "node:path"
 import dateList from "../../public/dateList.json"
-import { getRss } from "./network"
+import { getRss } from "../utils/network"
 
 const fetchDates: () => void = async () => {
   const root: string = PATH.resolve("./");
