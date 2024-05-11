@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
-import { AxiosResponse } from "axios";
+// import { AxiosResponse } from "axios";
 import volumeFile from "../../public/volumeList.json";
 import pageFile from "../../public/pageList.json";
 import {
@@ -11,7 +11,7 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-import { update } from "../utils/network";
+// import { update } from "../utils/network";
 import { ComicDataType, PageType } from "../utils/types";
 
 type ComicContextType = {
@@ -45,13 +45,13 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       const latest: PageType = getLatestPage();
-      const updateAttempt: AxiosResponse<any, any> | undefined = await update(
-        latest.date
-      );
-      if (updateAttempt != null) {
-        saveData(pageListKey, updateAttempt.data.pages);
-        saveData(volumeListKey, updateAttempt.data.volumes);
-      }
+      // const updateAttempt: AxiosResponse<any, any> | undefined = await update(
+        // latest.date
+      // );
+      // if (updateAttempt != null) {
+        // saveData(pageListKey, updateAttempt.data.pages);
+        // saveData(volumeListKey, updateAttempt.data.volumes);
+      // }
     })();
   }, []);
 
