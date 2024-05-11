@@ -10,7 +10,6 @@ export const saveData: (
   value: any
 ) => void = async (key, value) => {
   try {
-    // display message "x saved"
     await ass.setItem(key, JSON.stringify(value));
   } catch (error) {
     console.warn("error saving data");
