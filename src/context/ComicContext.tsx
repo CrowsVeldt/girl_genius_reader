@@ -88,7 +88,6 @@ const ComicProvider = ({ children }: { children: any }) => {
           }
         });
       } catch (error) {
-        // prevent annoying notice that promise may have been rejected
         console.error("error initializing list directory and/or files");
         console.error(error);
       }
