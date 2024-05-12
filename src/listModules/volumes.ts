@@ -1,11 +1,12 @@
-import * as fs from "expo-file-system"
+import * as fs from "expo-file-system";
 import { parseTitles } from "./titles";
 import { DateAndTitleType, PageType, VolumeType } from "../utils/types";
+import { dateListURI, pageListURI, volumeListURI } from "../utils/storage";
 
 export const collectVolumes: () => void = async () => {
   const pages: PageType[] = [];
   const parsedTitles: DateAndTitleType[] = await parseTitles();
-  const dates: string = await fs.readAsStringAsync(`${fs.documentDirectory}lists/dateList.json`);
+  const dates: string = await fs.readAsStringAsync(dateListURI);
   const parsedDates: string[] = JSON.parse(dates);
 
   const volumeStarts: DateAndTitleType[] = parsedTitles.filter(
@@ -55,6 +56,6 @@ export const collectVolumes: () => void = async () => {
     }
   );
 
-  fs.writeAsStringAsync(`${fs.documentDirectory}lists/pageList.json`, JSON.stringify(pages));
-  fs.writeAsStringAsync(`${fs.documentDirectory}lists/volumeList.json`, JSON.stringify(volumeList));
+  fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
+  fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
 };

@@ -8,10 +8,15 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
+  listDirectoryURI,
+  dateListURI,
+  pageListURI,
+  volumeListURI,
 } from "../utils/storage";
 import { ComicDataType, PageType, VolumeType } from "../utils/types";
 import { fetchDates } from "../listModules/dates";
 import { collectVolumes } from "../listModules/volumes";
+import dates from "../../public/dateList.json";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -43,18 +48,26 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
+      // Initialize local directory
+      try {
+        await fs.makeDirectoryAsync(listDirectoryURI);
+
+        await fs.writeAsStringAsync(dateListURI, JSON.stringify(dates));
+        await fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
+        await fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumes));
+      } catch (error) {
+        // prevent annoying notice that promise may have been rejected
+      }
+
       const datesUpdated: boolean = await fetchDates();
+
       if (datesUpdated) {
         collectVolumes();
       }
 
       if (datesUpdated) {
-        const pageList: string = await fs.readAsStringAsync(
-          `${fs.documentDirectory}lists/pageList.json`
-        );
-        const volumeList: string = await fs.readAsStringAsync(
-          `${fs.documentDirectory}lists/volumeList.json`
-        );
+        const pageList: string = await fs.readAsStringAsync(pageListURI);
+        const volumeList: string = await fs.readAsStringAsync(volumeListURI);
 
         saveData(pageListKey, pageList);
         saveData(volumeListKey, volumeList);
