@@ -50,61 +50,65 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      // Initialize local directory
+      // Initialize local directory and files
       try {
         fs.getInfoAsync(listDirectoryURI).then((res) => {
           if (!res.exists) {
             fs.makeDirectoryAsync(listDirectoryURI);
-            console.log("list directory created")
+            console.log("list directory created");
           } else {
-            console.log("list directory exists")
+            console.log("list directory exists");
           }
         });
 
         fs.getInfoAsync(dateListURI).then((res) => {
           if (!res.exists) {
             fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
-            console.log("date list written")
+            console.log("date list written");
           } else {
-            console.log("date list exists")
+            console.log("date list exists");
           }
         });
 
         fs.getInfoAsync(pageListURI).then((res) => {
           if (!res.exists) {
             fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));
-            console.log("page list written")
+            console.log("page list written");
           } else {
-            console.log("page list exists")
+            console.log("page list exists");
           }
         });
 
         fs.getInfoAsync(volumeListURI).then((res) => {
           if (!res.exists) {
             fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
-            console.log("volume list written")
+            console.log("volume list written");
           } else {
-            console.log("volume list exists")
+            console.log("volume list exists");
           }
         });
       } catch (error) {
         // prevent annoying notice that promise may have been rejected
-        console.error("error initializing list directory and/or files")
-        console.error(error)
+        console.error("error initializing list directory and/or files");
+        console.error(error);
       }
 
+      // check for new dates
       const datesUpdated: boolean = await fetchDates();
 
+      // if new dates found, collect volumes, then read pages and volumes to memory and save
       if (datesUpdated) {
-        collectVolumes();
-      }
+        collectVolumes().then(async (res) => {
+          if (res) {
+            const pageList: string = await fs.readAsStringAsync(pageListURI);
+            const volumeList: string = await fs.readAsStringAsync(
+              volumeListURI
+            );
 
-      if (datesUpdated) {
-        const pageList: string = await fs.readAsStringAsync(pageListURI);
-        const volumeList: string = await fs.readAsStringAsync(volumeListURI);
-
-        saveData(pageListKey, pageList);
-        saveData(volumeListKey, volumeList);
+            saveData(pageListKey, pageList);
+            saveData(volumeListKey, volumeList);
+          }
+        });
       }
     })();
   }, []);

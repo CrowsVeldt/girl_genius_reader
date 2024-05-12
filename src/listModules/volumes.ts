@@ -3,7 +3,7 @@ import { parseTitles } from "./titles";
 import { DateAndTitleType, PageType, VolumeType } from "../utils/types";
 import { dateListURI, pageListURI, volumeListURI } from "../utils/storage";
 
-export const collectVolumes: () => void = async () => {
+export const collectVolumes: () => Promise<boolean> = async () => {
   const pages: PageType[] = [];
   const parsedTitles: DateAndTitleType[] = await parseTitles();
   const dates: string = await fs.readAsStringAsync(dateListURI);
@@ -58,4 +58,6 @@ export const collectVolumes: () => void = async () => {
 
   fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
   fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
+
+  return true
 };

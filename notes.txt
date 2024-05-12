@@ -9,8 +9,7 @@ Releases:
 - - Regression: First page flashes before current page is loaded
 
 Improvements:
-- add react-toastify for toasts?
-- - display toasts with network request outcomes
+- currently saving page/volume data both in asyncstorage and filesystem, reduce redundancy
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - improve list ui
 - improve bookmarks ui
@@ -19,6 +18,8 @@ Improvements:
 - prevent double-tap-to-zoom under pageTurn(?)
 - seperate tap and swipe page turn?
 - clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
+- add react-toastify for toasts?
+- - display toasts with network request outcomes
 
 Done:
 x Make update loop stop even if it returns undefined
