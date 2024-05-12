@@ -1,9 +1,15 @@
 import ass from "@react-native-async-storage/async-storage";
+import * as fs from "expo-file-system"
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
 export const pageListKey: string = "@GGAppPageList";
 export const volumeListKey: string = "@GGAppVolumeList";
+
+export const listDirectoryURI: string = `${fs.documentDirectory}lists/`
+export const dateListURI: string = `${fs.documentDirectory}lists/dateList.json`
+export const pageListURI: string = `${fs.documentDirectory}lists/pageList.json`
+export const volumeListURI: string = `${fs.documentDirectory}lists/volumeList.json`
 
 export const saveData: (
   key: string,
