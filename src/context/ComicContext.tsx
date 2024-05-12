@@ -50,13 +50,45 @@ const ComicProvider = ({ children }: { children: any }) => {
     (async () => {
       // Initialize local directory
       try {
-        await fs.makeDirectoryAsync(listDirectoryURI);
+        fs.getInfoAsync(listDirectoryURI).then((res) => {
+          if (!res.exists) {
+            fs.makeDirectoryAsync(listDirectoryURI);
+            console.log("list directory created")
+          } else {
+            console.log("list directory exists")
+          }
+        });
 
-        await fs.writeAsStringAsync(dateListURI, JSON.stringify(dates));
-        await fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
-        await fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumes));
+        fs.getInfoAsync(dateListURI).then((res) => {
+          if (!res.exists) {
+            fs.writeAsStringAsync(dateListURI, JSON.stringify(dates));
+            console.log("date list written")
+          } else {
+            console.log("date list exists")
+          }
+        });
+
+        fs.getInfoAsync(pageListURI).then((res) => {
+          if (!res.exists) {
+            fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
+            console.log("page list written")
+          } else {
+            console.log("page list exists")
+          }
+        });
+
+        fs.getInfoAsync(volumeListURI).then((res) => {
+          if (!res.exists) {
+            fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumes));
+            console.log("volume list written")
+          } else {
+            console.log("volume list exists")
+          }
+        });
       } catch (error) {
         // prevent annoying notice that promise may have been rejected
+        console.error("error initializing list directory and/or files")
+        console.error(error)
       }
 
       const datesUpdated: boolean = await fetchDates();
