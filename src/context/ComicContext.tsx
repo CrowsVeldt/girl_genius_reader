@@ -16,7 +16,9 @@ import {
 import { ComicDataType, PageType, VolumeType } from "../utils/types";
 import { fetchDates } from "../listModules/dates";
 import { collectVolumes } from "../listModules/volumes";
-import dates from "../../public/dateList.json";
+import dateList from "../../public/dateList.json";
+import pageList from "../../public/pageList.json";
+import volumeList from "../../public/volumeList.json";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -61,7 +63,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
         fs.getInfoAsync(dateListURI).then((res) => {
           if (!res.exists) {
-            fs.writeAsStringAsync(dateListURI, JSON.stringify(dates));
+            fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
             console.log("date list written")
           } else {
             console.log("date list exists")
@@ -70,7 +72,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
         fs.getInfoAsync(pageListURI).then((res) => {
           if (!res.exists) {
-            fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
+            fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));
             console.log("page list written")
           } else {
             console.log("page list exists")
@@ -79,7 +81,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
         fs.getInfoAsync(volumeListURI).then((res) => {
           if (!res.exists) {
-            fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumes));
+            fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
             console.log("volume list written")
           } else {
             console.log("volume list exists")
