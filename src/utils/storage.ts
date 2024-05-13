@@ -38,7 +38,7 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   return data != null ? JSON.parse(data) : null;
 };
 
-export const initializeLocalFiles: () => Promise<boolean> = async () => {
+export const initializeLocalFiles: () => boolean = () => {
   try {
     fs.getInfoAsync(listDirectoryURI).then((res) => {
       if (!res.exists) {
@@ -79,6 +79,6 @@ export const initializeLocalFiles: () => Promise<boolean> = async () => {
     console.error("error initializing list directory and/or files");
     console.error(error);
   }
-  
-  return true
+
+  return true;
 };
