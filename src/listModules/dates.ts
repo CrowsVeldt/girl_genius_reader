@@ -4,16 +4,18 @@ import { dateListURI } from "../utils/storage";
 
 export const fetchDates: () => Promise<boolean> = async () => {
   try {
-    const dateList: string[] = await fs
-      .readAsStringAsync(dateListURI)
-      .then((res) => {
-        if (typeof res === "string") return JSON.parse(res);
-      });
+    const dateList: string = JSON.parse(
+      await fs.readAsStringAsync(dateListURI)
+    );
 
-    const onlyNewDates: string[] = await getRss().then((res) => {
-      return res.slice(res.indexOf(dateList[dateList.length - 1]) + 1);
-    });
+    const rss: any[] = await getRss();
+
+    const onlyNewDates: string[] = rss.slice(
+      rss.indexOf(dateList[dateList.length - 1]) + 1
+    );
+
     const newList: string[] = [...dateList, ...onlyNewDates];
+
     fs.writeAsStringAsync(dateListURI, JSON.stringify(newList));
   } catch (error) {
     console.error(error);
