@@ -18,7 +18,9 @@ export const fetchDates: () => Promise<boolean> = async () => {
 
     fs.writeAsStringAsync(dateListURI, JSON.stringify(newList));
   } catch (error) {
+    console.error("Error reading/fetching/writing dates");
     console.error(error);
+    return false;
   }
 
   return true;

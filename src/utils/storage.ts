@@ -76,6 +76,7 @@ export const initializeLocalFiles: () => boolean = () => {
   } catch (error) {
     console.error("error initializing list directory and/or files");
     console.error(error);
+    return false
   }
 
   return true;
