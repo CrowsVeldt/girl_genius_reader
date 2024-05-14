@@ -6,8 +6,6 @@ import {
   saveData,
   bookmarkKey,
   currentPageKey,
-  pageListKey,
-  volumeListKey,
   pageListURI,
   volumeListURI,
   initializeLocalFiles,
@@ -59,22 +57,11 @@ const ComicProvider = ({ children }: { children: any }) => {
 
           // if new dates found, collect volumes, then read pages and volumes to memory and save
           if (datesUpdated) {
-            collectVolumes().then(async (res) => {
-              if (res) {
-                const pageList: string = await fs.readAsStringAsync(
-                  pageListURI
-                );
-                const volumeList: string = await fs.readAsStringAsync(
-                  volumeListURI
-                );
-
-                saveData(pageListKey, pageList);
-                saveData(volumeListKey, volumeList);
-              }
-            });
+            collectVolumes();
           }
-          const savedPageList: any = await retrieveData(pageListKey);
-          const savedVolumeList: any = await retrieveData(volumeListKey);
+
+          const pageList: any = JSON.parse(await fs.readAsStringAsync(pageListURI))
+          const volumeList: any = JSON.parse(await fs.readAsStringAsync(volumeListURI))
           const savedBookmarks: any = await retrieveData(bookmarkKey);
           const savedCurrentPage: any = await retrieveData(currentPageKey);
 
@@ -84,11 +71,11 @@ const ComicProvider = ({ children }: { children: any }) => {
           if (savedCurrentPage != null) {
             setCurrentPage(savedCurrentPage as PageType);
           }
-          if (savedPageList != null) {
-            setPages(JSON.parse(savedPageList) as PageType[]);
+          if (pageList != null) {
+            setPages(JSON.parse(pageList) as PageType[]);
           }
-          if (savedVolumeList != null) {
-            setVolumes(JSON.parse(savedVolumeList) as VolumeType[]);
+          if (volumeList != null) {
+            setVolumes(JSON.parse(volumeList) as VolumeType[]);
           }
         } catch (err) {
           console.error(err);
