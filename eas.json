@@ -3,30 +3,6 @@
     "appVersionSource": "local"
   },
   "build": {
-    "preview": {
-      "android": {
-        "buildType": "apk"
-      },
-      "env": {
-        "EXPO_PUBLIC_LIGHT_BG_COLOR": "#f9e6c9",
-        "EXPO_PUBLIC_LIGHT_HEAD_COLOR": "#d9c8ae",
-        "EXPO_PUBLIC_LIGHT_DRAWER_COLOR": "#d9c8ae",
-        "EXPO_PUBLIC_DARK_BG_COLOR": "#61594c",
-        "EXPO_PUBLIC_DARK_HEAD_COLOR": "#464036",
-        "EXPO_PUBLIC_DARK_DRAWER_COLOR": "#464036"
-      }
-    },
-    "preview2": {
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
-      }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "preview4": {
-      "distribution": "internal"
-    },
     "production": {
       "env": {
         "EXPO_PUBLIC_LIGHT_BG_COLOR": "#f9e6c9",
@@ -37,6 +13,12 @@
         "EXPO_PUBLIC_DARK_DRAWER_COLOR": "#464036"
       },
       "autoIncrement": "true"
+    },
+    "preview": {
+      "extends": "production",
+      "android": {
+        "buildType": "apk"
+      }
     }
   }
 }
