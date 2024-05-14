@@ -44,8 +44,10 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   useEffect(() => {
-    initializeLocalFiles();
-    setFilesExist(true);
+    const filesReady: boolean = initializeLocalFiles();
+    if (filesReady) {
+      setFilesExist(true);
+    }
   }, []);
 
   useEffect(() => {

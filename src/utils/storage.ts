@@ -7,8 +7,6 @@ import volumeList from "../../public/volumeList.json";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
-// export const pageListKey: string = "@GGAppPageList";
-// export const volumeListKey: string = "@GGAppVolumeList";
 
 export const listDirectoryURI: string = `${fs.documentDirectory}lists/`;
 export const dateListURI: string = `${fs.documentDirectory}lists/dateList.json`;

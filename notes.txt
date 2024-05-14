@@ -1,5 +1,4 @@
 Important:
-- make *sure* list files exist before accessing them
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
 - cut down on lag when changing comic pages
@@ -85,6 +84,7 @@ x Rss:
 x on startup check rss feed for new dates
 x if any are found add to date list
 x then fetch title/volume data and update volume/page lists
+x make *sure* list files exist before accessing them
 
 
 Thanks to: 
