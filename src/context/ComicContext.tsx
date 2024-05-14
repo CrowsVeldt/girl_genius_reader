@@ -44,7 +44,9 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   useEffect(() => {
+    // initialize local files if necessary 
     const filesReady: boolean = initializeLocalFiles();
+    // if files ready set filesExist to true
     if (filesReady) {
       setFilesExist(true);
     }
@@ -62,15 +64,19 @@ const ComicProvider = ({ children }: { children: any }) => {
             collectVolumes();
           }
 
+          // attempt to read pages and volumes from local fiels
           const pageList: PageType[] = JSON.parse(
             await fs.readAsStringAsync(pageListURI)
           );
           const volumeList: VolumeType[] = JSON.parse(
             await fs.readAsStringAsync(volumeListURI)
           );
+
+          // attempt to retrieve current page and bookmarks from async storage
           const savedBookmarks: any = await retrieveData(bookmarkKey);
           const savedCurrentPage: any = await retrieveData(currentPageKey);
 
+          // if each of the above are not null, set state appropriately
           if (savedBookmarks != null) {
             setBookmarks(savedBookmarks as PageType[]);
           }
