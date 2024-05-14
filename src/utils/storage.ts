@@ -41,42 +41,30 @@ export const initializeLocalFiles: () => boolean = () => {
     fs.getInfoAsync(listDirectoryURI).then((res) => {
       if (!res.exists) {
         fs.makeDirectoryAsync(listDirectoryURI);
-        console.log("list directory created");
-      } else {
-        console.log("list directory exists");
       }
     });
 
     fs.getInfoAsync(dateListURI).then((res) => {
       if (!res.exists) {
         fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
-        console.log("date list written");
-      } else {
-        console.log("date list exists");
       }
     });
 
     fs.getInfoAsync(pageListURI).then((res) => {
       if (!res.exists) {
         fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));
-        console.log("page list written");
-      } else {
-        console.log("page list exists");
       }
     });
 
     fs.getInfoAsync(volumeListURI).then((res) => {
       if (!res.exists) {
         fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
-        console.log("volume list written");
-      } else {
-        console.log("volume list exists");
       }
     });
   } catch (error) {
     console.error("error initializing list directory and/or files");
     console.error(error);
-    return false
+    return false;
   }
 
   return true;
