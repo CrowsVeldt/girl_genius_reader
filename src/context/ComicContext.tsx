@@ -55,7 +55,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           // check for new dates
           const datesUpdated: boolean = await fetchDates();
 
-          // if new dates found, collect volumes, then read pages and volumes to memory and save
+          // if new dates found, collect volumes
           if (datesUpdated) {
             collectVolumes();
           }
