@@ -4,22 +4,19 @@ Important:
 - cut down on lag when changing comic pages
 
 Releases:
-- Frumious Fennic:
-- - Replace calls to dataCollector with accessing GG's RSS feed
-- - Regression: First page flashes before current page is loaded
 
 Improvements:
-- currently saving page/volume data both in asyncstorage and filesystem, reduce redundancy
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - improve list ui
 - improve bookmarks ui
 - optimize animations and transitions for speed
+- add toasts to inform users of things
+
+
 - remove redundancy from page/volumeList?
 - prevent double-tap-to-zoom under pageTurn(?)
 - seperate tap and swipe page turn?
 - clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
-- add react-toastify for toasts?
-- - display toasts with network request outcomes
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -85,6 +82,10 @@ x on startup check rss feed for new dates
 x if any are found add to date list
 x then fetch title/volume data and update volume/page lists
 x make *sure* list files exist before accessing them
+x Frumious Fennic:
+x - Replace calls to dataCollector with accessing GG's RSS feed
+x - Regression: First page flashes before current page is loaded
+x currently saving page/volume data both in asyncstorage and filesystem, reduce redundancy
 
 
 Thanks to: 
