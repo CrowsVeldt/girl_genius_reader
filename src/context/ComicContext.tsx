@@ -1,18 +1,18 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
-import { AxiosResponse } from "axios";
-import volumeFile from "../../public/volumeList.json";
-import pageFile from "../../public/pageList.json";
+import * as fs from "expo-file-system";
 import {
   retrieveData,
   saveData,
   bookmarkKey,
   currentPageKey,
-  pageListKey,
-  volumeListKey,
+  pageListURI,
+  volumeListURI,
+  initializeLocalFiles,
 } from "../utils/storage";
-import { update } from "../utils/network";
-import { ComicDataType, PageType } from "../utils/types";
+import { PageType, VolumeType } from "../utils/types";
+import { fetchDates } from "../listModules/dates";
+import { collectVolumes } from "../listModules/volumes";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -24,7 +24,7 @@ type ComicContextType = {
   isPageBookmarked: (page: PageType) => boolean;
   goToNextPage: (page: PageType) => void;
   goToPreviousPage: (page: PageType) => void;
-  getVolumes: () => ComicDataType[];
+  getVolumes: () => VolumeType[];
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -32,8 +32,9 @@ export const ComicContext = createContext<ComicContextType>(
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
-  const [volumes, setVolumes] = useState<ComicDataType[]>(volumeFile);
-  const [pages, setPages] = useState<PageType[]>(pageFile);
+  const [filesExist, setFilesExist] = useState<boolean>(false);
+  const [volumes, setVolumes] = useState<VolumeType[]>([]);
+  const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentPage, setCurrentPage] = useState<PageType>({
     date: "20021104",
@@ -43,47 +44,55 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   useEffect(() => {
-    (async () => {
-      const latest: PageType = getLatestPage();
-      const updateAttempt: AxiosResponse<any, any> | undefined = await update(
-        latest.date
-      );
-      if (updateAttempt != null) {
-        saveData(pageListKey, updateAttempt.data.pages);
-        saveData(volumeListKey, updateAttempt.data.volumes);
-      }
-    })();
+    const filesReady: boolean = initializeLocalFiles();
+    if (filesReady) {
+      setFilesExist(true);
+    }
   }, []);
 
   useEffect(() => {
     (async () => {
-      try {
-        const savedPageList: any = await retrieveData(pageListKey);
-        const savedVolumeList: any = await retrieveData(volumeListKey);
-        const savedBookmarks: any = await retrieveData(bookmarkKey);
-        const savedCurrentPage: any = await retrieveData(currentPageKey);
+      if (filesExist) {
+        try {
+          // check for new dates
+          const datesUpdated: boolean = await fetchDates();
 
-        if (savedBookmarks != null) {
-          setBookmarks(savedBookmarks as PageType[]);
+          // if new dates found, collect volumes
+          if (datesUpdated) {
+            collectVolumes();
+          }
+
+          const pageList: PageType[] = JSON.parse(
+            await fs.readAsStringAsync(pageListURI)
+          );
+          const volumeList: VolumeType[] = JSON.parse(
+            await fs.readAsStringAsync(volumeListURI)
+          );
+          const savedBookmarks: any = await retrieveData(bookmarkKey);
+          const savedCurrentPage: any = await retrieveData(currentPageKey);
+
+          if (savedBookmarks != null) {
+            setBookmarks(savedBookmarks as PageType[]);
+          }
+          if (savedCurrentPage != null) {
+            setCurrentPage(savedCurrentPage as PageType);
+          }
+          if (pageList != null) {
+            setPages(pageList);
+          }
+          if (volumeList != null) {
+            setVolumes(volumeList);
+          }
+        } catch (err) {
+          console.error(err);
         }
-        if (savedCurrentPage != null) {
-          setCurrentPage(savedCurrentPage as PageType);
-        }
-        if (savedPageList != null) {
-          setPages(savedPageList as PageType[]);
-        }
-        if (savedVolumeList != null) {
-          setVolumes(savedVolumeList);
-        }
-      } catch (err) {
-        console.error(err);
       }
     })();
-  }, []);
+  }, [filesExist]);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
-  const getVolumes: () => ComicDataType[] = () => volumes;
+  const getVolumes: () => VolumeType[] = () => volumes;
   const getLatestPage: () => PageType = () => pages[pages.length - 1];
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
