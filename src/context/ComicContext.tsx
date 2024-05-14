@@ -10,7 +10,7 @@ import {
   volumeListURI,
   initializeLocalFiles,
 } from "../utils/storage";
-import { ComicDataType, PageType, VolumeType } from "../utils/types";
+import { PageType, VolumeType } from "../utils/types";
 import { fetchDates } from "../listModules/dates";
 import { collectVolumes } from "../listModules/volumes";
 
@@ -24,7 +24,7 @@ type ComicContextType = {
   isPageBookmarked: (page: PageType) => boolean;
   goToNextPage: (page: PageType) => void;
   goToPreviousPage: (page: PageType) => void;
-  getVolumes: () => ComicDataType[];
+  getVolumes: () => VolumeType[];
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -33,7 +33,7 @@ export const ComicContext = createContext<ComicContextType>(
 
 const ComicProvider = ({ children }: { children: any }) => {
   const [filesExist, setFilesExist] = useState<boolean>(false);
-  const [volumes, setVolumes] = useState<ComicDataType[]>([]);
+  const [volumes, setVolumes] = useState<VolumeType[]>([]);
   const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentPage, setCurrentPage] = useState<PageType>({
@@ -60,8 +60,12 @@ const ComicProvider = ({ children }: { children: any }) => {
             collectVolumes();
           }
 
-          const pageList: any = JSON.parse(await fs.readAsStringAsync(pageListURI))
-          const volumeList: any = JSON.parse(await fs.readAsStringAsync(volumeListURI))
+          const pageList: PageType[] = JSON.parse(
+            await fs.readAsStringAsync(pageListURI)
+          );
+          const volumeList: VolumeType[] = JSON.parse(
+            await fs.readAsStringAsync(volumeListURI)
+          );
           const savedBookmarks: any = await retrieveData(bookmarkKey);
           const savedCurrentPage: any = await retrieveData(currentPageKey);
 
@@ -72,10 +76,10 @@ const ComicProvider = ({ children }: { children: any }) => {
             setCurrentPage(savedCurrentPage as PageType);
           }
           if (pageList != null) {
-            setPages(JSON.parse(pageList) as PageType[]);
+            setPages(pageList);
           }
           if (volumeList != null) {
-            setVolumes(JSON.parse(volumeList) as VolumeType[]);
+            setVolumes(volumeList);
           }
         } catch (err) {
           console.error(err);
@@ -86,7 +90,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
-  const getVolumes: () => ComicDataType[] = () => volumes;
+  const getVolumes: () => VolumeType[] = () => volumes;
   const getLatestPage: () => PageType = () => pages[pages.length - 1];
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
