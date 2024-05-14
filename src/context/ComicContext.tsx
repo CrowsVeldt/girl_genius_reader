@@ -34,6 +34,7 @@ export const ComicContext = createContext<ComicContextType>(
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
+  const [filesExist, setFilesExist] = useState<boolean>(false);
   const [volumes, setVolumes] = useState<ComicDataType[]>([]);
   const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
@@ -45,54 +46,56 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   useEffect(() => {
-    (async () => {
-      initializeLocalFiles();
-
-      // check for new dates
-      const datesUpdated: boolean = await fetchDates();
-
-      // if new dates found, collect volumes, then read pages and volumes to memory and save
-      if (datesUpdated) {
-        collectVolumes().then(async (res) => {
-          if (res) {
-            const pageList: string = await fs.readAsStringAsync(pageListURI);
-            const volumeList: string = await fs.readAsStringAsync(
-              volumeListURI
-            );
-
-            saveData(pageListKey, pageList);
-            saveData(volumeListKey, volumeList);
-          }
-        });
-      }
-    })();
+    initializeLocalFiles();
+    setFilesExist(true);
   }, []);
 
   useEffect(() => {
     (async () => {
-      try {
-        const savedPageList: any = await retrieveData(pageListKey);
-        const savedVolumeList: any = await retrieveData(volumeListKey);
-        const savedBookmarks: any = await retrieveData(bookmarkKey);
-        const savedCurrentPage: any = await retrieveData(currentPageKey);
+      if (filesExist) {
+        try {
+          // check for new dates
+          const datesUpdated: boolean = await fetchDates();
 
-        if (savedBookmarks != null) {
-          setBookmarks(savedBookmarks as PageType[]);
+          // if new dates found, collect volumes, then read pages and volumes to memory and save
+          if (datesUpdated) {
+            collectVolumes().then(async (res) => {
+              if (res) {
+                const pageList: string = await fs.readAsStringAsync(
+                  pageListURI
+                );
+                const volumeList: string = await fs.readAsStringAsync(
+                  volumeListURI
+                );
+
+                saveData(pageListKey, pageList);
+                saveData(volumeListKey, volumeList);
+              }
+            });
+          }
+          const savedPageList: any = await retrieveData(pageListKey);
+          const savedVolumeList: any = await retrieveData(volumeListKey);
+          const savedBookmarks: any = await retrieveData(bookmarkKey);
+          const savedCurrentPage: any = await retrieveData(currentPageKey);
+
+          if (savedBookmarks != null) {
+            setBookmarks(savedBookmarks as PageType[]);
+          }
+          if (savedCurrentPage != null) {
+            setCurrentPage(savedCurrentPage as PageType);
+          }
+          if (savedPageList != null) {
+            setPages(JSON.parse(savedPageList) as PageType[]);
+          }
+          if (savedVolumeList != null) {
+            setVolumes(JSON.parse(savedVolumeList) as VolumeType[]);
+          }
+        } catch (err) {
+          console.error(err);
         }
-        if (savedCurrentPage != null) {
-          setCurrentPage(savedCurrentPage as PageType);
-        }
-        if (savedPageList != null) {
-          setPages(JSON.parse(savedPageList) as PageType[]);
-        }
-        if (savedVolumeList != null) {
-          setVolumes(JSON.parse(savedVolumeList) as VolumeType[]);
-        }
-      } catch (err) {
-        console.error(err);
       }
     })();
-  }, []);
+  }, [filesExist]);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;

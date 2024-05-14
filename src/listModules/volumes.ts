@@ -59,5 +59,5 @@ export const collectVolumes: () => Promise<boolean> = async () => {
   fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
   fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
 
-  return true
+  return true;
 };
