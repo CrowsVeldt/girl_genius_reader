@@ -7,7 +7,7 @@ describe("<BookmarkLink />", () => {
     date: "20021104",
     title: "",
     pageNumber: 1,
-    volume: 1,
+    volumeNumber: 1,
   };
 
   it("renders the same as last time", () => {
