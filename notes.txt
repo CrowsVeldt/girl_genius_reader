@@ -7,11 +7,12 @@ Important:
 Releases:
 
 Improvements:
+- add toasts to inform users of things
+- use notifications as well as toasts
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - improve list ui
 - improve bookmarks ui
 - optimize animations and transitions for speed
-- add toasts to inform users of things
 
 
 - remove redundancy from page/volumeList?
