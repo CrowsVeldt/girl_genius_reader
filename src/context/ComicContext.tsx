@@ -44,7 +44,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   useEffect(() => {
-    // initialize local files if necessary 
+    // initialize local files if necessary
     const filesReady: boolean = initializeLocalFiles();
     // if files ready set filesExist to true
     if (filesReady) {
@@ -60,9 +60,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           const datesUpdated: boolean = await fetchDates();
 
           // if new dates found, collect volumes
-          if (datesUpdated) {
-            collectVolumes();
-          }
+          const collectedVolumes = datesUpdated ? collectVolumes() : false;
 
           // attempt to read pages and volumes from local fiels
           const pageList: PageType[] = JSON.parse(

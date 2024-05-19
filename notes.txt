@@ -1,4 +1,5 @@
 Important:
+- development build is updating, production build is not
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
 - cut down on lag when changing comic pages
