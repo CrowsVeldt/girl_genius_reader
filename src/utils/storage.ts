@@ -1,9 +1,10 @@
 import ass from "@react-native-async-storage/async-storage";
 import * as fs from "expo-file-system";
+import { getDateList } from "./network";
 
-import dateList from "../../public/dateList.json";
-import pageList from "../../public/pageList.json";
-import volumeList from "../../public/volumeList.json";
+// import dateList from "../../public/dateList.json";
+// import pageList from "../../public/pageList.json";
+// import volumeList from "../../public/volumeList.json";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -36,7 +37,9 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   return data != null ? JSON.parse(data) : null;
 };
 
-export const initializeLocalFiles: () => boolean = () => {
+export const initializeLocalFiles: () => Promise<boolean> = async () => {
+  const dateList = await getDateList()
+
   try {
     fs.getInfoAsync(listDirectoryURI).then((res) => {
       if (!res.exists) {
@@ -52,13 +55,13 @@ export const initializeLocalFiles: () => boolean = () => {
 
     fs.getInfoAsync(pageListURI).then((res) => {
       if (!res.exists) {
-        fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));
+        fs.writeAsStringAsync(pageListURI, "[]");
       }
     });
 
     fs.getInfoAsync(volumeListURI).then((res) => {
       if (!res.exists) {
-        fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
+        fs.writeAsStringAsync(volumeListURI, "[]");
       }
     });
   } catch (error) {
