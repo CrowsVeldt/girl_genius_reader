@@ -13,6 +13,7 @@ import {
 import { PageType, VolumeType } from "../utils/types";
 import { fetchDates } from "../listModules/dates";
 import { collectVolumes } from "../listModules/volumes";
+import { showToast } from "../utils/notifications";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -48,6 +49,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     const filesReady: boolean = initializeLocalFiles();
     // if files ready set filesExist to true
     if (filesReady) {
+      showToast("Local files exist")
       setFilesExist(true);
     }
   }, []);
