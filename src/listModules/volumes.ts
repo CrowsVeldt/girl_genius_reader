@@ -1,12 +1,12 @@
-import * as fs from "expo-file-system";
 import { parseTitles } from "./titles";
 import { DateAndTitleType, PageType, VolumeType } from "../utils/types";
-import { dateListURI, pageListURI, volumeListURI } from "../utils/storage";
 
-export const collectVolumes: () => Promise<boolean> = async () => {
+export const collectVolumes: (dates: string[]) => Promise<{
+  pages: PageType[];
+  volumes: VolumeType[];
+}> = async (dates) => {
   const parsedTitles: DateAndTitleType[] = await parseTitles();
-  const dates: string = await fs.readAsStringAsync(dateListURI);
-  const parsedDates: string[] = JSON.parse(dates);
+  // const parsedDates: string[] = JSON.parse(dates);
   const pages: PageType[] = [];
 
   try {
@@ -26,9 +26,9 @@ export const collectVolumes: () => Promise<boolean> = async () => {
             : null;
 
         // slice dates by volume, if lastDate index is null set it to parsedDates.length
-        const volumeDates: string[] = parsedDates.slice(
-          parsedDates.indexOf(item.date),
-          lastDate != null ? parsedDates.indexOf(lastDate) : parsedDates.length
+        const volumeDates: string[] = dates.slice(
+          dates.indexOf(item.date),
+          lastDate != null ? dates.indexOf(lastDate) : dates.length
         );
 
         // Filter all titles that do not include "First Page"
@@ -67,13 +67,13 @@ export const collectVolumes: () => Promise<boolean> = async () => {
     );
 
     // write pages and volumeList to local file
-    fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
-    fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
+    // fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
+    // fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
+    return { pages: pages, volumes: volumeList };
   } catch (error) {
     console.error("Error collecting volume/page data");
     console.error(error);
     // return value to simplify checking that collecting finished
-    return false;
+    return { pages: [], volumes: [] };
   }
-  return true;
 };

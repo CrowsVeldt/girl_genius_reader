@@ -1,6 +1,7 @@
 import ass from "@react-native-async-storage/async-storage";
 import * as fs from "expo-file-system";
 import { getDateList } from "./network";
+import { collectVolumes } from "../listModules/volumes";
 
 // import dateList from "../../public/dateList.json";
 // import pageList from "../../public/pageList.json";
@@ -38,7 +39,11 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
 };
 
 export const initializeLocalFiles: () => Promise<boolean> = async () => {
-  const dateList = await getDateList()
+  const dateList = await getDateList();
+  const { pages, volumes } = await collectVolumes(dateList);
+
+  // run collectVolumes with dateList from network
+  // return collected volumes from collect volumes, only then write them here
 
   try {
     fs.getInfoAsync(listDirectoryURI).then((res) => {
@@ -55,13 +60,13 @@ export const initializeLocalFiles: () => Promise<boolean> = async () => {
 
     fs.getInfoAsync(pageListURI).then((res) => {
       if (!res.exists) {
-        fs.writeAsStringAsync(pageListURI, "[]");
+        fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
       }
     });
 
     fs.getInfoAsync(volumeListURI).then((res) => {
       if (!res.exists) {
-        fs.writeAsStringAsync(volumeListURI, "[]");
+        fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumes));
       }
     });
   } catch (error) {

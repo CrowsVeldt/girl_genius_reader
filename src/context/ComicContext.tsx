@@ -47,7 +47,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     (async () => {
       // initialize local files if necessary
       const filesReady: boolean = await initializeLocalFiles();
-      collectVolumes()
+      // collectVolumes()
       // if files ready set filesExist to true
       if (filesReady) {
         setFilesExist(true);
@@ -63,7 +63,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           const datesUpdated: boolean = await fetchDates();
 
           // if new dates found, collect volumes
-          const collectedVolumes = datesUpdated ? collectVolumes() : false;
+          // const collectedVolumes = datesUpdated ? collectVolumes() : false;
 
           // attempt to read pages and volumes from local fiels
           const pageList: PageType[] = JSON.parse(
