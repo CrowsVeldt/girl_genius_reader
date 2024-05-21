@@ -1,14 +1,5 @@
-1. When app is run check for local files
-2. If no files were found, create them
-2b. get datelist from server, new dates from rss, collect volume info, write all to local files, and add to memory
-3. if files were found, check rss for updates, if found update files, and local memory
-3b. if no updates were found, load files into memory
-
-
-
-
 Important:
-- TODO: on install call render server to get date list
+- make sure new app is actually running and recieving updates in production
 - development build is updating, production build is not
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
