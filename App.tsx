@@ -13,10 +13,28 @@ import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
+import { useEffect } from "react";
+import { checkForLocalFiles, initializeLocalFiles } from "./src/utils/storage";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+
+  useEffect(() => {
+    (async () => {
+      // check for local files
+      const filesExist = await checkForLocalFiles()
+      // // if none found, create them
+      if (!filesExist) {
+        initializeLocalFiles()
+      }
+
+      // // check for updates
+      // // // if found update local files
+      // // Load files to memory
+    })()
+  })
+
   return (
     <RootSiblingParent>
       <NavigationContainer>
