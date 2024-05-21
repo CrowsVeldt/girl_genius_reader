@@ -29,7 +29,6 @@ export const ComicContext = createContext<ComicContextType>(
 );
 
 const ComicProvider = ({ children }: { children: any }) => {
-  const [filesExist, setFilesExist] = useState<boolean>(false);
   const [volumes, setVolumes] = useState<VolumeType[]>([]);
   const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);

@@ -34,15 +34,11 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   return data != null ? JSON.parse(data) : null;
 };
 
-export const checkForLocalFiles = async () => {
-  const filesExist =
-    (await fs.getInfoAsync(listDirectoryURI)).exists &&
-    (await fs.getInfoAsync(dateListURI)).exists &&
-    (await fs.getInfoAsync(pageListURI)).exists &&
-    (await fs.getInfoAsync(volumeListURI)).exists;
-
-  return filesExist;
-};
+export const checkForLocalFiles = async () =>
+  (await fs.getInfoAsync(listDirectoryURI)).exists &&
+  (await fs.getInfoAsync(dateListURI)).exists &&
+  (await fs.getInfoAsync(pageListURI)).exists &&
+  (await fs.getInfoAsync(volumeListURI)).exists;
 
 export const initializeLocalFiles: () => void = async () => {
   const dateList = await getDateList();
