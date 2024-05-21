@@ -1,12 +1,11 @@
-import * as fs from "expo-file-system";
-import { parseTitles } from "./titles";
-import { DateAndTitleType, PageType, VolumeType } from "../utils/types";
-import { dateListURI, pageListURI, volumeListURI } from "../utils/storage";
+import axios, { AxiosResponse } from "axios";
+import { DateAndTitleType, PageType, VolumeType } from "./types";
 
-export const collectVolumes: () => Promise<boolean> = async () => {
+export const collectVolumes: (dates: string[]) => Promise<{
+  pageList: PageType[];
+  volumeList: VolumeType[];
+}> = async (dates) => {
   const parsedTitles: DateAndTitleType[] = await parseTitles();
-  const dates: string = await fs.readAsStringAsync(dateListURI);
-  const parsedDates: string[] = JSON.parse(dates);
   const pages: PageType[] = [];
 
   try {
@@ -26,9 +25,9 @@ export const collectVolumes: () => Promise<boolean> = async () => {
             : null;
 
         // slice dates by volume, if lastDate index is null set it to parsedDates.length
-        const volumeDates: string[] = parsedDates.slice(
-          parsedDates.indexOf(item.date),
-          lastDate != null ? parsedDates.indexOf(lastDate) : parsedDates.length
+        const volumeDates: string[] = dates.slice(
+          dates.indexOf(item.date),
+          lastDate != null ? dates.indexOf(lastDate) : dates.length
         );
 
         // Filter all titles that do not include "First Page"
@@ -67,13 +66,38 @@ export const collectVolumes: () => Promise<boolean> = async () => {
     );
 
     // write pages and volumeList to local file
-    fs.writeAsStringAsync(pageListURI, JSON.stringify(pages));
-    fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
+    return { pageList: pages, volumeList: volumeList };
   } catch (error) {
     console.error("Error collecting volume/page data");
     console.error(error);
-    // return value to simplify checking that collecting finished
-    return false;
+    return { pageList: [], volumeList: [] };
   }
-  return true;
+};
+
+const getTitles = async () => {
+  const page: AxiosResponse = await axios.get(
+    `http://www.girlgeniusonline.com/comic.php?date=20021104`
+  );
+  const startIndex: number = page.data.indexOf("<option value='20021104'>");
+  const endIndex: number = page.data.indexOf("---Jump to a Scene---<");
+  const titles: string = page.data.substring(startIndex, endIndex);
+  return titles;
+};
+
+export const parseTitles: () => Promise<DateAndTitleType[]> = async () => {
+  const res: string = await getTitles();
+  const regex: RegExp = new RegExp(/^(.*)(<\/option>)/g);
+  const list: string[] = res.split("<option value='");
+  return list.map((item: string) => {
+    const date: string = item.substring(0, 8);
+    const titleReg: RegExpMatchArray | null = item.match(regex);
+    const matchedTitle: string = titleReg != null ? titleReg[0] : "";
+    const titleStartIndex: number = matchedTitle.indexOf(">");
+    const titleEndIndex: number = matchedTitle.indexOf("</option>");
+    const title: string = matchedTitle.substring(
+      titleStartIndex + 1,
+      titleEndIndex
+    );
+    return { date: date, title: title };
+  });
 };
