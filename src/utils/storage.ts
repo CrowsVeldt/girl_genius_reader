@@ -2,6 +2,7 @@ import ass from "@react-native-async-storage/async-storage";
 import * as fs from "expo-file-system";
 import { getDateList } from "./network";
 import { collectVolumes } from "./volumes";
+import { PageType, VolumeType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -42,7 +43,12 @@ export const checkForLocalFiles = async () =>
 
 export const initializeLocalFiles: () => void = async () => {
   const dateList = await getDateList();
-  const { pageList, volumeList } = await collectVolumes(dateList);
+  const {
+    pageList,
+    volumeList,
+  }: { pageList: PageType[]; volumeList: VolumeType[] } = await collectVolumes(
+    dateList
+  );
 
   try {
     fs.makeDirectoryAsync(listDirectoryURI);
@@ -58,8 +64,15 @@ export const initializeLocalFiles: () => void = async () => {
 export const getDateFile: () => Promise<string[]> = async () =>
   JSON.parse(await fs.readAsStringAsync(dateListURI));
 
-export const updateLocalFiles = async (dateList: string[]) => {
-  const { pageList, volumeList } = await collectVolumes(dateList);
+export const updateLocalFiles: (dateList: string[]) => void = async (
+  dateList
+) => {
+  const {
+    pageList,
+    volumeList,
+  }: { pageList: PageType[]; volumeList: VolumeType[] } = await collectVolumes(
+    dateList
+  );
 
   fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
   fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));

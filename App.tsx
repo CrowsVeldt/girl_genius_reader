@@ -43,8 +43,8 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const dates = await getDateFile();
-      const updates = fetchNewDates(lastElement(dates));
-      updateLocalFiles([...dates, ...(await updates)]);
+      const updates = await fetchNewDates(lastElement(dates));
+      updateLocalFiles([...dates, ...updates]);
     })();
   }, [filesExist]);
 

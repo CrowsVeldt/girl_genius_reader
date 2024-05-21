@@ -10,7 +10,6 @@ import {
   volumeListURI,
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
-import { fetchNewDates } from "../utils/network";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -43,7 +42,6 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-
         // attempt to read pages and volumes from local fiels
         const pageList: PageType[] = JSON.parse(
           await fs.readAsStringAsync(pageListURI)
