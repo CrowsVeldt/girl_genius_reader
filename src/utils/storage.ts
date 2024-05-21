@@ -1,10 +1,7 @@
 import ass from "@react-native-async-storage/async-storage";
 import * as fs from "expo-file-system";
 import { getDateList } from "./network";
-
-// import dateList from "../../public/dateList.json";
-// import pageList from "../../public/pageList.json";
-// import volumeList from "../../public/volumeList.json";
+import { collectVolumes } from "./volumes";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -37,38 +34,27 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   return data != null ? JSON.parse(data) : null;
 };
 
-export const initializeLocalFiles: () => Promise<boolean> = async () => {
-  const dateList = await getDateList()
+export const checkForLocalFiles = async () => {
+  const filesExist =
+    (await fs.getInfoAsync(listDirectoryURI)).exists &&
+    (await fs.getInfoAsync(dateListURI)).exists &&
+    (await fs.getInfoAsync(pageListURI)).exists &&
+    (await fs.getInfoAsync(volumeListURI)).exists;
+
+  return filesExist;
+};
+
+export const initializeLocalFiles: () => void = async () => {
+  const dateList = await getDateList();
+  const { pageList, volumeList } = await collectVolumes(dateList);
 
   try {
-    fs.getInfoAsync(listDirectoryURI).then((res) => {
-      if (!res.exists) {
-        fs.makeDirectoryAsync(listDirectoryURI);
-      }
-    });
-
-    fs.getInfoAsync(dateListURI).then((res) => {
-      if (!res.exists) {
-        fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
-      }
-    });
-
-    fs.getInfoAsync(pageListURI).then((res) => {
-      if (!res.exists) {
-        fs.writeAsStringAsync(pageListURI, "[]");
-      }
-    });
-
-    fs.getInfoAsync(volumeListURI).then((res) => {
-      if (!res.exists) {
-        fs.writeAsStringAsync(volumeListURI, "[]");
-      }
-    });
+    fs.makeDirectoryAsync(listDirectoryURI);
+    fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
+    fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));
+    fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
   } catch (error) {
     console.error("error initializing list directory and/or files");
     console.error(error);
-    return false;
   }
-
-  return true;
 };
