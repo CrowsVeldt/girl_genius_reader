@@ -1,3 +1,12 @@
+1. When app is run check for local files
+2. If no files were found, create them
+2b. get datelist from server, new dates from rss, collect volume info, write all to local files, and add to memory
+3. if files were found, check rss for updates, if found update files, and local memory
+3b. if no updates were found, load files into memory
+
+
+
+
 Important:
 - TODO: on install call render server to get date list
 - development build is updating, production build is not
@@ -8,6 +17,7 @@ Important:
 Releases:
 
 Improvements:
+- add notifications/animations/whatever to let user know if app is updating
 - add toasts to inform users of things
 - use notifications as well as toasts
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view

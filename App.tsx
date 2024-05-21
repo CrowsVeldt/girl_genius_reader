@@ -19,21 +19,17 @@ import { checkForLocalFiles, initializeLocalFiles } from "./src/utils/storage";
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-
   useEffect(() => {
     (async () => {
       // check for local files
-      const filesExist = await checkForLocalFiles()
+      const filesExist = await checkForLocalFiles();
+      console.log(filesExist)
       // // if none found, create them
       if (!filesExist) {
-        initializeLocalFiles()
+        initializeLocalFiles();
       }
-
-      // // check for updates
-      // // // if found update local files
-      // // Load files to memory
-    })()
-  })
+    })();
+  });
 
   return (
     <RootSiblingParent>

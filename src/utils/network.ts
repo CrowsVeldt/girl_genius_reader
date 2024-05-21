@@ -22,8 +22,9 @@ export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
   try {
     const rss: any[] = await getRss();
 
-    return rss.slice(rss.indexOf(latestDate) + 1);
+    const newDates: string[] = rss.slice(rss.indexOf(latestDate) + 1);
 
+    return newDates != null ? newDates : [];
   } catch (error) {
     console.error("Error reading/fetching/writing dates");
     console.error(error);
