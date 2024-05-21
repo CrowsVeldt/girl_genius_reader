@@ -54,3 +54,14 @@ export const initializeLocalFiles: () => void = async () => {
     console.error(error);
   }
 };
+
+export const getDateFile: () => Promise<string[]> = async () =>
+  JSON.parse(await fs.readAsStringAsync(dateListURI));
+
+export const updateLocalFiles = async (dateList: string[]) => {
+  const { pageList, volumeList } = await collectVolumes(dateList);
+
+  fs.writeAsStringAsync(dateListURI, JSON.stringify(dateList));
+  fs.writeAsStringAsync(pageListURI, JSON.stringify(pageList));
+  fs.writeAsStringAsync(volumeListURI, JSON.stringify(volumeList));
+};
