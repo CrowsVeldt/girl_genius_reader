@@ -11,8 +11,9 @@ import {
   initializeLocalFiles,
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
-import { fetchDates } from "../listModules/dates";
-import { collectVolumes } from "../listModules/volumes";
+import { fetchNewDates } from "../listModules/dates";
+import { getDateList } from "../utils/network";
+import { lastElement } from "../utils/utilFunctions";
 
 type ComicContextType = {
   getCurrentPage: () => PageType;
@@ -46,8 +47,12 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       // initialize local files if necessary
-      const filesReady: boolean = await initializeLocalFiles();
-      // collectVolumes()
+      const dateList = await getDateList();
+      const newDates = await fetchNewDates(lastElement(dateList));
+      const filesReady: boolean = await initializeLocalFiles([
+        ...dateList,
+        ...newDates,
+      ]);
       // if files ready set filesExist to true
       if (filesReady) {
         setFilesExist(true);
@@ -59,13 +64,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     (async () => {
       if (filesExist) {
         try {
-          // check for new dates
-          const datesUpdated: boolean = await fetchDates();
-
-          // if new dates found, collect volumes
-          // const collectedVolumes = datesUpdated ? collectVolumes() : false;
-
-          // attempt to read pages and volumes from local fiels
+          // attempt to read pages and volumes from local files
           const pageList: PageType[] = JSON.parse(
             await fs.readAsStringAsync(pageListURI)
           );

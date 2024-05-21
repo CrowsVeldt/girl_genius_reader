@@ -1,11 +1,6 @@
 import ass from "@react-native-async-storage/async-storage";
 import * as fs from "expo-file-system";
-import { getDateList } from "./network";
 import { collectVolumes } from "../listModules/volumes";
-
-// import dateList from "../../public/dateList.json";
-// import pageList from "../../public/pageList.json";
-// import volumeList from "../../public/volumeList.json";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -38,8 +33,8 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   return data != null ? JSON.parse(data) : null;
 };
 
-export const initializeLocalFiles: () => Promise<boolean> = async () => {
-  const dateList = await getDateList();
+export const initializeLocalFiles: (dateList: string[]) => Promise<boolean> = async (dateList) => {
+  // const dateList = await getDateList();
   const { pages, volumes } = await collectVolumes(dateList);
 
   // run collectVolumes with dateList from network

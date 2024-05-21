@@ -1,5 +1,5 @@
 Important:
-- move all page/list collecting/writing to initialize files
+- check new code for functioning
 - development build is updating, production build is not
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
