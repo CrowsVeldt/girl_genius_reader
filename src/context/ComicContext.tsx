@@ -1,13 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
-// import * as fs from "expo-file-system";
 import {
   retrieveData,
   saveData,
   bookmarkKey,
   currentPageKey,
-  // pageListURI,
-  // volumeListURI,
+  pageListKey,
+  volumeListKey,
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
 
@@ -42,14 +41,9 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        // attempt to read pages and volumes from local fiels
-        const pageList: PageType[] = JSON.parse(
-          await fs.readAsStringAsync(pageListURI)
-        );
-        const volumeList: VolumeType[] = JSON.parse(
-          await fs.readAsStringAsync(volumeListURI)
-        );
-
+        // attempt to read pages and volumes from async storage
+        const pageList: PageType[] = await retrieveData(pageListKey)
+        const volumeList: VolumeType[] = await retrieveData(volumeListKey)
         // attempt to retrieve current page and bookmarks from async storage
         const savedBookmarks: any = await retrieveData(bookmarkKey);
         const savedCurrentPage: any = await retrieveData(currentPageKey);
