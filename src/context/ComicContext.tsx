@@ -1,13 +1,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
-import * as fs from "expo-file-system";
+// import * as fs from "expo-file-system";
 import {
   retrieveData,
   saveData,
   bookmarkKey,
   currentPageKey,
-  pageListURI,
-  volumeListURI,
+  // pageListURI,
+  // volumeListURI,
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
 

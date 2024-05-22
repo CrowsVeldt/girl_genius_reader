@@ -14,12 +14,12 @@ import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
 import { useEffect, useState } from "react";
-import {
-  checkForLocalFiles,
-  getDateFile,
-  initializeLocalFiles,
-  updateLocalFiles,
-} from "./src/utils/storage";
+// import {
+  // checkForLocalFiles,
+  // getDateFile,
+  // initializeLocalFiles,
+  // updateLocalFiles,
+// } from "./src/utils/storage";
 import { fetchNewDates } from "./src/utils/network";
 import { lastElement } from "./src/utils/utilFunctions";
 
@@ -28,27 +28,27 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   const [filesExist, setFilesExist] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const filesExist = await checkForLocalFiles();
+  // useEffect(() => {
+    // (async () => {
+      // const filesExist = await checkForLocalFiles();
 
-      if (!filesExist) {
-        initializeLocalFiles();
-      }
+      // if (!filesExist) {
+        // initializeLocalFiles();
+      // }
 
-      setFilesExist(true);
-    })();
-  }, []);
+      // setFilesExist(true);
+    // })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      if (filesExist) {
-        const dates = await getDateFile();
-        const updates = await fetchNewDates(lastElement(dates));
-        updateLocalFiles([...dates, ...updates]);
-      }
-    })();
-  }, [filesExist]);
+  // useEffect(() => {
+    // (async () => {
+      // if (filesExist) {
+        // const dates = await getDateFile();
+        // const updates = await fetchNewDates(lastElement(dates));
+        // updateLocalFiles([...dates, ...updates]);
+      // }
+    // })();
+  // }, [filesExist]);
 
   return (
     <RootSiblingParent>
