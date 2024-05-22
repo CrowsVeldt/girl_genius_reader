@@ -13,42 +13,17 @@ import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
-import { useEffect, useState } from "react";
-// import {
-  // checkForLocalFiles,
-  // getDateFile,
-  // initializeLocalFiles,
-  // updateLocalFiles,
-// } from "./src/utils/storage";
-import { fetchNewDates } from "./src/utils/network";
-import { lastElement } from "./src/utils/utilFunctions";
+import { useEffect } from "react";
+import { updateLists } from "./src/utils/storage";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  const [filesExist, setFilesExist] = useState(false);
-
-  // useEffect(() => {
-    // (async () => {
-      // const filesExist = await checkForLocalFiles();
-
-      // if (!filesExist) {
-        // initializeLocalFiles();
-      // }
-
-      // setFilesExist(true);
-    // })();
-  // }, []);
-
-  // useEffect(() => {
-    // (async () => {
-      // if (filesExist) {
-        // const dates = await getDateFile();
-        // const updates = await fetchNewDates(lastElement(dates));
-        // updateLocalFiles([...dates, ...updates]);
-      // }
-    // })();
-  // }, [filesExist]);
+  useEffect(() => {
+    (async () => {
+      updateLists();
+    })();
+  }, []);
 
   return (
     <RootSiblingParent>

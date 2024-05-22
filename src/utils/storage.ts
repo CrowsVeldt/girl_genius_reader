@@ -49,3 +49,9 @@ export const updateLists: () => void = async () => {
     console.error(error);
   }
 };
+
+export const checkForListData = async () => {
+  const pageListExists = (await retrieveData(pageListKey)) != null;
+  const volumeListExists = (await retrieveData(volumeListKey)) != null;
+  return pageListExists && volumeListExists;
+};
