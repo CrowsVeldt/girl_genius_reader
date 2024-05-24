@@ -6,8 +6,8 @@ import { PageType, VolumeType } from "./types";
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
 export const dateListKey: string = "@GGAppDates";
-export const pageListKey: string = "@GGAppPage";
-export const volumeListKey: string = "@GGAppVolume";
+export const pageListKey: string = "@GGAppPageList";
+export const volumeListKey: string = "@GGAppVolumeList";
 
 export const saveData: (key: string, value: any) => void = async (
   key,
@@ -34,7 +34,8 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
 
 export const updateLists: () => void = async () => {
   try {
-    const dateList: string[] = await getDateList();
+    const dateList: string[] = Array.from(new Set (await getDateList()))
+    console.log(dateList)
     const {
       pageList,
       volumeList,
