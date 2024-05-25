@@ -9,7 +9,9 @@ import { ComicContext } from "../context/ComicContext";
 
 export default function DrawerContent(props: any) {
   const [open, setOpen] = useState<boolean>(false);
-  const { changeCurrentPage, getLatestPage } = useContext(ComicContext);
+  const { changeCurrentPage, getLatestPage, getDataStatus } =
+    useContext(ComicContext);
+  const dataReady = getDataStatus();
 
   return (
     <DrawerContentScrollView {...props}>
@@ -19,8 +21,10 @@ export default function DrawerContent(props: any) {
         labelStyle={styles.latestLabel}
         style={styles.latest}
         onPress={() => {
-          changeCurrentPage(getLatestPage());
-          props.navigation.navigate("Home");
+          if (dataReady) {
+            changeCurrentPage(getLatestPage());
+            props.navigation.navigate("Home");
+          }
         }}
       />
       <DrawerItem
