@@ -89,11 +89,8 @@ const ComicProvider = ({ children }: { children: any }) => {
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
-    console.log(page);
-    console.log(pages);
     if (page != null) {
       setCurrentPage(page);
-      setDataUpdated(!dataUpdated)
       saveData(currentPageKey, page);
     } else {
       console.error('Can\'t change page to "undefined"');
