@@ -43,12 +43,15 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log("updating");
     updateLists();
     setDataUpdated(true);
+    Toast.show("Updated");
   }, []);
 
   useEffect(() => {
     (async () => {
+      console.log("trying to load data");
       try {
         const pageList: PageType[] = await retrieveData(pageListKey);
         const volumeList: VolumeType[] = await retrieveData(volumeListKey);
@@ -68,7 +71,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           setVolumes(volumeList);
         }
         setDataReady(true);
-        Toast.show("Data ready");
+        console.log("data ready");
       } catch (err) {
         console.error(err);
       }
@@ -86,8 +89,11 @@ const ComicProvider = ({ children }: { children: any }) => {
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
+    console.log(page);
+    console.log(pages);
     if (page != null) {
       setCurrentPage(page);
+      setDataUpdated(!dataUpdated)
       saveData(currentPageKey, page);
     } else {
       console.error('Can\'t change page to "undefined"');
