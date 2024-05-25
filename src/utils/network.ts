@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { PageType, VolumeType } from "./types";
-import { dateListKey, saveData, volumeListKey } from "./storage";
+import { dateListKey, pageListKey, saveData, volumeListKey } from "./storage";
 import { collectVolumes } from "./volumes";
 
 export const getRss: () => Promise<any[]> = async () => {
@@ -45,9 +45,9 @@ export const updateLists: () => Promise<void> = async () => {
       await collectVolumes(dateList);
 
     saveData(dateListKey, dateList);
-    saveData(dateListKey, pageList);
+    saveData(pageListKey, pageList);
     saveData(volumeListKey, volumeList);
-    console.log('finished updating')
+    console.log("finished updating");
   } catch (error) {
     console.log("An error occurred while updating comic data");
     console.error(error);
