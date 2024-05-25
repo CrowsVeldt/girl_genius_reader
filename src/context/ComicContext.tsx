@@ -45,7 +45,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       Toast.show("Checking for updates")
-      const updated = await updateLists();
+      const updated: boolean = await updateLists();
       setDataUpdated(true);
       Toast.show("Updated");
     })();

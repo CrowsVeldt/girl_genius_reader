@@ -3,6 +3,10 @@
 - status bar is covered on production app?
 
 Releases:
+- Feature: rearranged drawer menu (finally)
+- Bug fix: (hopefully) fixed app not updating
+- Bug fix: (hopefully) fixed app freezing the first time it's open
+- Bug fix: (hopefully) stopped app from trying to load data before it's ready
 
 Improvements:
 - load next comic at the same time to cut down load times

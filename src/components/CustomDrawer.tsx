@@ -10,7 +10,7 @@ import { ComicContext } from "../context/ComicContext";
 export default function DrawerContent(props: any) {
   const { changeCurrentPage, getLatestPage, getDataStatus } =
     useContext(ComicContext);
-  const dataReady = getDataStatus();
+  const dataReady: boolean = getDataStatus();
 
   return (
     <DrawerContentScrollView {...props}>
