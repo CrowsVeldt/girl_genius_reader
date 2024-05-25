@@ -12,6 +12,7 @@ import {
 import { PageType, VolumeType } from "../utils/types";
 
 type ComicContextType = {
+  getDataStatus: () => boolean;
   getCurrentPage: () => PageType;
   getLatestPage: () => PageType;
   changeCurrentPage: (page: PageType) => void;
@@ -66,6 +67,8 @@ const ComicProvider = ({ children }: { children: any }) => {
         if (volumeList != null) {
           setVolumes(volumeList);
         }
+        setDataReady(true);
+        Toast.show("Data ready")
       } catch (err) {
         console.error(err);
       }
@@ -77,45 +80,68 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getVolumes: () => VolumeType[] = () => volumes;
   const getLatestPage: () => PageType = () => pages[pages.length - 1];
 
+  const getDataStatus: () => boolean = () => dataReady;
+
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
-    setCurrentPage(page);
-    saveData(currentPageKey, page);
+    if (page != null) {
+      setCurrentPage(page);
+      saveData(currentPageKey, page);
+    } else {
+      console.error('Can\'t change page to "undefined"');
+    }
   };
 
   const addBookmark: (newBookmark: PageType) => void = async (newBookmark) => {
-    const newBookmarks: PageType[] = [...bookmarks, newBookmark];
-    const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
-    const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
-    setBookmarks(filteredBookmarksArray);
-    Toast.show(`Added ${newBookmark.date} to bookmarks`);
-    saveData(bookmarkKey, filteredBookmarksArray);
+    try {
+      const newBookmarks: PageType[] = [...bookmarks, newBookmark];
+      const filteredBookmarks: Set<PageType> = new Set(newBookmarks);
+      const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
+      setBookmarks(filteredBookmarksArray);
+      Toast.show(`Added ${newBookmark.date} to bookmarks`);
+      saveData(bookmarkKey, filteredBookmarksArray);
+    } catch (error) {
+      console.error("failed to add bookmark");
+    }
   };
 
   const removeBookmark: (page: PageType) => void = async (page) => {
-    const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
-    setBookmarks(newBookmarks);
-    Toast.show(`Removed ${page.date} from bookmarks`);
-    saveData(bookmarkKey, newBookmarks);
+    try {
+      const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
+      setBookmarks(newBookmarks);
+      Toast.show(`Removed ${page.date} from bookmarks`);
+      saveData(bookmarkKey, newBookmarks);
+    } catch (error) {
+      console.error("failed to remove bookmark");
+    }
   };
 
   const goToNextPage: (page: PageType) => void = (page) => {
-    const index: number = pages.findIndex(
-      (element: PageType) => element.date === page.date
-    );
-    changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
+    try {
+      const index: number = pages.findIndex(
+        (element: PageType) => element.date === page.date
+      );
+      changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
+    } catch (error) {
+      console.error("failed to advance to next page");
+    }
   };
 
   const goToPreviousPage: (page: PageType) => void = (page) => {
-    const index: number = pages.findIndex(
-      (element: PageType) => element.date === page.date
-    );
-    changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
+    try {
+      const index: number = pages.findIndex(
+        (element: PageType) => element.date === page.date
+      );
+      changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
+    } catch (error) {
+      console.error("failed to retreat to last page");
+    }
   };
 
   const value = {
+    getDataStatus,
     getCurrentPage,
     getLatestPage,
     changeCurrentPage,
