@@ -17,10 +17,11 @@ const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
-  const { getCurrentPage } = useContext(ComicContext);
+  const { getCurrentPage, getDataStatus } = useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
+  const dataReady: boolean = getDataStatus();
 
   return (
     <View style={styles.comicPage}>
@@ -29,24 +30,26 @@ export default function Home() {
           <ActivityIndicator size={"large"} color={"gray"} />
         </View>
       )}
-      <ScrollView contentContainerStyle={styles.comicContainer}>
-        <PageTurn side={"left"} />
-        <ImageZoom
-          ref={imageRef}
-          uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
-          minPanPointers={1}
-          isDoubleTapEnabled
-          resizeMode="contain"
-          onLoadStart={() => {
-            setLoaded(false);
-            imageRef.current?.quickReset();
-          }}
-          onLoadEnd={() => {
-            setLoaded(true);
-          }}
-        />
-        <PageTurn side={"right"} />
-      </ScrollView>
+      {dataReady && (
+        <ScrollView contentContainerStyle={styles.comicContainer}>
+          <PageTurn side={"left"} />
+          <ImageZoom
+            ref={imageRef}
+            uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+            minPanPointers={1}
+            isDoubleTapEnabled
+            resizeMode="contain"
+            onLoadStart={() => {
+              setLoaded(false);
+              imageRef.current?.quickReset();
+            }}
+            onLoadEnd={() => {
+              setLoaded(true);
+            }}
+          />
+          <PageTurn side={"right"} />
+        </ScrollView>
+      )}
     </View>
   );
 }
