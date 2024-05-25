@@ -2,16 +2,16 @@ import { useContext } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
-import { ComicDataType } from "../utils/types";
+import { VolumeType } from "../utils/types";
 
 export default function ComicIndex({ navigation }: { navigation: any }) {
   const { getVolumes } = useContext(ComicContext);
 
-  const volumes: ComicDataType[] = getVolumes();
+  const volumes: VolumeType[] = getVolumes();
 
   return (
     <ScrollView contentContainerStyle={styles.list}>
-      {volumes.map((volume: ComicDataType, index: number) => {
+      {volumes.map((volume: VolumeType, index: number) => {
         return <VolumeList nav={navigation} volume={volume} key={index} />;
       })}
     </ScrollView>
