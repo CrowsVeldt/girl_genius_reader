@@ -7,8 +7,8 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
-  updateLists,
 } from "../utils/storage";
+import { updateLists } from "../utils/network";
 import { PageType, VolumeType } from "../utils/types";
 
 type ComicContextType = {
@@ -68,7 +68,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           setVolumes(volumeList);
         }
         setDataReady(true);
-        Toast.show("Data ready")
+        Toast.show("Data ready");
       } catch (err) {
         console.error(err);
       }

@@ -35,26 +35,8 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   }
 };
 
-export const updateLists: () => void = async () => {
-  try {
-    const dateList: string[] = Array.from(new Set(await getDateList()));
-    const {
-      pageList,
-      volumeList,
-    }: { pageList: PageType[]; volumeList: VolumeType[] } =
-      await collectVolumes(dateList);
-
-    saveData(dateListKey, dateList);
-    saveData(pageListKey, pageList);
-    saveData(volumeListKey, volumeList);
-  } catch (error) {
-    console.log("An error occurred while updating comic data");
-    console.error(error);
-  }
-};
-
-export const checkForListData = async () => {
-  const pageListExists = (await retrieveData(pageListKey)) != null;
-  const volumeListExists = (await retrieveData(volumeListKey)) != null;
-  return pageListExists && volumeListExists;
-};
+// export const checkForListData = async () => {
+  // const pageListExists = (await retrieveData(pageListKey)) != null;
+  // const volumeListExists = (await retrieveData(volumeListKey)) != null;
+  // return pageListExists && volumeListExists;
+// };

@@ -1,4 +1,7 @@
 import axios, { AxiosResponse } from "axios";
+import { PageType, VolumeType } from "./types";
+import { dateListKey, saveData, volumeListKey } from "./storage";
+import { collectVolumes } from "./volumes";
 
 export const getRss: () => Promise<any[]> = async () => {
   const res: AxiosResponse = await axios.get(
@@ -29,5 +32,23 @@ export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
     console.error("Error reading/fetching/writing dates");
     console.error(error);
     return [];
+  }
+};
+
+export const updateLists: () => void = async () => {
+  try {
+    const dateList: string[] = Array.from(new Set(await getDateList()));
+    const {
+      pageList,
+      volumeList,
+    }: { pageList: PageType[]; volumeList: VolumeType[] } =
+      await collectVolumes(dateList);
+
+    saveData(dateListKey, dateList);
+    saveData(dateListKey, pageList);
+    saveData(volumeListKey, volumeList);
+  } catch (error) {
+    console.log("An error occurred while updating comic data");
+    console.error(error);
   }
 };
