@@ -38,20 +38,22 @@ const ComicProvider = ({ children }: { children: any }) => {
     pageNumber: 1,
     volumeNumber: 1,
   });
+  const [dataReady, setDataReady] = useState<boolean>(false);
+  const [dataUpdated, setDataUpdated] = useState<boolean>(false);
+
+  useEffect(() => {
+    updateLists();
+    setDataUpdated(true);
+  }, []);
 
   useEffect(() => {
     (async () => {
       try {
-
-        updateLists();
-        // attempt to read pages and volumes from async storage
-        const pageList: PageType[] = await retrieveData(pageListKey)
-        const volumeList: VolumeType[] = await retrieveData(volumeListKey)
-        // attempt to retrieve current page and bookmarks from async storage
+        const pageList: PageType[] = await retrieveData(pageListKey);
+        const volumeList: VolumeType[] = await retrieveData(volumeListKey);
         const savedBookmarks: any = await retrieveData(bookmarkKey);
         const savedCurrentPage: any = await retrieveData(currentPageKey);
 
-        // if each of the above are not null, set state accordingly
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks as PageType[]);
         }
@@ -68,7 +70,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         console.error(err);
       }
     })();
-  }, []);
+  }, [dataUpdated]);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
