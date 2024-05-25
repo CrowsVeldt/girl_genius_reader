@@ -35,7 +35,7 @@ export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
   }
 };
 
-export const updateLists: () => Promise<void> = async () => {
+export const updateLists: () => Promise<boolean> = async () => {
   try {
     const dateList: string[] = Array.from(new Set(await getDateList()));
     const {
@@ -47,9 +47,10 @@ export const updateLists: () => Promise<void> = async () => {
     saveData(dateListKey, dateList);
     saveData(pageListKey, pageList);
     saveData(volumeListKey, volumeList);
-    console.log("finished updating");
+    return true
   } catch (error) {
     console.log("An error occurred while updating comic data");
     console.error(error);
+    return false
   }
 };

@@ -43,15 +43,16 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("updating");
-    updateLists();
-    setDataUpdated(true);
-    Toast.show("Updated");
+    (async () => {
+      Toast.show("Checking for updates")
+      const updated = await updateLists();
+      setDataUpdated(true);
+      Toast.show("Updated");
+    })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      console.log("trying to load data");
       try {
         const pageList: PageType[] = await retrieveData(pageListKey);
         const volumeList: VolumeType[] = await retrieveData(volumeListKey);
@@ -71,7 +72,6 @@ const ComicProvider = ({ children }: { children: any }) => {
           setVolumes(volumeList);
         }
         setDataReady(true);
-        console.log("data ready");
       } catch (err) {
         console.error(err);
       }
