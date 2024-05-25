@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
 
-import DrawerContent from "./src/components/Drawer";
+import DrawerContent from "./src/components/CustomDrawer";
 import CustomHeader from "./src/components/CustomHeader";
 
 import AckScreen from "./src/screens/AckScreen";
@@ -17,7 +17,6 @@ import ComicProvider from "./src/context/ComicContext";
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-
   return (
     <RootSiblingParent>
       <NavigationContainer>
@@ -49,17 +48,17 @@ export default function App() {
             <Drawer.Screen
               name="Home"
               component={HomeScreen}
-              options={{ drawerItemStyle: { borderBottomWidth: 1 } }}
+              options={{ drawerItemStyle: { display: "none" } }}
             />
             <Drawer.Screen
               name="Bookmarks"
               component={BookmarkScreen}
-              options={{ drawerItemStyle: { borderBottomWidth: 1 } }}
+              options={{ drawerItemStyle: { display: "none" } }}
             />
             <Drawer.Screen
               name="Index"
               component={IndexScreen}
-              options={{ drawerItemStyle: { borderBottomWidth: 1 } }}
+              options={{ drawerItemStyle: { display: "none" } }}
             />
             <Drawer.Screen
               name="Privacy Policy"

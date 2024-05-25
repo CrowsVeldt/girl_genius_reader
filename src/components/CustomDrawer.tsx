@@ -3,12 +3,11 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { ComicContext } from "../context/ComicContext";
 
 export default function DrawerContent(props: any) {
-  const [open, setOpen] = useState<boolean>(false);
   const { changeCurrentPage, getLatestPage, getDataStatus } =
     useContext(ComicContext);
   const dataReady = getDataStatus();
@@ -28,29 +27,41 @@ export default function DrawerContent(props: any) {
         }}
       />
       <DrawerItem
-        label={`${open ? "I" : "-"} Other`}
+        label={"Home"}
         onPress={() => {
-          setOpen(!open);
+          if (dataReady) {
+            props.navigation.navigate("Home");
+          }
         }}
       />
-      {open && (
-        <DrawerItem
-          label={"- Privacy Policy"}
-          style={styles.subItem}
-          onPress={() => {
-            props.navigation.navigate("Privacy Policy");
-          }}
-        />
-      )}
-      {open && (
-        <DrawerItem
-          label={"- Acknowledgements"}
-          style={styles.subItem}
-          onPress={() => {
-            props.navigation.navigate("Acknowledgements");
-          }}
-        />
-      )}
+      <DrawerItem
+        label={"Bookmarks"}
+        onPress={() => {
+          if (dataReady) {
+            props.navigation.navigate("Bookmarks");
+          }
+        }}
+      />
+      <DrawerItem
+        label={"Index"}
+        onPress={() => {
+          if (dataReady) {
+            props.navigation.navigate("Index");
+          }
+        }}
+      />
+      <DrawerItem
+        label={"Privacy Policy"}
+        onPress={() => {
+          props.navigation.navigate("Privacy Policy");
+        }}
+      />
+      <DrawerItem
+        label={"Acknowledgements"}
+        onPress={() => {
+          props.navigation.navigate("Acknowledgements");
+        }}
+      />
     </DrawerContentScrollView>
   );
 }
