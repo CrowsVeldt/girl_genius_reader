@@ -34,8 +34,7 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
 
 export const updateLists: () => void = async () => {
   try {
-    const dateList: string[] = Array.from(new Set (await getDateList()))
-    console.log(dateList)
+    const dateList: string[] = Array.from(new Set(await getDateList()));
     const {
       pageList,
       volumeList,

@@ -13,17 +13,10 @@ import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
-import { useEffect } from "react";
-import { updateLists } from "./src/utils/storage";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  useEffect(() => {
-    (async () => {
-      updateLists();
-    })();
-  }, []);
 
   return (
     <RootSiblingParent>

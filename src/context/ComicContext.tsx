@@ -7,6 +7,7 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
+  updateLists,
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
 
@@ -41,6 +42,8 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
+
+        updateLists();
         // attempt to read pages and volumes from async storage
         const pageList: PageType[] = await retrieveData(pageListKey)
         const volumeList: VolumeType[] = await retrieveData(volumeListKey)
@@ -48,7 +51,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         const savedBookmarks: any = await retrieveData(bookmarkKey);
         const savedCurrentPage: any = await retrieveData(currentPageKey);
 
-        // if each of the above are not null, set state appropriately
+        // if each of the above are not null, set state accordingly
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks as PageType[]);
         }

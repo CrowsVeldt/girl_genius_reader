@@ -1,13 +1,14 @@
-Important:
+- delay loading image/saving anything until data is available
+- check for update more than once after startup
 - make sure new app is actually running and recieving updates in production
 - development build is updating, production build is not
 - status bar is covered on production app?
-- load next comic at the same time to cut down load times
-- cut down on lag when changing comic pages
 
 Releases:
 
 Improvements:
+- load next comic at the same time to cut down load times
+- cut down on lag when changing comic pages
 - add notifications/animations/whatever to let user know if app is updating
 - add toasts to inform users of things
 - use notifications as well as toasts
