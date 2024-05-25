@@ -14,7 +14,11 @@ export const saveData: (key: string, value: any) => void = async (
   value
 ) => {
   try {
-    await ass.setItem(key, JSON.stringify(value));
+    if (key != null && value != null) {
+      await ass.setItem(key, JSON.stringify(value));
+    } else {
+      console.log("You tried to save an undefined value, dude");
+    }
   } catch (error) {
     console.warn("error saving data");
     console.warn(error);
@@ -22,14 +26,13 @@ export const saveData: (key: string, value: any) => void = async (
 };
 
 export const retrieveData: (key: string) => Promise<any> = async (key) => {
-  let data;
   try {
-    data = await ass.getItem(key);
+    const data: any = await ass.getItem(key);
+    return data != null ? JSON.parse(data) : null;
   } catch (error) {
     console.warn("error saving data");
     console.warn(error);
   }
-  return data != null ? JSON.parse(data) : null;
 };
 
 export const updateLists: () => void = async () => {
