@@ -1,7 +1,4 @@
 import ass from "@react-native-async-storage/async-storage";
-import { getDateList } from "./network";
-import { collectVolumes } from "./volumes";
-import { PageType, VolumeType } from "./types";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -34,9 +31,3 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
     console.warn(error);
   }
 };
-
-// export const checkForListData = async () => {
-  // const pageListExists = (await retrieveData(pageListKey)) != null;
-  // const volumeListExists = (await retrieveData(volumeListKey)) != null;
-  // return pageListExists && volumeListExists;
-// };
