@@ -1,12 +1,9 @@
+- production app is either not initializing, updating, or reading the comic info and I don't fucking know why
+- - looks like the error is in the updateLists function
 - make sure new app is actually running and recieving updates in production
-- development build is updating, production build is not
 - status bar is covered on production app?
 
 Releases:
-- Feature: rearranged drawer menu (finally)
-- Bug fix: (hopefully) fixed app not updating
-- Bug fix: (hopefully) fixed app freezing the first time it's open
-- Bug fix: (hopefully) stopped app from trying to load data before it's ready
 
 Improvements:
 - load next comic at the same time to cut down load times

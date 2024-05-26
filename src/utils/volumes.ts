@@ -1,10 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import { DateAndTitleType, PageType, VolumeType } from "./types";
+import Toast from "react-native-root-toast";
 
-export const collectVolumes: (dates: string[]) => Promise<{
-  pageList: PageType[];
-  volumeList: VolumeType[];
-}> = async (dates) => {
+export const collectVolumes: (dates: string[]) => Promise<
+  | {
+      pageList: PageType[];
+      volumeList: VolumeType[];
+    }
+  | undefined
+> = async (dates) => {
   const parsedTitles: DateAndTitleType[] = await parseTitles();
   const pages: PageType[] = [];
 
@@ -70,7 +74,7 @@ export const collectVolumes: (dates: string[]) => Promise<{
   } catch (error) {
     console.error("Error collecting volume/page data");
     console.error(error);
-    return { pageList: [], volumeList: [] };
+    Toast.show("error inside collectVolumes function");
   }
 };
 

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { PageType, VolumeType } from "./types";
 import { dateListKey, pageListKey, saveData, volumeListKey } from "./storage";
 import { collectVolumes } from "./volumes";
+import Toast from "react-native-root-toast";
 
 export const getRss: () => Promise<any[]> = async () => {
   const res: AxiosResponse = await axios.get(
@@ -38,19 +39,17 @@ export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
 export const updateLists: () => Promise<boolean> = async () => {
   try {
     const dateList: string[] = Array.from(new Set(await getDateList()));
-    const {
-      pageList,
-      volumeList,
-    }: { pageList: PageType[]; volumeList: VolumeType[] } =
-      await collectVolumes(dateList);
+    const lists:
+      | { pageList: PageType[]; volumeList: VolumeType[] }
+      | undefined = await collectVolumes(dateList);
 
     saveData(dateListKey, dateList);
-    saveData(pageListKey, pageList);
-    saveData(volumeListKey, volumeList);
-    return true
+    saveData(pageListKey, lists?.pageList);
+    saveData(volumeListKey, lists?.volumeList);
+    return true;
   } catch (error) {
     console.log("An error occurred while updating comic data");
     console.error(error);
-    return false
+    return false;
   }
 };

@@ -44,10 +44,14 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      Toast.show("Checking for updates")
-      const updated: boolean = await updateLists();
-      setDataUpdated(true);
-      Toast.show("Updated");
+      try {
+        Toast.show("Checking for updates");
+        const updated: boolean = await updateLists();
+        setDataUpdated(true);
+        Toast.show("Updated");
+      } catch (error) {
+        Toast.show("error updating data");
+      }
     })();
   }, []);
 
@@ -72,8 +76,10 @@ const ComicProvider = ({ children }: { children: any }) => {
           setVolumes(volumeList);
         }
         setDataReady(true);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.warn("Error settting data")
+        console.error(error)
+        Toast.show("Error setting data");
       }
     })();
   }, [dataUpdated]);
