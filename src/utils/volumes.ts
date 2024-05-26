@@ -81,6 +81,7 @@ const collectVolumeAndPageLists: (
 ) => {
   try {
     const pages: PageType[] = [];
+
     const volumeList: VolumeType[] = startDates.map(
       (item: DateAndTitleType, volumeIndex: number) => {
         const lastDate: string | null =
@@ -118,6 +119,6 @@ const collectVolumeAndPageLists: (
   } catch (error) {
     console.warn("Error collecting volume and page lists");
     console.error(error);
-    Toast.show("Error in CollectVolumesAndPageLists function");
+    Toast.show("Error in collectVolumesAndPageLists function");
   }
 };
