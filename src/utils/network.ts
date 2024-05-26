@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from "axios";
 import { PageType, VolumeType } from "./types";
 import { dateListKey, pageListKey, saveData, volumeListKey } from "./storage";
 import { collectVolumes } from "./volumes";
-import Toast from "react-native-root-toast";
 
 export const getRss: () => Promise<any[]> = async () => {
   const res: AxiosResponse = await axios.get(
@@ -20,26 +19,26 @@ export const getDateList: () => Promise<string[]> = async () => {
   return dateList.data;
 };
 
-export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
-  latestDate
-) => {
-  try {
-    const rss: any[] = await getRss();
+// export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
+  // latestDate
+// ) => {
+  // try {
+    // const rss: any[] = await getRss();
 
-    const newDates: string[] = rss.slice(rss.indexOf(latestDate) + 1);
+    // const newDates: string[] = rss.slice(rss.indexOf(latestDate) + 1);
 
-    return newDates != null ? newDates : [];
-  } catch (error) {
-    console.error("Error reading/fetching/writing dates");
-    console.error(error);
-    return [];
-  }
-};
+    // return newDates != null ? newDates : [];
+  // } catch (error) {
+    // console.error("Error reading/fetching/writing dates");
+    // console.error(error);
+    // return [];
+  // }
+// };
 
 export const updateLists: () => Promise<boolean | undefined> = async () => {
   try {
     const dateList: string[] = await getDateList()
-    const dateSet = new Set(dateList)
+    const dateSet: Set<string> = new Set(dateList)
     const dateArray: string[] = Array.from(dateSet)
     if (dateArray != null) {
       const lists:
