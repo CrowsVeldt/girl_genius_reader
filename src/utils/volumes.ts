@@ -13,8 +13,8 @@ export const collectVolumes: (dates: string[]) => Promise<
 
   try {
     const volumeStarts: DateAndTitleType[] = volumeStartDates(parsedTitles);
-
-    return collectVolumeAndPageLists(dates, volumeStarts, parsedTitles);
+    const lists = collectVolumeAndPageLists(dates, volumeStarts, parsedTitles);
+    return lists != null ? lists : { pageList: [], volumeList: [] };
   } catch (error) {
     console.error("Error collecting volume/page data");
     console.error(error);
@@ -55,49 +55,59 @@ const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => item.title.includes("First Page"));
 
-const collectVolumeAndPageLists = (
+const collectVolumeAndPageLists: (
   dates: string[],
   startDates: DateAndTitleType[],
   titles: DateAndTitleType[]
+) => { pageList: PageType[]; volumeList: VolumeType[] } | undefined = (
+  dates,
+  startDates,
+  titles
 ) => {
-  const pages: PageType[] = [];
-  const volumeList: VolumeType[] = startDates.map(
-    (item: DateAndTitleType, volumeIndex: number) => {
-      const lastDate: string | null =
-        startDates[volumeIndex + 1] != null
-          ? startDates[volumeIndex + 1].date
-          : null;
+  try {
+    const pages: PageType[] = [];
+    const volumeList: VolumeType[] = startDates.map(
+      (item: DateAndTitleType, volumeIndex: number) => {
+        const lastDate: string | null =
+          startDates[volumeIndex + 1] != null
+            ? startDates[volumeIndex + 1].date
+            : null;
 
-      const volumeDates: string[] = dates.slice(
-        dates.indexOf(item.date),
-        lastDate != null ? dates.indexOf(lastDate) : dates.length
-      );
+        const volumeDates: string[] = dates.slice(
+          dates.indexOf(item.date),
+          lastDate != null ? dates.indexOf(lastDate) : dates.length
+        );
 
-      const filteredTitles: DateAndTitleType[] = titles.filter(
-        (item: DateAndTitleType) => !item.title.includes("First Page")
-      );
+        const filteredTitles: DateAndTitleType[] = titles.filter(
+          (item: DateAndTitleType) => !item.title.includes("First Page")
+        );
 
-      const volumePages: PageType[] = volumeDates.map(
-        (date: string, pageIndex: number) => {
-          const title: DateAndTitleType | undefined = filteredTitles.find(
-            (item: DateAndTitleType) => item.date === date
-          );
-          const page: PageType = {
-            pageNumber: pageIndex + 1,
-            date: date,
-            title: title != null ? title.title : "",
-            volumeNumber: volumeIndex + 1,
-          };
-          pages.push(page);
-          return page;
-        }
-      );
-      return {
-        volumeStart: item.date,
-        volumeNumber: volumeIndex + 1,
-        pages: volumePages,
-      };
-    }
-  );
-  return { pageList: pages, volumeList: volumeList };
+        const volumePages: PageType[] = volumeDates.map(
+          (date: string, pageIndex: number) => {
+            const title: DateAndTitleType | undefined = filteredTitles.find(
+              (item: DateAndTitleType) => item.date === date
+            );
+            const page: PageType = {
+              pageNumber: pageIndex + 1,
+              date: date,
+              title: title != null ? title.title : "",
+              volumeNumber: volumeIndex + 1,
+            };
+            pages.push(page);
+            return page;
+          }
+        );
+        return {
+          volumeStart: item.date,
+          volumeNumber: volumeIndex + 1,
+          pages: volumePages,
+        };
+      }
+    );
+    return { pageList: pages, volumeList: volumeList };
+  } catch (error) {
+    console.warn("Error collecting volume and page lists");
+    console.error(error);
+    Toast.show("Error in CollectVolumesAndPageLists function");
+  }
 };
