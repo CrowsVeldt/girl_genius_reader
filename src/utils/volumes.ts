@@ -55,6 +55,21 @@ const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => item.title.includes("First Page"));
 
+const getVolumeDates: (
+  item: DateAndTitleType,
+  dates: string[],
+  lastDate: string | null
+) => string[] = (item, dates, lastDate) =>
+  dates.slice(
+    dates.indexOf(item.date),
+    lastDate != null ? dates.indexOf(lastDate) : dates.length
+  );
+
+const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
+  titles
+) =>
+  titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
+
 const collectVolumeAndPageLists: (
   dates: string[],
   startDates: DateAndTitleType[],
@@ -73,14 +88,9 @@ const collectVolumeAndPageLists: (
             ? startDates[volumeIndex + 1].date
             : null;
 
-        const volumeDates: string[] = dates.slice(
-          dates.indexOf(item.date),
-          lastDate != null ? dates.indexOf(lastDate) : dates.length
-        );
+        const volumeDates: string[] = getVolumeDates(item, dates, lastDate);
 
-        const filteredTitles: DateAndTitleType[] = titles.filter(
-          (item: DateAndTitleType) => !item.title.includes("First Page")
-        );
+        const filteredTitles: DateAndTitleType[] = filterTitles(titles)
 
         const volumePages: PageType[] = volumeDates.map(
           (date: string, pageIndex: number) => {
