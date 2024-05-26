@@ -36,20 +36,23 @@ export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
   }
 };
 
-export const updateLists: () => Promise<boolean> = async () => {
+export const updateLists: () => Promise<boolean | undefined> = async () => {
   try {
-    const dateList: string[] = Array.from(new Set(await getDateList()));
-    const lists:
-      | { pageList: PageType[]; volumeList: VolumeType[] }
-      | undefined = await collectVolumes(dateList);
+    const dateList: string[] = await getDateList()
+    const dateSet = new Set(dateList)
+    const dateArray: string[] = Array.from(dateSet)
+    if (dateArray != null) {
+      const lists:
+        | { pageList: PageType[]; volumeList: VolumeType[] }
+        | undefined = await collectVolumes(dateArray);
 
-    saveData(dateListKey, dateList);
-    saveData(pageListKey, lists?.pageList);
-    saveData(volumeListKey, lists?.volumeList);
-    return true;
+      saveData(dateListKey, dateArray);
+      saveData(pageListKey, lists?.pageList);
+      saveData(volumeListKey, lists?.volumeList);
+      return true;
+    } 
   } catch (error) {
     console.log("An error occurred while updating comic data");
     console.error(error);
-    return false;
   }
 };

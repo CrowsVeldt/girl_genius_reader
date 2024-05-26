@@ -45,10 +45,11 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        Toast.show("Checking for updates");
-        const updated: boolean = await updateLists();
-        setDataUpdated(true);
-        Toast.show("Updated");
+        const updated: boolean | undefined = await updateLists();
+        if (updated) {
+          setDataUpdated(true);
+          Toast.show("Updated");
+        }
       } catch (error) {
         Toast.show("error updating data");
       }
@@ -77,8 +78,8 @@ const ComicProvider = ({ children }: { children: any }) => {
         }
         setDataReady(true);
       } catch (error) {
-        console.warn("Error settting data")
-        console.error(error)
+        console.warn("Error settting data");
+        console.error(error);
         Toast.show("Error setting data");
       }
     })();

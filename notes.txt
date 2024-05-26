@@ -1,5 +1,4 @@
 - production app is either not initializing, updating, or reading the comic info and I don't fucking know why
-- - looks like the error is in the updateLists function
 - make sure new app is actually running and recieving updates in production
 - status bar is covered on production app?
 
