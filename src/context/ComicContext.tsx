@@ -7,12 +7,14 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
+  dateListKey,
 } from "../utils/storage";
 import { updateLists } from "../utils/network";
 import { PageType, VolumeType } from "../utils/types";
+import { collectVolumes } from "../utils/volumes";
 
 type ComicContextType = {
-  getDataStatus: () => boolean;
+  // getDataStatus: () => boolean;
   getCurrentPage: () => PageType;
   getLatestPage: () => PageType;
   changeCurrentPage: (page: PageType) => void;
@@ -39,19 +41,35 @@ const ComicProvider = ({ children }: { children: any }) => {
     pageNumber: 1,
     volumeNumber: 1,
   });
-  const [dataReady, setDataReady] = useState<boolean>(false);
+  // const [dataReady, setDataReady] = useState<boolean>(false);
   const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
+      Toast.show("begin update attempt", { duration: Toast.durations.SHORT });
       try {
-        const updated: boolean | undefined = await updateLists();
-        if (updated) {
+        const savedDates = await retrieveData(dateListKey);
+        if (savedDates != null && savedDates != undefined) {
+          const lists:
+            | { pageList: PageType[]; volumeList: VolumeType[] }
+            | undefined = await collectVolumes(savedDates);
+
+          saveData(dateListKey, savedDates);
+          saveData(pageListKey, lists?.pageList);
+          saveData(volumeListKey, lists?.volumeList);
+
           setDataUpdated(true);
-          Toast.show("Updated");
+        } else {
+          const updated: boolean = await updateLists();
+          if (updated) {
+            setDataUpdated(true);
+            Toast.show("Updated", { duration: Toast.durations.SHORT });
+          } else {
+            Toast.show("update attempt failed");
+          }
         }
       } catch (error) {
-        Toast.show("error updating data");
+        Toast.show("error updating data", { duration: Toast.durations.SHORT });
       }
     })();
   }, []);
@@ -59,6 +77,9 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
+        Toast.show("attempting to retrieve data from lists", {
+          duration: Toast.durations.SHORT,
+        });
         const pageList: PageType[] = await retrieveData(pageListKey);
         const volumeList: VolumeType[] = await retrieveData(volumeListKey);
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
@@ -76,7 +97,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         if (volumeList != null) {
           setVolumes(volumeList);
         }
-        setDataReady(true);
+        // setDataReady(true);
       } catch (error) {
         console.warn("Error settting data");
         console.error(error);
@@ -90,7 +111,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getVolumes: () => VolumeType[] = () => volumes;
   const getLatestPage: () => PageType = () => pages[pages.length - 1];
 
-  const getDataStatus: () => boolean = () => dataReady;
+  // const getDataStatus: () => boolean = () => dataReady;
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
@@ -151,7 +172,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const value = {
-    getDataStatus,
+    // getDataStatus,
     getCurrentPage,
     getLatestPage,
     changeCurrentPage,
