@@ -18,12 +18,16 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 39,
+      "versionCode": 42,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.crows.girl_genius_reader"
+      "package": "com.crows.girl_genius_reader",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ]
     },
     "web": {
       "favicon": ""
