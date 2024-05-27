@@ -30,7 +30,8 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
     const data: any = await ass.getItem(key);
     return data != null ? JSON.parse(data) : null;
   } catch (error) {
-    console.warn("error saving data");
+    console.warn("error retrieving data");
     console.warn(error);
+    Toast.show("error retrieving data")
   }
 };

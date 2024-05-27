@@ -1,10 +1,14 @@
-- production app is either not initializing, updating, or reading the comic info and I don't fucking know why
-- make sure new app is actually running and recieving updates in production
-- status bar is covered on production app?
+- Make sure data is called for
+- Make sure data is received
+- Make sure data is processed
+- Make sure data is saved
+- Make sure data is retrieved
+- Make sure data is displayed
 
 Releases:
 
 Improvements:
+- status bar is covered on production app?
 - load next comic at the same time to cut down load times
 - cut down on lag when changing comic pages
 - add notifications/animations/whatever to let user know if app is updating

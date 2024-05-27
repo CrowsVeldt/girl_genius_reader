@@ -61,14 +61,14 @@ const ComicProvider = ({ children }: { children: any }) => {
       try {
         const pageList: PageType[] = await retrieveData(pageListKey);
         const volumeList: VolumeType[] = await retrieveData(volumeListKey);
-        const savedBookmarks: any = await retrieveData(bookmarkKey);
-        const savedCurrentPage: any = await retrieveData(currentPageKey);
+        const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
+        const savedCurrentPage: PageType = await retrieveData(currentPageKey);
 
         if (savedBookmarks != null) {
-          setBookmarks(savedBookmarks as PageType[]);
+          setBookmarks(savedBookmarks);
         }
         if (savedCurrentPage != null) {
-          setCurrentPage(savedCurrentPage as PageType);
+          setCurrentPage(savedCurrentPage);
         }
         if (pageList != null) {
           setPages(pageList);

@@ -19,22 +19,6 @@ export const getDateList: () => Promise<string[]> = async () => {
   return dateList.data;
 };
 
-// export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
-  // latestDate
-// ) => {
-  // try {
-    // const rss: any[] = await getRss();
-
-    // const newDates: string[] = rss.slice(rss.indexOf(latestDate) + 1);
-
-    // return newDates != null ? newDates : [];
-  // } catch (error) {
-    // console.error("Error reading/fetching/writing dates");
-    // console.error(error);
-    // return [];
-  // }
-// };
-
 export const updateLists: () => Promise<boolean | undefined> = async () => {
   try {
     const dateList: string[] = await getDateList()
@@ -55,3 +39,19 @@ export const updateLists: () => Promise<boolean | undefined> = async () => {
     console.error(error);
   }
 };
+
+// export const fetchNewDates: (latestDate: string) => Promise<string[]> = async (
+  // latestDate
+// ) => {
+  // try {
+    // const rss: any[] = await getRss();
+
+    // const newDates: string[] = rss.slice(rss.indexOf(latestDate) + 1);
+
+    // return newDates != null ? newDates : [];
+  // } catch (error) {
+    // console.error("Error reading/fetching/writing dates");
+    // console.error(error);
+    // return [];
+  // }
+// };
