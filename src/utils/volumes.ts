@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { DateAndTitleType, PageType, VolumeType } from "./types";
-import Toast from "react-native-root-toast";
 
 export const collectVolumes: (dates: string[]) => Promise<
   | {
@@ -9,7 +8,6 @@ export const collectVolumes: (dates: string[]) => Promise<
     }
   | undefined
 > = async (dates) => {
-  Toast.show("Starting collecting volumes", {duration: Toast.durations.SHORT})
   const parsedTitles: DateAndTitleType[] = await parseTitles();
 
   try {
@@ -19,7 +17,6 @@ export const collectVolumes: (dates: string[]) => Promise<
   } catch (error) {
     console.error("Error collecting volume/page data");
     console.error(error);
-    Toast.show("error inside collectVolumes function", {duration: Toast.durations.SHORT});
   }
 };
 
@@ -83,7 +80,6 @@ const collectVolumeAndPageLists: (
   try {
     const pages: PageType[] = [];
 
-    Toast.show("Collecting volume and page lists", {duration: Toast.durations.SHORT})
     const volumeList: VolumeType[] = startDates.map(
       (item: DateAndTitleType, volumeIndex: number) => {
         const lastDate: string | null =
@@ -117,11 +113,9 @@ const collectVolumeAndPageLists: (
         };
       }
     );
-    Toast.show("finised collecting volume and page lists", {duration: Toast.durations.SHORT})
     return { pageList: pages, volumeList: volumeList };
   } catch (error) {
     console.warn("Error collecting volume and page lists");
     console.error(error);
-    Toast.show("Error in collectVolumesAndPageLists function", {duration: Toast.durations.SHORT});
   }
 };

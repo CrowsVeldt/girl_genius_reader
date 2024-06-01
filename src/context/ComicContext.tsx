@@ -46,7 +46,6 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      Toast.show("begin update attempt", { duration: Toast.durations.SHORT });
       try {
         const savedDates = await retrieveData(dateListKey);
         if (savedDates != null && savedDates != undefined) {
@@ -63,13 +62,11 @@ const ComicProvider = ({ children }: { children: any }) => {
           const updated: boolean = await updateLists();
           if (updated) {
             setDataUpdated(true);
-            Toast.show("Updated", { duration: Toast.durations.SHORT });
-          } else {
-            Toast.show("update attempt failed");
           }
         }
       } catch (error) {
-        Toast.show("error updating data", { duration: Toast.durations.SHORT });
+        console.warn("error in comic context useeffect")
+        console.error(error)
       }
     })();
   }, []);
@@ -77,9 +74,6 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        Toast.show("attempting to retrieve data from lists", {
-          duration: Toast.durations.SHORT,
-        });
         const pageList: PageType[] = await retrieveData(pageListKey);
         const volumeList: VolumeType[] = await retrieveData(volumeListKey);
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
@@ -101,7 +95,6 @@ const ComicProvider = ({ children }: { children: any }) => {
       } catch (error) {
         console.warn("Error settting data");
         console.error(error);
-        Toast.show("Error setting data");
       }
     })();
   }, [dataUpdated]);

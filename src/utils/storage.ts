@@ -1,5 +1,4 @@
 import ass from "@react-native-async-storage/async-storage";
-import Toast from "react-native-root-toast";
 
 export const bookmarkKey: string = "@GGAppBookmarks";
 export const currentPageKey: string = "@GGAppPage";
@@ -16,12 +15,10 @@ export const saveData: (key: string, value: any) => void = async (
       await ass.setItem(key, JSON.stringify(value));
     } else {
       console.log("You tried to save an undefined value, dude");
-      Toast.show("Tried to save an undefined value", {duration: Toast.durations.SHORT})
     }
   } catch (error) {
     console.warn("error saving data");
     console.warn(error);
-    Toast.show("Error occurred saving data", {duration: Toast.durations.SHORT})
   }
 };
 
@@ -32,6 +29,5 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
   } catch (error) {
     console.warn("error retrieving data");
     console.warn(error);
-    Toast.show("error retrieving data", {duration: Toast.durations.SHORT})
   }
 };
