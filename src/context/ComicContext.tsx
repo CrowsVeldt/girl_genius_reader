@@ -14,7 +14,7 @@ import { PageType, VolumeType } from "../utils/types";
 import { collectVolumes } from "../utils/volumes";
 
 type ComicContextType = {
-  // getDataStatus: () => boolean;
+  getDataStatus: () => boolean;
   getCurrentPage: () => PageType;
   getLatestPage: () => PageType;
   changeCurrentPage: (page: PageType) => void;
@@ -41,7 +41,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     pageNumber: 1,
     volumeNumber: 1,
   });
-  // const [dataReady, setDataReady] = useState<boolean>(false);
+  const [dataReady, setDataReady] = useState<boolean>(false);
   const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           saveData(pageListKey, lists?.pageList);
           saveData(volumeListKey, lists?.volumeList);
 
-          setDataUpdated(true);
+          setDataUpdated(true)
         } else {
           const updated: boolean = await updateLists();
           if (updated) {
@@ -97,7 +97,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         if (volumeList != null) {
           setVolumes(volumeList);
         }
-        // setDataReady(true);
+        setDataReady(true);
       } catch (error) {
         console.warn("Error settting data");
         console.error(error);
@@ -111,7 +111,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getVolumes: () => VolumeType[] = () => volumes;
   const getLatestPage: () => PageType = () => pages[pages.length - 1];
 
-  // const getDataStatus: () => boolean = () => dataReady;
+  const getDataStatus: () => boolean = () => dataReady;
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
@@ -172,7 +172,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const value = {
-    // getDataStatus,
+    getDataStatus,
     getCurrentPage,
     getLatestPage,
     changeCurrentPage,
