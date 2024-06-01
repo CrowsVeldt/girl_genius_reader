@@ -1,13 +1,5 @@
-Libraries that could be causing the failure:
-- Axios
-- AsyncStorage
-
-OK: Make sure data is called for
-FAIL: Make sure data is received
-- Make sure data is processed
-- Make sure data is saved
-- Make sure data is retrieved
-- Make sure data is displayed
+Failure to update possibly do to server downtime
+- if so, set to reping server every few minutes until response is recieved
 
 Releases:
 
