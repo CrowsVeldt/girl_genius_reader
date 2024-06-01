@@ -12,18 +12,22 @@ export const getDateList: () => Promise<string[]> = async () => {
 
 export const updateLists: () => Promise<boolean> = async () => {
   try {
-    const dateList: string[] = await getDateList();
-    const dateSet: Set<string> = new Set(dateList);
-    const dateArray: string[] = Array.from(dateSet);
-    if (dateArray != null) {
-      const lists:
-        | { pageList: PageType[]; volumeList: VolumeType[] }
-        | undefined = await collectVolumes(dateArray);
+    const dateList: string[] | undefined = await getDateList();
+    if (dateList != null) {
+      const dateSet: Set<string> = new Set(dateList);
+      const dateArray: string[] = Array.from(dateSet);
+      if (dateArray != null) {
+        const lists:
+          | { pageList: PageType[]; volumeList: VolumeType[] }
+          | undefined = await collectVolumes(dateArray);
 
-      saveData(dateListKey, dateArray);
-      saveData(pageListKey, lists?.pageList);
-      saveData(volumeListKey, lists?.volumeList);
-      return true;
+        saveData(dateListKey, dateArray);
+        saveData(pageListKey, lists?.pageList);
+        saveData(volumeListKey, lists?.volumeList);
+        return true;
+      } else {
+        return false
+      }
     }
   } catch (error) {
     console.log("An error occurred while updating comic data");

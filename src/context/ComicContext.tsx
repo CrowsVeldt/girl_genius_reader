@@ -48,7 +48,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     (async () => {
       try {
         const savedDates = await retrieveData(dateListKey);
-        if (savedDates != null && savedDates != undefined) {
+        if (savedDates != null) {
           const lists:
             | { pageList: PageType[]; volumeList: VolumeType[] }
             | undefined = await collectVolumes(savedDates);
@@ -57,7 +57,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           saveData(pageListKey, lists?.pageList);
           saveData(volumeListKey, lists?.volumeList);
 
-          setDataUpdated(true)
+          setDataUpdated(true);
         } else {
           const updated: boolean = await updateLists();
           if (updated) {
@@ -65,8 +65,8 @@ const ComicProvider = ({ children }: { children: any }) => {
           }
         }
       } catch (error) {
-        console.warn("error in comic context useeffect")
-        console.error(error)
+        console.warn("error in comic context useeffect");
+        console.error(error);
       }
     })();
   }, []);
