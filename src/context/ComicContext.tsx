@@ -7,9 +7,11 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
+  dateListKey,
 } from "../utils/storage";
 import { updateLists } from "../utils/network";
 import { PageType, VolumeType } from "../utils/types";
+import { collectVolumes } from "../utils/volumes";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -44,14 +46,30 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
+      Toast.show("begin update attempt", { duration: Toast.durations.SHORT });
       try {
-        const updated: boolean | undefined = await updateLists();
-        if (updated) {
-          setDataUpdated(true);
-          Toast.show("Updated");
+        const savedDates = await retrieveData(dateListKey);
+        if (savedDates != null && savedDates != undefined) {
+          const lists:
+            | { pageList: PageType[]; volumeList: VolumeType[] }
+            | undefined = await collectVolumes(savedDates);
+
+          saveData(dateListKey, savedDates);
+          saveData(pageListKey, lists?.pageList);
+          saveData(volumeListKey, lists?.volumeList);
+
+          setDataUpdated(true)
+        } else {
+          const updated: boolean = await updateLists();
+          if (updated) {
+            setDataUpdated(true);
+            Toast.show("Updated", { duration: Toast.durations.SHORT });
+          } else {
+            Toast.show("update attempt failed");
+          }
         }
       } catch (error) {
-        Toast.show("error updating data");
+        Toast.show("error updating data", { duration: Toast.durations.SHORT });
       }
     })();
   }, []);
@@ -59,6 +77,9 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
+        Toast.show("attempting to retrieve data from lists", {
+          duration: Toast.durations.SHORT,
+        });
         const pageList: PageType[] = await retrieveData(pageListKey);
         const volumeList: VolumeType[] = await retrieveData(volumeListKey);
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
