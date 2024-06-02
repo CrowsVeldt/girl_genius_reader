@@ -9,7 +9,7 @@ import {
   volumeListKey,
   dateListKey,
 } from "../utils/storage";
-import { updateLists } from "../utils/network";
+import { checkLists, updateLists } from "../utils/network";
 import { PageType, VolumeType } from "../utils/types";
 import { collectVolumes } from "../utils/volumes";
 
@@ -45,24 +45,22 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
+    (async() => {
+    const listsExist: boolean = await checkLists();
+    if (listsExist) {
+      setPages(await retrieveData(pageListKey));
+      setVolumes(await retrieveData(volumeListKey));
+      setDataReady(true);
+    }
+    })()
+  }, [dataUpdated]);
+
+  useEffect(() => {
     (async () => {
       try {
-        const savedDates = await retrieveData(dateListKey);
-        if (savedDates != null) {
-          const lists:
-            | { pageList: PageType[]; volumeList: VolumeType[] }
-            | undefined = await collectVolumes(savedDates);
-
-          saveData(dateListKey, savedDates);
-          saveData(pageListKey, lists?.pageList);
-          saveData(volumeListKey, lists?.volumeList);
-
-          setDataUpdated(true);
-        } else {
-          const updated: boolean = await updateLists();
-          if (updated) {
-            setDataUpdated(true);
-          }
+        const updated: boolean = await updateLists();
+        if(updated) {
+          setDataReady(true)
         }
       } catch (error) {
         console.warn("error in comic context useeffect");
@@ -74,8 +72,6 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        const pageList: PageType[] = await retrieveData(pageListKey);
-        const volumeList: VolumeType[] = await retrieveData(volumeListKey);
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
         const savedCurrentPage: PageType = await retrieveData(currentPageKey);
 
@@ -85,19 +81,12 @@ const ComicProvider = ({ children }: { children: any }) => {
         if (savedCurrentPage != null) {
           setCurrentPage(savedCurrentPage);
         }
-        if (pageList != null) {
-          setPages(pageList);
-        }
-        if (volumeList != null) {
-          setVolumes(volumeList);
-        }
-        setDataReady(true);
       } catch (error) {
         console.warn("Error settting data");
         console.error(error);
       }
     })();
-  }, [dataUpdated]);
+  }, []);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;

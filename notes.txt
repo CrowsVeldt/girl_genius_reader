@@ -1,5 +1,7 @@
-Failure to update possibly do to server downtime
-- if so, set to reping server every few minutes until response is recieved
+- check for lists in storage
+-- if found, load to memory 
+-- else, call to update lists
+
 
 Releases:
 
