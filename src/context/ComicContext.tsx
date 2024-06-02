@@ -60,7 +60,7 @@ const ComicProvider = ({ children }: { children: any }) => {
       try {
         const updated: boolean = await updateLists();
         if(updated) {
-          setDataReady(true)
+          setDataUpdated(true)
         }
       } catch (error) {
         console.warn("error in comic context useeffect");
