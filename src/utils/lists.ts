@@ -18,6 +18,8 @@ export const checkLists = async () => {
   return pages != null && volumes != null;
 };
 
+
+
 export const updateLists: () => Promise<boolean> = async () => {
   try {
     const dateList: string[] = await getDateList();

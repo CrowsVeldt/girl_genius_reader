@@ -11,6 +11,7 @@ import {
 import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
+import { showToast } from "../utils/notifications";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -44,14 +45,14 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
-    (async() => {
-    const listsExist: boolean = await checkLists();
-    if (listsExist) {
-      setPages(await retrieveData(pageListKey));
-      setVolumes(await retrieveData(volumeListKey));
-      setDataReady(true);
-    }
-    })()
+    (async () => {
+      const listsExist: boolean = await checkLists();
+      if (listsExist) {
+        setPages(await retrieveData(pageListKey));
+        setVolumes(await retrieveData(volumeListKey));
+        setDataReady(true);
+      } 
+    })();
   }, [dataUpdated]);
 
   useEffect(() => {
@@ -59,12 +60,15 @@ const ComicProvider = ({ children }: { children: any }) => {
       try {
         // repeat until updated successfully
         const updated: boolean = await updateLists();
-        if(updated) {
-          setDataUpdated(true)
+        if (updated) {
+          setDataUpdated(true);
+        } else {
+          throw new Error("update error")
         }
       } catch (error) {
         console.warn("error in comic context useeffect");
         console.error(error);
+        showToast("Update failed")
       }
     })();
   }, []);

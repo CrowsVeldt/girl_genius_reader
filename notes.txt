@@ -1,6 +1,7 @@
 Releases:
 
 Improvements:
+- log crashes and errors in production, give users a way to share those logs
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
 - cut down on lag when changing comic pages

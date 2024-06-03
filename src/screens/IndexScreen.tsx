@@ -11,9 +11,10 @@ export default function ComicIndex({ navigation }: { navigation: any }) {
 
   return (
     <ScrollView contentContainerStyle={styles.list}>
-      {volumes != null && volumes.map((volume: VolumeType, index: number) => {
-        return <VolumeList nav={navigation} volume={volume} key={index} />;
-      })}
+      {volumes != null &&
+        volumes.map((volume: VolumeType, index: number) => {
+          return <VolumeList nav={navigation} volume={volume} key={index} />;
+        })}
     </ScrollView>
   );
 }

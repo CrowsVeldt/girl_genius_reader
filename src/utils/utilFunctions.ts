@@ -1,15 +1,14 @@
 export const lastElement: (array: any[]) => any = (array) => {
   try {
-    
-  if (array.length > 0) {
-    let last: any = array[array.length - 1];
-    while (last == null) {
-      last = array[array.indexOf(last) - 1];
+    if (array.length > 0) {
+      let last: any = array[array.length - 1];
+      while (last == null) {
+        last = array[array.indexOf(last) - 1];
+      }
+      return last;
     }
-    return last;
-  } 
   } catch (error) {
-    console.error(error)   
+    console.error(error);
   }
 };
 
