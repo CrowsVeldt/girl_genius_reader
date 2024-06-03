@@ -10,6 +10,7 @@ import {
 } from "../utils/storage";
 import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
+import { lastElement } from "../utils/utilFunctions";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -81,7 +82,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage);
         }
       } catch (error) {
-        console.warn("Error settting data");
+        console.warn("Error setting data");
         console.error(error);
       }
     })();
@@ -90,7 +91,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
   const getVolumes: () => VolumeType[] = () => volumes;
-  const getLatestPage: () => PageType = () => pages[pages.length - 1];
+  const getLatestPage: () => PageType = () => lastElement(pages);
 
   const getDataStatus: () => boolean = () => dataReady;
 
