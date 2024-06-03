@@ -7,11 +7,9 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
-  dateListKey,
 } from "../utils/storage";
-import { checkLists, updateLists } from "../utils/network";
+import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
-import { collectVolumes } from "../utils/volumes";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -58,6 +56,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
+        // repeat until updated successfully
         const updated: boolean = await updateLists();
         if(updated) {
           setDataUpdated(true)
