@@ -1,8 +1,3 @@
-when app starts:
-    - check for lists, if found, load them to memory
-
-
-
 - FIX: have spinner spin until update is completed
 - FIX: make update actually update
 - FIX: make icon fit space

@@ -39,32 +39,32 @@ export const updateLists: () => Promise<boolean> = async () => {
   return false;
 };
 
-const processDates = (dates: string[]) => Array.from(new Set(dates));
+// const processDates = (dates: string[]) => Array.from(new Set(dates));
 
-const getLists = async () => {
-  try {
-    const rawDates = await getDateList();
-    if (rawDates != null) {
-      const processedDates: string[] = processDates(rawDates);
-      return await collectVolumes(processedDates);
-    } else {
-      throw new Error("Data returned null");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const getLists = async () => {
+  // try {
+    // const rawDates = await getDateList();
+    // if (rawDates != null) {
+      // const processedDates: string[] = processDates(rawDates);
+      // return await collectVolumes(processedDates);
+    // } else {
+      // throw new Error("Data returned null");
+    // }
+  // } catch (error) {
+    // console.log(error);
+  // }
+// };
 
-export const updateListsNew = async () => {
-  try {
-    const { pageList, volumeList } = await getLists();
-    saveData(pageListKey, pageList);
-    saveData(volumeListKey, volumeList);
+// export const updateListsNew = async () => {
+  // try {
+    // const { pageList, volumeList } = await getLists();
+    // saveData(pageListKey, pageList);
+    // saveData(volumeListKey, volumeList);
 
-    if (await checkLists()) {
-      console.log("lists ready")
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+    // if (await checkLists()) {
+      // console.log("lists ready")
+    // }
+  // } catch (error) {
+    // console.log(error);
+  // }
+// };
