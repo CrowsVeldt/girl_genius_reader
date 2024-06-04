@@ -9,6 +9,7 @@ import {
 import StarButton from "./StarButton";
 import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
+import PullToRefresh from "./PullToRefresh";
 
 export default function CustomHeader({
   navigation,
@@ -28,6 +29,7 @@ export default function CustomHeader({
 
   return (
     <View style={[options.headerStyle, styles.header]}>
+      <PullToRefresh />
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.openDrawer()}

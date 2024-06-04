@@ -1,4 +1,4 @@
-Releases:
+- Give users option to pull to refresh and run update again
 
 Improvements:
 - log crashes and errors in production, give users a way to share those logs

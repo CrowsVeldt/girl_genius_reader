@@ -11,7 +11,6 @@ import {
 import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
-import { showToast } from "../utils/notifications";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -68,7 +67,6 @@ const ComicProvider = ({ children }: { children: any }) => {
       } catch (error) {
         console.warn("error in comic context useeffect");
         console.error(error);
-        showToast("Update failed")
       }
     })();
   }, []);
