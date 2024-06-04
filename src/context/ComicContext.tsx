@@ -11,6 +11,7 @@ import {
 import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
+import { showToast } from "../utils/notifications";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -24,6 +25,7 @@ type ComicContextType = {
   goToNextPage: (page: PageType) => void;
   goToPreviousPage: (page: PageType) => void;
   getVolumes: () => VolumeType[];
+  refresh: () => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -50,7 +52,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         setPages(await retrieveData(pageListKey));
         setVolumes(await retrieveData(volumeListKey));
         setDataReady(true);
-      } 
+      }
     })();
   }, [dataUpdated]);
 
@@ -61,8 +63,6 @@ const ComicProvider = ({ children }: { children: any }) => {
         const updated: boolean = await updateLists();
         if (updated) {
           setDataUpdated(true);
-        } else {
-          throw new Error("update error")
         }
       } catch (error) {
         console.warn("error in comic context useeffect");
@@ -96,6 +96,19 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getLatestPage: () => PageType = () => lastElement(pages);
 
   const getDataStatus: () => boolean = () => dataReady;
+
+  const refresh: () => void = async () => {
+    try {
+      showToast("Updating");
+      const updated: boolean = await updateLists();
+      if (updated) {
+        setDataUpdated(true);
+      }
+    } catch (error) {
+      console.warn("an error was thrown from the refresh function");
+      console.error(error);
+    }
+  };
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
@@ -167,6 +180,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     goToNextPage,
     goToPreviousPage,
     getVolumes,
+    refresh,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
