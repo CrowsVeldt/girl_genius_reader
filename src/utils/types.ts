@@ -11,7 +11,14 @@ export type DateAndTitleType = {
 };
 
 export type VolumeType = {
-  volumeStart: string
-  volumeNumber: number
-  pages: PageType[]
-}
+  volumeStart: string;
+  volumeNumber: number;
+  pages: PageType[];
+};
+
+export type ListCollectionType =
+  | {
+      pageList: PageType[];
+      volumeList: VolumeType[];
+    }
+  | undefined;
