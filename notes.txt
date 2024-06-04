@@ -1,3 +1,5 @@
+- Current goal: Add types, comments. Split code into smaller sections as possible
+
 - FIX: have spinner spin until update is completed
 - FIX: make update actually update
 - FIX: make icon fit space

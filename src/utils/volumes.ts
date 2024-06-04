@@ -13,6 +13,7 @@ export const collectVolumes: (dates: string[]) => Promise<
   try {
     const volumeStarts: DateAndTitleType[] = volumeStartDates(parsedTitles);
     const lists: ListCollectionType = collectVolumeAndPageLists(dates, volumeStarts, parsedTitles);
+    // #TODO: Maybe better to return null instead of empty lists, so caller will know something went wrong
     return lists != null ? lists : { pageList: [], volumeList: [] };
   } catch (error) {
     console.error("Error collecting volume/page data");
