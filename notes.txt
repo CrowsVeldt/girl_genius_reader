@@ -1,4 +1,8 @@
-- Give users option to pull to refresh and run update again
+- FIX: pulltorefresh covers menu button
+- FIX: have spinner spin until update is completed
+- FIX: make update actually update
+- FIX: make icon fit space
+
 
 Improvements:
 - log crashes and errors in production, give users a way to share those logs
