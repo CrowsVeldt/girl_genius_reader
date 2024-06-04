@@ -11,9 +11,10 @@ export default function ComicIndex({ navigation }: { navigation: any }) {
 
   return (
     <ScrollView contentContainerStyle={styles.list}>
-      {volumes.map((volume: VolumeType, index: number) => {
-        return <VolumeList nav={navigation} volume={volume} key={index} />;
-      })}
+      {volumes != null &&
+        volumes.map((volume: VolumeType, index: number) => {
+          return <VolumeList nav={navigation} volume={volume} key={index} />;
+        })}
     </ScrollView>
   );
 }
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     width: "100%",
+    height: "100%",
     paddingTop: 30,
     paddingBottom: 60,
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,

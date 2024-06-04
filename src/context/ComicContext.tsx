@@ -7,11 +7,11 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
-  dateListKey,
 } from "../utils/storage";
-import { updateLists } from "../utils/network";
+import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
-import { collectVolumes } from "../utils/volumes";
+import { lastElement } from "../utils/utilFunctions";
+import { showToast } from "../utils/notifications";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -25,6 +25,7 @@ type ComicContextType = {
   goToNextPage: (page: PageType) => void;
   goToPreviousPage: (page: PageType) => void;
   getVolumes: () => VolumeType[];
+  refresh: () => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -46,30 +47,26 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
-      Toast.show("begin update attempt", { duration: Toast.durations.SHORT });
+      const listsExist: boolean = await checkLists();
+      if (listsExist) {
+        setPages(await retrieveData(pageListKey));
+        setVolumes(await retrieveData(volumeListKey));
+        setDataReady(true);
+      }
+    })();
+  }, [dataUpdated]);
+
+  useEffect(() => {
+    (async () => {
       try {
-        const savedDates = await retrieveData(dateListKey);
-        if (savedDates != null && savedDates != undefined) {
-          const lists:
-            | { pageList: PageType[]; volumeList: VolumeType[] }
-            | undefined = await collectVolumes(savedDates);
-
-          saveData(dateListKey, savedDates);
-          saveData(pageListKey, lists?.pageList);
-          saveData(volumeListKey, lists?.volumeList);
-
-          setDataUpdated(true)
-        } else {
-          const updated: boolean = await updateLists();
-          if (updated) {
-            setDataUpdated(true);
-            Toast.show("Updated", { duration: Toast.durations.SHORT });
-          } else {
-            Toast.show("update attempt failed");
-          }
+        // repeat until updated successfully
+        const updated: boolean = await updateLists();
+        if (updated) {
+          setDataUpdated(true);
         }
       } catch (error) {
-        Toast.show("error updating data", { duration: Toast.durations.SHORT });
+        console.warn("error in comic context useeffect");
+        console.error(error);
       }
     })();
   }, []);
@@ -77,11 +74,6 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        Toast.show("attempting to retrieve data from lists", {
-          duration: Toast.durations.SHORT,
-        });
-        const pageList: PageType[] = await retrieveData(pageListKey);
-        const volumeList: VolumeType[] = await retrieveData(volumeListKey);
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
         const savedCurrentPage: PageType = await retrieveData(currentPageKey);
 
@@ -91,27 +83,32 @@ const ComicProvider = ({ children }: { children: any }) => {
         if (savedCurrentPage != null) {
           setCurrentPage(savedCurrentPage);
         }
-        if (pageList != null) {
-          setPages(pageList);
-        }
-        if (volumeList != null) {
-          setVolumes(volumeList);
-        }
-        setDataReady(true);
       } catch (error) {
-        console.warn("Error settting data");
+        console.warn("Error setting data");
         console.error(error);
-        Toast.show("Error setting data");
       }
     })();
-  }, [dataUpdated]);
+  }, []);
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
   const getVolumes: () => VolumeType[] = () => volumes;
-  const getLatestPage: () => PageType = () => pages[pages.length - 1];
+  const getLatestPage: () => PageType = () => lastElement(pages);
 
   const getDataStatus: () => boolean = () => dataReady;
+
+  const refresh: () => void = async () => {
+    try {
+      showToast("Updating");
+      const updated: boolean = await updateLists();
+      if (updated) {
+        setDataUpdated(true);
+      }
+    } catch (error) {
+      console.warn("an error was thrown from the refresh function");
+      console.error(error);
+    }
+  };
 
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
@@ -183,6 +180,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     goToNextPage,
     goToPreviousPage,
     getVolumes,
+    refresh,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>

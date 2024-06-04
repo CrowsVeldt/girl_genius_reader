@@ -1,9 +1,15 @@
-Failure to update possibly do to server downtime
-- if so, set to reping server every few minutes until response is recieved
+when app starts:
+    - check for lists, if found, load them to memory
 
-Releases:
+
+
+- FIX: have spinner spin until update is completed
+- FIX: make update actually update
+- FIX: make icon fit space
+
 
 Improvements:
+- log crashes and errors in production, give users a way to share those logs
 - status bar is covered on production app?
 - load next comic at the same time to cut down load times
 - cut down on lag when changing comic pages
@@ -14,7 +20,6 @@ Improvements:
 - improve list ui
 - improve bookmarks ui
 - optimize animations and transitions for speed
-
 
 - remove redundancy from page/volumeList?
 - prevent double-tap-to-zoom under pageTurn(?)
