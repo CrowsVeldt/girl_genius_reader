@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
@@ -19,6 +20,7 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <RootSiblingParent>
+      <StatusBar style="auto" />
       <NavigationContainer>
         <ComicProvider>
           <Drawer.Navigator

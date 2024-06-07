@@ -37,6 +37,8 @@ export const updateLists: () => Promise<boolean> = async () => {
   return false;
 };
 
+// #TODO: implement these to exactly replace current updateLists function?
+
 // const processDates = (dates: string[]) => Array.from(new Set(dates));
 
 // const getLists = async () => {
