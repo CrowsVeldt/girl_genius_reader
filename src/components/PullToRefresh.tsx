@@ -46,10 +46,10 @@ export default function PullToRefresh(props: any) {
 
 const styles = StyleSheet.create({
   box: {
-    width: "100%",
+    width: "75%",
     height: "100%",
     position: "absolute",
-    left: 50,
+    left: "12.5%",
     zIndex: 1,
     opacity: 1,
   },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     bottom: 0,
-    right: 100,
+    right: 0,
     justifyContent: "center",
     alignItems: "center",
     opacity: 0,
