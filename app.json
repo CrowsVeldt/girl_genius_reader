@@ -11,12 +11,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 55,
+      "versionCode": 57,
       "adaptiveIcon": {
         "foregroundImage": "./assets/iconEdited.png",
         "backgroundColor": "#ffffff"

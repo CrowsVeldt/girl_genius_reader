@@ -20,9 +20,9 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <RootSiblingParent>
-      <StatusBar style="auto" />
       <NavigationContainer>
         <ComicProvider>
+      <StatusBar style="dark" />
           <Drawer.Navigator
             // Custom drawer content
             drawerContent={(props) => <DrawerContent {...props} />}

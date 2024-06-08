@@ -1,6 +1,9 @@
+- rewiden icon distance, shrink letters
+- shrink drag-to-update so it won't cover the star button
+
+
 - FIX: have spinner spin until update is completed
 - FIX: make update actually update
-- FIX: make icon fit space
 
 
 Improvements:
