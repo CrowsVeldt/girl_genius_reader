@@ -4,10 +4,10 @@
     "slug": "girl_genius_reader",
     "version": "0.1.1",
     "orientation": "portrait",
-    "icon": "./assets/iconEdited.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/iconEdited.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
     "android": {
       "versionCode": 57,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/iconEdited.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.crows.girl_genius_reader",
@@ -30,7 +30,7 @@
       ]
     },
     "web": {
-      "favicon": "./assets/iconEdited.png"
+      "favicon": "./assets/icon.png"
     },
     "extra": {
       "eas": {
