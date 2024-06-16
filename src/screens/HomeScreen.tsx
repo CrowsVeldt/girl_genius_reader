@@ -19,6 +19,8 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home() {
   const { getCurrentPage, getDataStatus } = useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [onLeftEdge, setOnLeftEdge] = useState<boolean>(true)
+  const [onRightEdge, setOnRightEdge] = useState<boolean>(true)
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
@@ -47,7 +49,12 @@ export default function Home() {
               setLoaded(true);
             }}
             onPanEnd={(args) => {
-              console.log(args)
+              const edgeData = args[0]
+              if (edgeData.onEdge === true) {
+                setOnLeftEdge(edgeData.onLeftEdge)
+                setOnRightEdge(edgeData.onRightEdge)
+                console.log("left " + onLeftEdge)
+              }
             }}
           />
           <PageTurn side={"right"} />

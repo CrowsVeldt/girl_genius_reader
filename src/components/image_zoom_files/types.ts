@@ -22,7 +22,6 @@ export type OnPanStartCallback = (
 export type OnPanEndCallback = (
   event: GestureStateChangeEvent<PanGestureHandlerEventPayload>,
   success: boolean,
-  edge: {onEdge: boolean, onLeftEdge: boolean}
 ) => void;
 
 export enum ANIMATION_VALUE {

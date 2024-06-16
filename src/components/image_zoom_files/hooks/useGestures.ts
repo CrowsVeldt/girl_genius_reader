@@ -43,8 +43,9 @@ export const useGestures = ({
 
   const prevScale = useSharedValue(1);
   const scale = useSharedValue(1);
-  const onEdge = useSharedValue(false)
-  const onLeftEdge = useSharedValue(false)
+  const onEdge = useSharedValue(false);
+  const onLeftEdge = useSharedValue(true);
+  const onRightEdge = useSharedValue(true);
   const initialFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const prevFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const focal = { x: useSharedValue(0), y: useSharedValue(0) };
@@ -180,10 +181,14 @@ export const useGestures = ({
     onPanStart?.();
   };
 
-  const onPanEnded = (...args) => {
+  const onPanEnded = (...args: any[]) => {
     isPanning.current = false;
-    args.push({onEdge: onEdge.value, onLeftEdge: onLeftEdge.value})
-    onPanEnd?.(...args);
+    args.push({
+      onEdge: onEdge.value,
+      onLeftEdge: onLeftEdge.value,
+      onRightEdge: onRightEdge.value,
+    });
+    onPanEnd?.([...args]);
     onInteractionEnded();
   };
 
@@ -209,14 +214,18 @@ export const useGestures = ({
           event.translationX + prevTranslate.x.value <= rightLimit &&
           event.translationX + prevTranslate.x.value >= leftLimit
         ) {
-          onEdge.value = false
+          onEdge.value = false;
+          onLeftEdge.value = false;
+          onRightEdge.value = false;
           translate.x.value = prevTranslate.x.value + event.translationX;
-        } else if (event.translationX + prevTranslate.x.value <= rightLimit){
-          onEdge.value = true
-          onLeftEdge.value = false
-        } else if (event.translationX + prevTranslate.x.value >= leftLimit){
-          onEdge.value = true
-          onLeftEdge.value = true
+        } else if (event.translationX + prevTranslate.x.value <= rightLimit) {
+          onEdge.value = true;
+          onRightEdge.value = true;
+          onLeftEdge.value = false;
+        } else if (event.translationX + prevTranslate.x.value >= leftLimit) {
+          onEdge.value = true;
+          onLeftEdge.value = true;
+          onRightEdge.value = false;
         }
 
         if (
@@ -225,6 +234,10 @@ export const useGestures = ({
         ) {
           translate.y.value = prevTranslate.y.value + event.translationY;
         }
+      } else {
+        onEdge.value = true
+        onRightEdge.value = true;
+        onLeftEdge.value = true;
       }
     })
     .onEnd(() => {
