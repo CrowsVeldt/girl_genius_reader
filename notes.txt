@@ -1,16 +1,10 @@
-- rewiden icon distance, shrink letters
-- shrink drag-to-update so it won't cover the star button
-
-
-- FIX: have spinner spin until update is completed
-- FIX: make update actually update
-
+Try using image prefetch to load next / previous image
 
 Improvements:
+- have spinner spin until update is completed
+- make update actually update
 - log crashes and errors in production, give users a way to share those logs
-- status bar is covered on production app?
-- cut down page turn lag: load next comic at the same time to cut down load times
-- add notifications/animations/whatever to let user know if app is updating
+- cut down page turn lag: load next comic at the same time to cut down load times?
 - add toasts/notifications to inform users of things
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - improve accessibility (follow suggestions from google play console)
@@ -89,6 +83,7 @@ x Frumious Fennic:
 x - Replace calls to dataCollector with accessing GG's RSS feed
 x - Regression: First page flashes before current page is loaded
 x currently saving page/volume data both in asyncstorage and filesystem, reduce redundancy
+x status bar is covered on production app?
 
 
 Thanks to: 
