@@ -10,19 +10,18 @@ export default function VerticalPageView() {
   const currentVolume = getCurrentVolume();
   const volumePages = currentVolume.pages;
   return (
-    <ScrollView>
-      {getDataStatus() &&
-        volumePages.map((page, index) => {
-          return <ImageZoom 
+    getDataStatus() &&
+    volumePages.map((page, index) => {
+      return (
+        <ImageZoom
           key={index}
-          ref={imageRef} 
+          ref={imageRef}
           uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
           minPanPointers={1}
           isDoubleTapEnabled
-
-          />;
-        })}
-    </ScrollView>
+        />
+      );
+    })
   );
 }
 

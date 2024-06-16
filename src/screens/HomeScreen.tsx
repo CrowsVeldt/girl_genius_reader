@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -8,20 +8,15 @@ import {
   View,
 } from "react-native";
 import { ComicContext } from "../context/ComicContext";
-import { ImageZoomRef } from "../components/image_zoom_files/types";
-import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
-import { PageType } from "../utils/types";
 import VerticalPageView from "../components/VerticalPageView";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
-  const { getCurrentPage, getDataStatus } = useContext(ComicContext);
+  const { getDataStatus } = useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
-  const imageRef = useRef<ImageZoomRef>();
-  const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
 
   return (
@@ -51,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
-    height: window.height - 150,
+    height: "100%",
     width: window.width,
   },
   spinner: {
@@ -65,17 +60,17 @@ const styles = StyleSheet.create({
   },
 });
 
-          // <ImageZoom
-            // ref={imageRef}
-            // uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
-            // minPanPointers={1}
-            // isDoubleTapEnabled
-            // resizeMode="contain"
-            // onLoadStart={() => {
-              // setLoaded(false);
-              // imageRef.current?.quickReset();
-            // }}
-            // onLoadEnd={() => {
-              // setLoaded(true);
-            // }}
-          // />
+// <ImageZoom
+// ref={imageRef}
+// uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+// minPanPointers={1}
+// isDoubleTapEnabled
+// resizeMode="contain"
+// onLoadStart={() => {
+// setLoaded(false);
+// imageRef.current?.quickReset();
+// }}
+// onLoadEnd={() => {
+// setLoaded(true);
+// }}
+// />
