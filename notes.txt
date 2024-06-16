@@ -1,6 +1,7 @@
 Try using image prefetch to load next / previous image
 
 Improvements:
+- have option to view volume pages in a vertical list
 - have spinner spin until update is completed
 - make update actually update
 - log crashes and errors in production, give users a way to share those logs
