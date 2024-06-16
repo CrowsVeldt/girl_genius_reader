@@ -46,6 +46,9 @@ export default function Home() {
             onLoadEnd={() => {
               setLoaded(true);
             }}
+            onPinchEnd={(args) => {
+              console.log(args)
+            }}
           />
           <PageTurn side={"right"} />
         </ScrollView>

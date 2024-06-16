@@ -166,9 +166,10 @@ export const useGestures = ({
     onPinchStart?.();
   };
 
-  const onPinchEnded = () => {
+  const onPinchEnded = (...args) => {
     isPinching.current = false;
-    onPinchEnd?.();
+    args.push(scale.value)
+    onPinchEnd?.(...args);
     onInteractionEnded();
   };
 
