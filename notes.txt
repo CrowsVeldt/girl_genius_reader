@@ -1,3 +1,6 @@
+onPanEnd return {onEdge: boolean, edge: ["right", "left"]}
+
+
 Try using image prefetch to load next / previous image
 
 Improvements:

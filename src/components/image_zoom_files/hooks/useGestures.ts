@@ -43,6 +43,8 @@ export const useGestures = ({
 
   const prevScale = useSharedValue(1);
   const scale = useSharedValue(1);
+  const onEdge = useSharedValue(false)
+  const onLeftEdge = useSharedValue(false)
   const initialFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const prevFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const focal = { x: useSharedValue(0), y: useSharedValue(0) };
@@ -178,9 +180,10 @@ export const useGestures = ({
     onPanStart?.();
   };
 
-  const onPanEnded = () => {
+  const onPanEnded = (...args) => {
     isPanning.current = false;
-    onPanEnd?.();
+    args.push({onEdge: onEdge, onLeftEdge: onLeftEdge})
+    onPanEnd?.(...args);
     onInteractionEnded();
   };
 
