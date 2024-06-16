@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     opacity: 1,
-    backgroundColor: "red"
+    // backgroundColor: "red"
   },
   arrow: {
     height: 45,
