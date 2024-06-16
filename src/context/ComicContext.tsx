@@ -25,6 +25,7 @@ type ComicContextType = {
   goToNextPage: (page: PageType) => void;
   goToPreviousPage: (page: PageType) => void;
   getVolumes: () => VolumeType[];
+  getCurrentVolume: () => VolumeType
   refresh: () => void;
 };
 
@@ -92,6 +93,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
+  const getCurrentVolume: () => VolumeType = () => volumes[currentPage.volumeNumber - 1]
   const getVolumes: () => VolumeType[] = () => volumes;
   const getLatestPage: () => PageType = () => lastElement(pages);
 
@@ -171,6 +173,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const value = {
     getDataStatus,
     getCurrentPage,
+    getCurrentVolume,
     getLatestPage,
     changeCurrentPage,
     getBookmarks,

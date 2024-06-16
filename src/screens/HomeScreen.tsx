@@ -12,6 +12,7 @@ import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
 import { PageType } from "../utils/types";
+import VerticalPageView from "../components/VerticalPageView";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -33,20 +34,7 @@ export default function Home() {
       {dataReady && (
         <ScrollView contentContainerStyle={styles.comicContainer}>
           <PageTurn side={"left"} />
-          <ImageZoom
-            ref={imageRef}
-            uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
-            minPanPointers={1}
-            isDoubleTapEnabled
-            resizeMode="contain"
-            onLoadStart={() => {
-              setLoaded(false);
-              imageRef.current?.quickReset();
-            }}
-            onLoadEnd={() => {
-              setLoaded(true);
-            }}
-          />
+          <VerticalPageView />
           <PageTurn side={"right"} />
         </ScrollView>
       )}
@@ -76,3 +64,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+          // <ImageZoom
+            // ref={imageRef}
+            // uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+            // minPanPointers={1}
+            // isDoubleTapEnabled
+            // resizeMode="contain"
+            // onLoadStart={() => {
+              // setLoaded(false);
+              // imageRef.current?.quickReset();
+            // }}
+            // onLoadEnd={() => {
+              // setLoaded(true);
+            // }}
+          // />
