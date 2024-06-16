@@ -182,7 +182,7 @@ export const useGestures = ({
 
   const onPanEnded = (...args) => {
     isPanning.current = false;
-    args.push({onEdge: onEdge, onLeftEdge: onLeftEdge})
+    args.push({onEdge: onEdge.value, onLeftEdge: onLeftEdge.value})
     onPanEnd?.(...args);
     onInteractionEnded();
   };
@@ -209,8 +209,16 @@ export const useGestures = ({
           event.translationX + prevTranslate.x.value <= rightLimit &&
           event.translationX + prevTranslate.x.value >= leftLimit
         ) {
+          onEdge.value = false
           translate.x.value = prevTranslate.x.value + event.translationX;
+        } else if (event.translationX + prevTranslate.x.value <= rightLimit){
+          onEdge.value = true
+          onLeftEdge.value = false
+        } else if (event.translationX + prevTranslate.x.value >= leftLimit){
+          onEdge.value = true
+          onLeftEdge.value = true
         }
+
         if (
           event.translationY + prevTranslate.y.value <= bottomLimit &&
           event.translationY + prevTranslate.y.value >= topLimit
