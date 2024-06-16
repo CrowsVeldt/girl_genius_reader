@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { DateAndTitleType, PageType, VolumeType } from "./types";
+import { DateAndTitleType, ListCollectionType, PageType, VolumeType } from "./types";
 
 export const collectVolumes: (dates: string[]) => Promise<
   | {
@@ -12,7 +12,8 @@ export const collectVolumes: (dates: string[]) => Promise<
 
   try {
     const volumeStarts: DateAndTitleType[] = volumeStartDates(parsedTitles);
-    const lists = collectVolumeAndPageLists(dates, volumeStarts, parsedTitles);
+    const lists: ListCollectionType = collectVolumeAndPageLists(dates, volumeStarts, parsedTitles);
+    // #TODO: Maybe better to return null instead of empty lists, so caller will know something went wrong
     return lists != null ? lists : { pageList: [], volumeList: [] };
   } catch (error) {
     console.error("Error collecting volume/page data");
@@ -72,7 +73,7 @@ const collectVolumeAndPageLists: (
   dates: string[],
   startDates: DateAndTitleType[],
   titles: DateAndTitleType[]
-) => { pageList: PageType[]; volumeList: VolumeType[] } | undefined = (
+) => ListCollectionType = (
   dates,
   startDates,
   titles
@@ -89,7 +90,7 @@ const collectVolumeAndPageLists: (
 
         const volumeDates: string[] = getVolumeDates(item, dates, lastDate);
 
-        const filteredTitles: DateAndTitleType[] = filterTitles(titles)
+        const filteredTitles: DateAndTitleType[] = filterTitles(titles);
 
         const volumePages: PageType[] = volumeDates.map(
           (date: string, pageIndex: number) => {
