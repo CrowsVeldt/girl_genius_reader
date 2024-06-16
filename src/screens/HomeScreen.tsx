@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -24,6 +24,10 @@ export default function Home() {
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
+
+  useEffect(() => {
+    // on pan end update edge states and render value for pageTurns
+  }, [])
 
   return (
     <View style={styles.comicPage}>
@@ -53,7 +57,6 @@ export default function Home() {
               if (edgeData.onEdge === true) {
                 setOnLeftEdge(edgeData.onLeftEdge)
                 setOnRightEdge(edgeData.onRightEdge)
-                console.log("left " + onLeftEdge)
               }
             }}
           />

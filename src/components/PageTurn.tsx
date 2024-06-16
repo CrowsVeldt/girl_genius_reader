@@ -18,19 +18,16 @@ export default function PageTurn(props: any) {
     useContext(ComicContext);
   const { side }: any = props;
   const page: PageType = getCurrentPage();
-  const onSide: SharedValue<boolean> = useSharedValue(true);
   const position: SharedValue<number> = useSharedValue(0);
   const END_POSITION: number = side === "left" ? 50 : -50;
 
   const pan = Gesture.Pan()
     .onUpdate((e) => {
-      if (onSide.value) {
-        position.value = clamp(
-          e.translationX,
-          side === "left" ? 0 : -50,
-          side === "left" ? 50 : 0
-        );
-      }
+      position.value = clamp(
+        e.translationX,
+        side === "left" ? 0 : -50,
+        side === "left" ? 50 : 0
+      );
     })
     .onEnd(() => {
       if (side === "left" && position.value >= END_POSITION) {
@@ -39,7 +36,6 @@ export default function PageTurn(props: any) {
         runOnJS(goToNextPage)(page);
       }
       position.value = withTiming(0, { duration: 100 });
-      onSide.value = true;
     });
 
   const tap = Gesture.Tap()
@@ -86,6 +82,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 1,
     opacity: 1,
+    backgroundColor: "red"
   },
   arrow: {
     height: 45,
