@@ -23,29 +23,37 @@ export const getDateList: () => Promise<string[]> = async () => {
   }
 };
 
-const isUpdateDay: (a: number) => boolean = (a) =>
-  a === 1 || a === 2 || a === 3;
-
-export const shouldAppUpdate: () => boolean | null = async () => {
-  try {
-    const latestSavedDate: string | null = await retrieveData(latestSavedDateKey);
-    const currentDate: Date = new Date();
-    console.log(isUpdateDay(currentDate.getDay()));
-    return true;
-  } catch (error) {
-    console.error(error);
-  }
-
-  //const shouldAppUpdate = currentDate.day !== 7
-  //? currentDate.date > latestSavedDate.date + 1
-  //? true : currentDate.date > latestSavedDate.date + 2
-  //? true : false
-
+const getDifferenceBetweenDates: (a: Date, b: string) => number = (a, b) => {
   // const currentDateString = `${currentDate.getDate()}/${
   // currentDate.getMonth().toString().length > 1
   // ? currentDate.getMonth().toString()
   // : `0${currentDate.getMonth().toString()}`
   // }/${currentDate.getFullYear()}`;
+};
+
+export const shouldAppUpdate: () => boolean | null = async () => {
+  try {
+    const latestSavedDate: string | null = await retrieveData(
+      latestSavedDateKey
+    );
+    const currentDate: Date = new Date();
+
+    //const shouldAppUpdate = currentDate.day !== 7
+    //? currentDate.date > latestSavedDate.date + 1
+    //? true : currentDate.date > latestSavedDate.date + 2
+    //? true : false
+
+    // if current day is not saturday
+    // then:
+    // if currentDate > LatestSavedDate + 1 => return true
+    // else:
+    // if currentDate > lastSavedDate + 2 => return true
+    // else:
+    // return false
+    return false;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const checkLists: () => Promise<boolean> = async () => {
