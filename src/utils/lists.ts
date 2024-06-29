@@ -1,7 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import { ListCollectionType } from "./types";
-import { pageListKey, retrieveData, saveData, volumeListKey } from "./storage";
+import {
+  latestSavedDateKey,
+  pageListKey,
+  retrieveData,
+  saveData,
+  volumeListKey,
+} from "./storage";
 import { collectVolumes } from "./volumes";
+import { lastElement } from "./utilFunctions";
 
 export const getDateList: () => Promise<string[]> = async () => {
   shouldAppUpdate();
@@ -16,21 +23,29 @@ export const getDateList: () => Promise<string[]> = async () => {
   }
 };
 
-export const shouldAppUpdate: () => boolean = async () => {
-  // const latestSavedDate: string = retrieveData(latestSavedDateKey)
-  const currentDate = new Date();
+const isUpdateDay: (a: number) => boolean = (a) =>
+  a === 1 || a === 2 || a === 3;
 
-//const shouldAppUpdate = currentDate.day !== 7 
-                                            //? currentDate.date > latestSavedDate.date + 1 
-                                            //? true : currentDate.date > latestSavedDate.date + 2 
-                                            //? true : false
+export const shouldAppUpdate: () => boolean | null = async () => {
+  try {
+    const latestSavedDate: string | null = await retrieveData(latestSavedDateKey);
+    const currentDate: Date = new Date();
+    console.log(isUpdateDay(currentDate.getDay()));
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+
+  //const shouldAppUpdate = currentDate.day !== 7
+  //? currentDate.date > latestSavedDate.date + 1
+  //? true : currentDate.date > latestSavedDate.date + 2
+  //? true : false
 
   // const currentDateString = `${currentDate.getDate()}/${
-    // currentDate.getMonth().toString().length > 1
-      // ? currentDate.getMonth().toString()
-      // : `0${currentDate.getMonth().toString()}`
+  // currentDate.getMonth().toString().length > 1
+  // ? currentDate.getMonth().toString()
+  // : `0${currentDate.getMonth().toString()}`
   // }/${currentDate.getFullYear()}`;
-  return true;
 };
 
 export const checkLists: () => Promise<boolean> = async () => {
@@ -50,6 +65,8 @@ export const updateLists: () => Promise<boolean> = async () => {
 
       saveData(pageListKey, lists?.pageList);
       saveData(volumeListKey, lists?.volumeList);
+      saveData(latestSavedDateKey, lastElement(dateArray));
+
       return true;
     }
   } catch (error) {
