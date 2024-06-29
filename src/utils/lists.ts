@@ -4,6 +4,7 @@ import { pageListKey, retrieveData, saveData, volumeListKey } from "./storage";
 import { collectVolumes } from "./volumes";
 
 export const getDateList: () => Promise<string[]> = async () => {
+  shouldAppUpdate();
   try {
     const dateList: AxiosResponse<any, any> = await axios.get(
       "https://data-collector-yuw1.onrender.com/update/dates/1"
@@ -11,8 +12,25 @@ export const getDateList: () => Promise<string[]> = async () => {
 
     return dateList.data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
+};
+
+export const shouldAppUpdate: () => boolean = async () => {
+  // const latestSavedDate: string = retrieveData(latestSavedDateKey)
+  const currentDate = new Date();
+
+//const shouldAppUpdate = currentDate.day !== 7 
+                                            //? currentDate.date > latestSavedDate.date + 1 
+                                            //? true : currentDate.date > latestSavedDate.date + 2 
+                                            //? true : false
+
+  // const currentDateString = `${currentDate.getDate()}/${
+    // currentDate.getMonth().toString().length > 1
+      // ? currentDate.getMonth().toString()
+      // : `0${currentDate.getMonth().toString()}`
+  // }/${currentDate.getFullYear()}`;
+  return true;
 };
 
 export const checkLists: () => Promise<boolean> = async () => {

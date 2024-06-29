@@ -1,3 +1,21 @@
+1. Store latest comic date
+2. Each time the app is opened, compare latestDate with currentDate
+3. If L... is equal to C... return
+4. check shouldAppUpdate
+4b. step 1: is C !== to saturday ? 
+4c. if so, if C > L + 1, return true
+4d. if not, if C > L + 2, return true
+4E. else, return false
+5. keep running update at intervals until shouldAppUpdate === false
+
+Pseudocode:
+const latestSavedDate
+const currentDate
+const shouldAppUpdate = currentDate.day !== 7 
+                                            ? currentDate.date > latestSavedDate.date + 1 
+                                            ? true : currentDate.date > latestSavedDate.date + 2 
+                                            ? true : false
+
 Try using image prefetch to load next / previous image
 
 Improvements:
