@@ -4,11 +4,15 @@ import { pageListKey, retrieveData, saveData, volumeListKey } from "./storage";
 import { collectVolumes } from "./volumes";
 
 export const getDateList: () => Promise<string[]> = async () => {
-  const dateList: AxiosResponse<any, any> = await axios.get(
-    "https://data-collector-yuw1.onrender.com/update/dates"
-  );
+  try {
+    const dateList: AxiosResponse<any, any> = await axios.get(
+      "https://data-collector-yuw1.onrender.com/update/dates/1"
+    );
 
-  return dateList.data;
+    return dateList.data;
+  } catch (error) {
+    console.error(error)
+  }
 };
 
 export const checkLists: () => Promise<boolean> = async () => {
