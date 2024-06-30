@@ -11,26 +11,12 @@ import { collectVolumes } from "./volumes";
 import { lastElement } from "./utilFunctions";
 
 export const getDateList: () => Promise<string[]> = async () => {
-  shouldAppUpdate();
   try {
     const dateList: AxiosResponse<any, any> = await axios.get(
       "https://data-collector-yuw1.onrender.com/update/dates/"
     );
 
     return dateList.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const shouldAppUpdate: () => boolean | null = async () => {
-  try {
-    const latestSavedDate: string = await retrieveData(
-      latestSavedDateKey
-    );
-    // const currentDate: Date = await (get latest date from girl genius)
-
-    return false;
   } catch (error) {
     console.error(error);
   }
