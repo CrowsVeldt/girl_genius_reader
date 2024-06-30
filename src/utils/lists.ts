@@ -6,7 +6,7 @@ import { collectVolumes } from "./volumes";
 export const getDateList: () => Promise<string[]> = async () => {
   try {
     const dateList: AxiosResponse<any, any> = await axios.get(
-      "https://data-collector-yuw1.onrender.com/update/dates/1"
+      "https://data-collector-yuw1.onrender.com/update/dates/"
     );
 
     return dateList.data;
