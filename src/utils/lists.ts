@@ -14,7 +14,7 @@ export const getDateList: () => Promise<string[]> = async () => {
   shouldAppUpdate();
   try {
     const dateList: AxiosResponse<any, any> = await axios.get(
-      "https://data-collector-yuw1.onrender.com/update/dates/1"
+      "https://data-collector-yuw1.onrender.com/update/dates/"
     );
 
     return dateList.data;
@@ -23,33 +23,13 @@ export const getDateList: () => Promise<string[]> = async () => {
   }
 };
 
-const getDifferenceBetweenDates: (a: Date, b: string) => number = (a, b) => {
-  // const currentDateString = `${currentDate.getDate()}/${
-  // currentDate.getMonth().toString().length > 1
-  // ? currentDate.getMonth().toString()
-  // : `0${currentDate.getMonth().toString()}`
-  // }/${currentDate.getFullYear()}`;
-};
-
 export const shouldAppUpdate: () => boolean | null = async () => {
   try {
-    const latestSavedDate: string | null = await retrieveData(
+    const latestSavedDate: string = await retrieveData(
       latestSavedDateKey
     );
-    const currentDate: Date = new Date();
+    // const currentDate: Date = await (get latest date from girl genius)
 
-    //const shouldAppUpdate = currentDate.day !== 7
-    //? currentDate.date > latestSavedDate.date + 1
-    //? true : currentDate.date > latestSavedDate.date + 2
-    //? true : false
-
-    // if current day is not saturday
-    // then:
-    // if currentDate > LatestSavedDate + 1 => return true
-    // else:
-    // if currentDate > lastSavedDate + 2 => return true
-    // else:
-    // return false
     return false;
   } catch (error) {
     console.error(error);
