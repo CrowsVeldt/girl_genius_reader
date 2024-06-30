@@ -14,10 +14,20 @@ import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
+import { useEffect } from "react";
+import { checkForNewComics, getLatestDate } from "./src/utils/network";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+
+  useEffect(() => {
+checkForNewComics()
+    // Check for new date
+    // if found, run update, and start countdown to check again
+    // when countdown finishes repeat
+  },[])
+
   return (
     <RootSiblingParent>
       <NavigationContainer>
