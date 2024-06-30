@@ -5,7 +5,8 @@ export const currentPageKey: string = "@GGAppPage";
 export const dateListKey: string = "@GGAppDates";
 export const pageListKey: string = "@GGAppPageList";
 export const volumeListKey: string = "@GGAppVolumeList";
-export const latestSavedDateKey: string = "@GGAppLastSavedDate";
+export const latestSavedDateKey: string = "@GGAppLastSavedDate"
+export const dataUpdatedKey: string = "@GGAppDataUpdated";
 
 export const saveData: (key: string, value: any) => void = async (
   key,

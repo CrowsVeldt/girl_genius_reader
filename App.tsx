@@ -16,15 +16,32 @@ import PrivacyScreen from "./src/screens/PrivacyScreen";
 import ComicProvider from "./src/context/ComicContext";
 import { useEffect } from "react";
 import { checkForNewComics } from "./src/utils/network";
+import { updateLists } from "./src/utils/lists";
+import { dataUpdatedKey, saveData } from "./src/utils/storage";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   useEffect(() => {
-    checkForNewComics();
-    // Check for new date
-    // if found, run update, and start countdown to check again
-    // when countdown finishes repeat
+    (async () => {
+      // Check for new date
+      try {
+      const update = await checkForNewComics();
+        if (update) {
+
+        const updated: boolean = await updateLists();
+        if (updated) {
+          saveData(dataUpdatedKey, true);
+        }
+        }
+      // if found, run update, and start countdown to check again
+      // when countdown finishes repeat
+      
+      } catch (error) {
+        console.warn("error in comic context useeffect");
+        console.error(error);
+      }
+    })();
   }, []);
 
   return (

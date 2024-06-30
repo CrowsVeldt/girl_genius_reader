@@ -39,7 +39,7 @@ export const updateLists: () => Promise<boolean> = async () => {
 
       saveData(pageListKey, lists?.pageList);
       saveData(volumeListKey, lists?.volumeList);
-      saveData(latestSavedDateKey, lastElement(dateArray));
+      // saveData(latestSavedDateKey, lastElement(dateArray));
 
       return true;
     }
