@@ -1,10 +1,14 @@
-Try using image prefetch to load next / previous image
+1. save latest comic when updating
+2. when opened check latest comic against savedLast
+3. if they are different run update
+
 
 Improvements:
+- Try using image prefetch to load next / previous image?
+- cut down page turn lag: load next comic at the same time to cut down load times?
 - have spinner spin until update is completed
 - make update actually update
 - log crashes and errors in production, give users a way to share those logs
-- cut down page turn lag: load next comic at the same time to cut down load times?
 - add toasts/notifications to inform users of things
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - improve accessibility (follow suggestions from google play console)
@@ -88,3 +92,19 @@ x status bar is covered on production app?
 
 Thanks to: 
 - https://github.com/likashefqet
+
+1. Store latest comic date
+2. Each time the app is opened, compare latestDate with currentDate
+4b. step 1: is C !== to saturday ? 
+4c. if so, if C > L + 1, return true
+4d. if not, if C > L + 2, return true
+4E. else, return false
+5. keep running update at intervals until shouldAppUpdate === false
+
+Pseudocode:
+const latestSavedDate
+const currentDate
+const shouldAppUpdate = currentDate.day !== 7 
+                                            ? currentDate.date > latestSavedDate.date + 1 
+                                            ? true : currentDate.date > latestSavedDate.date + 2 
+                                            ? true : false

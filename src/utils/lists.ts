@@ -1,7 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import { ListCollectionType } from "./types";
-import { pageListKey, retrieveData, saveData, volumeListKey } from "./storage";
+import {
+  latestSavedDateKey,
+  pageListKey,
+  retrieveData,
+  saveData,
+  volumeListKey,
+} from "./storage";
 import { collectVolumes } from "./volumes";
+import { lastElement } from "./utilFunctions";
 
 export const getDateList: () => Promise<string[]> = async () => {
   try {
@@ -11,7 +18,7 @@ export const getDateList: () => Promise<string[]> = async () => {
 
     return dateList.data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 };
 
@@ -32,6 +39,8 @@ export const updateLists: () => Promise<boolean> = async () => {
 
       saveData(pageListKey, lists?.pageList);
       saveData(volumeListKey, lists?.volumeList);
+      saveData(latestSavedDateKey, lastElement(dateArray));
+
       return true;
     }
   } catch (error) {
