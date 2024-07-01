@@ -1,3 +1,5 @@
+replace 'setUpdated' in comicContext with storage and 'dataUpdatedKey'
+
 1. save latest comic when updating
 2. when opened check latest comic against savedLast
 3. if they are different run update
