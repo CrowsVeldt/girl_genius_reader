@@ -12,6 +12,7 @@ import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
 import { showToast } from "../utils/notifications";
+import { getNextComicDate } from "../utils/network";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -58,6 +59,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
+      // TESTING PURPOSES ONLY:  getNextComicDate("20021104")
       try {
         // repeat until updated successfully
         const updated: boolean = await updateLists();
