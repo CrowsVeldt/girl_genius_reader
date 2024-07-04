@@ -1,9 +1,20 @@
-replace 'setUpdated' in comicContext with storage and 'dataUpdatedKey'
+1. Fetch datelist from onrender link
+2. check if latest date is equal to currentDate
+3. if not run update starting from latestDate
+4. append new dates to datelist
+5. save to memory
+6. process into lists
 
+
+
+_ REIMPLEMENT UPDATING FROM INSIDE APP
 1. save latest comic when updating
 2. when opened check latest comic against savedLast
 3. if they are different run update
 
+
+
+replace 'setUpdated' in comicContext with storage and 'dataUpdatedKey'
 
 Improvements:
 - Try using image prefetch to load next / previous image?
