@@ -5,32 +5,50 @@ import {
   retrieveData,
   saveData,
 } from "./storage";
-import { processDateList, updateLists } from "./lists";
-import { lastElement } from "./utilFunctions";
+import { updateLists } from "./lists";
+import { lastElement, stringOfEightNumbers } from "./utilFunctions";
 
 const rootUrl: string = "https://www.girlgeniusonline.com";
 
 export const getDateList: () => Promise<string[]> = async () => {
   try {
     const dateList: AxiosResponse<any, any> = await axios.get(
-      "https://data-collector-yuw1.onrender.com/update/dates/"
+      "https://data-collector-yuw1.onrender.com/"
     );
-
-    return processDateList(dateList.data);
+    return dateList != null ? dateList.data.dates : [];
   } catch (error) {
+    console.log("Error in the getDateList function");
     console.error(error);
   }
 };
 
 export const getLatestDate: () => Promise<string> = async () => {
-  const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
-  const index: number = data.search("topbookmark");
-  const date: string = data.slice(index + 117, index + 125);
-  return date;
+  try {
+    // console.log("getting latest date");
+    const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
+    const index: number = data.search("topbookmark");
+    const date: string = data.slice(index + 120, index + 128);
+    // console.log(date);
+    if (stringOfEightNumbers(date)) {
+      // console.log("date is proper number")
+      return date;
+    } else {
+      throw new Error("not a proper number");
+    }
+  } catch (error) {
+    console.log("Error in getLatestDate function")
+    console.error(error);
+  }
 };
 
-export const areThereNewComics: () => Promise<boolean> = async () =>
-  (await retrieveData(latestSavedDateKey)) === (await getLatestDate());
+export const areThereNewComics: () => Promise<boolean> = async () => {
+  try {
+    return (await retrieveData(latestSavedDateKey)) !== (await getLatestDate());
+  } catch (error) {
+    console.log("Error in areThereNewComics function");
+    console.error(error);
+  }
+};
 
 export const getNextComicDate: (date: string) => Promise<string> = async (
   date
@@ -46,6 +64,7 @@ export const getNextComicDate: (date: string) => Promise<string> = async (
     // return next date
     return nextDate;
   } catch (error) {
+    console.log("Error in the getNextComicDate function")
     console.error(error);
   }
 };
@@ -53,18 +72,25 @@ export const getNextComicDate: (date: string) => Promise<string> = async (
 export const update: () => void = async () => {
   try {
     // If new dates are found
-    if (await areThereNewComics()) {
-      const dateRegex: RegExp = new RegExp(/\d{8}/);
+    const newComics = await areThereNewComics();
+    if (newComics != null && !newComics) {
       // get date list
-      let dateList: string[] = await getDateList();
+      const savedDateList = await retrieveData(dateListKey);
+      const networkDateList = await getDateList();
+      let dateList: string[] =
+        savedDateList != null
+          ? savedDateList
+          : networkDateList != null
+          ? networkDateList
+          : ["20021104"];
       // set current date to start search
       let currentDate: string = lastElement(dateList);
       // while current date matches the date regex
-      while (currentDate.match(dateRegex) !== null) {
+      while (stringOfEightNumbers(currentDate)) {
         // get next date
         const nextDate: string = await getNextComicDate(currentDate);
         // if next date matches the date regex
-        if (nextDate.match(dateRegex) !== null) {
+        if (stringOfEightNumbers(nextDate)) {
           // add to date list
           dateList.push(
             nextDate === "20030106"
@@ -80,13 +106,14 @@ export const update: () => void = async () => {
         } else {
           // if next date does not match the date regex
           // save current date to latestSavedDate in memory
+          console.log("finished date update");
           updateLists();
           saveData(latestSavedDateKey, currentDate);
-          break;
         }
       }
     }
   } catch (error) {
+    console.log("Error in update function");
     console.error(error);
   }
 };

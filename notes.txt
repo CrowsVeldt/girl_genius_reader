@@ -1,3 +1,6 @@
+Crash is not coming from update functions. Update functions seem to be working correctly
+
+
 1. Fetch datelist from onrender link
 2. check if latest date is equal to currentDate
 3. if not run update starting from latestDate

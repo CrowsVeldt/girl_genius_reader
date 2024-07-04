@@ -6,6 +6,7 @@ export const dateListKey: string = "@GGAppDates";
 export const pageListKey: string = "@GGAppPageList";
 export const volumeListKey: string = "@GGAppVolumeList";
 export const latestSavedDateKey: string = "@GGAppLastSavedDate";
+export const initialStartKey: string = "@GGAppInitialStart";
 
 export const saveData: (key: string, value: any) => void = async (
   key,
@@ -13,6 +14,8 @@ export const saveData: (key: string, value: any) => void = async (
 ) => {
   try {
     if (key != null && value != null) {
+      // console.log(key)
+      // console.log(value)
       await ass.setItem(key, JSON.stringify(value));
     } else {
       console.log("You tried to save an undefined value, dude");
@@ -26,6 +29,7 @@ export const saveData: (key: string, value: any) => void = async (
 export const retrieveData: (key: string) => Promise<any> = async (key) => {
   try {
     const data: any = await ass.getItem(key);
+    // console.log(data)
     return data != null ? JSON.parse(data) : null;
   } catch (error) {
     console.warn("error retrieving data");

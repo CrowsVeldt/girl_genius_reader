@@ -8,10 +8,11 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-import { checkLists, updateLists } from "../utils/lists";
+import { checkLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
 import { showToast } from "../utils/notifications";
+import { update } from "../utils/network";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -88,7 +89,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const refresh: () => void = async () => {
     try {
       showToast("Updating");
-      const updated: boolean = await updateLists();
+      update();
     } catch (error) {
       console.warn("an error was thrown from the refresh function");
       console.error(error);
