@@ -12,7 +12,6 @@ import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
 import { showToast } from "../utils/notifications";
-import { getNextComicDate } from "../utils/network";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
@@ -44,30 +43,17 @@ const ComicProvider = ({ children }: { children: any }) => {
     volumeNumber: 1,
   });
   const [dataReady, setDataReady] = useState<boolean>(false);
-  const [dataUpdated, setDataUpdated] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      const listsExist: boolean = await checkLists();
-      if (listsExist) {
-        setPages(await retrieveData(pageListKey));
-        setVolumes(await retrieveData(volumeListKey));
-        setDataReady(true);
-      }
-    })();
-  }, [dataUpdated]);
-
-  useEffect(() => {
-    (async () => {
-      // TESTING PURPOSES ONLY:  getNextComicDate("20021104")
       try {
-        // repeat until updated successfully
-        const updated: boolean = await updateLists();
-        if (updated) {
-          setDataUpdated(true);
+        const listsExist: boolean = await checkLists();
+        if (listsExist) {
+          setPages(await retrieveData(pageListKey));
+          setVolumes(await retrieveData(volumeListKey));
+          setDataReady(true);
         }
       } catch (error) {
-        console.warn("error in comic context useeffect");
         console.error(error);
       }
     })();
@@ -103,9 +89,6 @@ const ComicProvider = ({ children }: { children: any }) => {
     try {
       showToast("Updating");
       const updated: boolean = await updateLists();
-      if (updated) {
-        setDataUpdated(true);
-      }
     } catch (error) {
       console.warn("an error was thrown from the refresh function");
       console.error(error);
