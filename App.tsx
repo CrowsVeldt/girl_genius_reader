@@ -16,12 +16,27 @@ import PrivacyScreen from "./src/screens/PrivacyScreen";
 import ComicProvider from "./src/context/ComicContext";
 import { useEffect } from "react";
 import { update } from "./src/utils/network";
+import {
+  dateListKey,
+  initialStartKey,
+  latestSavedDateKey,
+  retrieveData,
+  saveData,
+} from "./src/utils/storage";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   useEffect(() => {
-    update();
+    (async () => {
+      const initialStart = await retrieveData(initialStartKey);
+      if (initialStart != null && initialStart !== false) {
+        saveData(dateListKey, ["20021104"]);
+        saveData(latestSavedDateKey, "20021104");
+        saveData(initialStartKey, false);
+      }
+      update();
+    })();
   }, []);
 
   return (
