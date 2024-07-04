@@ -1,7 +1,26 @@
-import axios, { Axios, AxiosResponse } from "axios";
-import { latestSavedDateKey, retrieveData } from "./storage";
+import axios, { AxiosResponse } from "axios";
+import {
+  dateListKey,
+  latestSavedDateKey,
+  retrieveData,
+  saveData,
+} from "./storage";
+import { processDateList, updateLists } from "./lists";
+import { lastElement } from "./utilFunctions";
 
 const rootUrl: string = "https://www.girlgeniusonline.com";
+
+export const getDateList: () => Promise<string[]> = async () => {
+  try {
+    const dateList: AxiosResponse<any, any> = await axios.get(
+      "https://data-collector-yuw1.onrender.com/update/dates/"
+    );
+
+    return processDateList(dateList.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const getLatestDate: () => Promise<string> = async () => {
   const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
@@ -10,12 +29,14 @@ export const getLatestDate: () => Promise<string> = async () => {
   return date;
 };
 
-export const checkForNewComics: () => Promise<boolean> = async () =>
+export const areThereNewComics: () => Promise<boolean> = async () =>
   (await retrieveData(latestSavedDateKey)) === (await getLatestDate());
 
 export const getNextComicDate: (date: string) => Promise<string> = async (
   date
 ) => {
+  try {
+    
   // fetch page markup
   const { data }: AxiosResponse = await axios.get(
     `${rootUrl}/comic.php?date=${date}`
@@ -25,25 +46,51 @@ export const getNextComicDate: (date: string) => Promise<string> = async (
   const nextDate: string = data.slice(index - 14, index - 6);
   // return next date
   return nextDate;
-};
-
-export const update: (startDate: string) => void = async (startDate) => {
-  let currentDate = startDate;
-  let lastDate = false;
-  let dateList = [];
-  while (!lastDate) {
-    // starting from {start}, call getNextComicDate
-    const nextDate = await getNextComicDate(currentDate);
-    // add next date to list
-    dateList.push(nextDate);
-    // check for another next date
-    const nextNextDate = await getNextComicDate(nextDate);
-    const dateRegex = new RegExp("/d{8}/");
-    if (nextNextDate.match(dateRegex) != null) {
-      // save to storage
-      // repeat loop
-    } else {
-      // when last date is reached save it to latestSavedDate
-    }
+  } catch (error) {
+    
+    console.error(error)
   }
 };
+
+export const update: () => void = async () => {
+  try {
+    // If new dates are found
+    //if (await areThereNewComics()) {
+    const dateRegex: RegExp = new RegExp(/\d{8}/);
+    // get date list
+    let dateList: string[] = await getDateList();
+    // set current date to start search
+    let currentDate: string = lastElement(dateList);
+    // while current date matches the date regex
+    while (currentDate.match(dateRegex) !== null) {
+      // get next date
+      const nextDate: string = await getNextComicDate(currentDate);
+      // if next date matches the date regex
+      if (nextDate.match(dateRegex) !== null) {
+        // add to date list
+        dateList.push(
+          nextDate === "20030106"
+            ? "20030106b"
+            : nextDate === "20141226"
+            ? "20141226a"
+            : nextDate
+        );
+        // set current date to next date, to progress the loop
+        currentDate = nextDate;
+        // save date list to memory
+        saveData(dateListKey, dateList);
+      } else {
+        // if next date does not match the date regex
+        // save current date to latestSavedDate in memory
+        updateLists();
+        saveData(latestSavedDateKey, currentDate);
+        break;
+      }
+    }
+    //    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+// 20030106>20030106b (20030106 points to the wrong comic)
+// 20141226a-20141226b (a is the comic, b is a wallpaper)
