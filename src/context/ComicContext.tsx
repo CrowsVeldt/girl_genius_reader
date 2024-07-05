@@ -48,7 +48,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        const listsExist: boolean = await checkLists();
+        const listsExist: boolean | undefined = await checkLists();
         if (listsExist) {
           setPages(await retrieveData(pageListKey));
           setVolumes(await retrieveData(volumeListKey));
