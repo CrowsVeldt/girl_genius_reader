@@ -14,3 +14,8 @@ export const lastElement: (array: any[]) => any = (array) => {
 
 export const formatDate: (date: string) => string = (date) =>
   `${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6)}`;
+
+export const stringOfEightNumbers = (str: string) => {
+  const dateRegex: RegExp = new RegExp(/\d{8}/);
+  return dateRegex.test(str);
+};

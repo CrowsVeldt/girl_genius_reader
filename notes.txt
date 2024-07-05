@@ -1,10 +1,3 @@
-replace 'setUpdated' in comicContext with storage and 'dataUpdatedKey'
-
-1. save latest comic when updating
-2. when opened check latest comic against savedLast
-3. if they are different run update
-
-
 Improvements:
 - Try using image prefetch to load next / previous image?
 - cut down page turn lag: load next comic at the same time to cut down load times?

@@ -15,16 +15,21 @@ import PrivacyScreen from "./src/screens/PrivacyScreen";
 
 import ComicProvider from "./src/context/ComicContext";
 import { useEffect } from "react";
-import { checkForNewComics } from "./src/utils/network";
+import { getDateList, update } from "./src/utils/network";
+import { dateListKey, retrieveData, saveData } from "./src/utils/storage";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   useEffect(() => {
-    checkForNewComics();
-    // Check for new date
-    // if found, run update, and start countdown to check again
-    // when countdown finishes repeat
+    (async () => {
+      const data = await retrieveData(dateListKey);
+      if (data === null) {
+        const fetchDates = await getDateList();
+        saveData(dateListKey, fetchDates);
+      }
+      update();
+    })();
   }, []);
 
   return (
