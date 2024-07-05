@@ -17,42 +17,41 @@ export const getDateList: () => Promise<string[]> = async () => {
     );
     return dateList != null ? dateList.data.dates : [];
   } catch (error) {
-    console.log("Error in the getDateList function");
+    console.warn("Error in the getDateList function");
     console.error(error);
   }
 };
 
-export const getLatestDate: () => Promise<string> = async () => {
+export const getLatestDate: () => Promise<string | undefined> = async () => {
   try {
-    // console.log("getting latest date");
     const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
     const index: number = data.search("topbookmark");
     const date: string = data.slice(index + 120, index + 128);
-    // console.log(date);
     if (stringOfEightNumbers(date)) {
-      // console.log("date is proper number")
       return date;
     } else {
       throw new Error("not a proper number");
     }
   } catch (error) {
-    console.log("Error in getLatestDate function")
+    console.warn("Error in getLatestDate function");
     console.error(error);
   }
 };
 
-export const areThereNewComics: () => Promise<boolean> = async () => {
+export const areThereNewComics: () => Promise<
+  boolean | undefined
+> = async () => {
   try {
     return (await retrieveData(latestSavedDateKey)) !== (await getLatestDate());
   } catch (error) {
-    console.log("Error in areThereNewComics function");
+    console.warn("Error in areThereNewComics function");
     console.error(error);
   }
 };
 
-export const getNextComicDate: (date: string) => Promise<string> = async (
-  date
-) => {
+export const getNextComicDate: (
+  date: string
+) => Promise<string | undefined> = async (date) => {
   try {
     // fetch page markup
     const { data }: AxiosResponse = await axios.get(
@@ -64,7 +63,7 @@ export const getNextComicDate: (date: string) => Promise<string> = async (
     // return next date
     return nextDate;
   } catch (error) {
-    console.log("Error in the getNextComicDate function")
+    console.warn("Error in the getNextComicDate function");
     console.error(error);
   }
 };
@@ -73,7 +72,7 @@ export const update: () => void = async () => {
   try {
     // If new dates are found
     const newComics = await areThereNewComics();
-    if (newComics != null && !newComics) {
+    if (newComics != null && newComics) {
       // get date list
       const savedDateList = await retrieveData(dateListKey);
       const networkDateList = await getDateList();
@@ -88,14 +87,18 @@ export const update: () => void = async () => {
       // while current date matches the date regex
       while (stringOfEightNumbers(currentDate)) {
         // get next date
-        const nextDate: string = await getNextComicDate(currentDate);
+        const nextDate: string | undefined = await getNextComicDate(
+          currentDate
+        );
         // if next date matches the date regex
-        if (stringOfEightNumbers(nextDate)) {
+        if (nextDate != undefined && stringOfEightNumbers(nextDate)) {
           // add to date list
           dateList.push(
+            // 20030106>20030106b (20030106 points to the wrong comic)
             nextDate === "20030106"
               ? "20030106b"
-              : nextDate === "20141226"
+              : // 20141226a-20141226b (a is the comic, b is a wallpaper)
+              nextDate === "20141226"
               ? "20141226a"
               : nextDate
           );
@@ -106,16 +109,13 @@ export const update: () => void = async () => {
         } else {
           // if next date does not match the date regex
           // save current date to latestSavedDate in memory
-          console.log("finished date update");
           updateLists();
           saveData(latestSavedDateKey, currentDate);
         }
       }
     }
   } catch (error) {
-    console.log("Error in update function");
+    console.warn("Error in update function");
     console.error(error);
   }
 };
-// 20030106>20030106b (20030106 points to the wrong comic)
-// 20141226a-20141226b (a is the comic, b is a wallpaper)
