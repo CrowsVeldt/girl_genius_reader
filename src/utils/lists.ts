@@ -8,16 +8,16 @@ import {
 } from "./storage";
 import { collectVolumes } from "./volumes";
 
-export const checkLists: () => Promise<boolean> = async () => {
+export const checkLists: () => Promise<boolean | undefined> = async () => {
   try {
     const pages = await retrieveData(pageListKey);
     const volumes = await retrieveData(volumeListKey);
 
     return pages != null && volumes != null;
   } catch (error) {
+    console.warn("Error checking lists");
     console.error(error);
   }
-  return false;
 };
 
 export const processDateList: (list: string[]) => string[] = (list) =>
@@ -35,7 +35,7 @@ export const updateLists: () => Promise<boolean> = async () => {
       return true;
     }
   } catch (error) {
-    console.log("An error occurred while updating comic data");
+    console.warn("An error occurred while updating comic data");
     console.error(error);
   }
   return false;
