@@ -71,11 +71,11 @@ export const getNextComicDate: (
 export const update: () => void = async () => {
   try {
     // If new dates are found
-    const newComics = await areThereNewComics();
+    const newComics: boolean | undefined = await areThereNewComics();
     if (newComics != null && newComics) {
       // get date list
-      const savedDateList = await retrieveData(dateListKey);
-      const networkDateList = await getDateList();
+      const savedDateList: string[] = await retrieveData(dateListKey);
+      const networkDateList: string[] = await getDateList();
       let dateList: string[] =
         savedDateList != null
           ? savedDateList

@@ -9,9 +9,10 @@ Improvements:
 - add option to view two pages when in landscape mode
 - - rework ComicContext methods to work with two images per page/screen
 
-
 - improve accessibility (follow suggestions from google play console)
 - - rename starButton ("white star") for screen readers
+- - make volume and page titles taller and more distinct to press in index page
+
 - remove repeated code from page/volumeList?
 
 Done:
