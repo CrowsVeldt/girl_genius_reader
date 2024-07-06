@@ -1,18 +1,16 @@
-Improvements:
-- Try using image prefetch to load next / previous image?
 - cut down page turn lag: load next comic at the same time to cut down load times?
+- - Try using image prefetch to load next / previous image?
+
+Improvements:
 - have spinner spin until update is completed
-- make update actually update
 - log crashes and errors in production, give users a way to share those logs
 - add toasts/notifications to inform users of things
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
+- add option to view two pages when in landscape mode
+
+
 - improve accessibility (follow suggestions from google play console)
-
-
-- remove redundancy from page/volumeList?
-- prevent double-tap-to-zoom under pageTurn(?)
-- seperate tap and swipe page turn?
-- clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
+- remove repeated code from page/volumeList?
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -83,23 +81,11 @@ x - Replace calls to dataCollector with accessing GG's RSS feed
 x - Regression: First page flashes before current page is loaded
 x currently saving page/volume data both in asyncstorage and filesystem, reduce redundancy
 x status bar is covered on production app?
+x make update actually update
+x prevent double-tap-to-zoom under pageTurn(?)
+x seperate tap and swipe page turn?
+x clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
 
 
 Thanks to: 
 - https://github.com/likashefqet
-
-1. Store latest comic date
-2. Each time the app is opened, compare latestDate with currentDate
-4b. step 1: is C !== to saturday ? 
-4c. if so, if C > L + 1, return true
-4d. if not, if C > L + 2, return true
-4E. else, return false
-5. keep running update at intervals until shouldAppUpdate === false
-
-Pseudocode:
-const latestSavedDate
-const currentDate
-const shouldAppUpdate = currentDate.day !== 7 
-                                            ? currentDate.date > latestSavedDate.date + 1 
-                                            ? true : currentDate.date > latestSavedDate.date + 2 
-                                            ? true : false
