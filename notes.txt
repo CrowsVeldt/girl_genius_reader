@@ -11,6 +11,7 @@ Improvements:
 
 
 - improve accessibility (follow suggestions from google play console)
+- - rename starButton ("white star") for screen readers
 - remove repeated code from page/volumeList?
 
 Done:
