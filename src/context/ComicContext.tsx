@@ -15,18 +15,18 @@ import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
 
 type ComicContextType = {
-  getDataStatus: () => boolean;
-  getCurrentPage: () => PageType;
-  getLatestPage: () => PageType;
+  addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
   getBookmarks: () => PageType[];
-  addBookmark: (newBookmark: PageType) => void;
-  removeBookmark: (page: PageType) => void;
-  isPageBookmarked: (page: PageType) => boolean;
-  goToNextPage: (page: PageType) => void;
-  goToPreviousPage: (page: PageType) => void;
+  getCurrentPage: () => PageType;
+  getDataStatus: () => boolean;
+  getLatestPage: () => PageType;
   getVolumes: () => VolumeType[];
+  goToPreviousPage: (page: PageType) => void;
+  goToNextPage: (page: PageType) => void;
+  isPageBookmarked: (page: PageType) => boolean;
   refresh: () => void;
+  removeBookmark: (page: PageType) => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -79,35 +79,6 @@ const ComicProvider = ({ children }: { children: any }) => {
     })();
   }, []);
 
-  const getBookmarks: () => PageType[] = () => bookmarks;
-  const getCurrentPage: () => PageType = () => currentPage;
-  const getVolumes: () => VolumeType[] = () => volumes;
-  const getLatestPage: () => PageType = () => lastElement(pages);
-
-  const getDataStatus: () => boolean = () => dataReady;
-
-  const refresh: () => void = async () => {
-    try {
-      showToast("Updating");
-      update();
-    } catch (error) {
-      console.warn("an error was thrown from the refresh function");
-      console.error(error);
-    }
-  };
-
-  const isPageBookmarked: (page: PageType) => boolean = (page) =>
-    bookmarks.find((item: PageType) => item.date === page.date) != undefined;
-
-  const changeCurrentPage: (page: PageType) => void = async (page) => {
-    if (page != null) {
-      setCurrentPage(page);
-      saveData(currentPageKey, page);
-    } else {
-      console.error('Can\'t change page to "undefined"');
-    }
-  };
-
   const addBookmark: (newBookmark: PageType) => void = async (newBookmark) => {
     try {
       const newBookmarks: PageType[] = [...bookmarks, newBookmark];
@@ -121,14 +92,29 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
-  const removeBookmark: (page: PageType) => void = async (page) => {
+  const changeCurrentPage: (page: PageType) => void = async (page) => {
+    if (page != null) {
+      setCurrentPage(page);
+      saveData(currentPageKey, page);
+    } else {
+      console.error('Can\'t change page to "undefined"');
+    }
+  };
+
+  const getBookmarks: () => PageType[] = () => bookmarks;
+  const getCurrentPage: () => PageType = () => currentPage;
+  const getDataStatus: () => boolean = () => dataReady;
+  const getLatestPage: () => PageType = () => lastElement(pages);
+  const getVolumes: () => VolumeType[] = () => volumes;
+
+  const goToPreviousPage: (page: PageType) => void = (page) => {
     try {
-      const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
-      setBookmarks(newBookmarks);
-      Toast.show(`Removed ${page.date} from bookmarks`);
-      saveData(bookmarkKey, newBookmarks);
+      const index: number = pages.findIndex(
+        (element: PageType) => element.date === page.date
+      );
+      changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
     } catch (error) {
-      console.error("failed to remove bookmark");
+      console.error("failed to retreat to last page");
     }
   };
 
@@ -143,30 +129,43 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
-  const goToPreviousPage: (page: PageType) => void = (page) => {
+  const isPageBookmarked: (page: PageType) => boolean = (page) =>
+    bookmarks.find((item: PageType) => item.date === page.date) != undefined;
+
+  const refresh: () => void = async () => {
     try {
-      const index: number = pages.findIndex(
-        (element: PageType) => element.date === page.date
-      );
-      changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
+      showToast("Updating");
+      update();
     } catch (error) {
-      console.error("failed to retreat to last page");
+      console.warn("an error was thrown from the refresh function");
+      console.error(error);
+    }
+  };
+
+  const removeBookmark: (page: PageType) => void = async (page) => {
+    try {
+      const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
+      setBookmarks(newBookmarks);
+      Toast.show(`Removed ${page.date} from bookmarks`);
+      saveData(bookmarkKey, newBookmarks);
+    } catch (error) {
+      console.error("failed to remove bookmark");
     }
   };
 
   const value = {
-    getDataStatus,
-    getCurrentPage,
-    getLatestPage,
+    addBookmark,
     changeCurrentPage,
     getBookmarks,
-    addBookmark,
-    removeBookmark,
-    isPageBookmarked,
-    goToNextPage,
-    goToPreviousPage,
+    getCurrentPage,
+    getDataStatus,
+    getLatestPage,
     getVolumes,
+    goToPreviousPage,
+    goToNextPage,
+    isPageBookmarked,
     refresh,
+    removeBookmark,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
