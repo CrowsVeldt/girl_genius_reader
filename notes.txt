@@ -7,6 +7,7 @@ Improvements:
 - add toasts/notifications to inform users of things
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 - add option to view two pages when in landscape mode
+- - rework ComicContext methods to work with two images per page/screen
 
 
 - improve accessibility (follow suggestions from google play console)

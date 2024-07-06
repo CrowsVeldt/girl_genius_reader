@@ -55,6 +55,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           setDataReady(true);
         }
       } catch (error) {
+        console.warn("An error occurred setting page and volume data");
         console.error(error);
       }
     })();
@@ -73,7 +74,7 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage);
         }
       } catch (error) {
-        console.warn("Error setting data");
+        console.warn("An error occurred setting bookmark and current page data");
         console.error(error);
       }
     })();
@@ -88,16 +89,22 @@ const ComicProvider = ({ children }: { children: any }) => {
       Toast.show(`Added ${newBookmark.date} to bookmarks`);
       saveData(bookmarkKey, filteredBookmarksArray);
     } catch (error) {
-      console.error("failed to add bookmark");
+      console.warn("An error occurred adding bookmark");
+      console.error(error);
     }
   };
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
-    if (page != null) {
-      setCurrentPage(page);
-      saveData(currentPageKey, page);
-    } else {
-      console.error('Can\'t change page to "undefined"');
+    try {
+      if (page != null) {
+        setCurrentPage(page);
+        saveData(currentPageKey, page);
+      } else if (page === undefined) {
+        throw new Error("Cannot change page to 'undefined'");
+      }
+    } catch (error) {
+      console.warn("An error occurred changing page");
+      console.error(error);
     }
   };
 
@@ -114,7 +121,8 @@ const ComicProvider = ({ children }: { children: any }) => {
       );
       changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
     } catch (error) {
-      console.error("failed to retreat to last page");
+      console.warn("An error occurred going to previous page");
+      console.error(error);
     }
   };
 
@@ -125,7 +133,8 @@ const ComicProvider = ({ children }: { children: any }) => {
       );
       changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
     } catch (error) {
-      console.error("failed to advance to next page");
+      console.warn("An error occurred going to next page");
+      console.error(error);
     }
   };
 
@@ -137,7 +146,7 @@ const ComicProvider = ({ children }: { children: any }) => {
       showToast("Updating");
       update();
     } catch (error) {
-      console.warn("an error was thrown from the refresh function");
+      console.warn("An error occurred refreshing data");
       console.error(error);
     }
   };
@@ -149,7 +158,8 @@ const ComicProvider = ({ children }: { children: any }) => {
       Toast.show(`Removed ${page.date} from bookmarks`);
       saveData(bookmarkKey, newBookmarks);
     } catch (error) {
-      console.error("failed to remove bookmark");
+      console.warn("An error occurred removing bookmark");
+      console.error(error);
     }
   };
 
