@@ -10,7 +10,7 @@ import Animated, {
   SharedValue,
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { PageType } from "../utils/types";
+import { PageType, SideType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 
 export default function PageTurn(props: any) {
@@ -19,7 +19,7 @@ export default function PageTurn(props: any) {
     goToNextPage,
     goToPreviousPage,
   }: ContextType<typeof ComicContext> = useContext(ComicContext);
-  const { side }: any = props;
+  const side: SideType = props.side;
   const page: PageType = getCurrentPage();
   const onSide: SharedValue<boolean> = useSharedValue(true);
   const position: SharedValue<number> = useSharedValue(0);

@@ -22,3 +22,5 @@ export type ListCollectionType =
       volumeList: VolumeType[];
     }
   | undefined;
+
+export type SideType = "left" | "right";
