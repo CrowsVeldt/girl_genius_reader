@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ContextType, useContext } from "react";
 import { StyleSheet } from "react-native";
 import {
   DrawerContentScrollView,
@@ -8,8 +8,11 @@ import {
 import { ComicContext } from "../context/ComicContext";
 
 export default function DrawerContent(props: any) {
-  const { changeCurrentPage, getLatestPage, getDataStatus } =
-    useContext(ComicContext);
+  const {
+    changeCurrentPage,
+    getLatestPage,
+    getDataStatus,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
   const dataReady: boolean = getDataStatus();
 
   return (

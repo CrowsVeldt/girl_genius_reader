@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ContextType, useContext } from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
 import Animated, {
   useSharedValue,
@@ -13,7 +13,8 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { ComicContext } from "../context/ComicContext";
 
 export default function PullToRefresh(props: any) {
-  const { refresh } = useContext(ComicContext);
+  const { refresh }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
   const position: SharedValue<number> = useSharedValue(0);
   const END_POSITION: number = 50;
 

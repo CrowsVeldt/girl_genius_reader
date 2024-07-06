@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { ContextType, useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { formatDate } from "../utils/utilFunctions";
 import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 
 export default function ComicLink({ page, nav }: { page: PageType; nav: any }) {
-  const { changeCurrentPage } = useContext(ComicContext);
+  const { changeCurrentPage }: ContextType<typeof ComicContext> = useContext(ComicContext);
   return (
     <TouchableOpacity
       style={styles.linkButton}

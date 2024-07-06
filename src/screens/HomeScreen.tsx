@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { ContextType, useContext, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -17,7 +17,8 @@ const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
-  const { getCurrentPage, getDataStatus } = useContext(ComicContext);
+  const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
