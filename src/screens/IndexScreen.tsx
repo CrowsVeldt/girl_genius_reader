@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     width: "100%",
-    height: "100%",
     paddingTop: 30,
     paddingBottom: 60,
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
