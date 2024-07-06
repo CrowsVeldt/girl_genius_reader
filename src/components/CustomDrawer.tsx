@@ -1,10 +1,10 @@
+import { useContext } from "react";
+import { StyleSheet } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { useContext } from "react";
-import { StyleSheet } from "react-native";
 import { ComicContext } from "../context/ComicContext";
 
 export default function DrawerContent(props: any) {

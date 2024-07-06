@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
+import { updateLists } from "./lists";
 import {
   dateListKey,
   latestSavedDateKey,
   retrieveData,
   saveData,
 } from "./storage";
-import { updateLists } from "./lists";
 import { lastElement, stringOfEightNumbers } from "./utilFunctions";
 
 const rootUrl: string = "https://www.girlgeniusonline.com";

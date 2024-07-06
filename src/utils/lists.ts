@@ -1,4 +1,3 @@
-import { ListCollectionType } from "./types";
 import {
   dateListKey,
   pageListKey,
@@ -6,6 +5,7 @@ import {
   saveData,
   volumeListKey,
 } from "./storage";
+import { ListCollectionType } from "./types";
 import { collectVolumes } from "./volumes";
 
 export const checkLists: () => Promise<boolean | undefined> = async () => {

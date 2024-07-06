@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   withTiming,
@@ -10,8 +9,10 @@ import Animated, {
   clamp,
   SharedValue,
 } from "react-native-reanimated";
-import { ComicContext } from "../context/ComicContext";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { PageType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
+
 
 export default function PageTurn(props: any) {
   const { getCurrentPage, goToNextPage, goToPreviousPage } =

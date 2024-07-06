@@ -7,11 +7,11 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
-import { PageType } from "../utils/types";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");

@@ -6,17 +6,17 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { runOnJS } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { TapGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/tapGesture";
-import { runOnJS } from "react-native-reanimated";
+import { VolumeType } from "../utils/types";
 import ComicLink from "./ComicLink";
-import { ComicDataType } from "../utils/types";
 
 export const VolumeList = ({
   volume,
   nav,
 }: {
-  volume: ComicDataType;
+  volume: VolumeType;
   nav: any;
 }) => {
   const [open, setOpen] = useState<boolean>(false);

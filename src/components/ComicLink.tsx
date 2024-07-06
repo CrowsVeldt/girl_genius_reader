@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { formatDate } from "../utils/utilFunctions";
-import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
 
 export default function ComicLink({ page, nav }: { page: PageType; nav: any }) {
   const { changeCurrentPage } = useContext(ComicContext);

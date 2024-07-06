@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
+import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import BookmarkLink from "../components/BookmarkLink";
-import { PageType } from "../utils/types";
 
 export default function Bookmarks({ navigation }: any) {
   const { getBookmarks } = useContext(ComicContext);

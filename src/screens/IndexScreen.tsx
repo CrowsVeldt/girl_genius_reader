@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { StyleSheet, ScrollView } from "react-native";
+import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
-import { VolumeType } from "../utils/types";
 
 export default function ComicIndex({ navigation }: { navigation: any }) {
   const { getVolumes } = useContext(ComicContext);

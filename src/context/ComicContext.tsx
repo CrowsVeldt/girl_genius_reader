@@ -1,5 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
+import { checkLists } from "../utils/lists";
+import { update } from "../utils/network";
+import { showToast } from "../utils/notifications";
 import {
   retrieveData,
   saveData,
@@ -8,11 +11,8 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-import { checkLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
-import { showToast } from "../utils/notifications";
-import { update } from "../utils/network";
 
 type ComicContextType = {
   getDataStatus: () => boolean;
