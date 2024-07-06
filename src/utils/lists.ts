@@ -5,13 +5,13 @@ import {
   saveData,
   volumeListKey,
 } from "./storage";
-import { ListCollectionType } from "./types";
+import { ListCollectionType, PageType, VolumeType } from "./types";
 import { collectVolumes } from "./volumes";
 
 export const checkLists: () => Promise<boolean | undefined> = async () => {
   try {
-    const pages = await retrieveData(pageListKey);
-    const volumes = await retrieveData(volumeListKey);
+    const pages: PageType[] = await retrieveData(pageListKey);
+    const volumes: VolumeType[] = await retrieveData(volumeListKey);
 
     return pages != null && volumes != null;
   } catch (error) {
@@ -25,7 +25,7 @@ export const processDateList: (list: string[]) => string[] = (list) =>
 
 export const updateLists: () => Promise<boolean> = async () => {
   try {
-    const dateArray = processDateList(await retrieveData(dateListKey));
+    const dateArray: string[] = processDateList(await retrieveData(dateListKey));
     if (dateArray != null) {
       const lists: ListCollectionType = await collectVolumes(dateArray);
 
