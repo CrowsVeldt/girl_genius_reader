@@ -25,8 +25,8 @@ export const getDateList: () => Promise<string[]> = async () => {
 export const getLatestDate: () => Promise<string | undefined> = async () => {
   try {
     const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
-    const index: number = data.search("topbookmark");
-    const date: string = data.slice(index + 120, index + 128);
+    const index: string = data.search("javascript:setPage")
+    const date: string = data.slice(index + 19, index + 27)
     if (stringOfEightNumbers(date)) {
       return date;
     } else {
