@@ -2,8 +2,7 @@ BUGS:
 - somethings wrong with volume 10 starting around page 32, images don't load, returns an http error
 
 - cut down page turn lag: load next comic at the same time to cut down load times?
-- - Try using image prefetch to load next / previous image?
-- - when calling getCurrentPage(s) return the next, current, and previous dates
+- - prefetch apparently not working, might not be calling it correctly
 - - rework imageZoom to work with expo-image?
 
 Improvements:
