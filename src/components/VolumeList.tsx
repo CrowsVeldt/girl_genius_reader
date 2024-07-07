@@ -39,6 +39,13 @@ export const VolumeList = ({
         >
           <Text>{`Volume ${volume.volumeNumber}`}</Text>
         </TouchableOpacity>
+        {open && (
+          <View style={styles.subtitleContainer}>
+            <Text style={{ flex: 1 }}>Page #</Text>
+            <Text style={{ flex: 2, marginStart: 20 }}>Date</Text>
+            <Text style={{ flex: 3, paddingStart: 30 }}>Scene</Text>
+          </View>
+        )}
         <ScrollView>
           {volume.pages.map((page, index) =>
             open ? <ComicLink page={page} nav={nav} key={index} /> : null
@@ -57,7 +64,13 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: "center",
+    height: 50,
     borderBottomWidth: 1,
     marginBottom: 10,
+  },
+  subtitleContainer: {
+    flexDirection: "row",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
 });

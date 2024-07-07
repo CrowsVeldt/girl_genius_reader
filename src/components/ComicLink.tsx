@@ -5,7 +5,8 @@ import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 
 export default function ComicLink({ page, nav }: { page: PageType; nav: any }) {
-  const { changeCurrentPage }: ContextType<typeof ComicContext> = useContext(ComicContext);
+  const { changeCurrentPage }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
   return (
     <TouchableOpacity
       style={styles.linkButton}
@@ -14,7 +15,7 @@ export default function ComicLink({ page, nav }: { page: PageType; nav: any }) {
         nav.navigate("Home");
       }}
     >
-      <Text style={styles.linkNumber}>{`Page ${page.pageNumber}`}</Text>
+      <Text style={styles.linkNumber}>{page.pageNumber}</Text>
       <Text style={styles.linkText}>{formatDate(page.date)}</Text>
       <Text style={styles.title}>{page.title}</Text>
     </TouchableOpacity>
@@ -24,8 +25,11 @@ export default function ComicLink({ page, nav }: { page: PageType; nav: any }) {
 const styles = StyleSheet.create({
   linkButton: {
     width: "100%",
+    height: 40,
     flexDirection: "row",
     justifyContent: "space-between",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
   linkNumber: {
     marginRight: 6,

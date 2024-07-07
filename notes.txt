@@ -6,6 +6,7 @@ Improvements:
 - log crashes and errors in production, give users a way to share those logs
 - add toasts/notifications to inform users of things
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
+- add option to sort volumes first-last or last-first
 - add option to view two pages when in landscape mode
 - - rework ComicContext methods to work with two images per page/screen
 
