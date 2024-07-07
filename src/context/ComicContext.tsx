@@ -13,12 +13,14 @@ import {
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
+import { Image } from "expo-image";
 
 type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
   getBookmarks: () => PageType[];
   getCurrentPage: () => PageType;
+  getCurrentFive: (page: PageType) => [string, string, string, string, string];
   getDataStatus: () => boolean;
   getLatestPage: () => PageType;
   getVolumes: () => VolumeType[];
@@ -74,7 +76,9 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage);
         }
       } catch (error) {
-        console.warn("An error occurred setting bookmark and current page data");
+        console.warn(
+          "An error occurred setting bookmark and current page data"
+        );
         console.error(error);
       }
     })();
@@ -97,6 +101,16 @@ const ComicProvider = ({ children }: { children: any }) => {
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     try {
       if (page != null) {
+        const five = getCurrentFive();
+
+        Image.prefetch([
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${five[0]}.jpg`,
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${five[1]}.jpg`,
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${five[2]}.jpg`,
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${five[3]}.jpg`,
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${five[4]}.jpg`,
+        ]);
+
         setCurrentPage(page);
         saveData(currentPageKey, page);
       } else if (page === undefined) {
@@ -110,6 +124,23 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
+
+  const getCurrentFive: () => [string, string, string, string, string] = (
+  ) => {
+    const current = getCurrentPage();
+    const index: number = pages.findIndex(
+      (element: PageType) => element.date === current.date
+    );
+
+    return [
+      pages[index - 2]?.date,
+      pages[index - 1]?.date,
+      pages[index]?.date,
+      pages[index + 1]?.date,
+      pages[index + 2]?.date,
+    ];
+  };
+
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
   const getVolumes: () => VolumeType[] = () => volumes;
@@ -168,6 +199,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentPage,
     getBookmarks,
     getCurrentPage,
+    getCurrentFive,
     getDataStatus,
     getLatestPage,
     getVolumes,
