@@ -12,7 +12,6 @@ Improvements:
 
 - improve accessibility (follow suggestions from google play console)
 - - rename starButton ("white star") for screen readers
-- - make volume and page titles taller and more distinct to press in index page
 
 - remove repeated code from page/volumeList?
 
@@ -89,6 +88,7 @@ x make update actually update
 x prevent double-tap-to-zoom under pageTurn(?)
 x seperate tap and swipe page turn?
 x clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
+x - make volume and page titles taller and more distinct to press in index page
 
 
 Thanks to: 
