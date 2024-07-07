@@ -36,6 +36,7 @@ export default function Home() {
           <PageTurn side={"left"} />
           <ImageZoom
             ref={imageRef}
+            alt={`Comic page for ${page.date}`}
             uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
             minPanPointers={1}
             isDoubleTapEnabled
