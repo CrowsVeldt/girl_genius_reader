@@ -125,8 +125,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
 
-  const getCurrentFive: () => [string, string, string, string, string] = (
-  ) => {
+  const getCurrentFive: () => [string, string, string, string, string] = () => {
     const current = getCurrentPage();
     const index: number = pages.findIndex(
       (element: PageType) => element.date === current.date
@@ -141,12 +140,38 @@ const ComicProvider = ({ children }: { children: any }) => {
     ];
   };
 
+  const prefetchFive = async (page: PageType) => {
+    const index: number = pages.findIndex(
+      (element: PageType) => element.date === page.date
+    );
+
+    const pre = await Image.prefetch([
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index - 2]?.date
+      }.jpg`,
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index - 1]?.date
+      }.jpg`,
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${pages[index]?.date}.jpg`,
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index + 1]?.date
+      }.jpg`,
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index + 2]?.date
+      }.jpg`,
+    ]);
+
+    console.log(pre);
+
+  };
+
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
   const getVolumes: () => VolumeType[] = () => volumes;
 
-  const goToPreviousPage: (page: PageType) => void = (page) => {
+  const goToPreviousPage: (page: PageType) => void = async (page) => {
     try {
+      prefetchFive(page);
       const index: number = pages.findIndex(
         (element: PageType) => element.date === page.date
       );
@@ -159,6 +184,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const goToNextPage: (page: PageType) => void = (page) => {
     try {
+      prefetchFive(page);
       const index: number = pages.findIndex(
         (element: PageType) => element.date === page.date
       );
