@@ -34,7 +34,8 @@
     "react-native-web": "~0.19.6",
     "react-test-renderer": "^18.2.0",
     "expo-build-properties": "~0.12.3",
-    "expo-status-bar": "~1.12.1"
+    "expo-status-bar": "~1.12.1",
+    "expo-image": "~1.12.12"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
