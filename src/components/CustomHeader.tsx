@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ContextType, useContext } from "react";
 import {
   View,
   Text,
@@ -6,10 +6,10 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import StarButton from "./StarButton";
-import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
 import PullToRefresh from "./PullToRefresh";
+import StarButton from "./StarButton";
 
 export default function CustomHeader({
   navigation,
@@ -22,7 +22,8 @@ export default function CustomHeader({
   options: any;
   layout: any;
 }) {
-  const { getCurrentPage } = useContext(ComicContext);
+  const { getCurrentPage }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
 
   const page: PageType = getCurrentPage();
   const routeName: string = route.name;

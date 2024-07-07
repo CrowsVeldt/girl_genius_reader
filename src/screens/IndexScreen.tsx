@@ -1,11 +1,12 @@
-import { useContext } from "react";
+import { ContextType, useContext } from "react";
 import { StyleSheet, ScrollView } from "react-native";
+import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
-import { VolumeType } from "../utils/types";
 
 export default function ComicIndex({ navigation }: { navigation: any }) {
-  const { getVolumes } = useContext(ComicContext);
+  const { getVolumes }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
 
   const volumes: VolumeType[] = getVolumes();
 
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     width: "100%",
-    height: "100%",
     paddingTop: 30,
     paddingBottom: 60,
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,

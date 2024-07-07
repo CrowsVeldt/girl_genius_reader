@@ -1,5 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
+import { checkLists } from "../utils/lists";
+import { update } from "../utils/network";
+import { showToast } from "../utils/notifications";
 import {
   retrieveData,
   saveData,
@@ -8,24 +11,22 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-import { checkLists, updateLists } from "../utils/lists";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
-import { showToast } from "../utils/notifications";
 
 type ComicContextType = {
-  getDataStatus: () => boolean;
-  getCurrentPage: () => PageType;
-  getLatestPage: () => PageType;
+  addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
   getBookmarks: () => PageType[];
-  addBookmark: (newBookmark: PageType) => void;
-  removeBookmark: (page: PageType) => void;
-  isPageBookmarked: (page: PageType) => boolean;
-  goToNextPage: (page: PageType) => void;
-  goToPreviousPage: (page: PageType) => void;
+  getCurrentPage: () => PageType;
+  getDataStatus: () => boolean;
+  getLatestPage: () => PageType;
   getVolumes: () => VolumeType[];
+  goToPreviousPage: (page: PageType) => void;
+  goToNextPage: (page: PageType) => void;
+  isPageBookmarked: (page: PageType) => boolean;
   refresh: () => void;
+  removeBookmark: (page: PageType) => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -43,29 +44,18 @@ const ComicProvider = ({ children }: { children: any }) => {
     volumeNumber: 1,
   });
   const [dataReady, setDataReady] = useState<boolean>(false);
-  const [dataUpdated, setDataUpdated] = useState<boolean>(false);
-
-  useEffect(() => {
-    (async () => {
-      const listsExist: boolean = await checkLists();
-      if (listsExist) {
-        setPages(await retrieveData(pageListKey));
-        setVolumes(await retrieveData(volumeListKey));
-        setDataReady(true);
-      }
-    })();
-  }, [dataUpdated]);
 
   useEffect(() => {
     (async () => {
       try {
-        // repeat until updated successfully
-        const updated: boolean = await updateLists();
-        if (updated) {
-          setDataUpdated(true);
+        const listsExist: boolean | undefined = await checkLists();
+        if (listsExist) {
+          setPages(await retrieveData(pageListKey));
+          setVolumes(await retrieveData(volumeListKey));
+          setDataReady(true);
         }
       } catch (error) {
-        console.warn("error in comic context useeffect");
+        console.warn("An error occurred setting page and volume data");
         console.error(error);
       }
     })();
@@ -84,43 +74,11 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage);
         }
       } catch (error) {
-        console.warn("Error setting data");
+        console.warn("An error occurred setting bookmark and current page data");
         console.error(error);
       }
     })();
   }, []);
-
-  const getBookmarks: () => PageType[] = () => bookmarks;
-  const getCurrentPage: () => PageType = () => currentPage;
-  const getVolumes: () => VolumeType[] = () => volumes;
-  const getLatestPage: () => PageType = () => lastElement(pages);
-
-  const getDataStatus: () => boolean = () => dataReady;
-
-  const refresh: () => void = async () => {
-    try {
-      showToast("Updating");
-      const updated: boolean = await updateLists();
-      if (updated) {
-        setDataUpdated(true);
-      }
-    } catch (error) {
-      console.warn("an error was thrown from the refresh function");
-      console.error(error);
-    }
-  };
-
-  const isPageBookmarked: (page: PageType) => boolean = (page) =>
-    bookmarks.find((item: PageType) => item.date === page.date) != undefined;
-
-  const changeCurrentPage: (page: PageType) => void = async (page) => {
-    if (page != null) {
-      setCurrentPage(page);
-      saveData(currentPageKey, page);
-    } else {
-      console.error('Can\'t change page to "undefined"');
-    }
-  };
 
   const addBookmark: (newBookmark: PageType) => void = async (newBookmark) => {
     try {
@@ -131,18 +89,40 @@ const ComicProvider = ({ children }: { children: any }) => {
       Toast.show(`Added ${newBookmark.date} to bookmarks`);
       saveData(bookmarkKey, filteredBookmarksArray);
     } catch (error) {
-      console.error("failed to add bookmark");
+      console.warn("An error occurred adding bookmark");
+      console.error(error);
     }
   };
 
-  const removeBookmark: (page: PageType) => void = async (page) => {
+  const changeCurrentPage: (page: PageType) => void = async (page) => {
     try {
-      const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
-      setBookmarks(newBookmarks);
-      Toast.show(`Removed ${page.date} from bookmarks`);
-      saveData(bookmarkKey, newBookmarks);
+      if (page != null) {
+        setCurrentPage(page);
+        saveData(currentPageKey, page);
+      } else if (page === undefined) {
+        throw new Error("Cannot change page to 'undefined'");
+      }
     } catch (error) {
-      console.error("failed to remove bookmark");
+      console.warn("An error occurred changing page");
+      console.error(error);
+    }
+  };
+
+  const getBookmarks: () => PageType[] = () => bookmarks;
+  const getCurrentPage: () => PageType = () => currentPage;
+  const getDataStatus: () => boolean = () => dataReady;
+  const getLatestPage: () => PageType = () => lastElement(pages);
+  const getVolumes: () => VolumeType[] = () => volumes;
+
+  const goToPreviousPage: (page: PageType) => void = (page) => {
+    try {
+      const index: number = pages.findIndex(
+        (element: PageType) => element.date === page.date
+      );
+      changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
+    } catch (error) {
+      console.warn("An error occurred going to previous page");
+      console.error(error);
     }
   };
 
@@ -153,34 +133,49 @@ const ComicProvider = ({ children }: { children: any }) => {
       );
       changeCurrentPage(pages[index + 1] ? pages[index + 1] : page);
     } catch (error) {
-      console.error("failed to advance to next page");
+      console.warn("An error occurred going to next page");
+      console.error(error);
     }
   };
 
-  const goToPreviousPage: (page: PageType) => void = (page) => {
+  const isPageBookmarked: (page: PageType) => boolean = (page) =>
+    bookmarks.find((item: PageType) => item.date === page.date) != undefined;
+
+  const refresh: () => void = async () => {
     try {
-      const index: number = pages.findIndex(
-        (element: PageType) => element.date === page.date
-      );
-      changeCurrentPage(index - 1 >= 0 ? pages[index - 1] : page);
+      showToast("Updating");
+      update();
     } catch (error) {
-      console.error("failed to retreat to last page");
+      console.warn("An error occurred refreshing data");
+      console.error(error);
+    }
+  };
+
+  const removeBookmark: (page: PageType) => void = async (page) => {
+    try {
+      const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
+      setBookmarks(newBookmarks);
+      Toast.show(`Removed ${page.date} from bookmarks`);
+      saveData(bookmarkKey, newBookmarks);
+    } catch (error) {
+      console.warn("An error occurred removing bookmark");
+      console.error(error);
     }
   };
 
   const value = {
-    getDataStatus,
-    getCurrentPage,
-    getLatestPage,
+    addBookmark,
     changeCurrentPage,
     getBookmarks,
-    addBookmark,
-    removeBookmark,
-    isPageBookmarked,
-    goToNextPage,
-    goToPreviousPage,
+    getCurrentPage,
+    getDataStatus,
+    getLatestPage,
     getVolumes,
+    goToPreviousPage,
+    goToNextPage,
+    isPageBookmarked,
     refresh,
+    removeBookmark,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>

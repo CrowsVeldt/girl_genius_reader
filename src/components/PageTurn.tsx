@@ -1,6 +1,5 @@
-import { useContext } from "react";
+import { ContextType, useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   withTiming,
@@ -10,13 +9,17 @@ import Animated, {
   clamp,
   SharedValue,
 } from "react-native-reanimated";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { PageType, SideType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
-import { PageType } from "../utils/types";
 
 export default function PageTurn(props: any) {
-  const { getCurrentPage, goToNextPage, goToPreviousPage } =
-    useContext(ComicContext);
-  const { side }: any = props;
+  const {
+    getCurrentPage,
+    goToNextPage,
+    goToPreviousPage,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
+  const side: SideType = props.side;
   const page: PageType = getCurrentPage();
   const onSide: SharedValue<boolean> = useSharedValue(true);
   const position: SharedValue<number> = useSharedValue(0);

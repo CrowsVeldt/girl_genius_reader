@@ -1,9 +1,15 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
 
+import { dateListKey, retrieveData, saveData } from "./src/utils/storage";
+import { getDateList, update } from "./src/utils/network";
+
+import ComicProvider from "./src/context/ComicContext";
+
+import { StatusBar } from "expo-status-bar";
 import DrawerContent from "./src/components/CustomDrawer";
 import CustomHeader from "./src/components/CustomHeader";
 
@@ -13,16 +19,26 @@ import HomeScreen from "./src/screens/HomeScreen";
 import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 
-import ComicProvider from "./src/context/ComicContext";
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  useEffect(() => {
+    (async () => {
+      const data = await retrieveData(dateListKey);
+      if (data === null) {
+        const fetchDates = await getDateList();
+        saveData(dateListKey, fetchDates);
+      }
+      update();
+    })();
+  }, []);
+
   return (
     <RootSiblingParent>
       <NavigationContainer>
         <ComicProvider>
-      <StatusBar style="dark" />
+          <StatusBar style="dark" />
           <Drawer.Navigator
             // Custom drawer content
             drawerContent={(props) => <DrawerContent {...props} />}

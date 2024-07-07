@@ -1,11 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { ContextType, useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { ComicContext } from "../context/ComicContext";
 import { PageType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
 
 export default function StarButton({ page }: { page: PageType }) {
-  const { addBookmark, removeBookmark, isPageBookmarked } =
-    useContext(ComicContext);
+  const {
+    addBookmark,
+    removeBookmark,
+    isPageBookmarked,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
   const [bookmarked, setBookmarked] = useState<boolean>(false);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { ContextType, useContext, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -7,17 +7,18 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
-import { PageType } from "../utils/types";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
-  const { getCurrentPage, getDataStatus } = useContext(ComicContext);
+  const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();

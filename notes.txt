@@ -1,20 +1,20 @@
-Try using image prefetch to load next / previous image
+- cut down page turn lag: load next comic at the same time to cut down load times?
+- - Try using image prefetch to load next / previous image?
 
 Improvements:
 - have option to view volume pages in a vertical list
 - have spinner spin until update is completed
-- make update actually update
 - log crashes and errors in production, give users a way to share those logs
-- cut down page turn lag: load next comic at the same time to cut down load times?
 - add toasts/notifications to inform users of things
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
+- add option to sort volumes first-last or last-first
+- add option to view two pages when in landscape mode
+- - rework ComicContext methods to work with two images per page/screen
+
 - improve accessibility (follow suggestions from google play console)
+- - rename starButton ("white star") for screen readers
 
-
-- remove redundancy from page/volumeList?
-- prevent double-tap-to-zoom under pageTurn(?)
-- seperate tap and swipe page turn?
-- clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
+- remove repeated code from page/volumeList?
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -85,6 +85,11 @@ x - Replace calls to dataCollector with accessing GG's RSS feed
 x - Regression: First page flashes before current page is loaded
 x currently saving page/volume data both in asyncstorage and filesystem, reduce redundancy
 x status bar is covered on production app?
+x make update actually update
+x prevent double-tap-to-zoom under pageTurn(?)
+x seperate tap and swipe page turn?
+x clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
+x - make volume and page titles taller and more distinct to press in index page
 
 
 Thanks to: 

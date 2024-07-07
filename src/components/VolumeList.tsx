@@ -6,17 +6,17 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { runOnJS } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { TapGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/tapGesture";
-import { runOnJS } from "react-native-reanimated";
+import { VolumeType } from "../utils/types";
 import ComicLink from "./ComicLink";
-import { ComicDataType } from "../utils/types";
 
 export const VolumeList = ({
   volume,
   nav,
 }: {
-  volume: ComicDataType;
+  volume: VolumeType;
   nav: any;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -39,6 +39,13 @@ export const VolumeList = ({
         >
           <Text>{`Volume ${volume.volumeNumber}`}</Text>
         </TouchableOpacity>
+        {open && (
+          <View style={styles.subtitleContainer}>
+            <Text style={{ flex: 1 }}>Page #</Text>
+            <Text style={{ flex: 2, marginStart: 20 }}>Date</Text>
+            <Text style={{ flex: 3, paddingStart: 30 }}>Scene</Text>
+          </View>
+        )}
         <ScrollView>
           {volume.pages.map((page, index) =>
             open ? <ComicLink page={page} nav={nav} key={index} /> : null
@@ -57,7 +64,13 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: "center",
+    height: 50,
     borderBottomWidth: 1,
     marginBottom: 10,
+  },
+  subtitleContainer: {
+    flexDirection: "row",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
 });
