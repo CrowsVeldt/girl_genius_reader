@@ -25,8 +25,8 @@ export const getDateList: () => Promise<string[]> = async () => {
 export const getLatestDate: () => Promise<string | undefined> = async () => {
   try {
     const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
-    const index: string = data.search("javascript:setPage")
-    const date: string = data.slice(index + 19, index + 27)
+    const index: string = data.search("javascript:setPage");
+    const date: string = data.slice(index + 19, index + 27);
     if (stringOfEightNumbers(date)) {
       return date;
     } else {
@@ -93,15 +93,22 @@ export const update: () => void = async () => {
         // if next date matches the date regex
         if (nextDate != undefined && stringOfEightNumbers(nextDate)) {
           // add to date list
-          dateList.push(
+
+          if (nextDate === "20030106") {
             // 20030106>20030106b (20030106 points to the wrong comic)
-            nextDate === "20030106"
-              ? "20030106b"
-              : // 20141226a-20141226b (a is the comic, b is a wallpaper)
-              nextDate === "20141226"
-              ? "20141226a"
-              : nextDate
-          );
+            dateList.push("20030106b");
+          } else if (nextDate === "20060425") {
+            // 20060425b-20060425c (Authors added second page)
+            dateList.push("20060425b");
+            dateList.push("20060425c");
+          } else if (nextDate === "20141226") {
+            // 20141226a-20141226b (a is the comic, b is a wallpaper)
+            dateList.push("20141226a");
+            dateList.push("20141226b");
+          } else {
+            dateList.push(nextDate);
+          }
+
           // set current date to next date, to progress the loop
           currentDate = nextDate;
           // save date list to memory

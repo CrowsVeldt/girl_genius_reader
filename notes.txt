@@ -13,6 +13,7 @@ Improvements:
 - log crashes and errors in production, give users a way to share those logs
 - improve accessibility (follow suggestions from google play console)
 - - rename starButton ("white star") for screen readers
+- make dev build with incomplete comic list for testing updates
 
 ???
 - remove repeated code from page/volumeList?
@@ -61,6 +62,7 @@ x add tests for async storage (https://dev.to/tiaeastwood/how-to-mock-and-test-a
 
 x Date & Page exceptions:
 x - 20030106>20030106b (20030106 points to the wrong comic)
+x - 20060425b-20060425c
 x - 20141226a-20141226b (a is the comic, b is a wallpaper)
 
 x remove unused files from "assets" folder
