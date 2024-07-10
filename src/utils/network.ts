@@ -101,6 +101,12 @@ export const update: () => void = async () => {
             // 20060425b-20060425c (Authors added second page)
             dateList.push("20060425b");
             dateList.push("20060425c");
+          } else if (nextDate === "20100224") {
+            dateList.push("20100224a");
+          } else if (nextDate === "20100226") {
+            dateList.push("20100226a");
+          } else if (nextDate === "20100301") {
+            dateList.push("20100301a");
           } else if (nextDate === "20141226") {
             // 20141226a-20141226b (a is the comic, b is a wallpaper)
             dateList.push("20141226a");

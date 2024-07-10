@@ -1,8 +1,8 @@
 BUGS: 
-- somethings wrong with volume 10 starting around page 32, images don't load, returns an http error
+- somethings wrong with volume 10, pages 32, 33, 34, re: colorist health issue
 
 
-Improvements:
+UI/UX Improvements:
 - have option to view volume pages in a vertical list
 - add option to sort volumes first-last or last-first
 - add option to view two pages when in landscape mode
@@ -10,15 +10,23 @@ Improvements:
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 
 - add toasts/notifications to inform users of things
-- log crashes and errors in production, give users a way to share those logs
 - improve accessibility (follow suggestions from google play console)
 - - rename starButton ("white star") for screen readers
+
+Dev Improvements
+- log crashes and errors in production, give users a way to share those logs
 - make dev build with incomplete comic list for testing updates
 
 ???
 - remove repeated code from page/volumeList?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
+
+Date & Page exceptions:
+ - 20030106>20030106b (20030106 points to the wrong comic)
+ - 20060425b-20060425c
+ - 20100224a-20100226a-20100301a
+ - 20141226a-20141226b (a is the comic, b is a wallpaper)
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -59,11 +67,6 @@ x add vol# & page# to header
 x impove styles of header
 x!! _ - try making dev build that wipes bookmarks on startup, see if that stops the crashing
 x add tests for async storage (https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil)
-
-x Date & Page exceptions:
-x - 20030106>20030106b (20030106 points to the wrong comic)
-x - 20060425b-20060425c
-x - 20141226a-20141226b (a is the comic, b is a wallpaper)
 
 x remove unused files from "assets" folder
 x check for updated lists on startup, fetch new lists if found
