@@ -10,6 +10,8 @@ export type PageType = {
   volumeNumber: number;
 };
 
+export type TriplePageType = [PageType, PageType, PageType];
+
 export type VolumeType = {
   volumeStart: string;
   volumeNumber: number;

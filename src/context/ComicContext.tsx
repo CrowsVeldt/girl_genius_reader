@@ -13,6 +13,7 @@ import {
 } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
+import { Image } from "react-native";
 
 type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
@@ -74,7 +75,9 @@ const ComicProvider = ({ children }: { children: any }) => {
           setCurrentPage(savedCurrentPage);
         }
       } catch (error) {
-        console.warn("An error occurred setting bookmark and current page data");
+        console.warn(
+          "An error occurred setting bookmark and current page data"
+        );
         console.error(error);
       }
     })();
@@ -97,6 +100,8 @@ const ComicProvider = ({ children }: { children: any }) => {
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     try {
       if (page != null) {
+        prefetchFive(page);
+
         setCurrentPage(page);
         saveData(currentPageKey, page);
       } else if (page === undefined) {
@@ -110,11 +115,12 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
+
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
   const getVolumes: () => VolumeType[] = () => volumes;
 
-  const goToPreviousPage: (page: PageType) => void = (page) => {
+  const goToPreviousPage: (page: PageType) => void = async (page) => {
     try {
       const index: number = pages.findIndex(
         (element: PageType) => element.date === page.date
@@ -149,6 +155,40 @@ const ComicProvider = ({ children }: { children: any }) => {
       console.warn("An error occurred refreshing data");
       console.error(error);
     }
+  };
+
+  const prefetchFive: (page: PageType) => void = (page) => {
+    const index: number = pages.findIndex(
+      (element: PageType) => element.date === page.date
+    );
+
+    const pre1: Promise<boolean> = Image.prefetch(
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index - 2]?.date
+      }.jpg`
+    );
+
+    const pre2: Promise<boolean> = Image.prefetch(
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index - 1]?.date
+      }.jpg`
+    );
+
+    const pre3: Promise<boolean> = Image.prefetch(
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${pages[index]?.date}.jpg`
+    );
+
+    const pre4: Promise<boolean> = Image.prefetch(
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index + 1]?.date
+      }.jpg`
+    );
+
+    const pre5: Promise<boolean> = Image.prefetch(
+      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+        pages[index + 2]?.date
+      }.jpg`
+    );
   };
 
   const removeBookmark: (page: PageType) => void = async (page) => {

@@ -1,19 +1,23 @@
-- cut down page turn lag: load next comic at the same time to cut down load times?
-- - Try using image prefetch to load next / previous image?
+BUGS: 
+- somethings wrong with volume 10 starting around page 32, images don't load, returns an http error
+
 
 Improvements:
-- have spinner spin until update is completed
-- log crashes and errors in production, give users a way to share those logs
-- add toasts/notifications to inform users of things
-- redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
+- have option to view volume pages in a vertical list
 - add option to sort volumes first-last or last-first
 - add option to view two pages when in landscape mode
 - - rework ComicContext methods to work with two images per page/screen
+- redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
 
+- add toasts/notifications to inform users of things
+- log crashes and errors in production, give users a way to share those logs
 - improve accessibility (follow suggestions from google play console)
 - - rename starButton ("white star") for screen readers
 
+???
 - remove repeated code from page/volumeList?
+- set comic loading indicator with loadingIndicatorSource property?
+- rework imageZoom to work with expo-image?
 
 Done:
 x Make update loop stop even if it returns undefined
@@ -89,6 +93,9 @@ x prevent double-tap-to-zoom under pageTurn(?)
 x seperate tap and swipe page turn?
 x clear chache after update? to make sure new versions are displayed? Probably not necessary on a regular basis
 x - make volume and page titles taller and more distinct to press in index page
+x - make test app just with an image to prefetch, try to make it work
+x - prefetch apparently not working, might not be calling it correctly
+x have spinner spin until update is completed
 
 
 Thanks to: 
