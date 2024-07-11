@@ -3,6 +3,7 @@ import { View, FlatList, StyleSheet } from "react-native";
 import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import BookmarkLink from "../components/BookmarkLink";
+import NetStatus from "../components/NetStatus";
 
 export default function Bookmarks({ navigation }: any) {
   const { getBookmarks }: ContextType<typeof ComicContext> =
@@ -15,6 +16,7 @@ export default function Bookmarks({ navigation }: any) {
 
   return (
     <View style={styles.list}>
+      <NetStatus />
       {bookmarks && <FlatList data={bookmarks} renderItem={renderItem} />}
     </View>
   );

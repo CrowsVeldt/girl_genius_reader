@@ -1,11 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
+import NetStatus from "../components/NetStatus";
 
-export default function Acknowledgements () {
-    return (
-        <View style={styles.screen}>
-            <Text>Acknowledgments</Text>
-        </View>
-    )
+export default function Acknowledgements() {
+  return (
+    <View style={styles.screen}>
+      <NetStatus />
+      <Text>Absolutely everything to do with Girl Genius belongs to the Foglios</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

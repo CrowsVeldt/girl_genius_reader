@@ -1,6 +1,4 @@
 BUGS: 
-- somethings wrong with volume 10, pages 32, 33, 34, re: colorist health issue
-
 
 UI/UX Improvements:
 - have option to view volume pages in a vertical list
@@ -8,6 +6,7 @@ UI/UX Improvements:
 - add option to view two pages when in landscape mode
 - - rework ComicContext methods to work with two images per page/screen
 - redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
+- close index volumes when navigating away
 
 - add toasts/notifications to inform users of things
 - improve accessibility (follow suggestions from google play console)
@@ -16,6 +15,10 @@ UI/UX Improvements:
 Dev Improvements
 - log crashes and errors in production, give users a way to share those logs
 - make dev build with incomplete comic list for testing updates
+
+TODO: 
+- Link to girlgeniusonline.com, the girl genius store, their books on amazon, etc, from within the app
+    preferably from the main page
 
 ???
 - remove repeated code from page/volumeList?
@@ -101,7 +104,8 @@ x - make volume and page titles taller and more distinct to press in index page
 x - make test app just with an image to prefetch, try to make it work
 x - prefetch apparently not working, might not be calling it correctly
 x have spinner spin until update is completed
-
+x somethings wrong with volume 10, pages 32, 33, 34, re: colorist health issue
+x Display in app message if there is no internet connection
 
 Thanks to: 
 - https://github.com/likashefqet

@@ -12,6 +12,7 @@ import { ComicContext } from "../context/ComicContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
+import NetStatus from "../components/NetStatus";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -26,6 +27,7 @@ export default function Home() {
 
   return (
     <View style={styles.comicPage}>
+      <NetStatus />
       {!loaded && (
         <View style={styles.spinner}>
           <ActivityIndicator size={"large"} color={"gray"} />

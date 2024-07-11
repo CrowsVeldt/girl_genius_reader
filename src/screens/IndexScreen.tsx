@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView } from "react-native";
 import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
+import NetStatus from "../components/NetStatus";
 
 export default function ComicIndex({ navigation }: { navigation: any }) {
   const { getVolumes }: ContextType<typeof ComicContext> =
@@ -12,6 +13,7 @@ export default function ComicIndex({ navigation }: { navigation: any }) {
 
   return (
     <ScrollView contentContainerStyle={styles.list}>
+      <NetStatus />
       {volumes != null &&
         volumes.map((volume: VolumeType, index: number) => {
           return <VolumeList nav={navigation} volume={volume} key={index} />;
