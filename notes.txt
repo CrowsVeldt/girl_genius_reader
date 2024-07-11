@@ -1,3 +1,7 @@
+Update notes:
+- Add message displayed when no internet connection is available
+
+
 BUGS: 
 
 UI/UX Improvements:
@@ -10,7 +14,9 @@ UI/UX Improvements:
 
 - add toasts/notifications to inform users of things
 - improve accessibility (follow suggestions from google play console)
+- - give all components appropriate accessibility names
 - - rename starButton ("white star") for screen readers
+- replace NetStatus component with toast that fires at intervals?
 
 Dev Improvements
 - log crashes and errors in production, give users a way to share those logs
