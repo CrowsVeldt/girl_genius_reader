@@ -6,7 +6,7 @@ export default function NetStatus() {
 
   return (
     <View style={styles.statusContainer}>
-      {isConnected && <Text style={styles.status}>No Internet Connection</Text>}
+      {!isConnected && <Text style={styles.status}>No Internet Connection</Text>}
     </View>
   );
 }
