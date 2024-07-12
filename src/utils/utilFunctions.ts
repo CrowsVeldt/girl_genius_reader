@@ -15,7 +15,10 @@ export const lastElement: (array: any[]) => any = (array) => {
 export const formatDate: (date: string) => string = (date) =>
   `${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6)}`;
 
-export const stringOfEightNumbers = (str: string) => {
+export const stringOfEightNumbers: (str: string) => boolean = (str) => {
   const dateRegex: RegExp = new RegExp(/\d{8}/);
   return dateRegex.test(str);
 };
+
+export const comicUrl: (date: string) => string = (date) =>
+  `https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`;
