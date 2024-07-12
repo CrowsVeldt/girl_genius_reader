@@ -1,34 +1,21 @@
 Update notes:
 - Add message displayed when no internet connection is available
 
-
-BUGS: 
-
 UI/UX Improvements:
 - have option to view volume pages in a vertical list
 - add option to sort volumes first-last or last-first
-- add option to view two pages when in landscape mode
-- - rework ComicContext methods to work with two images per page/screen
-- redo page turn to be like MangaPlus, i.e. dragging the page pulls the next page into view
+
 - close index volumes when navigating away
+- Use regular Images as placeholders for zoomableImages when showing multiple pages on screen at once?
 
-- add toasts/notifications to inform users of things
-- improve accessibility (follow suggestions from google play console)
-- - give all components appropriate accessibility names
-- - rename starButton ("white star") for screen readers
-- replace NetStatus component with toast that fires at intervals?
-
-Dev Improvements
-- log crashes and errors in production, give users a way to share those logs
-- make dev build with incomplete comic list for testing updates
-
-TODO: 
-- Link to girlgeniusonline.com, the girl genius store, their books on amazon, etc, from within the app
-    preferably from the main page
 - make sure bookmark list works well with many bookmarks
 
+Dev Improvements
+
+TODO: 
+
 ???
-- remove repeated code from page/volumeList?
+- replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
 
@@ -113,6 +100,6 @@ x - prefetch apparently not working, might not be calling it correctly
 x have spinner spin until update is completed
 x somethings wrong with volume 10, pages 32, 33, 34, re: colorist health issue
 x Display in app message if there is no internet connection
-
-Thanks to: 
-- https://github.com/likashefqet
+x - rename starButton ("white star") for screen readers
+x Thanks to: - https://github.com/likashefqet
+x Link to girlgeniusonline.com, the girl genius store, their books on amazon, etc, from within the app preferably from the main page
