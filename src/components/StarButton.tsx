@@ -18,6 +18,11 @@ export default function StarButton({ page }: { page: PageType }) {
   return (
     <TouchableOpacity
       style={styles.starButton}
+      accessibilityLabel={
+        bookmarked
+          ? "Bookmark Button - Bookmarked"
+          : "Bookmark Button - Not Bookmarked"
+      }
       onPress={() => {
         if (bookmarked) {
           removeBookmark(page);

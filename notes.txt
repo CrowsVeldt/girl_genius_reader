@@ -25,6 +25,7 @@ Dev Improvements
 TODO: 
 - Link to girlgeniusonline.com, the girl genius store, their books on amazon, etc, from within the app
     preferably from the main page
+- make sure bookmark list works well with many bookmarks
 
 ???
 - remove repeated code from page/volumeList?
