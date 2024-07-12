@@ -17,11 +17,11 @@ export default function VolumeScreen({ navigation }: { navigation: any }) {
   const volume: VolumeType = getCurrentVolume();
 
   return (
-      <FlatList
-        data={volume.pages}
-        style={styles.page}
-        renderItem={({ item, index, separators }) => renderElement(item, index)}
-      />
+    <FlatList
+      data={volume.pages}
+      style={styles.page}
+      renderItem={({ item, index, separators }) => renderElement(item, index)}
+    />
   );
 }
 
