@@ -40,6 +40,8 @@ export default function CustomHeader({
       <Text style={styles.headerTitle}>
         {routeName === "ComicPage"
           ? `Volume ${page.volumeNumber} - Page ${page.pageNumber}`
+          : routeName === "Volume"
+          ? `Volume ${page.volumeNumber}`
           : routeName}
       </Text>
       {routeName === "ComicPage" && <StarButton page={page} />}
