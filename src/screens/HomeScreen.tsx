@@ -1,9 +1,8 @@
 import { ContextType, useContext } from "react";
-import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import NetStatus from "../components/NetStatus";
-import { Link } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Home({ navigation }: { navigation: any }) {
