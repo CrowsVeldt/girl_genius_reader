@@ -33,7 +33,7 @@ export default function DrawerContent(props: any) {
         label={"Home"}
         onPress={() => {
           if (dataReady) {
-            props.navigation.navigate("ComicPage");
+            props.navigation.navigate("Home");
           }
         }}
       />
