@@ -18,7 +18,7 @@ import BookmarkScreen from "./src/screens/BookmarksScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
-
+import ComicPageScreen from "./src/screens/ComicPageScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -66,6 +66,11 @@ export default function App() {
             <Drawer.Screen
               name="Home"
               component={HomeScreen}
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
+            <Drawer.Screen
+              name="ComicPage"
+              component={ComicPageScreen}
               options={{ drawerItemStyle: { display: "none" } }}
             />
             <Drawer.Screen

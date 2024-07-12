@@ -1,90 +1,80 @@
-import { ContextType, useContext, useRef, useState } from "react";
-import {
-  ActivityIndicator,
-  Dimensions,
-  ScaledSize,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
-import { PageType, VolumeType } from "../utils/types";
+import { ContextType, useContext } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
-import { ImageZoomRef } from "../components/image_zoom_files/types";
-import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
-import PageTurn from "../components/PageTurn";
 import NetStatus from "../components/NetStatus";
-import VerticalVolumeScroll from "../components/VolumeVerticalScroll";
-import { comicUrl } from "../utils/utilFunctions";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const screen: ScaledSize = Dimensions.get("screen");
-const window: ScaledSize = Dimensions.get("window");
-
-export default function Home() {
-  const { getCurrentPage, getCurrentVolume, getDataStatus }: ContextType<typeof ComicContext> =
+export default function Home({ navigation }: { navigation: any }) {
+  const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
-  const [loaded, setLoaded] = useState<boolean>(true);
-  const [vertical, setVertical] = useState<boolean>(true);
-  const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
   const volume: VolumeType = getCurrentVolume()
   const dataReady: boolean = getDataStatus();
 
   return (
-    <View style={styles.comicPage}>
+    <View style={styles.page}>
       <NetStatus />
-      {!loaded && (
-        <View style={styles.spinner}>
-          <ActivityIndicator size={"large"} color={"gray"} />
-        </View>
-      )}
-      {dataReady && !vertical && (
-        <ScrollView contentContainerStyle={styles.comicContainer}>
-          <PageTurn side={"left"} />
-          <ImageZoom
-            ref={imageRef}
-            alt={`Comic page for ${page.date}`}
-            uri={comicUrl(page.date)}
-            minPanPointers={1}
-            isDoubleTapEnabled
-            resizeMode="contain"
-            onLoadStart={() => {
-              setLoaded(false);
-              imageRef.current?.quickReset();
-            }}
-            onLoadEnd={() => {
-              setLoaded(true);
-            }}
-          />
-          <PageTurn side={"right"} />
-        </ScrollView>
-      )}
-      {dataReady && vertical && (
-        <VerticalVolumeScroll volume={volume} style={styles.verticalVolume} />
-      )}
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("ComicPage");
+        }}
+      >
+        <Text>Comic Page</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Index");
+        }}
+      >
+        <Text>Index</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Bookmarks");
+        }}
+      >
+        <Text>Bookmarks</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Privacy Policy");
+        }}
+      >
+        <Text>Privacy Policy</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Acknowledgements");
+        }}
+      >
+        <Text>Acknowledgements</Text>
+      </TouchableOpacity>
+
+      <Text>Link to girlgeniusonline.com</Text>
+      <Text>Link to girl genius shops</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  comicPage: {
-    height: screen.height,
-    width: screen.width,
-    alignContent: "center",
+  page: {
+    flex: 1,
+    alignItems: "center",
+    alignSelf: "center",
+    width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
-  comicContainer: {
-    paddingTop: 60,
-    height: window.height - 150,
-    width: window.width,
-  },
-  spinner: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+  linkButton: {
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
   },
   verticalVolume: {},
 });
