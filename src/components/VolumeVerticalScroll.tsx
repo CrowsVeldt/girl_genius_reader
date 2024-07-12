@@ -23,7 +23,6 @@ export default function VerticalVolumeScroll({ ...props }) {
 
 const styles = StyleSheet.create({
   image: {
-    minHeight: window.height - 190,
-    maxWidth: window.width
+    height: window.height - 190,
   },
 });

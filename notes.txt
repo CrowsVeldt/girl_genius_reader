@@ -2,17 +2,11 @@ Update notes:
 - Add message displayed when no internet connection is available
 
 UI/UX Improvements:
-- have option to view volume pages in a vertical list
 - add option to sort volumes first-last or last-first
-
 - close index volumes when navigating away
 - Use regular Images as placeholders for zoomableImages when showing multiple pages on screen at once?
 
 - make sure bookmark list works well with many bookmarks
-
-Dev Improvements
-
-TODO: 
 
 ???
 - replace NetStatus component with toast that fires at intervals?
@@ -103,3 +97,4 @@ x Display in app message if there is no internet connection
 x - rename starButton ("white star") for screen readers
 x Thanks to: - https://github.com/likashefqet
 x Link to girlgeniusonline.com, the girl genius store, their books on amazon, etc, from within the app preferably from the main page
+x load only images on screen(?)

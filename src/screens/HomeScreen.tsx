@@ -85,8 +85,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  verticalVolume: {
-    height: window.height - 150,
-    width: window.width,
-  },
+  verticalVolume: {},
 });
