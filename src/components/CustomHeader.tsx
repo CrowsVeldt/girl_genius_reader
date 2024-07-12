@@ -38,12 +38,12 @@ export default function CustomHeader({
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
       <Text style={styles.headerTitle}>
-        {routeName === "Home"
+        {routeName === "ComicPage"
           ? `Volume ${page.volumeNumber} - Page ${page.pageNumber}`
           : routeName}
       </Text>
-      {routeName === "Home" && <StarButton page={page} />}
-      {routeName !== "Home" && <View style={styles.placeholderBox}></View>}
+      {routeName === "ComicPage" && <StarButton page={page} />}
+      {routeName !== "ComicPage" && <View style={styles.placeholderBox}></View>}
     </View>
   );
 }

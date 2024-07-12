@@ -21,7 +21,7 @@ export default function BookmarkLink({
         style={styles.linkButton}
         onPress={() => {
           changeCurrentPage(page);
-          nav.navigate("Home");
+          nav.navigate("ComicPage");
         }}
       >
         <Text>{`Volume ${page.volumeNumber} - Page ${page.pageNumber}`}</Text>

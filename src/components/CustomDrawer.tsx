@@ -25,7 +25,7 @@ export default function DrawerContent(props: any) {
         onPress={() => {
           if (dataReady) {
             changeCurrentPage(getLatestPage());
-            props.navigation.navigate("Home");
+            props.navigation.navigate("ComicPage");
           }
         }}
       />
