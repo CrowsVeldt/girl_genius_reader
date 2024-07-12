@@ -9,7 +9,6 @@ export default function Home({ navigation }: { navigation: any }) {
   const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const page: PageType = getCurrentPage();
-  const volume: VolumeType = getCurrentVolume()
   const dataReady: boolean = getDataStatus();
 
   return (
@@ -76,5 +75,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
   },
-  verticalVolume: {},
 });
