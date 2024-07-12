@@ -1,8 +1,15 @@
 import { useContext } from "react";
-import { Image, StyleSheet } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Dimensions, Image, ScaledSize, StyleSheet } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { ComicContext } from "../context/ComicContext";
 import { comicUrl } from "../utils/utilFunctions";
+import { PageType } from "../utils/types";
+
+const window: ScaledSize = Dimensions.get("window");
+
+const renderElement = (item: PageType, index: number) => (
+  <Image src={comicUrl(item.date)} style={styles.image} key={index} />
+);
 
 export default function VerticalVolumeScroll({ ...props }) {
   const { getVolume } = useContext(ComicContext);
@@ -10,21 +17,13 @@ export default function VerticalVolumeScroll({ ...props }) {
   const volume = getVolume(volumeNumber);
 
   return (
-    <ScrollView>
-      {volume != null &&
-        volume.pages.map((page, index) => (
-          <Image
-            src={comicUrl(volume.pages[index].date)}
-            style={styles.image}
-            key={index}
-          />
-        ))}
-    </ScrollView>
+    <FlatList data={volume.pages} renderItem={({item, index, separators}) => renderElement(item, index)}/>
   );
 }
 
 const styles = StyleSheet.create({
   image: {
-    height: 640,
+    minHeight: window.height - 190,
+    maxWidth: window.width
   },
 });
