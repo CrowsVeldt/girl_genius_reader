@@ -61,13 +61,13 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   comicPage: {
-    paddingTop: 50,
     height: screen.height,
     width: screen.width,
     alignContent: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
+    paddingTop: 50,
     height: window.height - 150,
     width: window.width,
   },
