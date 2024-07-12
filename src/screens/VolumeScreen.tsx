@@ -1,20 +1,29 @@
 import { ContextType, useContext } from "react";
-import { Dimensions, Image, ScaledSize, StyleSheet, View } from "react-native";
+import { Dimensions, Image, ScaledSize, StyleSheet } from "react-native";
 import { PageType, VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { comicUrl } from "../utils/utilFunctions";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 const window: ScaledSize = Dimensions.get("window");
 
-const renderElement = (item: PageType, index: number) => (
-  <Image src={comicUrl(item.date)} style={styles.image} key={index} />
-);
-
 export default function VolumeScreen({ navigation }: { navigation: any }) {
-  const { getCurrentVolume }: ContextType<typeof ComicContext> =
-    useContext(ComicContext);
+  const {
+    getCurrentVolume,
+    changeCurrentPage,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
   const volume: VolumeType = getCurrentVolume();
+
+  const renderElement = (item: PageType, index: number) => (
+    <TouchableOpacity
+      onPress={() => {
+        changeCurrentPage(item);
+        navigation.navigate("ComicPage");
+      }}
+    >
+      <Image src={comicUrl(item.date)} style={styles.image} key={index} />
+    </TouchableOpacity>
+  );
 
   return (
     <FlatList
