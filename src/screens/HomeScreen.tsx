@@ -3,8 +3,10 @@ import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
 import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import NetStatus from "../components/NetStatus";
+import { Link } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function Home() {
+export default function Home({ navigation }: { navigation: any }) {
   const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const page: PageType = getCurrentPage();
@@ -13,14 +15,49 @@ export default function Home() {
   return (
     <View style={styles.page}>
       <NetStatus />
-      <Text>Link to current comic</Text>
-      <Text>Link to Index</Text>
-      <Text>Link to Bookmarks</Text>
-      <Text>Link to Settings?</Text>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("ComicPage");
+        }}
+      >
+        <Text>Comic Page</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Index");
+        }}
+      >
+        <Text>Index</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Bookmarks");
+        }}
+      >
+        <Text>Bookmarks</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Privacy Policy");
+        }}
+      >
+        <Text>Privacy Policy</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          navigation.navigate("Acknowledgements");
+        }}
+      >
+        <Text>Acknowledgements</Text>
+      </TouchableOpacity>
+
       <Text>Link to girlgeniusonline.com</Text>
       <Text>Link to girl genius shops</Text>
-      <Text>Link to Acknowledgements</Text>
-      <Text>Link to Privacy policy</Text>
     </View>
   );
 }
@@ -32,5 +69,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
+  },
+  linkButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
   },
 });
