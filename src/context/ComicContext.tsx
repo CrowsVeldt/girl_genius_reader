@@ -118,7 +118,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
   const getCurrentVolume: () => VolumeType = () =>
-    volumes[currentPage.volumeNumber];
+    volumes[currentPage.volumeNumber - 1];
 
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
