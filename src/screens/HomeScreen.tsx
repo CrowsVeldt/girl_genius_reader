@@ -13,6 +13,8 @@ import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
 import NetStatus from "../components/NetStatus";
+import VerticalVolumeScroll from "../components/VolumeVerticalScroll";
+import { comicUrl } from "../utils/utilFunctions";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -20,7 +22,8 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home() {
   const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
-  const [loaded, setLoaded] = useState<boolean>(false);
+  const [loaded, setLoaded] = useState<boolean>(true);
+  const [vertical, setVertical] = useState<boolean>(true);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
@@ -33,13 +36,13 @@ export default function Home() {
           <ActivityIndicator size={"large"} color={"gray"} />
         </View>
       )}
-      {dataReady && (
+      {dataReady && !vertical && (
         <ScrollView contentContainerStyle={styles.comicContainer}>
           <PageTurn side={"left"} />
           <ImageZoom
             ref={imageRef}
             alt={`Comic page for ${page.date}`}
-            uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+            uri={comicUrl(page.date)}
             minPanPointers={1}
             isDoubleTapEnabled
             resizeMode="contain"
@@ -54,19 +57,22 @@ export default function Home() {
           <PageTurn side={"right"} />
         </ScrollView>
       )}
+      {dataReady && vertical && (
+        <VerticalVolumeScroll volumeNumber={1} style={styles.verticalVolume} />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   comicPage: {
-    paddingTop: 50,
     height: screen.height,
     width: screen.width,
     alignContent: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
+    paddingTop: 60,
     height: window.height - 150,
     width: window.width,
   },
@@ -78,5 +84,9 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: "center",
     alignItems: "center",
+  },
+  verticalVolume: {
+    height: window.height - 150,
+    width: window.width,
   },
 });
