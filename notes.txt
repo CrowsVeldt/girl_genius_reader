@@ -1,11 +1,12 @@
 Update notes:
 - Add message displayed when no internet connection is available
+- Seperate comic and home pages
 
 UI/UX Improvements:
-- have option to view volume pages in a vertical list
 - add option to sort volumes first-last or last-first
 
 - close index volumes when navigating away
+
 - Use regular Images as placeholders for zoomableImages when showing multiple pages on screen at once?
 
 - make sure bookmark list works well with many bookmarks
