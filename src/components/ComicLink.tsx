@@ -12,7 +12,7 @@ export default function ComicLink({ page, nav }: { page: PageType; nav: any }) {
       style={styles.linkButton}
       onPress={() => {
         changeCurrentPage(page);
-        nav.navigate("Home");
+        nav.navigate("ComicPage");
       }}
     >
       <Text style={styles.linkNumber}>{page.pageNumber}</Text>
