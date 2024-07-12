@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import { Dimensions, Image, ScaledSize, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ComicContext } from "../context/ComicContext";
 import { comicUrl } from "../utils/utilFunctions";
 import { PageType } from "../utils/types";
 
@@ -12,9 +10,7 @@ const renderElement = (item: PageType, index: number) => (
 );
 
 export default function VerticalVolumeScroll({ ...props }) {
-  const { getVolume } = useContext(ComicContext);
-  const { volumeNumber } = props;
-  const volume = getVolume(volumeNumber);
+  const { volume } = props;
 
   return (
     <FlatList data={volume.pages} renderItem={({item, index, separators}) => renderElement(item, index)}/>
