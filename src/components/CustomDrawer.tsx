@@ -38,6 +38,14 @@ export default function DrawerContent(props: any) {
         }}
       />
       <DrawerItem
+        label={"Volume"}
+        onPress={() => {
+          if (dataReady) {
+            props.navigation.navigate("Volume");
+          }
+        }}
+      />
+      <DrawerItem
         label={"Bookmarks"}
         onPress={() => {
           if (dataReady) {
