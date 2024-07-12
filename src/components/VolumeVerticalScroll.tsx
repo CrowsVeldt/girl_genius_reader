@@ -13,7 +13,10 @@ export default function VerticalVolumeScroll({ ...props }) {
   const { volume } = props;
 
   return (
-    <FlatList data={volume.pages} renderItem={({item, index, separators}) => renderElement(item, index)}/>
+    <FlatList
+      data={volume.pages}
+      renderItem={({ item, index, separators }) => renderElement(item, index)}
+    />
   );
 }
 

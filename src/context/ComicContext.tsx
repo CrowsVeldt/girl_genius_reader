@@ -23,6 +23,7 @@ type ComicContextType = {
   getDataStatus: () => boolean;
   getLatestPage: () => PageType;
   getVolume: (number: number) => VolumeType;
+  getCurrentVolume: () => VolumeType;
   getVolumes: () => VolumeType[];
   goToPreviousPage: (page: PageType) => void;
   goToNextPage: (page: PageType) => void;
@@ -45,6 +46,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     pageNumber: 1,
     volumeNumber: 1,
   });
+
   const [dataReady, setDataReady] = useState<boolean>(false);
 
   useEffect(() => {
@@ -116,6 +118,8 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
+  const getCurrentVolume: () => VolumeType = () =>
+    volumes[currentPage.volumeNumber];
 
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
@@ -211,6 +215,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentPage,
     getBookmarks,
     getCurrentPage,
+    getCurrentVolume,
     getDataStatus,
     getLatestPage,
     getVolume,
