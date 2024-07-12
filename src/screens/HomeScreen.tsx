@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { PageType } from "../utils/types";
+import { PageType, VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
@@ -20,12 +20,13 @@ const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home() {
-  const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
+  const { getCurrentPage, getCurrentVolume, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(true);
   const [vertical, setVertical] = useState<boolean>(true);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
+  const volume: VolumeType = getCurrentVolume()
   const dataReady: boolean = getDataStatus();
 
   return (
@@ -58,7 +59,7 @@ export default function Home() {
         </ScrollView>
       )}
       {dataReady && vertical && (
-        <VerticalVolumeScroll volumeNumber={1} style={styles.verticalVolume} />
+        <VerticalVolumeScroll volume={volume} style={styles.verticalVolume} />
       )}
     </View>
   );
