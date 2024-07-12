@@ -13,6 +13,7 @@ import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/PageTurn";
 import NetStatus from "../components/NetStatus";
+import { comicUrl } from "../utils/utilFunctions";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -39,7 +40,7 @@ export default function Home() {
           <ImageZoom
             ref={imageRef}
             alt={`Comic page for ${page.date}`}
-            uri={`https://www.girlgeniusonline.com/ggmain/strips/ggmain${page.date}.jpg`}
+            uri={comicUrl(page.date)}
             minPanPointers={1}
             isDoubleTapEnabled
             resizeMode="contain"
