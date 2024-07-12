@@ -1,16 +1,8 @@
-import { ContextType, useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { PageType } from "../utils/types";
-import { ComicContext } from "../context/ComicContext";
 import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
-    useContext(ComicContext);
-  const page: PageType = getCurrentPage();
-  const dataReady: boolean = getDataStatus();
-
   return (
     <View style={styles.page}>
       <NetStatus />

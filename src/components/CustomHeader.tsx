@@ -37,11 +37,22 @@ export default function CustomHeader({
       >
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
-      <Text style={styles.headerTitle}>
-        {routeName === "ComicPage"
-          ? `Volume ${page.volumeNumber} - Page ${page.pageNumber}`
-          : routeName}
-      </Text>
+      {routeName === "ComicPage" && (
+        <View style={styles.volumeLink}>
+          <TouchableOpacity onPress={() => navigation.navigate("Volume")}>
+            <Text style={styles.headerTitle}>
+              {`Volume ${page.volumeNumber}`}
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>{` - Page ${page.pageNumber}`}</Text>
+        </View>
+      )}
+      {routeName === "Volume" && (
+        <Text style={styles.headerTitle}>{`Volume ${page.volumeNumber}`}</Text>
+      )}
+      {routeName !== "ComicPage" && routeName !== "Volume" && (
+        <Text style={styles.headerTitle}>{routeName}</Text>
+      )}
       {routeName === "ComicPage" && <StarButton page={page} />}
       {routeName !== "ComicPage" && <View style={styles.placeholderBox}></View>}
     </View>
@@ -60,7 +71,9 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     textAlign: "center",
     fontSize: 18,
-    flexGrow: 1,
+  },
+  volumeLink: {
+    flexDirection: "row",
   },
   button: {
     backgroundColor: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
