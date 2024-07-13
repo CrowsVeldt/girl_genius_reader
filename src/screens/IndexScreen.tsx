@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
-import { VolumeList } from "../components/VolumeList";
 import NetStatus from "../components/NetStatus";
 import { FlatList } from "react-native-gesture-handler";
 

@@ -1,13 +1,9 @@
 Update notes:
-
-UI/UX Improvements:
-- add option to sort volumes first-last or last-first
-
-- close index volumes when navigating away
-
-- make sure bookmark list works well with many bookmarks
+- rework index page so it only displays links to volumes
 
 ???
+- make sure bookmark list works well with many bookmarks
+- add option to sort volumes first-last or last-first
 - replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
@@ -102,3 +98,4 @@ x Add message displayed when no internet connection is available
 x Seperate comic and home pages
 x add vertical volume view
 x link between comic and vertical scroll screens
+x close index volumes when navigating away
