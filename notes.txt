@@ -1,7 +1,7 @@
 Update notes:
 - Add message displayed when no internet connection is available
 - Seperate comic and home pages
-- add vertical volume viewed
+- add vertical volume view
 - link between comic and vertical scroll screens
 
 UI/UX Improvements:
