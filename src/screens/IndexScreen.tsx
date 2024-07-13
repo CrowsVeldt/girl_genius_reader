@@ -1,5 +1,12 @@
 import { ContextType, useContext } from "react";
-import { Dimensions, ScaledSize, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
@@ -9,13 +16,23 @@ import { FlatList } from "react-native-gesture-handler";
 const window: ScaledSize = Dimensions.get("window");
 
 export default function ComicIndex({ navigation }: { navigation: any }) {
-  const { getVolumes }: ContextType<typeof ComicContext> =
+  const { getVolumes, changeCurrentVolume }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
 
   const volumes: VolumeType[] = getVolumes();
 
   const renderElement = (item: VolumeType, index: number, separators: any) => {
-    return <VolumeList nav={navigation} volume={item} key={index} />;
+    return (
+      <TouchableOpacity
+        style={styles.title}
+        onPress={() => {
+          changeCurrentVolume(item.volumeNumber);
+          navigation.navigate("Volume", { volumeNumber: item.volumeNumber });
+        }}
+      >
+        <Text>{`Volume ${item.volumeNumber}`}</Text>
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -38,8 +55,17 @@ const styles = StyleSheet.create({
   list: {
     alignSelf: "center",
     alignItems: "center",
-    width: "100%",
+    width: window.width,
+    minHeight: "100%",
     paddingTop: 10,
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
+  },
+  title: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 50,
+    width: window.width,
+    borderColor: "black",
+    borderWidth: 1,
   },
 });
