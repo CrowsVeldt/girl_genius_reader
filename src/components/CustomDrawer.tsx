@@ -46,7 +46,7 @@ export default function DrawerContent(props: any) {
         }}
       />
       <DrawerItem
-        label={"Index"}
+        label={"Volumes"}
         onPress={() => {
           if (dataReady) {
             props.navigation.navigate("Index");
