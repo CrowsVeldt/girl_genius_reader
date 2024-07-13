@@ -7,12 +7,17 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 const window: ScaledSize = Dimensions.get("window");
 
-export default function VolumeScreen({ navigation }: { navigation: any }) {
-  const {
-    getCurrentVolume,
-    changeCurrentPage,
-  }: ContextType<typeof ComicContext> = useContext(ComicContext);
-  const volume: VolumeType = getCurrentVolume();
+export default function VolumeScreen({
+  route,
+  navigation,
+}: {
+  route: any;
+  navigation: any;
+}) {
+  const { getVolume, changeCurrentPage }: ContextType<typeof ComicContext> =
+    useContext(ComicContext);
+  const { volumeNumber } = route.params;
+  const volume: VolumeType = getVolume(volumeNumber);
 
   const renderElement = (item: PageType, index: number) => (
     <TouchableOpacity
