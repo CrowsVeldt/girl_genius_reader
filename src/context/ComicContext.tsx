@@ -18,11 +18,13 @@ import { Image } from "react-native";
 type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
+  changeCurrentVolume: (num: number) => void;
   getBookmarks: () => PageType[];
   getCurrentPage: () => PageType;
+  getCurrentVolume: () => number;
   getDataStatus: () => boolean;
   getLatestPage: () => PageType;
-  getCurrentVolume: () => VolumeType;
+  getVolume: (num: number) => VolumeType;
   getVolumes: () => VolumeType[];
   goToPreviousPage: (page: PageType) => void;
   goToNextPage: (page: PageType) => void;
@@ -39,6 +41,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [volumes, setVolumes] = useState<VolumeType[]>([]);
   const [pages, setPages] = useState<PageType[]>([]);
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
+  const [currentVolume, setCurrentVolume] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<PageType>({
     date: "20021104",
     title: "",
@@ -115,13 +118,17 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
+  const changeCurrentVolume: (num: number) => void = (num) => {
+    setCurrentVolume(num);
+  };
+
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
-  const getCurrentVolume: () => VolumeType = () =>
-    volumes[currentPage.volumeNumber - 1];
-
+  const getCurrentVolume: () => number = () => currentVolume;
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
+  const getVolume: (num: number) => VolumeType = (num) => volumes[num - 1];
+
   const getVolumes: () => VolumeType[] = () => volumes;
 
   const goToPreviousPage: (page: PageType) => void = async (page) => {
@@ -210,11 +217,13 @@ const ComicProvider = ({ children }: { children: any }) => {
   const value = {
     addBookmark,
     changeCurrentPage,
+    changeCurrentVolume,
     getBookmarks,
     getCurrentPage,
     getCurrentVolume,
     getDataStatus,
     getLatestPage,
+    getVolume,
     getVolumes,
     goToPreviousPage,
     goToNextPage,
