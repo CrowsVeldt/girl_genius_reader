@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
 import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
+const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
   return (
@@ -20,7 +22,7 @@ export default function Home({ navigation }: { navigation: any }) {
           navigation.navigate("Index");
         }}
       >
-        <Text>Index</Text>
+        <Text>Volumes</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.linkButton}
@@ -46,9 +48,22 @@ export default function Home({ navigation }: { navigation: any }) {
       >
         <Text>Acknowledgements</Text>
       </TouchableOpacity>
-
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          // navigation.navigate("Acknowledgements");
+        }}
+      >
       <Text>Link to girlgeniusonline.com</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          // navigation.navigate("Acknowledgements");
+        }}
+      >
       <Text>Link to girl genius shops</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -62,9 +77,10 @@ const styles = StyleSheet.create({
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   linkButton: {
-    flexDirection: "row",
-    justifyContent: "center",
+    width: window.width,
+    height: 70,
     alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
   },
 });
