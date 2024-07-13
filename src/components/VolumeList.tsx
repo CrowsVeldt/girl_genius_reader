@@ -21,8 +21,10 @@ export const VolumeList = ({
   volume: VolumeType;
   nav: any;
 }) => {
-  const { changeCurrentPage, changeCurrentVolume }: ContextType<typeof ComicContext> =
-    useContext(ComicContext);
+  const {
+    changeCurrentPage,
+    changeCurrentVolume,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
   const [open, setOpen] = useState<boolean>(false);
 
   const renderElement = (item: PageType, index: number, separators: any) => {
@@ -49,14 +51,13 @@ export const VolumeList = ({
           setOpen(!open);
         }}
       >
-
-<View style={styles.chevron}></View>
+        <View style={styles.chevron}></View>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.title}
         onPress={() => {
-          changeCurrentVolume(volume.volumeNumber)
-          nav.navigate("Volume", {volumeNumber: volume.volumeNumber});
+          changeCurrentVolume(volume.volumeNumber);
+          nav.navigate("Volume", { volumeNumber: volume.volumeNumber });
         }}
       >
         <Text>{`Volume ${volume.volumeNumber}`}</Text>
@@ -120,8 +121,8 @@ const styles = StyleSheet.create({
     width: 10,
     borderColor: "black",
     borderEndWidth: 1,
-    borderBottomWidth: 1
-  }
+    borderBottomWidth: 1,
+  },
 });
 
 // {open && (

@@ -22,10 +22,14 @@ export default function CustomHeader({
   options: any;
   layout: any;
 }) {
-  const { getCurrentPage }: ContextType<typeof ComicContext> =
-    useContext(ComicContext);
+  const {
+    getCurrentPage,
+    getCurrentVolume,
+    changeCurrentVolume,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
 
   const page: PageType = getCurrentPage();
+  const volumeNumber: number = getCurrentVolume();
   const routeName: string = route.name;
 
   return (
@@ -39,7 +43,14 @@ export default function CustomHeader({
       </TouchableOpacity>
       {routeName === "ComicPage" && (
         <View style={styles.volumeLink}>
-          <TouchableOpacity onPress={() => navigation.navigate("Volume")}>
+          <TouchableOpacity
+            onPress={() => {
+              changeCurrentVolume(page.volumeNumber);
+              navigation.navigate("Volume", {
+                volumeNumber: page.volumeNumber,
+              });
+            }}
+          >
             <Text style={styles.headerTitle}>
               {`Volume ${page.volumeNumber}`}
             </Text>
@@ -48,7 +59,7 @@ export default function CustomHeader({
         </View>
       )}
       {routeName === "Volume" && (
-        <Text style={styles.headerTitle}>{`Volume ${page.volumeNumber}`}</Text>
+        <Text style={styles.headerTitle}>{`Volume ${volumeNumber}`}</Text>
       )}
       {routeName !== "ComicPage" && routeName !== "Volume" && (
         <Text style={styles.headerTitle}>{routeName}</Text>
