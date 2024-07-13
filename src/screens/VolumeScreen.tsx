@@ -17,6 +17,7 @@ export default function VolumeScreen({
   const { getVolume, changeCurrentPage }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const { volumeNumber } = route.params;
+
   const volume: VolumeType = getVolume(volumeNumber);
 
   const renderElement = (item: PageType, index: number) => (
@@ -35,6 +36,11 @@ export default function VolumeScreen({
       data={volume.pages}
       style={styles.page}
       renderItem={({ item, index, separators }) => renderElement(item, index)}
+      getItemLayout={(data, index) => ({
+        length: window.height - 190,
+        offset: window.height - 190 * index,
+        index,
+      })}
     />
   );
 }
