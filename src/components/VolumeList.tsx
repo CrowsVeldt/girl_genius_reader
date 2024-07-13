@@ -6,9 +6,6 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { runOnJS } from "react-native-reanimated";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { TapGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/tapGesture";
 import { VolumeType } from "../utils/types";
 import ComicLink from "./ComicLink";
 
@@ -21,38 +18,29 @@ export const VolumeList = ({
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const doubleTap: TapGesture = Gesture.Tap()
-    .maxDuration(250)
-    .numberOfTaps(2)
-    .onStart(() => {
-      runOnJS(setOpen)(false);
-    });
-
   return (
-    <GestureDetector gesture={doubleTap}>
-      <View style={styles.list}>
-        <TouchableOpacity
-          style={styles.title}
-          onPress={() => {
-            setOpen(!open);
-          }}
-        >
-          <Text>{`Volume ${volume.volumeNumber}`}</Text>
-        </TouchableOpacity>
-        {open && (
-          <View style={styles.subtitleContainer}>
-            <Text style={{ flex: 1 }}>Page #</Text>
-            <Text style={{ flex: 2, marginStart: 20 }}>Date</Text>
-            <Text style={{ flex: 3, paddingStart: 30 }}>Scene</Text>
-          </View>
+    <View style={styles.list}>
+      <TouchableOpacity
+        style={styles.title}
+        onPress={() => {
+          setOpen(!open);
+        }}
+      >
+        <Text>{`Volume ${volume.volumeNumber}`}</Text>
+      </TouchableOpacity>
+      {open && (
+        <View style={styles.subtitleContainer}>
+          <Text style={{ flex: 1 }}>Page #</Text>
+          <Text style={{ flex: 2, marginStart: 20 }}>Date</Text>
+          <Text style={{ flex: 3, paddingStart: 30 }}>Scene</Text>
+        </View>
+      )}
+      <ScrollView>
+        {volume.pages.map((page, index) =>
+          open ? <ComicLink page={page} nav={nav} key={index} /> : null
         )}
-        <ScrollView>
-          {volume.pages.map((page, index) =>
-            open ? <ComicLink page={page} nav={nav} key={index} /> : null
-          )}
-        </ScrollView>
-      </View>
-    </GestureDetector>
+      </ScrollView>
+    </View>
   );
 };
 

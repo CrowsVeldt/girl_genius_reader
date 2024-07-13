@@ -1,8 +1,4 @@
 Update notes:
-- Add message displayed when no internet connection is available
-- Seperate comic and home pages
-- add vertical volume view
-- link between comic and vertical scroll screens
 
 UI/UX Improvements:
 - add option to sort volumes first-last or last-first
@@ -101,3 +97,8 @@ x - rename starButton ("white star") for screen readers
 x Thanks to: - https://github.com/likashefqet
 x Link to girlgeniusonline.com, the girl genius store, their books on amazon, etc, from within the app preferably from the main page
 x Use regular Images as placeholders for zoomableImages when showing multiple pages on screen at once?
+update
+x Add message displayed when no internet connection is available
+x Seperate comic and home pages
+x add vertical volume view
+x link between comic and vertical scroll screens
