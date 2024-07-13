@@ -21,7 +21,7 @@ export const VolumeList = ({
   volume: VolumeType;
   nav: any;
 }) => {
-  const { changeCurrentPage }: ContextType<typeof ComicContext> =
+  const { changeCurrentPage, changeCurrentVolume }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -55,7 +55,8 @@ export const VolumeList = ({
       <TouchableOpacity
         style={styles.title}
         onPress={() => {
-          nav.navigate("Volume");
+          changeCurrentVolume(volume.volumeNumber)
+          nav.navigate("Volume", {volumeNumber: volume.volumeNumber});
         }}
       >
         <Text>{`Volume ${volume.volumeNumber}`}</Text>
