@@ -9,15 +9,15 @@ import { PageType } from "../../../src/utils/types";
 
 // https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil
 
-const mockData = [
+const mockData: PageType[] = [
   {
     pageNumber: 1,
     date: "20021104",
     title: "The Streets of Beetleburg",
-    volume: 1,
+    volumeNumber: 1,
   },
-  { pageNumber: 2, date: "20021106", title: "", volume: 1 },
-  { pageNumber: 3, date: "20021108", title: "Agatha Gets Mugged", volume: 1 },
+  { pageNumber: 2, date: "20021106", title: "", volumeNumber: 1 },
+  { pageNumber: 3, date: "20021108", title: "Agatha Gets Mugged", volumeNumber: 1 },
 ];
 
 describe("storage", () => {
