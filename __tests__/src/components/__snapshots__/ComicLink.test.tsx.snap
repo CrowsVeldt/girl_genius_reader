@@ -31,7 +31,10 @@ exports[`<ComicLink /> renders the same as last time 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
+      "borderBottomColor": "black",
+      "borderBottomWidth": 1,
       "flexDirection": "row",
+      "height": 40,
       "justifyContent": "space-between",
       "opacity": 1,
       "width": "100%",
@@ -46,7 +49,7 @@ exports[`<ComicLink /> renders the same as last time 1`] = `
       }
     }
   >
-    Page 1
+    1
   </Text>
   <Text
     style={

@@ -2,6 +2,7 @@
 
 exports[`<StarButton /> renders the same as last time 1`] = `
 <View
+  accessibilityLabel="Bookmark Button - Not Bookmarked"
   accessibilityState={
     {
       "busy": undefined,

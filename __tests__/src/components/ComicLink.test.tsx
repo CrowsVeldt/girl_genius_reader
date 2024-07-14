@@ -1,9 +1,10 @@
 import renderer from "react-test-renderer";
 import ComicLink from "../../../src/components/ComicLink";
 import ComicProvider from "../../../src/context/ComicContext";
+import { PageType } from "../../../src/utils/types";
 
 describe("<ComicLink />", () => {
-  const testPage = {
+  const testPage: PageType = {
     date: "20021104",
     title: "",
     pageNumber: 1,
