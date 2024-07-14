@@ -1,5 +1,12 @@
 import { ContextType, useContext, useState } from "react";
-import { Button, Dimensions, Image, ScaledSize, StyleSheet } from "react-native";
+import {
+  Button,
+  Dimensions,
+  Image,
+  ScaledSize,
+  StyleSheet,
+  Switch,
+} from "react-native";
 import { PageType, VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { comicUrl } from "../utils/utilFunctions";
@@ -39,7 +46,11 @@ export default function VolumeScreen({
 
   return (
     <ScrollView style={styles.page}>
-      <Button title={image ? "Pages" : "Links"} onPress={() => setImage(!image)}/>
+      <Switch
+        onValueChange={() => setImage(!image)}
+        thumbColor={image ? "blue" : "lightgray"}
+        value={image}
+      />
       {image && (
         <FlatList
           data={volume.pages}
