@@ -28,6 +28,7 @@ const mockVolumeData: VolumeType[] = [
   { volumeStart: "20021104", volumeNumber: 1, pages: mockPageData },
 ];
 
+// Tests for checkLists function
 describe("checkLists", () => {
   describe("to be true when", () => {
     beforeAll(() => {
@@ -58,3 +59,7 @@ describe("checkLists", () => {
     });
   });
 });
+
+// Tests for processDateList function
+
+// Tests for updateLists function
