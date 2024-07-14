@@ -1,9 +1,10 @@
 Update notes:
 - rework index page so it only displays links to volumes
+- add toggle to volume screen to switch between full page view and link view
+- add link to comic page to drawer menu
 
 ???
 - make sure bookmark list works well with many bookmarks
-- add option to sort volumes first-last or last-first
 - replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
@@ -99,3 +100,4 @@ x Seperate comic and home pages
 x add vertical volume view
 x link between comic and vertical scroll screens
 x close index volumes when navigating away
+x add option to sort volumes first-last or last-first

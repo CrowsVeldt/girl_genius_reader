@@ -1,9 +1,14 @@
-import { ContextType, useContext } from "react";
-import { Dimensions, Image, ScaledSize, StyleSheet } from "react-native";
+import { ContextType, useContext, useState } from "react";
+import { Dimensions, Image, ScaledSize, StyleSheet, View } from "react-native";
+import {
+  FlatList,
+  Switch,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { PageType, VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { comicUrl } from "../utils/utilFunctions";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { VolumeList } from "../components/VolumeList";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -16,6 +21,7 @@ export default function VolumeScreen({
 }) {
   const { getVolume, changeCurrentPage }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
+  const [image, setImage] = useState<boolean>(true);
   const { volumeNumber } = route.params;
 
   const volume: VolumeType = getVolume(volumeNumber);
@@ -32,16 +38,27 @@ export default function VolumeScreen({
   );
 
   return (
-    <FlatList
-      data={volume.pages}
-      style={styles.page}
-      renderItem={({ item, index, separators }) => renderElement(item, index)}
-      getItemLayout={(data, index) => ({
-        length: window.height - 190,
-        offset: window.height - 190 * index,
-        index,
-      })}
-    />
+    <View style={styles.page}>
+      <Switch
+        onValueChange={() => setImage(!image)}
+        thumbColor={image ? "blue" : "lightgray"}
+        value={image}
+      />
+      {image && (
+        <FlatList
+          data={volume.pages}
+          renderItem={({ item, index }: { item: PageType; index: number }) =>
+            renderElement(item, index)
+          }
+          getItemLayout={(data, index) => ({
+            length: window.height - 190,
+            offset: window.height - 190 * index,
+            index,
+          })}
+        />
+      )}
+      {!image && <VolumeList volume={volume} nav={navigation} />}
+    </View>
   );
 }
 
