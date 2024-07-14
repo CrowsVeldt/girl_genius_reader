@@ -4,6 +4,7 @@ import {
   retrieveData,
   bookmarkKey,
   currentPageKey,
+  removeData,
 } from "../../../src/utils/storage";
 import { PageType } from "../../../src/utils/types";
 
@@ -17,7 +18,12 @@ const mockData: PageType[] = [
     volumeNumber: 1,
   },
   { pageNumber: 2, date: "20021106", title: "", volumeNumber: 1 },
-  { pageNumber: 3, date: "20021108", title: "Agatha Gets Mugged", volumeNumber: 1 },
+  {
+    pageNumber: 3,
+    date: "20021108",
+    title: "Agatha Gets Mugged",
+    volumeNumber: 1,
+  },
 ];
 
 describe("storage", () => {
@@ -50,7 +56,7 @@ describe("storage", () => {
         pageNumber: 1,
         date: "20021104",
         title: "The Streets of Beetleburg",
-        volume: 1,
+        volumeNumber: 1,
       });
     });
   });
@@ -70,8 +76,22 @@ describe("storage", () => {
         pageNumber: 3,
         date: "20021108",
         title: "Agatha Gets Mugged",
-        volume: 1,
+        volumeNumber: 1,
       });
     });
+  });
+
+  describe("removeData", () => {
+    beforeEach(() => {
+      removeData(currentPageKey);
+    });
+
+    test("data should not be found after being removed", async () => {
+      expect(await retrieveData(currentPageKey)).toBe(null);
+    });
+
+    test("other data should not be effected", async () => {
+      expect(await retrieveData(bookmarkKey)).toMatchObject(mockData)
+    })
   });
 });

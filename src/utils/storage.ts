@@ -32,3 +32,7 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
     console.warn(error);
   }
 };
+
+export const removeData: (key: string) => void = (key) => {
+  ass.removeItem(key)
+}
