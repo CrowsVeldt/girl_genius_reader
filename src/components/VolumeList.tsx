@@ -52,6 +52,11 @@ export const VolumeList = ({
         renderItem={({ item, index, separators }) =>
           renderElement(item, index, separators)
         }
+          getItemLayout={(data, index) => ({
+            length: 40,
+            offset: 40 * index,
+            index,
+          })}
       />
     </View>
   );
