@@ -1,20 +1,13 @@
 import { ContextType, useContext, useState } from "react";
+import { Dimensions, Image, ScaledSize, StyleSheet, View } from "react-native";
 import {
-  Button,
-  Dimensions,
-  Image,
-  ScaledSize,
-  StyleSheet,
+  FlatList,
   Switch,
-} from "react-native";
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { PageType, VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { comicUrl } from "../utils/utilFunctions";
-import {
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
 import { VolumeList } from "../components/VolumeList";
 
 const window: ScaledSize = Dimensions.get("window");
@@ -28,7 +21,7 @@ export default function VolumeScreen({
 }) {
   const { getVolume, changeCurrentPage }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
-  const [image, setImage] = useState<boolean>(false);
+  const [image, setImage] = useState<boolean>(true);
   const { volumeNumber } = route.params;
 
   const volume: VolumeType = getVolume(volumeNumber);
@@ -45,7 +38,7 @@ export default function VolumeScreen({
   );
 
   return (
-    <ScrollView style={styles.page}>
+    <View style={styles.page}>
       <Switch
         onValueChange={() => setImage(!image)}
         thumbColor={image ? "blue" : "lightgray"}
@@ -54,7 +47,7 @@ export default function VolumeScreen({
       {image && (
         <FlatList
           data={volume.pages}
-          renderItem={({ item, index, separators }) =>
+          renderItem={({ item, index }: { item: PageType; index: number }) =>
             renderElement(item, index)
           }
           getItemLayout={(data, index) => ({
@@ -65,7 +58,7 @@ export default function VolumeScreen({
         />
       )}
       {!image && <VolumeList volume={volume} nav={navigation} />}
-    </ScrollView>
+    </View>
   );
 }
 

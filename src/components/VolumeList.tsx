@@ -1,4 +1,4 @@
-import { ContextType, useContext, useState } from "react";
+import { ContextType, useContext } from "react";
 import {
   Text,
   TouchableOpacity,
