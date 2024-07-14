@@ -1,7 +1,4 @@
 Update notes:
-- rework index page so it only displays links to volumes
-- add toggle to volume screen to switch between full page view and link view
-- add link to comic page to drawer menu
 
 ???
 - make sure bookmark list works well with many bookmarks
@@ -101,3 +98,6 @@ x add vertical volume view
 x link between comic and vertical scroll screens
 x close index volumes when navigating away
 x add option to sort volumes first-last or last-first
+x rework index page so it only displays links to volumes
+x add toggle to volume screen to switch between full page view and link view
+x add link to comic page to drawer menu
