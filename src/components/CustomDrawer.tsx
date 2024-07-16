@@ -1,9 +1,10 @@
-import { ContextType, useContext } from "react";
+import { ContextType, useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
+  useDrawerStatus,
 } from "@react-navigation/drawer";
 import { ComicContext } from "../context/ComicContext";
 import VolumeSubMenu from "./VolumeSubMenu";
@@ -14,7 +15,13 @@ export default function DrawerContent(props: any) {
     getLatestPage,
     getDataStatus,
   }: ContextType<typeof ComicContext> = useContext(ComicContext);
+  const [subMenuOpen, setSubMenuOpen] = useState<boolean>(false);
+  const drawerOpen = useDrawerStatus() === "open";
   const dataReady: boolean = getDataStatus();
+
+  useEffect(() => {
+    setSubMenuOpen(false);
+  }, [drawerOpen]);
 
   return (
     <DrawerContentScrollView {...props}>
@@ -58,10 +65,12 @@ export default function DrawerContent(props: any) {
         label={"Volumes"}
         onPress={() => {
           if (dataReady) {
-            props.navigation.navigate("Index");
+            setSubMenuOpen(!subMenuOpen);
+            // props.navigation.navigate("Index");
           }
         }}
       />
+      {subMenuOpen && <VolumeSubMenu nav={props.navigation} />}
       <DrawerItem
         label={"Privacy Policy"}
         onPress={() => {
@@ -74,7 +83,6 @@ export default function DrawerContent(props: any) {
           props.navigation.navigate("Acknowledgements");
         }}
       />
-      <VolumeSubMenu/>
     </DrawerContentScrollView>
   );
 }
