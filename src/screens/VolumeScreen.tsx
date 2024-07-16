@@ -1,5 +1,12 @@
 import { ContextType, useContext, useState } from "react";
-import { Dimensions, Image, ScaledSize, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import {
   FlatList,
   Switch,
@@ -40,15 +47,16 @@ export default function VolumeScreen({
   return (
     <View style={styles.page}>
       <View style={styles.options}>
-        <Text>Links</Text>
-      <Switch
-        onValueChange={() => setImage(!image)}
-        thumbColor={image ? "blue" : "lightgray"}
-        value={image}
-      />
-
-        <Text>Pages</Text>
-</View>
+        <View style={styles.toggle}>
+          <Text>Links</Text>
+          <Switch
+            onValueChange={() => setImage(!image)}
+            thumbColor={image ? "blue" : "lightgray"}
+            value={image}
+          />
+          <Text>Pages</Text>
+        </View>
+      </View>
       {image && (
         <FlatList
           data={volume.pages}
@@ -73,9 +81,13 @@ const styles = StyleSheet.create({
   },
   image: {
     height: window.height - 190,
-    width: window.width
+    width: window.width,
   },
   options: {
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
+  toggle: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });
