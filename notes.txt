@@ -1,5 +1,6 @@
 Update notes:
 - bug fix: volume list scrolls to the bottom again
+- Feature: add volume submenu to drawer menu
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -27,6 +28,7 @@ Date & Page exceptions:
  - 20060425b-20060425c
  - 20100224a-20100226a-20100301a
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
+ - 20240211 doesn't exist
 
 Done:
 x Make update loop stop even if it returns undefined
