@@ -1,10 +1,27 @@
 Update notes:
 
+
+
+Ideas:
+- when user is scrolling the volume view, have the screen slide to showing the one full image 
+  when the user lifts their finger
+
+BUG: 
+volume list not scrolling all the way down
+
 ???
 - make sure bookmark list works well with many bookmarks
 - replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
+- add horizontal scroll option
+- - have vertical/horizontal toggle (in settings?)
+
+- Options context:
+- - light/dark mode
+- - vertical/horizontal scroll
+
+
 
 Date & Page exceptions:
  - 20030106>20030106b (20030106 points to the wrong comic)
