@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     width: window.width,
-    minHeight: "100%",
     paddingTop: 10,
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
