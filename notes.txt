@@ -1,13 +1,10 @@
 Update notes:
-- bug fix: volume list scrolls to the bottom again
+- Bug fix: Page scroll loading all images correctly
 - Feature: add volume submenu to drawer menu
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
-
-BUG: 
-volume list not scrolling all the way down
 
 ???
 - make sure bookmark list works well with many bookmarks
@@ -119,3 +116,8 @@ x add option to sort volumes first-last or last-first
 x rework index page so it only displays links to volumes
 x add toggle to volume screen to switch between full page view and link view
 x add link to comic page to drawer menu
+x volume list not scrolling all the way down
+BUG: 
+x VolumeScreen seems to be displaying the first 10 and last 10 items
+x - try using react.memo to fix?
+x - initialNumberToRender doesn't seem to make a difference
