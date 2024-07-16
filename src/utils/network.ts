@@ -111,6 +111,8 @@ export const update: () => void = async () => {
             // 20141226a-20141226b (a is the comic, b is a wallpaper)
             dateList.push("20141226a");
             dateList.push("20141226b");
+          } else if (nextDate === "20240211") {
+            console.log("Nothing to add")
           } else {
             dateList.push(nextDate);
           }
