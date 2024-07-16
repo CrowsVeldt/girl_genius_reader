@@ -1,5 +1,12 @@
 import { ContextType, useContext, useState } from "react";
-import { Dimensions, Image, ScaledSize, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import {
   FlatList,
   Switch,
@@ -22,33 +29,46 @@ export default function VolumeScreen({
   const { getVolume, changeCurrentPage }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const [image, setImage] = useState<boolean>(true);
+  const [vertical, setVertical] = useState<boolean>(true);
   const { volumeNumber } = route.params;
 
   const volume: VolumeType = getVolume(volumeNumber);
 
   const renderElement = (item: PageType, index: number) => (
     <TouchableOpacity
+      key={index}
       onPress={() => {
         changeCurrentPage(item);
         navigation.navigate("ComicPage");
       }}
     >
-      <Image src={comicUrl(item.date)} style={styles.image} key={index} />
+      <Image src={comicUrl(item.date)} style={styles.image} />
     </TouchableOpacity>
   );
 
   return (
     <View style={styles.page}>
       <View style={styles.options}>
-        <Text>Links</Text>
-      <Switch
-        onValueChange={() => setImage(!image)}
-        thumbColor={image ? "blue" : "lightgray"}
-        value={image}
-      />
-
+        <View style={styles.toggle}>
+          <Text>Links</Text>
+          <Switch
+            onValueChange={() => setImage(!image)}
+            thumbColor={image ? "blue" : "lightgray"}
+            value={image}
+          />
         <Text>Pages</Text>
-</View>
+        </View>
+
+        <View style={styles.toggle}>
+          <Text>{"≡≡≡"}</Text>
+          <Switch
+            onValueChange={() => setVertical(!vertical)}
+            thumbColor={vertical ? "blue" : "lightgray"}
+            value={vertical}
+          />
+          <Text style={styles.vertical}>{"≡\n≡\n≡\n"}</Text>
+        </View>
+      </View>
       {image && (
         <FlatList
           data={volume.pages}
@@ -60,6 +80,7 @@ export default function VolumeScreen({
             offset: window.height - 190 * index,
             index,
           })}
+          horizontal={!vertical}
         />
       )}
       {!image && <VolumeList volume={volume} nav={navigation} />}
@@ -73,9 +94,19 @@ const styles = StyleSheet.create({
   },
   image: {
     height: window.height - 190,
-    width: window.width
+    width: window.width,
   },
   options: {
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  toggle: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  vertical: {
+    lineHeight: 7,
+    textAlignVertical: "center"
+
   }
 });
