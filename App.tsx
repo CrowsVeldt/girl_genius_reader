@@ -16,7 +16,6 @@ import CustomHeader from "./src/components/CustomHeader";
 import AckScreen from "./src/screens/AckScreen";
 import BookmarkScreen from "./src/screens/BookmarksScreen";
 import HomeScreen from "./src/screens/HomeScreen";
-import IndexScreen from "./src/screens/IndexScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 import ComicPageScreen from "./src/screens/ComicPageScreen";
 import VolumeScreen from "./src/screens/VolumeScreen";
@@ -82,11 +81,6 @@ export default function App() {
             <Drawer.Screen
               name="Bookmarks"
               component={BookmarkScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Index"
-              component={IndexScreen}
               options={{ drawerItemStyle: { display: "none" } }}
             />
             <Drawer.Screen
