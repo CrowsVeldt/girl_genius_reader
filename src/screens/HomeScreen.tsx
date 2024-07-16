@@ -19,14 +19,6 @@ export default function Home({ navigation }: { navigation: any }) {
       <TouchableOpacity
         style={styles.linkButton}
         onPress={() => {
-          navigation.navigate("Index");
-        }}
-      >
-        <Text>Volumes</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
           navigation.navigate("Bookmarks");
         }}
       >
@@ -54,7 +46,7 @@ export default function Home({ navigation }: { navigation: any }) {
           // navigation.navigate("Acknowledgements");
         }}
       >
-      <Text>Link to girlgeniusonline.com</Text>
+        <Text>Link to girlgeniusonline.com</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.linkButton}
@@ -62,7 +54,7 @@ export default function Home({ navigation }: { navigation: any }) {
           // navigation.navigate("Acknowledgements");
         }}
       >
-      <Text>Link to girl genius shops</Text>
+        <Text>Link to girl genius shops</Text>
       </TouchableOpacity>
     </View>
   );

@@ -66,7 +66,6 @@ export default function DrawerContent(props: any) {
         onPress={() => {
           if (dataReady) {
             setSubMenuOpen(!subMenuOpen);
-            // props.navigation.navigate("Index");
           }
         }}
       />
