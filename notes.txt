@@ -1,6 +1,5 @@
 Update notes:
-
-
+- bug fix: volume list scrolls to the bottom again
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 

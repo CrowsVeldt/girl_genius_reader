@@ -6,6 +6,7 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { ComicContext } from "../context/ComicContext";
+import VolumeSubMenu from "./VolumeSubMenu";
 
 export default function DrawerContent(props: any) {
   const {
@@ -73,6 +74,7 @@ export default function DrawerContent(props: any) {
           props.navigation.navigate("Acknowledgements");
         }}
       />
+      <VolumeSubMenu/>
     </DrawerContentScrollView>
   );
 }
