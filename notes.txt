@@ -1,5 +1,5 @@
 Update notes:
-
+fixed: scroll images being cut off on horizontal axis
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -15,7 +15,7 @@ Ideas:
 
 - Options context:
 - - light/dark mode
-- - vertical/horizontal scroll
+? - vertical/horizontal scroll
 
 
 
