@@ -31,7 +31,7 @@ export default memo(VolumeScrollImage);
 
 const styles = StyleSheet.create({
   image: {
-    height: window.height - 220,
+    height: window.height - 200,
     resizeMode: "contain"
   },
 });

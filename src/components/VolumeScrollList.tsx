@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, ScaledSize } from "react-native";
+import { Dimensions, ScaledSize, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { PageType } from "../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
@@ -10,6 +10,7 @@ const VolumeScreenList = React.memo(
   (props: { pages: PageType[]; navigation: any }) => {
     return (
       <FlatList
+        contentContainerStyle={styles.list}
         data={props.pages}
         renderItem={({ item, index }: { item: PageType; index: number }) => (
           <VolumeScrollImage
@@ -19,8 +20,8 @@ const VolumeScreenList = React.memo(
           />
         )}
         getItemLayout={(data, index) => ({
-          length: window.height - 220,
-          offset: (window.height - 220) * index,
+          length: window.height - 200,
+          offset: (window.height - 200) * index,
           index,
         })}
         initialNumToRender={5}
@@ -28,5 +29,12 @@ const VolumeScreenList = React.memo(
     );
   }
 );
+
+const styles = StyleSheet.create({
+  list: {
+    width: window.width,
+    alignSelf: "center"
+  },
+});
 
 export default VolumeScreenList;
