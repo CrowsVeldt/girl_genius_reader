@@ -1,6 +1,5 @@
 Update notes:
-- Bug fix: Page scroll loading all images correctly
-- Feature: add volume submenu to drawer menu
+
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -121,3 +120,6 @@ BUG:
 x VolumeScreen seems to be displaying the first 10 and last 10 items
 x - try using react.memo to fix?
 x - initialNumberToRender doesn't seem to make a difference
+updates
+x Bug fix: Page scroll loading all images correctly
+x Feature: add volume submenu to drawer menu
