@@ -47,8 +47,8 @@ export default function VolumeScreen({
             />
           )}
           getItemLayout={(data, index) => ({
-            length: window.height - 190,
-            offset: (window.height - 190) * index,
+            length: window.height - 220,
+            offset: (window.height - 220) * index,
             index,
           })}
           initialNumToRender={5}
