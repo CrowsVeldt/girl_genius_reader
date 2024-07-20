@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Dimensions, ScaledSize, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { PageType } from "../utils/types";
@@ -8,8 +8,22 @@ const window: ScaledSize = Dimensions.get("window");
 
 const VolumeScreenList = React.memo(
   (props: { pages: PageType[]; navigation: any }) => {
+    const listRef = useRef(null);
+
+    useEffect(() => {
+      if (listRef.current) {
+        listRef.current.scrollToIndex({
+          index: 1,
+          viewPosition: 0,
+          animated: false,
+        });
+      }
+    }, [listRef]);
+
     return (
       <FlatList
+        ref={listRef}
+        initialScrollIndex={0}
         contentContainerStyle={styles.list}
         data={props.pages}
         renderItem={({ item, index }: { item: PageType; index: number }) => (
@@ -33,7 +47,7 @@ const VolumeScreenList = React.memo(
 const styles = StyleSheet.create({
   list: {
     width: window.width,
-    alignSelf: "center"
+    alignSelf: "center",
   },
 });
 
