@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   options: {
+    height: 50,
     flexDirection: "row",
   },
   toggle: {
