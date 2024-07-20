@@ -1,5 +1,6 @@
 Update notes:
 fixed: scroll images being cut off on horizontal axis
+feature: returning to volume screen from other pages will scroll to index of currentPage, if currentPage is in volume
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
