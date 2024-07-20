@@ -1,10 +1,10 @@
 import { ContextType, useContext, useState } from "react";
 import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
-import { FlatList, Switch } from "react-native-gesture-handler";
-import { PageType, VolumeType } from "../utils/types";
+import { Switch } from "react-native-gesture-handler";
+import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
-import VolumeScrollImage from "../components/VolumeScrollImage";
+import VolumeScreenList from "../components/VolumeScrollList";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -37,22 +37,7 @@ export default function VolumeScreen({
         </View>
       </View>
       {image && (
-        <FlatList
-          data={volume.pages}
-          renderItem={({ item, index }: { item: PageType; index: number }) => (
-            <VolumeScrollImage
-              page={item}
-              navigation={navigation}
-              key={index}
-            />
-          )}
-          getItemLayout={(data, index) => ({
-            length: window.height - 220,
-            offset: (window.height - 220) * index,
-            index,
-          })}
-          initialNumToRender={5}
-        />
+        <VolumeScreenList pages={volume.pages} navigation={navigation} />
       )}
       {!image && <VolumeList volume={volume} nav={navigation} />}
     </View>
@@ -64,6 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   options: {
+    height: 50,
     flexDirection: "row",
   },
   toggle: {
