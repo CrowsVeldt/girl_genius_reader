@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import BookmarkLink from "../../../src/components/LinkComponents/BookmarkLink";
+import BookmarkLink from "../../../src/components/link components/BookmarkLink";
 import ComicProvider from "../../../src/context/ComicContext";
 import { PageType } from "../../../src/utils/types";
 

@@ -2,7 +2,7 @@ import { ContextType, useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
-import BookmarkLink from "../components/LinkComponents/BookmarkLink";
+import BookmarkLink from "../components/link components/BookmarkLink";
 import NetStatus from "../components/NetStatus";
 
 export default function Bookmarks({ navigation }: any) {

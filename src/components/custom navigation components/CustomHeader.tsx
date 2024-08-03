@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { PageType } from "../../utils/types";
 import { ComicContext } from "../../context/ComicContext";
-import PullToRefresh from "../GestureComponents/PullToRefresh";
+import PullToRefresh from "../gesture components/PullToRefresh";
 import StarButton from "../StarButton";
 
 export default function CustomHeader({

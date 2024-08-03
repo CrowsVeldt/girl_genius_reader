@@ -10,8 +10,8 @@ import { getDateList, update } from "./src/utils/network";
 import ComicProvider from "./src/context/ComicContext";
 
 import { StatusBar } from "expo-status-bar";
-import DrawerContent from "./src/components/CustomNavigationComponents/CustomDrawer";
-import CustomHeader from "./src/components/CustomNavigationComponents/CustomHeader";
+import DrawerContent from "./src/components/custom navigation components/CustomDrawer";
+import CustomHeader from "./src/components/custom navigation components/CustomHeader";
 
 import AckScreen from "./src/screens/AckScreen";
 import BookmarkScreen from "./src/screens/BookmarksScreen";
