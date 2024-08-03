@@ -1,6 +1,4 @@
 Update notes:
-fixed: scroll images being cut off on horizontal axis
-feature: returning to volume screen from other pages will scroll to index of currentPage, if currentPage is in volume
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -11,12 +9,12 @@ Ideas:
 - replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
-- add horizontal scroll option
-- - have vertical/horizontal toggle (in settings?)
+? add horizontal scroll option
 
 - Options context:
 - - light/dark mode
 ? - vertical/horizontal scroll
+- - preload only on wifi/never/always
 
 
 
@@ -124,3 +122,6 @@ x - initialNumberToRender doesn't seem to make a difference
 updates
 x Bug fix: Page scroll loading all images correctly
 x Feature: add volume submenu to drawer menu
+updates
+fixed: scroll images being cut off on horizontal axis
+feature: returning to volume screen from other pages will scroll to index of currentPage, if currentPage is in volume
