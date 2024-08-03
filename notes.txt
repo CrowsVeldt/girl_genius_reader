@@ -1,11 +1,13 @@
 Update notes:
 - Add option to control prefetching 
+- Add option to change volume scroll direction
 
 FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
+- Add light and dark modes
 
 ???
 - make sure bookmark list works well with many bookmarks
@@ -14,11 +16,9 @@ Ideas:
 - rework imageZoom to work with expo-image?
 - move options to drawer menu?
 - add options context?
-? add horizontal scroll option
 
-- Options
-- - light/dark mode
-? - vertical/horizontal scroll
+
+
 
 
 
@@ -131,3 +131,5 @@ updates
 fixed: scroll images being cut off on horizontal axis
 feature: returning to volume screen from other pages will scroll to index of currentPage, if currentPage is in volume
 x - preload only on wifi/never/always
+x - vertical/horizontal scroll
+x add horizontal scroll option
