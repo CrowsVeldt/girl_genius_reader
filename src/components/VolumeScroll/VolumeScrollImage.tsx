@@ -1,9 +1,9 @@
 import { memo, useContext } from "react";
 import { Dimensions, Image, ScaledSize, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { ComicContext } from "../context/ComicContext";
-import { comicUrl } from "../utils/utilFunctions";
-import { PageType } from "../utils/types";
+import { ComicContext } from "../../context/ComicContext";
+import { comicUrl } from "../../utils/utilFunctions";
+import { PageType } from "../../utils/types";
 
 const window: ScaledSize = Dimensions.get("window");
 

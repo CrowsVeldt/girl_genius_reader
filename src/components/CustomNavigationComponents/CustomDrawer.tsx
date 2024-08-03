@@ -6,7 +6,7 @@ import {
   DrawerItemList,
   useDrawerStatus,
 } from "@react-navigation/drawer";
-import { ComicContext } from "../context/ComicContext";
+import { ComicContext } from "../../context/ComicContext";
 import VolumeSubMenu from "./VolumeSubMenu";
 
 export default function DrawerContent(props: any) {

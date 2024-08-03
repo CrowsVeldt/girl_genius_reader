@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import ComicProvider from "../../../src/context/ComicContext";
-import PageTurn from "../../../src/components/PageTurn";
+import PageTurn from "../../../src/components/GestureComponents/PageTurn";
 
 describe("<PageTurn />", () => {
   // always fails when GestureDetector is present
