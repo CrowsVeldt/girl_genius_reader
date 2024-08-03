@@ -82,6 +82,12 @@ export default function DrawerContent(props: any) {
           props.navigation.navigate("Acknowledgements");
         }}
       />
+      <DrawerItem
+        label={"Options"}
+        onPress={() => {
+          props.navigation.navigate("Options");
+        }}
+      />
     </DrawerContentScrollView>
   );
 }

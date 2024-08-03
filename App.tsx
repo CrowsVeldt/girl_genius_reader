@@ -19,6 +19,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 import ComicPageScreen from "./src/screens/ComicPageScreen";
 import VolumeScreen from "./src/screens/VolumeScreen";
+import Options from "./src/screens/OptionsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -91,6 +92,11 @@ export default function App() {
             <Drawer.Screen
               name="Acknowledgements"
               component={AckScreen}
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
+            <Drawer.Screen
+              name="Options"
+              component={Options}
               options={{ drawerItemStyle: { display: "none" } }}
             />
           </Drawer.Navigator>
