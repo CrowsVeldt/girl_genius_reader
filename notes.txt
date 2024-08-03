@@ -1,17 +1,5 @@
-goals: 
-1. add options page/menu
-2. add options context
-
-- Options page/menu:
-- - add options button to drawer menu
-- - Maybe have an options drawer that opens up instead of a full page
-
-- Options context:
-- - light/dark mode
-? - vertical/horizontal scroll
-- - preload only on wifi/never/always
-
 Update notes:
+- Add option to control prefetching 
 
 FIX: double spread eliyahu mentioned in the GG app chat group
 
@@ -24,7 +12,14 @@ Ideas:
 - replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
+- move options to drawer menu?
+- add options context?
 ? add horizontal scroll option
+
+- Options
+- - light/dark mode
+? - vertical/horizontal scroll
+
 
 
 
@@ -135,3 +130,4 @@ x Feature: add volume submenu to drawer menu
 updates
 fixed: scroll images being cut off on horizontal axis
 feature: returning to volume screen from other pages will scroll to index of currentPage, if currentPage is in volume
+x - preload only on wifi/never/always

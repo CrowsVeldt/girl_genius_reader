@@ -33,7 +33,7 @@ export default function PreloadOption() {
         }}
         style={currentPolicy === "wifi" ? styles.buttonCurrent : styles.button}
       >
-        <Text>WiFi</Text>
+        <Text>Only on WiFi</Text>
       </Pressable>
       <Pressable
         onPress={() => {
@@ -51,22 +51,23 @@ export default function PreloadOption() {
 const styles = StyleSheet.create({
   option: {
     flexDirection: "row",
+    paddingTop: 10,
   },
   button: {
     flexDirection: "row",
     justifyContent: "center",
-    width: 60,
     height: 30,
     borderColor: "black",
     borderWidth: 1,
+    paddingHorizontal: 4,
   },
   buttonCurrent: {
     flexDirection: "row",
     justifyContent: "center",
-    width: 60,
     height: 30,
-    backgroundColor: "gray",
     borderColor: "black",
     borderWidth: 1,
+    paddingHorizontal: 4,
+    backgroundColor: "gray",
   },
 });
