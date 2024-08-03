@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { Image } from "react-native";
 import Toast from "react-native-root-toast";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { checkLists } from "../utils/lists";
@@ -21,7 +22,6 @@ import {
   VolumeType,
 } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
-import { Image } from "react-native";
 
 type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
@@ -62,7 +62,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
   const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
   const [scrollDirection, setScrollDirection] =
-    useState<ScrollDirectionType>("vertical");
+    useState<ScrollDirectionType>("horizontal");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
   const netStatus = useNetInfo();
