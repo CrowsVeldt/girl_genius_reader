@@ -1,7 +1,7 @@
-import { ContextType, useContext, useEffect, useState } from "react";
-import { ComicContext } from "../../context/ComicContext";
+import { ContextType, useContext, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { PreloadPolicyType } from "../../utils/types";
+import { ComicContext } from "../../context/ComicContext";
 
 export default function PreloadOption() {
   const {

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import PreloadOption from "../components/control components/PreloadOptionSwitch";
 
 export default function Options({ navigation }: { navigation: any }) {
