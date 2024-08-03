@@ -1,11 +1,11 @@
-import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
-import NetStatus from "../components/NetStatus";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, Text, View } from "react-native";
+import PreloadOption from "../components/control components/PreloadOptionSwitch";
 
 export default function Options({ navigation }: { navigation: any }) {
   return (
     <View style={styles.screen}>
-        <Text>Options</Text>
+      <Text>Options</Text>
+      <PreloadOption />
     </View>
   );
 }
