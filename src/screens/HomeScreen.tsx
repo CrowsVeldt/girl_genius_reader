@@ -43,10 +43,10 @@ export default function Home({ navigation }: { navigation: any }) {
       <TouchableOpacity
         style={styles.linkButton}
         onPress={() => {
-          // navigation.navigate("Acknowledgements");
+          navigation.navigate("Options");
         }}
       >
-        <Text>Link to girlgeniusonline.com</Text>
+        <Text>Options</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.linkButton}
@@ -54,7 +54,15 @@ export default function Home({ navigation }: { navigation: any }) {
           // navigation.navigate("Acknowledgements");
         }}
       >
-        <Text>Link to girl genius shops</Text>
+        <Text>Link to girlgeniusonline.com (not yet implemented)</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.linkButton}
+        onPress={() => {
+          // navigation.navigate("Acknowledgements");
+        }}
+      >
+        <Text>Link to girl genius shops (not yet implemented)</Text>
       </TouchableOpacity>
     </View>
   );

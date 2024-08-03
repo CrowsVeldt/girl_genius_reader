@@ -11,7 +11,7 @@ import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { ImageZoomRef } from "../components/image_zoom_files/types";
 import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
-import PageTurn from "../components/PageTurn";
+import PageTurn from "../components/gesture components/PageTurn";
 import NetStatus from "../components/NetStatus";
 import { comicUrl } from "../utils/utilFunctions";
 

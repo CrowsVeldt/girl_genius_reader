@@ -4,7 +4,7 @@ import { Switch } from "react-native-gesture-handler";
 import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
-import VolumeScreenList from "../components/VolumeScrollList";
+import VolumeScreenList from "../components/Volume Scroll components/VolumeScrollList";
 
 const window: ScaledSize = Dimensions.get("window");
 

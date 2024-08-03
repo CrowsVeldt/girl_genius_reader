@@ -1,4 +1,7 @@
 Update notes:
+- Add option to control prefetching 
+
+FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -9,12 +12,14 @@ Ideas:
 - replace NetStatus component with toast that fires at intervals?
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
+- move options to drawer menu?
+- add options context?
 ? add horizontal scroll option
 
-- Options context:
+- Options
 - - light/dark mode
 ? - vertical/horizontal scroll
-- - preload only on wifi/never/always
+
 
 
 
@@ -125,3 +130,4 @@ x Feature: add volume submenu to drawer menu
 updates
 fixed: scroll images being cut off on horizontal axis
 feature: returning to volume screen from other pages will scroll to index of currentPage, if currentPage is in volume
+x - preload only on wifi/never/always

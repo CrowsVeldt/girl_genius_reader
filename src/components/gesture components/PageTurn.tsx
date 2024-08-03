@@ -10,8 +10,8 @@ import Animated, {
   SharedValue,
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { PageType, SideType } from "../utils/types";
-import { ComicContext } from "../context/ComicContext";
+import { PageType, SideType } from "../../utils/types";
+import { ComicContext } from "../../context/ComicContext";
 
 export default function PageTurn(props: any) {
   const {

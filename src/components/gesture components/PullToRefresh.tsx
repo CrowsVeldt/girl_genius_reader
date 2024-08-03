@@ -10,7 +10,7 @@ import Animated, {
   SharedValue,
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { ComicContext } from "../context/ComicContext";
+import { ComicContext } from "../../context/ComicContext";
 
 export default function PullToRefresh(props: any) {
   const { refresh }: ContextType<typeof ComicContext> =

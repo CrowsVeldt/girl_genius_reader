@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef } from "react";
 import { Dimensions, ScaledSize, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { PageType } from "../utils/types";
+import { PageType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
-import { ComicContext } from "../context/ComicContext";
+import { ComicContext } from "../../context/ComicContext";
 
 const window: ScaledSize = Dimensions.get("window");
 

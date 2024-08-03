@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { ComicContext } from "../context/ComicContext";
-import { VolumeType } from "../utils/types";
+import { ComicContext } from "../../context/ComicContext";
+import { VolumeType } from "../../utils/types";
 
 export default function VolumeSubMenu(props: any) {
   const { getVolumes, changeCurrentVolume } = useContext(ComicContext);

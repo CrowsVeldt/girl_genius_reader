@@ -6,10 +6,10 @@ import {
   StatusBar,
   TouchableOpacity,
 } from "react-native";
-import { PageType } from "../utils/types";
-import { ComicContext } from "../context/ComicContext";
-import PullToRefresh from "./PullToRefresh";
-import StarButton from "./StarButton";
+import { PageType } from "../../utils/types";
+import { ComicContext } from "../../context/ComicContext";
+import PullToRefresh from "../gesture components/PullToRefresh";
+import StarButton from "../control components/StarButton";
 
 export default function CustomHeader({
   navigation,

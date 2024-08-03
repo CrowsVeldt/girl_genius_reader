@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { checkLists } from "../utils/lists";
 import { update } from "../utils/network";
 import { showToast } from "../utils/notifications";
@@ -10,8 +11,9 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
+  preloadPolicyKey,
 } from "../utils/storage";
-import { PageType, VolumeType } from "../utils/types";
+import { PageType, PreloadPolicyType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
 import { Image } from "react-native";
 
@@ -19,11 +21,13 @@ type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
   changeCurrentVolume: (num: number) => void;
+  changePreloadPolicy: (policy: PreloadPolicyType) => void;
   getBookmarks: () => PageType[];
   getCurrentPage: () => PageType;
   getCurrentVolume: () => number;
   getDataStatus: () => boolean;
   getLatestPage: () => PageType;
+  getPreloadPolicy: () => PreloadPolicyType;
   getVolume: (num: number) => VolumeType;
   getVolumes: () => VolumeType[];
   goToPreviousPage: (page: PageType) => void;
@@ -48,8 +52,10 @@ const ComicProvider = ({ children }: { children: any }) => {
     pageNumber: 1,
     volumeNumber: 1,
   });
+  const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
+  const netStatus = useNetInfo();
 
   useEffect(() => {
     (async () => {
@@ -72,12 +78,19 @@ const ComicProvider = ({ children }: { children: any }) => {
       try {
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
         const savedCurrentPage: PageType = await retrieveData(currentPageKey);
+        const savedPreloadPolicy: PreloadPolicyType = await retrieveData(
+          preloadPolicyKey
+        );
 
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks);
         }
         if (savedCurrentPage != null) {
           setCurrentPage(savedCurrentPage);
+        }
+
+        if (savedPreloadPolicy != null) {
+          setPreloadPolicy(savedPreloadPolicy);
         }
       } catch (error) {
         console.warn(
@@ -105,7 +118,12 @@ const ComicProvider = ({ children }: { children: any }) => {
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     try {
       if (page != null) {
-        prefetchFive(page);
+        if (
+          preloadPolicy === "always" ||
+          (preloadPolicy === "wifi" && netStatus.type === "wifi")
+        ) {
+          prefetchFive(page);
+        }
 
         setCurrentPage(page);
         saveData(currentPageKey, page);
@@ -122,11 +140,17 @@ const ComicProvider = ({ children }: { children: any }) => {
     setCurrentVolume(num);
   };
 
+  const changePreloadPolicy: (policy: PreloadPolicyType) => void = (policy) => {
+    saveData(preloadPolicyKey, preloadPolicy);
+    setPreloadPolicy(policy);
+  };
+
   const getBookmarks: () => PageType[] = () => bookmarks;
   const getCurrentPage: () => PageType = () => currentPage;
   const getCurrentVolume: () => number = () => currentVolume;
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
+  const getPreloadPolicy: () => PreloadPolicyType = () => preloadPolicy;
   const getVolume: (num: number) => VolumeType = (num) => volumes[num - 1];
 
   const getVolumes: () => VolumeType[] = () => volumes;
@@ -218,11 +242,13 @@ const ComicProvider = ({ children }: { children: any }) => {
     addBookmark,
     changeCurrentPage,
     changeCurrentVolume,
+    changePreloadPolicy,
     getBookmarks,
     getCurrentPage,
     getCurrentVolume,
     getDataStatus,
     getLatestPage,
+    getPreloadPolicy,
     getVolume,
     getVolumes,
     goToPreviousPage,

@@ -10,8 +10,8 @@ import { getDateList, update } from "./src/utils/network";
 import ComicProvider from "./src/context/ComicContext";
 
 import { StatusBar } from "expo-status-bar";
-import DrawerContent from "./src/components/CustomDrawer";
-import CustomHeader from "./src/components/CustomHeader";
+import DrawerContent from "./src/components/custom navigation components/CustomDrawer";
+import CustomHeader from "./src/components/custom navigation components/CustomHeader";
 
 import AckScreen from "./src/screens/AckScreen";
 import BookmarkScreen from "./src/screens/BookmarksScreen";
@@ -19,6 +19,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 import ComicPageScreen from "./src/screens/ComicPageScreen";
 import VolumeScreen from "./src/screens/VolumeScreen";
+import Options from "./src/screens/OptionsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -91,6 +92,11 @@ export default function App() {
             <Drawer.Screen
               name="Acknowledgements"
               component={AckScreen}
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
+            <Drawer.Screen
+              name="Options"
+              component={Options}
               options={{ drawerItemStyle: { display: "none" } }}
             />
           </Drawer.Navigator>

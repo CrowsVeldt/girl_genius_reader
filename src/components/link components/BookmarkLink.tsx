@@ -1,7 +1,7 @@
 import { ContextType, useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { PageType } from "../utils/types";
-import { ComicContext } from "../context/ComicContext";
+import { PageType } from "../../utils/types";
+import { ComicContext } from "../../context/ComicContext";
 
 export default function BookmarkLink({
   page,
