@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Toast from "react-native-root-toast";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { checkLists } from "../utils/lists";
 import { update } from "../utils/network";
 import { showToast } from "../utils/notifications";
@@ -52,6 +53,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
+  const netStatus = useNetInfo();
 
   useEffect(() => {
     (async () => {
@@ -107,7 +109,12 @@ const ComicProvider = ({ children }: { children: any }) => {
   const changeCurrentPage: (page: PageType) => void = async (page) => {
     try {
       if (page != null) {
-        prefetchFive(page);
+        if (
+          preloadPolicy === "always" ||
+          (preloadPolicy === "wifi" && netStatus.type === "wifi")
+        ) {
+          prefetchFive(page);
+        }
 
         setCurrentPage(page);
         saveData(currentPageKey, page);
