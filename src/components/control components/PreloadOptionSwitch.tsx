@@ -1,27 +1,72 @@
-import { ContextType, useContext, useEffect } from "react";
+import { ContextType, useContext, useEffect, useState } from "react";
 import { ComicContext } from "../../context/ComicContext";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { PreloadPolicyType } from "../../utils/types";
 
 export default function PreloadOption() {
   const {
-    getPreloadPolicy
+    getPreloadPolicy,
+    changePreloadPolicy,
   }: ContextType<typeof ComicContext> = useContext(ComicContext);
-
-  useEffect(() => {}, []);
+  const [currentPolicy, setCurrentPolicy] = useState<PreloadPolicyType>(
+    getPreloadPolicy()
+  );
 
   return (
-    <View>
-        <Pressable>
-            <Text>{getPreloadPolicy()}</Text>
-        </Pressable>
+    <View style={styles.option}>
+      <Text>Preload images: </Text>
+      <Pressable
+        onPress={() => {
+          changePreloadPolicy("always");
+          setCurrentPolicy("always");
+        }}
+        style={
+          currentPolicy === "always" ? styles.buttonCurrent : styles.button
+        }
+      >
+        <Text>Always</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          changePreloadPolicy("wifi");
+          setCurrentPolicy("wifi");
+        }}
+        style={currentPolicy === "wifi" ? styles.buttonCurrent : styles.button}
+      >
+        <Text>WiFi</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          changePreloadPolicy("never");
+          setCurrentPolicy("never");
+        }}
+        style={currentPolicy === "never" ? styles.buttonCurrent : styles.button}
+      >
+        <Text>Never</Text>
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  starButton: {
-    height: 40,
-    width: 40,
-    marginRight: 10,
-  }
+  option: {
+    flexDirection: "row",
+  },
+  button: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: 60,
+    height: 30,
+    borderColor: "black",
+    borderWidth: 1,
+  },
+  buttonCurrent: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: 60,
+    height: 30,
+    backgroundColor: "gray",
+    borderColor: "black",
+    borderWidth: 1,
+  },
 });

@@ -4,7 +4,6 @@ import PreloadOption from "../components/control components/PreloadOptionSwitch"
 export default function Options({ navigation }: { navigation: any }) {
   return (
     <View style={styles.screen}>
-      <Text>Options</Text>
       <PreloadOption />
     </View>
   );
