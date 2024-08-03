@@ -62,7 +62,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
   const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
   const [scrollDirection, setScrollDirection] =
-    useState<ScrollDirectionType>("horizontal");
+    useState<ScrollDirectionType>("vertical");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
   const netStatus = useNetInfo();

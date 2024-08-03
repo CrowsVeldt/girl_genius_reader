@@ -47,6 +47,8 @@ export default function VolumeScreen({
 const styles = StyleSheet.create({
   page: {
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
+    height: "100%",
+    width: "100%"
   },
   options: {
     flexDirection: "row",
