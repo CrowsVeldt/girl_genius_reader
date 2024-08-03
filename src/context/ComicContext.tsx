@@ -11,7 +11,7 @@ import {
   pageListKey,
   volumeListKey,
 } from "../utils/storage";
-import { PageType, VolumeType } from "../utils/types";
+import { PageType, PreloadPolicyType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
 import { Image } from "react-native";
 
@@ -19,6 +19,7 @@ type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
   changeCurrentVolume: (num: number) => void;
+  changePreloadPolicy: (policy: PreloadPolicyType) => void;
   getBookmarks: () => PageType[];
   getCurrentPage: () => PageType;
   getCurrentVolume: () => number;
@@ -48,6 +49,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     pageNumber: 1,
     volumeNumber: 1,
   });
+  const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
 
@@ -120,6 +122,10 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const changeCurrentVolume: (num: number) => void = (num) => {
     setCurrentVolume(num);
+  };
+
+  const changePreloadPolicy: (policy: PreloadPolicyType) => void = (policy) => {
+    setPreloadPolicy(policy);
   };
 
   const getBookmarks: () => PageType[] = () => bookmarks;
@@ -218,6 +224,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     addBookmark,
     changeCurrentPage,
     changeCurrentVolume,
+    changePreloadPolicy,
     getBookmarks,
     getCurrentPage,
     getCurrentVolume,

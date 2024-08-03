@@ -1,3 +1,17 @@
+goals: 
+1. add options page/menu
+2. add options context
+
+- Options page/menu:
+- - add options button to drawer menu
+- - Maybe have an options drawer that opens up instead of a full page
+
+- Options context:
+- - light/dark mode
+? - vertical/horizontal scroll
+- - preload only on wifi/never/always
+
+
 Update notes:
 
 Ideas:
@@ -10,11 +24,6 @@ Ideas:
 - set comic loading indicator with loadingIndicatorSource property?
 - rework imageZoom to work with expo-image?
 ? add horizontal scroll option
-
-- Options context:
-- - light/dark mode
-? - vertical/horizontal scroll
-- - preload only on wifi/never/always
 
 
 

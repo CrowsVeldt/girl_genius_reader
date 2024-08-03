@@ -26,3 +26,5 @@ export type ListCollectionType =
   | undefined;
 
 export type SideType = "left" | "right";
+
+export type PreloadPolicyType = "wifi" | "never" | "always";
