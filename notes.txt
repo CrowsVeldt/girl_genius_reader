@@ -11,8 +11,9 @@ goals:
 ? - vertical/horizontal scroll
 - - preload only on wifi/never/always
 
-
 Update notes:
+
+FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
