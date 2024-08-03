@@ -11,6 +11,7 @@ import {
   currentPageKey,
   pageListKey,
   volumeListKey,
+  preloadPolicyKey,
 } from "../utils/storage";
 import { PageType, PreloadPolicyType, VolumeType } from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
@@ -76,12 +77,19 @@ const ComicProvider = ({ children }: { children: any }) => {
       try {
         const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
         const savedCurrentPage: PageType = await retrieveData(currentPageKey);
+        const savedPreloadPolicy: PreloadPolicyType = await retrieveData(
+          preloadPolicyKey
+        );
 
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks);
         }
         if (savedCurrentPage != null) {
           setCurrentPage(savedCurrentPage);
+        }
+
+        if (savedPreloadPolicy != null) {
+          setPreloadPolicy(savedPreloadPolicy);
         }
       } catch (error) {
         console.warn(
@@ -132,6 +140,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const changePreloadPolicy: (policy: PreloadPolicyType) => void = (policy) => {
+    saveData(preloadPolicyKey, preloadPolicy);
     setPreloadPolicy(policy);
   };
 
