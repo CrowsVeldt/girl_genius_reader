@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { Image } from "react-native";
 import Toast from "react-native-root-toast";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { checkLists } from "../utils/lists";
@@ -12,22 +13,29 @@ import {
   pageListKey,
   volumeListKey,
   preloadPolicyKey,
+  scrollDirectionKey,
 } from "../utils/storage";
-import { PageType, PreloadPolicyType, VolumeType } from "../utils/types";
+import {
+  PageType,
+  PreloadPolicyType,
+  ScrollDirectionType,
+  VolumeType,
+} from "../utils/types";
 import { lastElement } from "../utils/utilFunctions";
-import { Image } from "react-native";
 
 type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
   changeCurrentPage: (page: PageType) => void;
   changeCurrentVolume: (num: number) => void;
   changePreloadPolicy: (policy: PreloadPolicyType) => void;
+  changeScrollDirection: (dir: ScrollDirectionType) => void;
   getBookmarks: () => PageType[];
   getCurrentPage: () => PageType;
   getCurrentVolume: () => number;
   getDataStatus: () => boolean;
   getLatestPage: () => PageType;
   getPreloadPolicy: () => PreloadPolicyType;
+  getScrollDirection: () => ScrollDirectionType;
   getVolume: (num: number) => VolumeType;
   getVolumes: () => VolumeType[];
   goToPreviousPage: (page: PageType) => void;
@@ -53,6 +61,8 @@ const ComicProvider = ({ children }: { children: any }) => {
     volumeNumber: 1,
   });
   const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
+  const [scrollDirection, setScrollDirection] =
+    useState<ScrollDirectionType>("vertical");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
   const netStatus = useNetInfo();
@@ -81,6 +91,9 @@ const ComicProvider = ({ children }: { children: any }) => {
         const savedPreloadPolicy: PreloadPolicyType = await retrieveData(
           preloadPolicyKey
         );
+        const savedScrollDirection: ScrollDirectionType = await retrieveData(
+          scrollDirectionKey
+        );
 
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks);
@@ -91,6 +104,10 @@ const ComicProvider = ({ children }: { children: any }) => {
 
         if (savedPreloadPolicy != null) {
           setPreloadPolicy(savedPreloadPolicy);
+        }
+
+        if (savedScrollDirection != null) {
+          setScrollDirection(savedScrollDirection);
         }
       } catch (error) {
         console.warn(
@@ -141,8 +158,13 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const changePreloadPolicy: (policy: PreloadPolicyType) => void = (policy) => {
-    saveData(preloadPolicyKey, preloadPolicy);
+    saveData(preloadPolicyKey, policy);
     setPreloadPolicy(policy);
+  };
+
+  const changeScrollDirection: (dir: ScrollDirectionType) => void = (dir) => {
+    saveData(scrollDirectionKey, dir);
+    setScrollDirection(dir);
   };
 
   const getBookmarks: () => PageType[] = () => bookmarks;
@@ -151,6 +173,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const getDataStatus: () => boolean = () => dataReady;
   const getLatestPage: () => PageType = () => lastElement(pages);
   const getPreloadPolicy: () => PreloadPolicyType = () => preloadPolicy;
+  const getScrollDirection: () => ScrollDirectionType = () => scrollDirection;
   const getVolume: (num: number) => VolumeType = (num) => volumes[num - 1];
 
   const getVolumes: () => VolumeType[] = () => volumes;
@@ -243,12 +266,14 @@ const ComicProvider = ({ children }: { children: any }) => {
     changeCurrentPage,
     changeCurrentVolume,
     changePreloadPolicy,
+    changeScrollDirection,
     getBookmarks,
     getCurrentPage,
     getCurrentVolume,
     getDataStatus,
     getLatestPage,
     getPreloadPolicy,
+    getScrollDirection,
     getVolume,
     getVolumes,
     goToPreviousPage,

@@ -28,3 +28,5 @@ export type ListCollectionType =
 export type SideType = "left" | "right";
 
 export type PreloadPolicyType = "wifi" | "never" | "always";
+
+export type ScrollDirectionType = "horizontal" | "vertical"

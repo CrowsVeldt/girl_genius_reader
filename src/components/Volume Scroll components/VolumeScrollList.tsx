@@ -11,10 +11,12 @@ export default function VolumeScreenList(props: {
   pages: PageType[];
   navigation: any;
 }) {
-  const { getCurrentPage, getCurrentVolume } = useContext(ComicContext);
+  const { getCurrentPage, getCurrentVolume, getScrollDirection } =
+    useContext(ComicContext);
   const listRef = useRef<FlatList>(null);
   const currentPage = getCurrentPage();
   const currentVolume = getCurrentVolume();
+  const dir = getScrollDirection();
 
   useEffect(() => {
     if (listRef.current) {
@@ -37,6 +39,7 @@ export default function VolumeScreenList(props: {
   return (
     <FlatList
       ref={listRef}
+      horizontal={dir === "horizontal"}
       contentContainerStyle={styles.list}
       data={props.pages}
       renderItem={({ item, index }: { item: PageType; index: number }) => (
@@ -46,11 +49,19 @@ export default function VolumeScreenList(props: {
           key={index}
         />
       )}
-      getItemLayout={(data, index) => ({
-        length: window.height - 200,
-        offset: (window.height - 200) * index,
-        index,
-      })}
+      getItemLayout={(data, index) =>
+        dir === "vertical"
+          ? {
+              length: window.height - 200,
+              offset: (window.height - 200) * index,
+              index,
+            }
+          : {
+              length: window.width,
+              offset: window.width * index,
+              index,
+            }
+      }
       initialNumToRender={5}
     />
   );
@@ -58,7 +69,6 @@ export default function VolumeScreenList(props: {
 
 const styles = StyleSheet.create({
   list: {
-    width: window.width,
     alignSelf: "center",
   },
 });
