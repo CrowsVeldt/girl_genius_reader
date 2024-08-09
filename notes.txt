@@ -1,19 +1,18 @@
-Update notes:
-- Add option to control prefetching 
-- Add option to change volume scroll direction
+- Add light and dark modes
+- add changelog
+- Refactor image zoom to use react-native-zoom-image V4
 
 FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
-- Add light and dark modes
 
 ???
 - make sure bookmark list works well with many bookmarks
-- replace NetStatus component with toast that fires at intervals?
+- replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
-- rework imageZoom to work with expo-image?
+
 - move options to drawer menu?
 - add options context?
 
@@ -133,3 +132,6 @@ feature: returning to volume screen from other pages will scroll to index of cur
 x - preload only on wifi/never/always
 x - vertical/horizontal scroll
 x add horizontal scroll option
+Update notes:
+x Add option to control prefetching 
+x Add option to change volume scroll direction
