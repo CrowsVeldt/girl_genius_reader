@@ -50,10 +50,10 @@ export default function ScrollDirectionSwitch() {
 const styles = StyleSheet.create({
   option: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   buttonContainer: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   button: {
     flexDirection: "row",
