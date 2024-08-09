@@ -1,12 +1,21 @@
 import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
 import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useContext } from "react";
+import { ComicContext } from "../context/ComicContext";
 
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
+  const { getColorTheme } = useContext(ComicContext);
+  console.log(getColorTheme());
   return (
-    <View style={styles.page}>
+    <View
+      style={[
+        styles.page,
+        getColorTheme() === "light" ? styles.lightTheme : styles.darkTheme,
+      ]}
+    >
       <NetStatus />
       <TouchableOpacity
         style={styles.linkButton}
@@ -74,7 +83,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: "100%",
-    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   linkButton: {
     width: window.width,
@@ -82,5 +90,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
+  },
+  lightTheme: {
+    backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
+  },
+  darkTheme: {
+    backgroundColor: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
   },
 });
