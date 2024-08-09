@@ -5,8 +5,10 @@ import ScrollDirectionSwitch from "../components/control components/ScrollDirect
 export default function Options({ navigation }: { navigation: any }) {
   return (
     <View style={styles.screen}>
-      <ScrollDirectionSwitch />
-      <PreloadOption />
+      <View style={styles.optionsContainer}>
+        <ScrollDirectionSwitch />
+        <PreloadOption />
+      </View>
     </View>
   );
 }
@@ -14,10 +16,13 @@ export default function Options({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignSelf: "center",
-    alignItems: "center",
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
     paddingVertical: 10,
+  },
+  optionsContainer: {
+    alignSelf: "center",
+    alignItems: "stretch",
+    width: "80%",
   },
 });

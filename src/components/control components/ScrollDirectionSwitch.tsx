@@ -15,32 +15,45 @@ export default function ScrollDirectionSwitch() {
   return (
     <View style={styles.option}>
       <Text>Volume Scroll Direction: </Text>
-      <Pressable
-        onPress={() => {
-          changeScrollDirection("vertical");
-          setCurrentDirection("vertical");
-        }}
-        style={
-          currentDirection === "vertical" ? styles.buttonCurrent : styles.button
-        }
-      >
-        <Text>Vertical</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          changeScrollDirection("horizontal");
-          setCurrentDirection("horizontal");
-        }}
-        style={currentDirection === "horizontal" ? styles.buttonCurrent : styles.button}
-      >
-        <Text>Horizontal</Text>
-      </Pressable>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          onPress={() => {
+            changeScrollDirection("vertical");
+            setCurrentDirection("vertical");
+          }}
+          style={
+            currentDirection === "vertical"
+              ? styles.buttonCurrent
+              : styles.button
+          }
+        >
+          <Text>Vertical</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            changeScrollDirection("horizontal");
+            setCurrentDirection("horizontal");
+          }}
+          style={
+            currentDirection === "horizontal"
+              ? styles.buttonCurrent
+              : styles.button
+          }
+        >
+          <Text>Horizontal</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   option: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  buttonContainer: {
     flexDirection: "row",
   },
   button: {

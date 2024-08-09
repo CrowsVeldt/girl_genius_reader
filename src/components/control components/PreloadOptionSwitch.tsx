@@ -15,35 +15,41 @@ export default function PreloadOption() {
   return (
     <View style={styles.option}>
       <Text>Preload images: </Text>
-      <Pressable
-        onPress={() => {
-          changePreloadPolicy("always");
-          setCurrentPolicy("always");
-        }}
-        style={
-          currentPolicy === "always" ? styles.buttonCurrent : styles.button
-        }
-      >
-        <Text>Always</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          changePreloadPolicy("wifi");
-          setCurrentPolicy("wifi");
-        }}
-        style={currentPolicy === "wifi" ? styles.buttonCurrent : styles.button}
-      >
-        <Text>On WiFi Only</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          changePreloadPolicy("never");
-          setCurrentPolicy("never");
-        }}
-        style={currentPolicy === "never" ? styles.buttonCurrent : styles.button}
-      >
-        <Text>Never</Text>
-      </Pressable>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          onPress={() => {
+            changePreloadPolicy("always");
+            setCurrentPolicy("always");
+          }}
+          style={
+            currentPolicy === "always" ? styles.buttonCurrent : styles.button
+          }
+        >
+          <Text>Always</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            changePreloadPolicy("wifi");
+            setCurrentPolicy("wifi");
+          }}
+          style={
+            currentPolicy === "wifi" ? styles.buttonCurrent : styles.button
+          }
+        >
+          <Text>On WiFi Only</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            changePreloadPolicy("never");
+            setCurrentPolicy("never");
+          }}
+          style={
+            currentPolicy === "never" ? styles.buttonCurrent : styles.button
+          }
+        >
+          <Text>Never</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -51,7 +57,13 @@ export default function PreloadOption() {
 const styles = StyleSheet.create({
   option: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10
+
   },
+buttonContainer: {
+  flexDirection: "row"
+},
   button: {
     flexDirection: "row",
     justifyContent: "center",
