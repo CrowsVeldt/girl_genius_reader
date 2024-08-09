@@ -1,12 +1,16 @@
 import { StyleSheet, View } from "react-native";
 import PreloadOption from "../components/control components/PreloadOptionSwitch";
 import ScrollDirectionSwitch from "../components/control components/ScrollDirectionSwitch";
+import ColorThemeOption from "../components/control components/ColorThemeSwitch";
 
 export default function Options({ navigation }: { navigation: any }) {
   return (
     <View style={styles.screen}>
-      <ScrollDirectionSwitch />
-      <PreloadOption />
+      <View>
+        <ColorThemeOption />
+        <ScrollDirectionSwitch />
+        <PreloadOption />
+      </View>
     </View>
   );
 }
