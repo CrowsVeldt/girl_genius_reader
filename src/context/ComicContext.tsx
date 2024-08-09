@@ -14,6 +14,7 @@ import {
   volumeListKey,
   preloadPolicyKey,
   scrollDirectionKey,
+  colorThemeKey,
 } from "../utils/storage";
 import {
   PageType,
@@ -25,11 +26,13 @@ import { lastElement } from "../utils/utilFunctions";
 
 type ComicContextType = {
   addBookmark: (newBookmark: PageType) => void;
+  changeColorTheme: (newTheme: string) => void;
   changeCurrentPage: (page: PageType) => void;
   changeCurrentVolume: (num: number) => void;
   changePreloadPolicy: (policy: PreloadPolicyType) => void;
   changeScrollDirection: (dir: ScrollDirectionType) => void;
   getBookmarks: () => PageType[];
+  getColorTheme: () => string;
   getCurrentPage: () => PageType;
   getCurrentVolume: () => number;
   getDataStatus: () => boolean;
@@ -63,6 +66,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
   const [scrollDirection, setScrollDirection] =
     useState<ScrollDirectionType>("vertical");
+  const [colorTheme, setColorTheme] = useState<string>("light");
 
   const [dataReady, setDataReady] = useState<boolean>(false);
   const netStatus = useNetInfo();
@@ -94,6 +98,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         const savedScrollDirection: ScrollDirectionType = await retrieveData(
           scrollDirectionKey
         );
+        const savedColorTheme: string = await retrieveData(colorThemeKey);
 
         if (savedBookmarks != null) {
           setBookmarks(savedBookmarks);
@@ -108,6 +113,9 @@ const ComicProvider = ({ children }: { children: any }) => {
 
         if (savedScrollDirection != null) {
           setScrollDirection(savedScrollDirection);
+        }
+        if (savedColorTheme != null) {
+          setColorTheme(savedColorTheme);
         }
       } catch (error) {
         console.warn(
@@ -130,6 +138,11 @@ const ComicProvider = ({ children }: { children: any }) => {
       console.warn("An error occurred adding bookmark");
       console.error(error);
     }
+  };
+
+  const changeColorTheme: (newTheme: string) => void = async (newTheme) => {
+    setColorTheme(newTheme);
+    saveData(colorThemeKey, colorTheme);
   };
 
   const changeCurrentPage: (page: PageType) => void = async (page) => {
@@ -168,6 +181,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const getBookmarks: () => PageType[] = () => bookmarks;
+  const getColorTheme: () => string = () => colorTheme;
   const getCurrentPage: () => PageType = () => currentPage;
   const getCurrentVolume: () => number = () => currentVolume;
   const getDataStatus: () => boolean = () => dataReady;
@@ -263,11 +277,13 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   const value = {
     addBookmark,
+    changeColorTheme,
     changeCurrentPage,
     changeCurrentVolume,
     changePreloadPolicy,
     changeScrollDirection,
     getBookmarks,
+    getColorTheme,
     getCurrentPage,
     getCurrentVolume,
     getDataStatus,
