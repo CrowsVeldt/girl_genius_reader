@@ -1,4 +1,7 @@
-- Add light and dark modes
+Updates:
+- improve options screen layout
+
+TODO: 
 - add changelog
 - Refactor image zoom to use react-native-zoom-image V4
 
@@ -7,6 +10,7 @@ FIX: double spread eliyahu mentioned in the GG app chat group
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
+- implement light/dark mode support
 
 ???
 - make sure bookmark list works well with many bookmarks
