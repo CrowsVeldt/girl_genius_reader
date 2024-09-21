@@ -1,27 +1,33 @@
-import { useCallback, useRef } from "react";
-import {
-  Gesture,
-  GestureStateChangeEvent,
-  GestureUpdateEvent,
-  PanGestureHandlerEventPayload,
-  PinchGestureHandlerEventPayload,
-  TapGestureHandlerEventPayload,
-} from "react-native-gesture-handler";
+import { useCallback, useRef } from 'react';
+import { Gesture } from 'react-native-gesture-handler';
 import {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
+  withDecay,
   withTiming,
-} from "react-native-reanimated";
-
-import { clamp } from "../utils/clamp";
-
-import type { ImageZoomUseGesturesProps } from "../types";
+} from 'react-native-reanimated';
+import { clamp } from '../utils/clamp';
+import { limits } from '../utils/limits';
+import { ANIMATION_VALUE, ZOOM_TYPE } from '../types';
+import type {
+  OnPanEndCallback,
+  OnPanStartCallback,
+  OnPinchEndCallback,
+  OnPinchStartCallback,
+  ProgrammaticZoomCallback,
+  ZoomableUseGesturesProps,
+} from '../types';
+import { useAnimationEnd } from './useAnimationEnd';
+import { useInteractionId } from './useInteractionId';
+import { usePanGestureCount } from './usePanGestureCount';
+import { sum } from '../utils/sum';
 
 export const useGestures = ({
   width,
   height,
   center,
+  scale: scaleValue,
   minScale = 1,
   maxScale = 5,
   doubleTapScale = 3,
@@ -42,7 +48,8 @@ export const useGestures = ({
   const isPinching = useRef(false);
 
   const prevScale = useSharedValue(1);
-  const scale = useSharedValue(1);
+  const internalScaleValue = useSharedValue(1);
+  const scale = scaleValue ?? internalScaleValue
   const initialFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const prevFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const focal = { x: useSharedValue(0), y: useSharedValue(0) };
