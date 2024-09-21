@@ -1,9 +1,18 @@
+- Refactor image zoom to use react-native-zoom-image V4
+
+image behavior:
+! when zoomed out pan is disabled
+- when zoomed in pan is possible only to the image edge
+? when image is at scale=1, double-tapping zooms in to mazZoom centered at the tap point
+! otherwise double-tap scales out to scale=1
+- changing page resets scale to 1
+
+
 Updates:
 - improve options screen layout
 
 TODO: 
 - add changelog
-- Refactor image zoom to use react-native-zoom-image V4
 
 FIX: double spread eliyahu mentioned in the GG app chat group
 
