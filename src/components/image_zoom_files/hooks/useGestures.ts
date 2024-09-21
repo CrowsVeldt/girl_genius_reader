@@ -27,14 +27,15 @@ export const useGestures = ({
   width,
   height,
   center,
-  scale: scaleValue,
   minScale = 1,
   maxScale = 5,
+  scale: scaleValue,
   doubleTapScale = 3,
   minPanPointers = 2,
   maxPanPointers = 2,
   isPanEnabled = true,
   isPinchEnabled = true,
+  isSingleTapEnabled = false,
   isDoubleTapEnabled = false,
   onInteractionStart,
   onInteractionEnd,
@@ -42,31 +43,109 @@ export const useGestures = ({
   onPinchEnd,
   onPanStart,
   onPanEnd,
-}: ImageZoomUseGesturesProps) => {
+  onSingleTap = () => {},
+  onDoubleTap = () => {},
+  onProgrammaticZoom = () => {},
+  onResetAnimationEnd,
+}: ZoomableUseGesturesProps) => {
   const isInteracting = useRef(false);
-  const isPanning = useRef(false);
   const isPinching = useRef(false);
+  const { isPanning, startPan, endPan } = usePanGestureCount();
 
-  const prevScale = useSharedValue(1);
+  const savedScale = useSharedValue(1);
   const internalScaleValue = useSharedValue(1);
-  const scale = scaleValue ?? internalScaleValue
+  const scale = scaleValue ?? internalScaleValue;
   const initialFocal = { x: useSharedValue(0), y: useSharedValue(0) };
-  const prevFocal = { x: useSharedValue(0), y: useSharedValue(0) };
+  const savedFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const focal = { x: useSharedValue(0), y: useSharedValue(0) };
-  const prevTranslate = { x: useSharedValue(0), y: useSharedValue(0) };
+  const savedTranslate = { x: useSharedValue(0), y: useSharedValue(0) };
   const translate = { x: useSharedValue(0), y: useSharedValue(0) };
 
+  const { getInteractionId, updateInteractionId } = useInteractionId();
+  const { onAnimationEnd } = useAnimationEnd(onResetAnimationEnd);
+
+  const reset = useCallback(() => {
+    'worklet';
+    const interactionId = getInteractionId();
+
+    savedScale.value = 1;
+    const lastScaleValue = scale.value;
+    scale.value = withTiming(1, undefined, (...args) =>
+      onAnimationEnd(
+        interactionId,
+        ANIMATION_VALUE.SCALE,
+        lastScaleValue,
+        ...args
+      )
+    );
+    initialFocal.x.value = 0;
+    initialFocal.y.value = 0;
+    savedFocal.x.value = 0;
+    savedFocal.y.value = 0;
+    const lastFocalXValue = focal.x.value;
+    focal.x.value = withTiming(0, undefined, (...args) =>
+      onAnimationEnd(
+        interactionId,
+        ANIMATION_VALUE.FOCAL_X,
+        lastFocalXValue,
+        ...args
+      )
+    );
+    const lastFocalYValue = focal.y.value;
+    focal.y.value = withTiming(0, undefined, (...args) =>
+      onAnimationEnd(
+        interactionId,
+        ANIMATION_VALUE.FOCAL_Y,
+        lastFocalYValue,
+        ...args
+      )
+    );
+    savedTranslate.x.value = 0;
+    savedTranslate.y.value = 0;
+    const lastTranslateXValue = translate.x.value;
+    translate.x.value = withTiming(0, undefined, (...args) =>
+      onAnimationEnd(
+        interactionId,
+        ANIMATION_VALUE.TRANSLATE_X,
+        lastTranslateXValue,
+        ...args
+      )
+    );
+    const lastTranslateYValue = translate.y.value;
+    translate.y.value = withTiming(0, undefined, (...args) =>
+      onAnimationEnd(
+        interactionId,
+        ANIMATION_VALUE.TRANSLATE_Y,
+        lastTranslateYValue,
+        ...args
+      )
+    );
+  }, [
+    savedScale,
+    scale,
+    initialFocal.x,
+    initialFocal.y,
+    savedFocal.x,
+    savedFocal.y,
+    focal.x,
+    focal.y,
+    savedTranslate.x,
+    savedTranslate.y,
+    translate.x,
+    translate.y,
+    getInteractionId,
+    onAnimationEnd,
+  ]);
+
   const moveIntoView = () => {
-    "worklet";
-
+    'worklet';
     if (scale.value > 1) {
-      const rightLimit = (width * (scale.value - 1)) / 2;
+      const rightLimit = limits.right(width, scale);
       const leftLimit = -rightLimit;
-      const totalTranslateX = translate.x.value + focal.x.value;
-
-      const bottomLimit = (height * (scale.value - 1)) / 2;
+      const bottomLimit = limits.bottom(height, scale);
       const topLimit = -bottomLimit;
-      const totalTranslateY = translate.y.value + focal.y.value;
+      const totalTranslateX = sum(translate.x, focal.x);
+      const totalTranslateY = sum(translate.y, focal.y);
 
       if (totalTranslateX > rightLimit) {
         translate.x.value = withTiming(rightLimit);
@@ -84,79 +163,33 @@ export const useGestures = ({
         focal.y.value = withTiming(0);
       }
     } else {
-      translate.x.value = withTiming(0);
-      focal.x.value = withTiming(0);
-      translate.y.value = withTiming(0);
-      focal.y.value = withTiming(0);
+      reset();
     }
   };
 
-  const reset = useCallback(() => {
-    "worklet";
-    prevScale.value = 1;
-    scale.value = withTiming(1);
-    initialFocal.x.value = 0;
-    initialFocal.y.value = 0;
-    prevFocal.x.value = 0;
-    prevFocal.y.value = 0;
-    focal.x.value = withTiming(0);
-    focal.y.value = withTiming(0);
-    prevTranslate.x.value = 0;
-    prevTranslate.y.value = 0;
-    translate.x.value = withTiming(0);
-    translate.y.value = withTiming(0);
-  }, [
-    focal.x,
-    focal.y,
-    initialFocal.x,
-    initialFocal.y,
-    prevFocal.x,
-    prevFocal.y,
-    prevScale,
-    prevTranslate.x,
-    prevTranslate.y,
-    scale,
-    translate.x,
-    translate.y,
-  ]);
+  const zoom: ProgrammaticZoomCallback = (event) => {
+    'worklet';
+    if (event.scale > 1) {
+      runOnJS(onProgrammaticZoom)(ZOOM_TYPE.ZOOM_IN);
+      scale.value = withTiming(event.scale);
+      focal.x.value = withTiming((center.x - event.x) * (event.scale - 1));
+      focal.y.value = withTiming((center.y - event.y) * (event.scale - 1));
+    } else {
+      runOnJS(onProgrammaticZoom)(ZOOM_TYPE.ZOOM_OUT);
+      reset();
+    }
+  };
 
-  const quickReset = useCallback(() => {
-    "worklet";
-    prevScale.value = 1;
-    scale.value = 1;
-    initialFocal.x.value = 0;
-    initialFocal.y.value = 0;
-    prevFocal.x.value = 0;
-    prevFocal.y.value = 0;
-    focal.x.value = 0;
-    focal.y.value = 0;
-    prevTranslate.x.value = 0;
-    prevTranslate.y.value = 0;
-    translate.x.value = 0;
-    translate.y.value = 0;
-  }, [
-    focal.x,
-    focal.y,
-    initialFocal.x,
-    initialFocal.y,
-    prevFocal.x,
-    prevFocal.y,
-    prevScale,
-    prevTranslate.x,
-    prevTranslate.y,
-    scale,
-    translate.x,
-    translate.y,
-  ]);
   const onInteractionStarted = () => {
     if (!isInteracting.current) {
       isInteracting.current = true;
       onInteractionStart?.();
+      updateInteractionId();
     }
   };
 
   const onInteractionEnded = () => {
-    if (isInteracting.current && !isPinching.current && !isPanning.current) {
+    if (isInteracting.current && !isPinching.current && !isPanning()) {
       if (isDoubleTapEnabled) {
         moveIntoView();
       } else {
@@ -167,110 +200,130 @@ export const useGestures = ({
     }
   };
 
-  const onPinchStarted = () => {
+  const onPinchStarted: OnPinchStartCallback = (event) => {
     onInteractionStarted();
     isPinching.current = true;
-    onPinchStart?.();
+    onPinchStart?.(event);
   };
 
-  const onPinchEnded = () => {
+  const onPinchEnded: OnPinchEndCallback = (...args) => {
     isPinching.current = false;
-    onPinchEnd?.();
+    onPinchEnd?.(...args);
     onInteractionEnded();
   };
 
-  const onPanStarted = () => {
+  const onPanStarted: OnPanStartCallback = (event) => {
     onInteractionStarted();
-    isPanning.current = true;
-    onPanStart?.();
+    startPan();
+    onPanStart?.(event);
   };
 
-  const onPanEnded = () => {
-    isPanning.current = false;
-    onPanEnd?.();
+  const onPanEnded: OnPanEndCallback = (...args) => {
+    endPan();
+    onPanEnd?.(...args);
     onInteractionEnded();
   };
 
   const panGesture = Gesture.Pan()
     .enabled(isPanEnabled)
+    .averageTouches(true)
+    .enableTrackpadTwoFingerGesture(true)
     .minPointers(minPanPointers)
     .maxPointers(maxPanPointers)
-    .onStart(() => {
-      runOnJS(onPanStarted)();
-      if (scale.value > 1) {
-        prevTranslate.x.value = translate.x.value;
-        prevTranslate.y.value = translate.y.value;
-      }
+    .onStart((event) => {
+      runOnJS(onPanStarted)(event);
+      savedTranslate.x.value = translate.x.value;
+      savedTranslate.y.value = translate.y.value;
     })
-    .onUpdate((event: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
-      if (scale.value > 1) {
-        const rightLimit = (width * (scale.value - 1)) / 2;
-        const leftLimit = -rightLimit;
+    .onUpdate((event) => {
+      translate.x.value = savedTranslate.x.value + event.translationX;
+      translate.y.value = savedTranslate.y.value + event.translationY;
+    })
+    .onEnd((event, success) => {
+      const rightLimit = limits.right(width, scale);
+      const leftLimit = -rightLimit;
+      const bottomLimit = limits.bottom(height, scale);
+      const topLimit = -bottomLimit;
 
-        const bottomLimit = (height * (scale.value - 1)) / 2;
-        const topLimit = -bottomLimit;
-        if (
-          event.translationX + prevTranslate.x.value <= rightLimit &&
-          event.translationX + prevTranslate.x.value >= leftLimit
-        ) {
-          translate.x.value = prevTranslate.x.value + event.translationX;
-        }
-        if (
-          event.translationY + prevTranslate.y.value <= bottomLimit &&
-          event.translationY + prevTranslate.y.value >= topLimit
-        ) {
-          translate.y.value = prevTranslate.y.value + event.translationY;
-        }
+      if (scale.value > 1 && isDoubleTapEnabled) {
+        translate.x.value = withDecay(
+          {
+            velocity: event.velocityX,
+            velocityFactor: 0.6,
+            rubberBandEffect: true,
+            rubberBandFactor: 0.9,
+            clamp: [leftLimit - focal.x.value, rightLimit - focal.x.value],
+          },
+          () => {
+            if (event.velocityX >= event.velocityY) {
+              runOnJS(onPanEnded)(event, success);
+            }
+          }
+        );
+        translate.y.value = withDecay(
+          {
+            velocity: event.velocityY,
+            velocityFactor: 0.6,
+            rubberBandEffect: true,
+            rubberBandFactor: 0.9,
+            clamp: [topLimit - focal.y.value, bottomLimit - focal.y.value],
+          },
+          () => {
+            if (event.velocityY > event.velocityX) {
+              runOnJS(onPanEnded)(event, success);
+            }
+          }
+        );
+      } else {
+        runOnJS(onPanEnded)(event, success);
       }
-    })
-    .onEnd(() => {
-      runOnJS(onPanEnded)();
     });
 
   const pinchGesture = Gesture.Pinch()
     .enabled(isPinchEnabled)
-    .onStart(
-      (event: GestureStateChangeEvent<PinchGestureHandlerEventPayload>) => {
-        runOnJS(onPinchStarted)();
-        prevScale.value = scale.value;
-        prevFocal.x.value = focal.x.value;
-        prevFocal.y.value = focal.y.value;
-        initialFocal.x.value = event.focalX;
-        initialFocal.y.value = event.focalY;
-      }
-    )
-    .onUpdate((event: GestureUpdateEvent<PinchGestureHandlerEventPayload>) => {
-      scale.value = clamp(prevScale.value * event.scale, minScale, maxScale);
-      focal.x.value =
-        prevFocal.x.value +
-        (center.x - initialFocal.x.value) * (scale.value - prevScale.value);
-      focal.y.value =
-        prevFocal.y.value +
-        (center.y - initialFocal.y.value) * (scale.value - prevScale.value);
+    .onStart((event) => {
+      runOnJS(onPinchStarted)(event);
+      savedScale.value = scale.value;
+      savedFocal.x.value = focal.x.value;
+      savedFocal.y.value = focal.y.value;
+      initialFocal.x.value = event.focalX;
+      initialFocal.y.value = event.focalY;
     })
-    .onEnd(() => {
-      runOnJS(onPinchEnded)();
+    .onUpdate((event) => {
+      scale.value = clamp(savedScale.value * event.scale, minScale, maxScale);
+      focal.x.value =
+        savedFocal.x.value +
+        (center.x - initialFocal.x.value) * (scale.value - savedScale.value);
+      focal.y.value =
+        savedFocal.y.value +
+        (center.y - initialFocal.y.value) * (scale.value - savedScale.value);
+    })
+    .onEnd((...args) => {
+      runOnJS(onPinchEnded)(...args);
     });
 
   const doubleTapGesture = Gesture.Tap()
     .enabled(isDoubleTapEnabled)
     .numberOfTaps(2)
     .maxDuration(250)
-    .onStart(
-      (event: GestureStateChangeEvent<TapGestureHandlerEventPayload>) => {
-        if (scale.value === 1) {
-          scale.value = withTiming(doubleTapScale);
-          focal.x.value = withTiming(
-            (center.x - event.x) * (doubleTapScale - 1)
-          );
-          focal.y.value = withTiming(
-            (center.y - event.y) * (doubleTapScale - 1)
-          );
-        } else {
-          reset();
-        }
+    .onStart((event) => {
+      if (scale.value === 1) {
+        runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_IN);
+        scale.value = withTiming(doubleTapScale);
+        focal.x.value = withTiming((center.x - event.x) * (doubleTapScale - 1));
+        focal.y.value = withTiming((center.y - event.y) * (doubleTapScale - 1));
+      } else {
+        runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_OUT);
+        reset();
       }
-    );
+    });
+
+  const singleTapGesture = Gesture.Tap()
+    .enabled(isSingleTapEnabled)
+    .numberOfTaps(1)
+    .onStart((event) => {
+      runOnJS(onSingleTap)(event);
+    });
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
@@ -282,10 +335,12 @@ export const useGestures = ({
     ],
   }));
 
-  const simultaneousGestures = Gesture.Simultaneous(pinchGesture, panGesture);
-  const gestures = isDoubleTapEnabled
-    ? Gesture.Race(doubleTapGesture, simultaneousGestures)
-    : simultaneousGestures;
+  const pinchPanGestures = Gesture.Simultaneous(pinchGesture, panGesture);
+  const tapGestures = Gesture.Exclusive(doubleTapGesture, singleTapGesture);
+  const gestures =
+    isDoubleTapEnabled || isSingleTapEnabled
+      ? Gesture.Race(tapGestures, pinchPanGestures)
+      : pinchPanGestures;
 
-  return { gestures, animatedStyle, reset, quickReset };
+  return { gestures, animatedStyle, zoom, reset };
 };

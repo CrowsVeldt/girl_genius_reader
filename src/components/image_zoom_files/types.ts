@@ -1,18 +1,18 @@
-import { ForwardedRef } from "react";
+import { ForwardedRef } from 'react';
 import type {
   ImageProps,
   ImageSourcePropType,
   LayoutChangeEvent,
   LayoutRectangle,
   ViewProps,
-} from "react-native";
+} from 'react-native';
 import type {
   GestureStateChangeEvent,
   PanGestureHandlerEventPayload,
   PinchGestureHandlerEventPayload,
   TapGestureHandlerEventPayload,
-} from "react-native-gesture-handler";
-import { AnimatableValue, SharedValue } from "react-native-reanimated";
+} from 'react-native-gesture-handler';
+import { AnimatableValue, SharedValue } from 'react-native-reanimated';
 
 export type OnPinchStartCallback = (
   event: GestureStateChangeEvent<PinchGestureHandlerEventPayload>
@@ -37,8 +37,8 @@ export type OnSingleTapCallback = (
 ) => void;
 
 export enum ZOOM_TYPE {
-  ZOOM_IN = "ZOOM_IN",
-  ZOOM_OUT = "ZOOM_OUT",
+  ZOOM_IN = 'ZOOM_IN',
+  ZOOM_OUT = 'ZOOM_OUT',
 }
 
 export type ProgrammaticZoomCallback = (event: {
@@ -51,11 +51,11 @@ export type OnDoubleTapCallback = (zoomType: ZOOM_TYPE) => void;
 export type OnProgrammaticZoomCallback = (zoomType: ZOOM_TYPE) => void;
 
 export enum ANIMATION_VALUE {
-  SCALE = "SCALE",
-  FOCAL_X = "FOCAL_X",
-  FOCAL_Y = "FOCAL_Y",
-  TRANSLATE_X = "TRANSLATE_X",
-  TRANSLATE_Y = "TRANSLATE_Y",
+  SCALE = 'SCALE',
+  FOCAL_X = 'FOCAL_X',
+  FOCAL_Y = 'FOCAL_Y',
+  TRANSLATE_X = 'TRANSLATE_X',
+  TRANSLATE_Y = 'TRANSLATE_Y',
 }
 
 export type OnResetAnimationEndCallback = (
@@ -182,7 +182,7 @@ export type UseZoomableProps = ZoomProps & {
   onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
 };
 
-export type ImageZoomProps = Omit<ImageProps, "source"> &
+export type ImageZoomProps = Omit<ImageProps, 'source'> &
   ZoomProps & {
     /**
      * The image's URI, which can be overridden by the `source` prop.
@@ -196,7 +196,7 @@ export type ImageZoomProps = Omit<ImageProps, "source"> &
     source?: ImageSourcePropType;
   };
 
-export type ZoomableUseLayoutProps = Pick<ZoomableProps, "onLayout">;
+export type ZoomableUseLayoutProps = Pick<ZoomableProps, 'onLayout'>;
 
 export type ZoomableLayoutState = LayoutRectangle & {
   /**
@@ -216,30 +216,30 @@ export type ZoomableLayoutState = LayoutRectangle & {
 
 export type ZoomableUseGesturesProps = Pick<
   ZoomableLayoutState,
-  "width" | "height" | "center"
+  'width' | 'height' | 'center'
 > &
   Pick<
     ZoomableProps,
-    | "minScale"
-    | "maxScale"
-    | "scale"
-    | "doubleTapScale"
-    | "minPanPointers"
-    | "maxPanPointers"
-    | "isPanEnabled"
-    | "isPinchEnabled"
-    | "isSingleTapEnabled"
-    | "isDoubleTapEnabled"
-    | "onInteractionStart"
-    | "onInteractionEnd"
-    | "onPinchStart"
-    | "onPinchEnd"
-    | "onPanStart"
-    | "onPanEnd"
-    | "onSingleTap"
-    | "onDoubleTap"
-    | "onProgrammaticZoom"
-    | "onResetAnimationEnd"
+    | 'minScale'
+    | 'maxScale'
+    | 'scale'
+    | 'doubleTapScale'
+    | 'minPanPointers'
+    | 'maxPanPointers'
+    | 'isPanEnabled'
+    | 'isPinchEnabled'
+    | 'isSingleTapEnabled'
+    | 'isDoubleTapEnabled'
+    | 'onInteractionStart'
+    | 'onInteractionEnd'
+    | 'onPinchStart'
+    | 'onPinchEnd'
+    | 'onPanStart'
+    | 'onPanEnd'
+    | 'onSingleTap'
+    | 'onDoubleTap'
+    | 'onProgrammaticZoom'
+    | 'onResetAnimationEnd'
   >;
 
 export type ZoomableRef = {
@@ -247,7 +247,6 @@ export type ZoomableRef = {
    * Resets the zoom level to its original scale.
    */
   reset: () => void;
-  quickReset: () => void;
   /**
    * Triggers a zoom event to the specified coordinates (x, y) at the defined scale level.
    */

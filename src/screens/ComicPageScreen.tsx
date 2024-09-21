@@ -14,6 +14,7 @@ import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
 import PageTurn from "../components/gesture components/PageTurn";
 import NetStatus from "../components/NetStatus";
 import { comicUrl } from "../utils/utilFunctions";
+import { useSharedValue } from "react-native-reanimated";
 
 const screen: ScaledSize = Dimensions.get("screen");
 const window: ScaledSize = Dimensions.get("window");
@@ -25,6 +26,7 @@ export default function ComicPageScreen() {
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
+  const scale = useSharedValue<number>(1)
 
   return (
     <View style={styles.comicPage}>
@@ -39,9 +41,9 @@ export default function ComicPageScreen() {
           <PageTurn side={"left"} />
           <ImageZoom
             ref={imageRef}
+            scale={scale}
             alt={`Comic page for ${page.date}`}
             uri={comicUrl(page.date)}
-            minPanPointers={1}
             isDoubleTapEnabled
             resizeMode="contain"
             onLoadStart={() => {
