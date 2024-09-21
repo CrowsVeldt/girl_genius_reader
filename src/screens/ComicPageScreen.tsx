@@ -48,7 +48,7 @@ export default function ComicPageScreen() {
             resizeMode="contain"
             onLoadStart={() => {
               setLoaded(false);
-              imageRef.current?.quickReset();
+              // imageRef.current?.quickReset();
             }}
             onLoadEnd={() => {
               setLoaded(true);
