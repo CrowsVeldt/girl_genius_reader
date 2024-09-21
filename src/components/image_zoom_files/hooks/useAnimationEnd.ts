@@ -11,12 +11,13 @@ import { ANIMATION_VALUE, OnResetAnimationEndCallback } from "../types";
 export type OnAnimationEndCallback = AnimationCallback extends (
   ...a: infer I
 ) => infer O
-  ? (interactionId: string, value: ANIMATION_VALUE, ...a: I) => O
+  ? (interactionId: string, value: ANIMATION_VALUE, lastValue: number, ...a: I) => O
   : never;
 
 type EndValues = Record<
   ANIMATION_VALUE,
   {
+    lastValue: number;
     finished?: boolean;
     current?: AnimatableValue;
   }
@@ -45,11 +46,11 @@ export const useAnimationEnd = (
   const endValues = useSharedValue<InteractionEndValues>({});
 
   const onAnimationEnd: OnAnimationEndCallback = useCallback(
-    (interactionId, value, finished, current) => {
+    (interactionId, value, lastValue, finished, current) => {
       "worklet";
       if (onResetAnimationEnd) {
         const currentEndValues = endValues.value[interactionId] || {};
-        currentEndValues[value] = { finished, current };
+        currentEndValues[value] = { lastValue, finished, current };
         if (isAnimationComplete(currentEndValues)) {
           const completed = !Object.values(currentEndValues).some(
             (item) => !item.finished
