@@ -224,6 +224,11 @@ export const useGestures = ({
     onInteractionEnded();
   };
 
+  const rightLimit = limits.right(width, scale);
+  const leftLimit = -rightLimit;
+  const bottomLimit = limits.bottom(height, scale);
+  const topLimit = -bottomLimit;
+
   const panGesture = Gesture.Pan()
     .enabled(isPanEnabled)
     .averageTouches(true)
@@ -236,40 +241,25 @@ export const useGestures = ({
       savedTranslate.y.value = translate.y.value;
     })
     .onUpdate((event) => {
-      const rightLimit = limits.right(width, scale);
-      const leftLimit = -rightLimit;
-      const bottomLimit = limits.bottom(height, scale);
-      const topLimit = -bottomLimit;
-      // use clamp to keep x and y within bounds
-      if (translate.x.value > rightLimit) {
-        translate.x.value = rightLimit;
-      } else if (translate.x.value < leftLimit) {
-        translate.x.value = leftLimit;
-      } else {
-        translate.x.value = savedTranslate.x.value + event.translationX;
-      }
-      if (translate.y.value < topLimit) {
-        translate.y.value = topLimit;
-      } else if (translate.y.value > bottomLimit) {
-        translate.y.value = bottomLimit;
-      } else {
-        translate.y.value = savedTranslate.y.value + event.translationY;
-      }
+      translate.x.value = clamp(
+        savedTranslate.x.value + event.translationX,
+        leftLimit,
+        rightLimit
+      );
+      translate.y.value = clamp(
+        savedTranslate.y.value + event.translationY,
+        topLimit,
+        bottomLimit
+      );
     })
     .onEnd((event, success) => {
-      const rightLimit = limits.right(width, scale);
-      const leftLimit = -rightLimit;
-      const bottomLimit = limits.bottom(height, scale);
-      const topLimit = -bottomLimit;
-
       if (scale.value > 1 && isDoubleTapEnabled) {
         translate.x.value = withDecay(
           {
             velocity: event.velocityX,
             velocityFactor: 0.6,
-            rubberBandEffect: true,
-            rubberBandFactor: 0.9,
-            clamp: [leftLimit - focal.x.value, rightLimit - focal.x.value],
+            rubberBandEffect: false,
+            clamp: [leftLimit, rightLimit],
           },
           () => {
             if (event.velocityX >= event.velocityY) {
@@ -281,9 +271,8 @@ export const useGestures = ({
           {
             velocity: event.velocityY,
             velocityFactor: 0.6,
-            rubberBandEffect: true,
-            rubberBandFactor: 0.9,
-            clamp: [topLimit - focal.y.value, bottomLimit - focal.y.value],
+            rubberBandEffect: false,
+            clamp: [topLimit, bottomLimit],
           },
           () => {
             if (event.velocityY > event.velocityX) {
