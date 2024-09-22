@@ -4,7 +4,7 @@ import type { ProgrammaticZoomCallback, ZoomableRef } from "../types";
 export const useZoomableHandle = (
   ref: Ref<unknown> | undefined,
   reset: () => void,
-  quickReset: () => void,
+  // quickReset: () => void,
   zoom: ProgrammaticZoomCallback
 ) => {
   useImperativeHandle(
@@ -13,13 +13,13 @@ export const useZoomableHandle = (
       reset() {
         reset();
       },
-      quickReset() {
-        quickReset();
-      },
+      // quickReset() {
+      // quickReset();
+      // },
       zoom(event) {
         zoom(event);
       },
     }),
-    [reset, quickReset, zoom]
+    [reset, /*quickReset,*/ zoom]
   );
 };

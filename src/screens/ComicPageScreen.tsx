@@ -28,6 +28,8 @@ export default function ComicPageScreen() {
   const dataReady: boolean = getDataStatus();
   const scale = useSharedValue<number>(1)
 
+  let panEnabled = scale.value !== 1
+
   return (
     <View style={styles.comicPage}>
       <NetStatus />
@@ -42,8 +44,12 @@ export default function ComicPageScreen() {
           <ImageZoom
             ref={imageRef}
             scale={scale}
+            minScale={1}
+            maxScale={3}
             alt={`Comic page for ${page.date}`}
             uri={comicUrl(page.date)}
+            minPanPointers={1}
+            isPanEnabled={panEnabled}
             isDoubleTapEnabled
             resizeMode="contain"
             onLoadStart={() => {

@@ -248,6 +248,10 @@ export type ZoomableRef = {
    */
   reset: () => void;
   /**
+   * Resets zoom without animation.
+   */
+  //quickReset: () => void
+  /**
    * Triggers a zoom event to the specified coordinates (x, y) at the defined scale level.
    */
   zoom: ProgrammaticZoomCallback;
