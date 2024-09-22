@@ -1,15 +1,15 @@
-import { useCallback, useRef } from 'react';
-import { Gesture } from 'react-native-gesture-handler';
+import { useCallback, useRef } from "react";
+import { Gesture } from "react-native-gesture-handler";
 import {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withDecay,
   withTiming,
-} from 'react-native-reanimated';
-import { clamp } from '../utils/clamp';
-import { limits } from '../utils/limits';
-import { ANIMATION_VALUE, ZOOM_TYPE } from '../types';
+} from "react-native-reanimated";
+import { clamp } from "../utils/clamp";
+import { limits } from "../utils/limits";
+import { ANIMATION_VALUE, ZOOM_TYPE } from "../types";
 import type {
   OnPanEndCallback,
   OnPanStartCallback,
@@ -17,11 +17,11 @@ import type {
   OnPinchStartCallback,
   ProgrammaticZoomCallback,
   ZoomableUseGesturesProps,
-} from '../types';
-import { useAnimationEnd } from './useAnimationEnd';
-import { useInteractionId } from './useInteractionId';
-import { usePanGestureCount } from './usePanGestureCount';
-import { sum } from '../utils/sum';
+} from "../types";
+import { useAnimationEnd } from "./useAnimationEnd";
+import { useInteractionId } from "./useInteractionId";
+import { usePanGestureCount } from "./usePanGestureCount";
+import { sum } from "../utils/sum";
 
 export const useGestures = ({
   width,
@@ -65,7 +65,7 @@ export const useGestures = ({
   const { onAnimationEnd } = useAnimationEnd(onResetAnimationEnd);
 
   const reset = useCallback(() => {
-    'worklet';
+    "worklet";
     const interactionId = getInteractionId();
 
     savedScale.value = 1;
@@ -138,7 +138,7 @@ export const useGestures = ({
   ]);
 
   const moveIntoView = () => {
-    'worklet';
+    "worklet";
     if (scale.value > 1) {
       const rightLimit = limits.right(width, scale);
       const leftLimit = -rightLimit;
@@ -168,7 +168,7 @@ export const useGestures = ({
   };
 
   const zoom: ProgrammaticZoomCallback = (event) => {
-    'worklet';
+    "worklet";
     if (event.scale > 1) {
       runOnJS(onProgrammaticZoom)(ZOOM_TYPE.ZOOM_IN);
       scale.value = withTiming(event.scale);
@@ -236,8 +236,25 @@ export const useGestures = ({
       savedTranslate.y.value = translate.y.value;
     })
     .onUpdate((event) => {
-      translate.x.value = savedTranslate.x.value + event.translationX;
-      translate.y.value = savedTranslate.y.value + event.translationY;
+      const rightLimit = limits.right(width, scale);
+      const leftLimit = -rightLimit;
+      const bottomLimit = limits.bottom(height, scale);
+      const topLimit = -bottomLimit;
+      // use clamp to keep x and y within bounds
+      if (translate.x.value > rightLimit) {
+        translate.x.value = rightLimit;
+      } else if (translate.x.value < leftLimit) {
+        translate.x.value = leftLimit;
+      } else {
+        translate.x.value = savedTranslate.x.value + event.translationX;
+      }
+      if (translate.y.value < topLimit) {
+        translate.y.value = topLimit;
+      } else if (translate.y.value > bottomLimit) {
+        translate.y.value = bottomLimit;
+      } else {
+        translate.y.value = savedTranslate.y.value + event.translationY;
+      }
     })
     .onEnd((event, success) => {
       const rightLimit = limits.right(width, scale);
