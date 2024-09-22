@@ -23,12 +23,11 @@ export default function ComicPageScreen() {
   const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [panEnabled, setPanEnabled] = useState<boolean>(false);
   const imageRef = useRef<ImageZoomRef>();
   const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
-  const scale = useSharedValue<number>(1)
-
-  let panEnabled = scale.value !== 1
+  const scale = useSharedValue<number>(1);
 
   return (
     <View style={styles.comicPage}>
@@ -42,22 +41,30 @@ export default function ComicPageScreen() {
         <ScrollView contentContainerStyle={styles.comicContainer}>
           <PageTurn side={"left"} />
           <ImageZoom
+            uri={comicUrl(page.date)}
+            alt={`Comic page for ${page.date}`}
+            resizeMode="contain"
             ref={imageRef}
-            scale={scale}
             minScale={1}
             maxScale={3}
-            alt={`Comic page for ${page.date}`}
-            uri={comicUrl(page.date)}
+            scale={scale}
             minPanPointers={1}
             isPanEnabled={panEnabled}
             isDoubleTapEnabled
-            resizeMode="contain"
             onLoadStart={() => {
               setLoaded(false);
               // imageRef.current?.quickReset();
             }}
             onLoadEnd={() => {
               setLoaded(true);
+            }}
+            onPinchEnd={() => setPanEnabled(scale.value !== 1)}
+            onDoubleTap={(zoomType) => {
+              if (zoomType === "ZOOM_IN") {
+                setPanEnabled(true);
+              } else {
+                setPanEnabled(false)
+              }
             }}
           />
           <PageTurn side={"right"} />
