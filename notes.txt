@@ -1,4 +1,5 @@
 Updates:
+- Reimplement Image zoom to allow for new features
 
 TODO: 
 - add changelog
