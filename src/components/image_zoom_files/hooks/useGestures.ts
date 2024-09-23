@@ -137,6 +137,38 @@ export const useGestures = ({
     onAnimationEnd,
   ]);
 
+  const quickReset = useCallback(() => {
+    "worklet";
+
+    savedScale.value = 1;
+    scale.value = 1;
+    initialFocal.x.value = 0;
+    initialFocal.y.value = 0;
+    savedFocal.x.value = 0;
+    savedFocal.y.value = 0;
+    focal.x.value = 0;
+    focal.y.value = 0;
+    savedTranslate.x.value = 0;
+    savedTranslate.y.value = 0;
+    translate.x.value = 0;
+    translate.y.value = 0;
+  }, [
+    savedScale,
+    scale,
+    initialFocal.x,
+    initialFocal.y,
+    savedFocal.x,
+    savedFocal.y,
+    focal.x,
+    focal.y,
+    savedTranslate.x,
+    savedTranslate.y,
+    translate.x,
+    translate.y,
+    getInteractionId,
+    onAnimationEnd,
+  ]);
+
   const moveIntoView = () => {
     "worklet";
     if (scale.value > 1) {
@@ -348,5 +380,5 @@ export const useGestures = ({
       ? Gesture.Race(tapGestures, pinchPanGestures)
       : pinchPanGestures;
 
-  return { gestures, animatedStyle, zoom, reset };
+  return { gestures, animatedStyle, zoom, reset, quickReset };
 };

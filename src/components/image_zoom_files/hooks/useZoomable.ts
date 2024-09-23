@@ -1,7 +1,7 @@
-import { useGestures } from '../hooks/useGestures';
-import { useZoomableLayout } from '../hooks/useZoomableLayout';
-import { useZoomableHandle } from '../hooks/useZoomableHandle';
-import type { UseZoomableProps } from '../types';
+import { useGestures } from "../hooks/useGestures";
+import { useZoomableLayout } from "../hooks/useZoomableLayout";
+import { useZoomableHandle } from "../hooks/useZoomableHandle";
+import type { UseZoomableProps } from "../types";
 
 export const useZoomable = ({
   minScale,
@@ -30,7 +30,7 @@ export const useZoomable = ({
   const { width, height, center, onZoomableLayout } = useZoomableLayout({
     onLayout,
   });
-  const { animatedStyle, gestures, reset, zoom } = useGestures({
+  const { animatedStyle, gestures, reset, quickReset, zoom } = useGestures({
     width,
     height,
     center,
@@ -55,7 +55,7 @@ export const useZoomable = ({
     onProgrammaticZoom,
     onResetAnimationEnd,
   });
-  useZoomableHandle(ref, reset, zoom);
+  useZoomableHandle(ref, reset, quickReset, zoom);
 
   return { animatedStyle, gestures, onZoomableLayout };
 };

@@ -1,7 +1,7 @@
-import { SharedValue } from 'react-native-reanimated';
+import { SharedValue } from "react-native-reanimated";
 
 export const sum = (...animatedValues: SharedValue<number>[]) => {
-  'worklet';
+  "worklet";
 
   return animatedValues.reduce(
     (result, animatedValue) => result + animatedValue.value,

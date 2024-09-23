@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
-import { useSharedValue } from 'react-native-reanimated';
+import { useCallback } from "react";
+import { useSharedValue } from "react-native-reanimated";
 
 export const useInteractionId = () => {
-  const interactionId = useSharedValue('');
+  const interactionId = useSharedValue("");
 
   const getInteractionId = useCallback(() => {
-    'worklet';
+    "worklet";
     return interactionId.value;
   }, [interactionId]);
 

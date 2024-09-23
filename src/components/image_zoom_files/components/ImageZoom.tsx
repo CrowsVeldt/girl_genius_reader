@@ -1,9 +1,9 @@
-import React, { forwardRef, ForwardRefRenderFunction } from 'react';
-import { StyleSheet } from 'react-native';
-import { GestureDetector } from 'react-native-gesture-handler';
-import Animated from 'react-native-reanimated';
-import { useZoomable } from '../hooks/useZoomable';
-import type { ImageZoomProps, ImageZoomRef } from '../types';
+import React, { forwardRef, ForwardRefRenderFunction } from "react";
+import { StyleSheet } from "react-native";
+import { GestureDetector } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
+import { useZoomable } from "../hooks/useZoomable";
+import type { ImageZoomProps, ImageZoomRef } from "../types";
 
 const styles = StyleSheet.create({
   image: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 
 const Zoomable: ForwardRefRenderFunction<ImageZoomRef, ImageZoomProps> = (
   {
-    uri = '',
+    uri = "",
     minScale,
     maxScale,
     scale,

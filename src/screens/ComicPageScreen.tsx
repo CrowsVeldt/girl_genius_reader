@@ -53,17 +53,22 @@ export default function ComicPageScreen() {
             isDoubleTapEnabled
             onLoadStart={() => {
               setLoaded(false);
-              // imageRef.current?.quickReset();
+              imageRef.current?.quickReset();
             }}
             onLoadEnd={() => {
               setLoaded(true);
             }}
-            onPinchEnd={() => setPanEnabled(scale.value !== 1)}
+            onInteractionEnd={() => {
+              setPanEnabled(scale.value > 1);
+            }}
+            onPinchEnd={() => {
+              setPanEnabled(scale.value > 1);
+            }}
             onDoubleTap={(zoomType) => {
               if (zoomType === "ZOOM_IN") {
                 setPanEnabled(true);
               } else {
-                setPanEnabled(false)
+                setPanEnabled(false);
               }
             }}
           />

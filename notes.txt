@@ -1,11 +1,11 @@
 Updates:
-- improve options screen layout
 
 TODO: 
 - add changelog
-- Refactor image zoom to use react-native-zoom-image V4
 
 FIX: double spread eliyahu mentioned in the GG app chat group
+BUG: pan shouldn't count towards double-tap
+BUG: image not resetting to center immediately when zooming out 
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -17,8 +17,6 @@ Ideas:
 - replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
 
-- move options to drawer menu?
-- add options context?
 
 
 
@@ -139,3 +137,8 @@ x add horizontal scroll option
 Update notes:
 x Add option to control prefetching 
 x Add option to change volume scroll direction
+
+- move options to drawer menu?
+- add options context?
+x Refactor image zoom to use react-native-zoom-image V4
+x changing page should reset zoom

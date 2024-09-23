@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import type { LayoutChangeEvent } from 'react-native';
-import type { ZoomableLayoutState, ZoomableUseLayoutProps } from '../types';
+import { useState } from "react";
+import type { LayoutChangeEvent } from "react-native";
+import type { ZoomableLayoutState, ZoomableUseLayoutProps } from "../types";
 
 export const useZoomableLayout = ({ onLayout }: ZoomableUseLayoutProps) => {
   const [state, setState] = useState<ZoomableLayoutState>({
