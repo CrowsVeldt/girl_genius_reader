@@ -24,7 +24,7 @@ export default function ComicPageScreen() {
     useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [panEnabled, setPanEnabled] = useState<boolean>(false);
-  const imageRef = useRef<ImageZoomRef>();
+  const imageRef = useRef<ImageZoomRef>(null);
   const page: PageType = getCurrentPage();
   const dataReady: boolean = getDataStatus();
   const scale = useSharedValue<number>(1);
