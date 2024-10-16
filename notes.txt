@@ -1,12 +1,11 @@
 Updates:
-- Reimplement Image zoom to allow for new features
 
 TODO: 
 - add changelog
 
-FIX: double spread eliyahu mentioned in the GG app chat group
-BUG: pan shouldn't count towards double-tap
 BUG: image not resetting to center immediately when zooming out 
+BUG: Panning is inconsistent. Frequently doesn't work after double-tapping to zoom in
+FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -14,6 +13,7 @@ Ideas:
 - implement light/dark mode support
 
 ???
+- pan shouldn't count towards double-tap?
 - make sure bookmark list works well with many bookmarks
 - replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
@@ -143,3 +143,4 @@ x Add option to change volume scroll direction
 - add options context?
 x Refactor image zoom to use react-native-zoom-image V4
 x changing page should reset zoom
+x Reimplement Image zoom to allow for new features
