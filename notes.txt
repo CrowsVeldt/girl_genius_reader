@@ -8,6 +8,7 @@ BUG: Panning is inconsistent. Frequently doesn't work after double-tapping to zo
 FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
+- add shaded background to PageTurn when activated to make it more obvious
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
 - implement light/dark mode support

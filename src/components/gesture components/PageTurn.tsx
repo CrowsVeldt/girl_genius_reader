@@ -12,6 +12,7 @@ import Animated, {
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { PageType, SideType } from "../../utils/types";
 import { ComicContext } from "../../context/ComicContext";
+import { rgbaColor } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 
 export default function PageTurn(props: any) {
   const {
@@ -42,6 +43,7 @@ export default function PageTurn(props: any) {
         runOnJS(goToNextPage)(page);
       }
       position.value = withTiming(0, { duration: 100 });
+      console.log(position.value);
       onSide.value = true;
     });
 
@@ -58,6 +60,10 @@ export default function PageTurn(props: any) {
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: position.value }],
+    backgroundColor:
+      side === "left"
+        ? `rgba(0, 0, 0, ${position.value / 50})`
+        : `rgba(0, 0, 0, ${-position.value / 50})`,
     left: side === "left" ? 0 : null,
     right: side === "right" ? 0 : null,
   }));
