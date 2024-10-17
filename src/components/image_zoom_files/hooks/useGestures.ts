@@ -4,7 +4,6 @@ import {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withDecay,
   withTiming,
 } from "react-native-reanimated";
 import { clamp } from "../utils/clamp";
@@ -53,8 +52,7 @@ export const useGestures = ({
   const { isPanning, startPan, endPan } = usePanGestureCount();
 
   const savedScale = useSharedValue(1);
-  const internalScaleValue = useSharedValue(1);
-  const scale = scaleValue ?? internalScaleValue;
+  const scale = scaleValue ?? useSharedValue(1);
   const initialFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const savedFocal = { x: useSharedValue(0), y: useSharedValue(0) };
   const focal = { x: useSharedValue(0), y: useSharedValue(0) };
@@ -346,7 +344,7 @@ export const useGestures = ({
     .numberOfTaps(2)
     .maxDuration(250)
     .onStart((event) => {
-      if (scale.value === 1) {
+      if (scale.value <= 1) {
         runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_IN);
         scale.value = withTiming(doubleTapScale);
         focal.x.value = withTiming((center.x - event.x) * (doubleTapScale - 1));
