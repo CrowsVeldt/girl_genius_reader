@@ -58,9 +58,6 @@ export default function ComicPageScreen() {
             onLoadEnd={() => {
               setLoaded(true);
             }}
-            onInteractionEnd={() => {
-              setPanEnabled(scale.value > 1);
-            }}
             onPinchEnd={() => {
               setPanEnabled(scale.value > 1);
             }}
