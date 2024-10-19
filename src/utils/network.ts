@@ -1,11 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { updateLists } from "./lists";
-import {
-  dateListKey,
-  latestSavedDateKey,
-  retrieveData,
-  saveData,
-} from "./storage";
+import { retrieveData, saveData } from "./storage";
 import { lastElement, stringOfEightNumbers } from "./utilFunctions";
 
 const rootUrl: string = "https://www.girlgeniusonline.com";
@@ -42,7 +37,10 @@ export const areThereNewComics: () => Promise<
   boolean | undefined
 > = async () => {
   try {
-    return (await retrieveData(latestSavedDateKey)) !== (await getLatestDate());
+    return (
+      (await retrieveData(process.env.EXPO_PUBLIC_LATEST_SAVED_DATE_KEY!)) !==
+      (await getLatestDate())
+    );
   } catch (error) {
     console.warn("Error in areThereNewComics function");
     console.error(error);
@@ -74,7 +72,9 @@ export const update: () => void = async () => {
     const newComics: boolean | undefined = await areThereNewComics();
     if (newComics != null && newComics) {
       // get date list
-      const savedDateList: string[] = await retrieveData(dateListKey);
+      const savedDateList: string[] = await retrieveData(
+        process.env.EXPO_PUBLIC_DATE_LIST_KEY!
+      );
       const networkDateList: string[] = await getDateList();
       let dateList: string[] =
         savedDateList != null
@@ -112,7 +112,7 @@ export const update: () => void = async () => {
             dateList.push("20141226a");
             dateList.push("20141226b");
           } else if (nextDate === "20240211") {
-            console.log("Nothing to add")
+            console.log("Nothing to add");
           } else {
             dateList.push(nextDate);
           }
@@ -120,12 +120,12 @@ export const update: () => void = async () => {
           // set current date to next date, to progress the loop
           currentDate = nextDate;
           // save date list to memory
-          saveData(dateListKey, dateList);
+          saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, dateList);
         } else {
           // if next date does not match the date regex
           // save current date to latestSavedDate in memory
           updateLists();
-          saveData(latestSavedDateKey, currentDate);
+          saveData(process.env.EXPO_PUBLIC_LATEST_SAVED_DATE_KEY!, currentDate);
         }
       }
     }

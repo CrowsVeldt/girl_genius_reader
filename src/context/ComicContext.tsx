@@ -5,16 +5,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import { checkLists } from "../utils/lists";
 import { update } from "../utils/network";
 import { showToast } from "../utils/notifications";
-import {
-  retrieveData,
-  saveData,
-  bookmarkKey,
-  currentPageKey,
-  pageListKey,
-  volumeListKey,
-  preloadPolicyKey,
-  scrollDirectionKey,
-} from "../utils/storage";
+import { retrieveData, saveData } from "../utils/storage";
 import {
   PageType,
   PreloadPolicyType,
@@ -72,8 +63,10 @@ const ComicProvider = ({ children }: { children: any }) => {
       try {
         const listsExist: boolean | undefined = await checkLists();
         if (listsExist) {
-          setPages(await retrieveData(pageListKey));
-          setVolumes(await retrieveData(volumeListKey));
+          setPages(await retrieveData(process.env.EXPO_PUBLIC_PAGE_LIST_KEY!));
+          setVolumes(
+            await retrieveData(process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!)
+          );
           setDataReady(true);
         }
       } catch (error) {
@@ -86,13 +79,17 @@ const ComicProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     (async () => {
       try {
-        const savedBookmarks: PageType[] = await retrieveData(bookmarkKey);
-        const savedCurrentPage: PageType = await retrieveData(currentPageKey);
+        const savedBookmarks: PageType[] = await retrieveData(
+          process.env.EXPO_PUBLIC_BOOKMARK_KEY!
+        );
+        const savedCurrentPage: PageType = await retrieveData(
+          process.env.EXPO_PUBLIC_CURRENT_PAGE_KEY!
+        );
         const savedPreloadPolicy: PreloadPolicyType = await retrieveData(
-          preloadPolicyKey
+          process.env.EXPO_PUBLIC_PRELOAD_POLICY_KEY!
         );
         const savedScrollDirection: ScrollDirectionType = await retrieveData(
-          scrollDirectionKey
+          process.env.EXPO_PUBLIC_SCROLL_DIRECTION_KEY!
         );
 
         if (savedBookmarks != null) {
@@ -125,7 +122,7 @@ const ComicProvider = ({ children }: { children: any }) => {
       const filteredBookmarksArray: PageType[] = Array.from(filteredBookmarks);
       setBookmarks(filteredBookmarksArray);
       Toast.show(`Added ${newBookmark.date} to bookmarks`);
-      saveData(bookmarkKey, filteredBookmarksArray);
+      saveData(process.env.EXPO_PUBLIC_BOOKMARK_KEY!, filteredBookmarksArray);
     } catch (error) {
       console.warn("An error occurred adding bookmark");
       console.error(error);
@@ -143,7 +140,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         }
 
         setCurrentPage(page);
-        saveData(currentPageKey, page);
+        saveData(process.env.EXPO_PUBLIC_CURRENT_PAGE_KEY!, page);
       } else if (page === undefined) {
         throw new Error("Cannot change page to 'undefined'");
       }
@@ -158,12 +155,12 @@ const ComicProvider = ({ children }: { children: any }) => {
   };
 
   const changePreloadPolicy: (policy: PreloadPolicyType) => void = (policy) => {
-    saveData(preloadPolicyKey, policy);
+    saveData(process.env.EXPO_PUBLIC_PRELOAD_POLICY_KEY!, policy);
     setPreloadPolicy(policy);
   };
 
   const changeScrollDirection: (dir: ScrollDirectionType) => void = (dir) => {
-    saveData(scrollDirectionKey, dir);
+    saveData(process.env.EXPO_PUBLIC_SCROLL_DIRECTION_KEY!, dir);
     setScrollDirection(dir);
   };
 
@@ -254,7 +251,7 @@ const ComicProvider = ({ children }: { children: any }) => {
       const newBookmarks: PageType[] = bookmarks.filter((a) => a !== page);
       setBookmarks(newBookmarks);
       Toast.show(`Removed ${page.date} from bookmarks`);
-      saveData(bookmarkKey, newBookmarks);
+      saveData(process.env.EXPO_PUBLIC_BOOKMARK_KEY!, newBookmarks);
     } catch (error) {
       console.warn("An error occurred removing bookmark");
       console.error(error);

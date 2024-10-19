@@ -1,14 +1,5 @@
 import ass from "@react-native-async-storage/async-storage";
 
-export const bookmarkKey: string = "@GGAppBookmarks";
-export const currentPageKey: string = "@GGAppPage";
-export const dateListKey: string = "@GGAppDates";
-export const pageListKey: string = "@GGAppPageList";
-export const volumeListKey: string = "@GGAppVolumeList";
-export const latestSavedDateKey: string = "@GGAppLastSavedDate";
-export const preloadPolicyKey: string = "@GGAppPreloadPolicy"
-export const scrollDirectionKey: string = "@GGAppScrollDirection"
-
 export const saveData: (key: string, value: any) => void = async (
   key,
   value
@@ -36,5 +27,5 @@ export const retrieveData: (key: string) => Promise<any> = async (key) => {
 };
 
 export const removeData: (key: string) => void = (key) => {
-  ass.removeItem(key)
-}
+  ass.removeItem(key);
+};

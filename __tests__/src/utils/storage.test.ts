@@ -1,14 +1,11 @@
 import { describe, expect, test } from "@jest/globals";
-import {
-  saveData,
-  retrieveData,
-  bookmarkKey,
-  currentPageKey,
-  removeData,
-} from "../../../src/utils/storage";
+import { saveData, retrieveData, removeData } from "../../../src/utils/storage";
 import { PageType } from "../../../src/utils/types";
 
 // https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil
+
+const bookmarkKey = "bookmarkkey";
+const currentPageKey = "currentpagekey";
 
 const mockData: PageType[] = [
   {
@@ -91,7 +88,7 @@ describe("storage", () => {
     });
 
     test("other data should not be effected", async () => {
-      expect(await retrieveData(bookmarkKey)).toMatchObject(mockData)
-    })
+      expect(await retrieveData(bookmarkKey)).toMatchObject(mockData);
+    });
   });
 });

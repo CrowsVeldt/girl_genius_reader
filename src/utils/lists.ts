@@ -1,17 +1,15 @@
-import {
-  dateListKey,
-  pageListKey,
-  retrieveData,
-  saveData,
-  volumeListKey,
-} from "./storage";
+import { retrieveData, saveData } from "./storage";
 import { ListCollectionType, PageType, VolumeType } from "./types";
 import { collectVolumes } from "./volumes";
 
 export const checkLists: () => Promise<boolean | undefined> = async () => {
   try {
-    const pages: PageType[] = await retrieveData(pageListKey);
-    const volumes: VolumeType[] = await retrieveData(volumeListKey);
+    const pages: PageType[] = await retrieveData(
+      process.env.EXPO_PUBLIC_PAGE_LIST_KEY!
+    );
+    const volumes: VolumeType[] = await retrieveData(
+      process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!
+    );
 
     return pages != null && volumes != null;
   } catch (error) {
@@ -25,12 +23,14 @@ export const processDateList: (list: string[]) => string[] = (list) =>
 
 export const updateLists: () => Promise<boolean> = async () => {
   try {
-    const dateArray: string[] = processDateList(await retrieveData(dateListKey));
+    const dateArray: string[] = processDateList(
+      await retrieveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!)
+    );
     if (dateArray != null) {
       const lists: ListCollectionType = await collectVolumes(dateArray);
 
-      saveData(pageListKey, lists?.pageList);
-      saveData(volumeListKey, lists?.volumeList);
+      saveData(process.env.EXPO_PUBLIC_PAGE_LIST_KEY!, lists?.pageList);
+      saveData(process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!, lists?.volumeList);
 
       return true;
     }

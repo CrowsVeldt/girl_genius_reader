@@ -1,8 +1,8 @@
 Updates:
+- add version notice on main page
 
 TODO: 
 - add changelog
-- add version notice on main page
 
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again

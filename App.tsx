@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
 
-import { dateListKey, retrieveData, saveData } from "./src/utils/storage";
+import { retrieveData, saveData } from "./src/utils/storage";
 import { getDateList, update } from "./src/utils/network";
 
 import ComicProvider from "./src/context/ComicContext";
@@ -26,10 +26,10 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   useEffect(() => {
     (async () => {
-      const data = await retrieveData(dateListKey);
+      const data = await retrieveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!);
       if (data === null) {
         const fetchDates = await getDateList();
-        saveData(dateListKey, fetchDates);
+        saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, fetchDates);
       }
       update();
     })();

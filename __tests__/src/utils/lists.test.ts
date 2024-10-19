@@ -1,12 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
-import {
-  pageListKey,
-  removeData,
-  saveData,
-  volumeListKey,
-} from "../../../src/utils/storage";
+import { removeData, saveData } from "../../../src/utils/storage";
 import { PageType, VolumeType } from "../../../src/utils/types";
 import { checkLists } from "../../../src/utils/lists";
+
+const pageListKey = "pagelistkey";
+const volumeListKey = "volumelistkey";
 
 const mockPageData: PageType[] = [
   {
