@@ -283,36 +283,6 @@ export const useGestures = ({
       );
     })
     .onEnd((event, success) => {
-      //if (scale.value > 1 && isDoubleTapEnabled) {
-      //translate.x.value = withDecay(
-      //{
-      //velocity: event.velocityX,
-      //velocityFactor: 0.0,
-      //rubberBandEffect: false,
-      //clamp: [leftLimit, rightLimit],
-      //},
-      //() => {
-      //if (event.velocityX >= event.velocityY) {
-      //runOnJS(onPanEnded)(event, success);
-      //}
-      //}
-      //);
-      //translate.y.value = withDecay(
-      //{
-      //velocity: event.velocityY,
-      //velocityFactor: 0.0,
-      //rubberBandEffect: false,
-      //clamp: [topLimit, bottomLimit],
-      //},
-      //() => {
-      //if (event.velocityY > event.velocityX) {
-      //runOnJS(onPanEnded)(event, success);
-      //}
-      //}
-      //);
-      //} else {
-      //runOnJS(onPanEnded)(event, success);
-      //}
       runOnJS(onPanEnded)(event, success);
     });
 
