@@ -322,12 +322,19 @@ export const useGestures = ({
     .onStart((event) => {
       if (scale.value === 1) {
         runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_IN);
-        scale.value = withTiming(doubleTapScale, withTimingConfig);
-        focal.x.value = withTiming((center.x - event.x) * (doubleTapScale - 1), withTimingConfig);
-        focal.y.value = withTiming((center.y - event.y) * (doubleTapScale - 1), withTimingConfig);
+        /* Using withTiming to update scale.value breaks panning behavior, no idea why */
+        // scale.value = withTiming(doubleTapScale, withTimingConfig);
+        // focal.x.value = withTiming((center.x - event.x) * (doubleTapScale - 1), withTimingConfig);
+        // focal.y.value = withTiming((center.y - event.y) * (doubleTapScale - 1), withTimingConfig);
+
+        scale.value = doubleTapScale;
+        focal.x.value = (center.x - event.x) * (doubleTapScale - 1);
+        focal.y.value = (center.y - event.y) * (doubleTapScale - 1);
       } else {
         runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_OUT);
-        reset();
+        /* Using quickReset to match zoomIn behavior */
+        // reset();
+        quickReset();
       }
     });
 
