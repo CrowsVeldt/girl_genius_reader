@@ -7,63 +7,66 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home({ navigation }: { navigation: any }) {
   return (
     <View style={styles.page}>
-      <NetStatus />
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          navigation.navigate("ComicPage");
-        }}
-      >
-        <Text>Comic Page</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          navigation.navigate("Bookmarks");
-        }}
-      >
-        <Text>Bookmarks</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          navigation.navigate("Privacy Policy");
-        }}
-      >
-        <Text>Privacy Policy</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          navigation.navigate("Acknowledgements");
-        }}
-      >
-        <Text>Acknowledgements</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          navigation.navigate("Options");
-        }}
-      >
-        <Text>Options</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          // navigation.navigate("Acknowledgements");
-        }}
-      >
-        <Text>Link to girlgeniusonline.com (not yet implemented)</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.linkButton}
-        onPress={() => {
-          // navigation.navigate("Acknowledgements");
-        }}
-      >
-        <Text>Link to girl genius shops (not yet implemented)</Text>
-      </TouchableOpacity>
+      <View>
+        <NetStatus />
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            navigation.navigate("ComicPage");
+          }}
+        >
+          <Text>Comic Page</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            navigation.navigate("Bookmarks");
+          }}
+        >
+          <Text>Bookmarks</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            navigation.navigate("Privacy Policy");
+          }}
+        >
+          <Text>Privacy Policy</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            navigation.navigate("Acknowledgements");
+          }}
+        >
+          <Text>Acknowledgements</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            navigation.navigate("Options");
+          }}
+        >
+          <Text>Options</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            // navigation.navigate("Acknowledgements");
+          }}
+        >
+          <Text>Link to girlgeniusonline.com (not yet implemented)</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
+            // navigation.navigate("Acknowledgements");
+          }}
+        >
+          <Text>Link to girl genius shops (not yet implemented)</Text>
+        </TouchableOpacity>
+      </View>
+      <Text>{`Version ${process.env.EXPO_PUBLIC_VERSION_NUMBER}`}</Text>
     </View>
   );
 }
@@ -73,6 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     alignSelf: "center",
+    justifyContent: "space-between",
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },

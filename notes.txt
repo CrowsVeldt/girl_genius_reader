@@ -2,9 +2,10 @@ Updates:
 
 TODO: 
 - add changelog
+- add version notice on main page
 
-BUG: image not resetting to center immediately when zooming out 
-BUG: Panning is inconsistent. Frequently doesn't work after double-tapping to zoom in
+
+BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
@@ -144,3 +145,5 @@ x Add option to change volume scroll direction
 x Refactor image zoom to use react-native-zoom-image V4
 x changing page should reset zoom
 x Reimplement Image zoom to allow for new features
+x BUG: image not resetting to center immediately when zooming out 
+x BUG: Panning is inconsistent. Frequently doesn't work after double-tapping to zoom in
