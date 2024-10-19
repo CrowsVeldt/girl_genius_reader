@@ -1,10 +1,12 @@
 import { useCallback, useRef } from "react";
 import { Gesture } from "react-native-gesture-handler";
 import {
+  Easing,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  WithTimingConfig,
 } from "react-native-reanimated";
 import { clamp } from "../utils/clamp";
 import { limits } from "../utils/limits";
@@ -21,6 +23,10 @@ import { useAnimationEnd } from "./useAnimationEnd";
 import { useInteractionId } from "./useInteractionId";
 import { usePanGestureCount } from "./usePanGestureCount";
 import { sum } from "../utils/sum";
+
+const withTimingConfig: WithTimingConfig = {
+  easing: Easing.inOut(Easing.quad),
+};
 
 export const useGestures = ({
   width,
@@ -314,11 +320,11 @@ export const useGestures = ({
     .numberOfTaps(2)
     .maxDuration(250)
     .onStart((event) => {
-      if (scale.value <= 1) {
+      if (scale.value === 1) {
         runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_IN);
-        scale.value = withTiming(doubleTapScale);
-        focal.x.value = withTiming((center.x - event.x) * (doubleTapScale - 1));
-        focal.y.value = withTiming((center.y - event.y) * (doubleTapScale - 1));
+        scale.value = withTiming(doubleTapScale, withTimingConfig);
+        focal.x.value = withTiming((center.x - event.x) * (doubleTapScale - 1), withTimingConfig);
+        focal.y.value = withTiming((center.y - event.y) * (doubleTapScale - 1), withTimingConfig);
       } else {
         runOnJS(onDoubleTap)(ZOOM_TYPE.ZOOM_OUT);
         reset();
