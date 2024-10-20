@@ -52,6 +52,14 @@ export default function Home({ navigation }: { navigation: any }) {
         <TouchableOpacity
           style={styles.linkButton}
           onPress={() => {
+            navigation.navigate("Changelog");
+          }}
+        >
+          <Text>Change Log</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.linkButton}
+          onPress={() => {
             // navigation.navigate("Acknowledgements");
           }}
         >
