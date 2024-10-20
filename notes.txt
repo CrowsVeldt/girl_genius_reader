@@ -1,5 +1,5 @@
-Updates:
-- add version notice on main page
+Update 0.8.4:
+- add version number to bottom of home screen
 
 TODO: 
 - add changelog
@@ -147,3 +147,4 @@ x changing page should reset zoom
 x Reimplement Image zoom to allow for new features
 x BUG: image not resetting to center immediately when zooming out 
 x BUG: Panning is inconsistent. Frequently doesn't work after double-tapping to zoom in
+x fix panning breaking after double tap
