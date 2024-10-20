@@ -3,6 +3,8 @@ Update 0.8.4:
 - add changelog
 
 TODO: 
+- seperate context into ComicContext and appcontext
+- add version data to AppContext, along with net status, and options status
 
 
 ChangeLog modal:
