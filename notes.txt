@@ -1,9 +1,14 @@
 Update 0.8.4:
 - add version number to bottom of home screen
-
-TODO: 
 - add changelog
 
+TODO: 
+
+
+ChangeLog modal:
+- track latest changelog update
+- if last saved update is different from current update, display modal on startup
+- when user exits the modal update the latest changelog update data
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 FIX: double spread eliyahu mentioned in the GG app chat group
