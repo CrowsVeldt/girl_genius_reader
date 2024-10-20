@@ -19,6 +19,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import PrivacyScreen from "./src/screens/PrivacyScreen";
 import ComicPageScreen from "./src/screens/ComicPageScreen";
 import VolumeScreen from "./src/screens/VolumeScreen";
+import ChangeLogScreen from "./src/screens/ChangeLogScreen";
 import Options from "./src/screens/OptionsScreen";
 
 const Drawer = createDrawerNavigator();
@@ -97,6 +98,11 @@ export default function App() {
             <Drawer.Screen
               name="Options"
               component={Options}
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
+            <Drawer.Screen
+              name="Changelog"
+              component={ChangeLogScreen}
               options={{ drawerItemStyle: { display: "none" } }}
             />
           </Drawer.Navigator>
