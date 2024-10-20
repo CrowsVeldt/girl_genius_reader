@@ -88,6 +88,12 @@ export default function DrawerContent(props: any) {
           props.navigation.navigate("Options");
         }}
       />
+      <DrawerItem
+        label={"Change Log"}
+        onPress={() => {
+          props.navigation.navigate("Changelog");
+        }}
+      />
     </DrawerContentScrollView>
   );
 }
