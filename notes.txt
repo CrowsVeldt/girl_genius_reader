@@ -1,11 +1,4 @@
 TODO: 
-- seperate context into ComicContext and appcontext
-- add version data to AppContext, along with net status, and options status
-
-ChangeLog modal:
-- track latest changelog update
-- if last saved update is different from current update, display modal on startup
-- when user exits the modal update the latest changelog update data
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 FIX: double spread eliyahu mentioned in the GG app chat group
@@ -150,3 +143,9 @@ x Reimplement Image zoom to allow for new features
 x BUG: image not resetting to center immediately when zooming out 
 x BUG: Panning is inconsistent. Frequently doesn't work after double-tapping to zoom in
 x fix panning breaking after double tap
+x seperate context into ComicContext and appcontext
+x add version data to AppContext, along with net status, and options status
+ChangeLog modal:
+x track latest changelog update
+x if last saved update is different from current update, display modal on startup
+x when user exits the modal update the latest changelog update data
