@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 import { changeList } from "../../changelog";
-import ChangeLogModal from "../components/ChangeLogModal";
 
 const changeLogItem = (item: string[], index: number) => {
   return (
