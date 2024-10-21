@@ -4,6 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { PageType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
 import { ComicContext } from "../../context/ComicContext";
+import { AppContext } from "../../context/AppContext";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -11,8 +12,8 @@ export default function VolumeScreenList(props: {
   pages: PageType[];
   navigation: any;
 }) {
-  const { getCurrentPage, getCurrentVolume, getScrollDirection } =
-    useContext(ComicContext);
+  const { getCurrentPage, getCurrentVolume } = useContext(ComicContext);
+  const { getScrollDirection } = useContext(AppContext);
   const listRef = useRef<FlatList>(null);
   const currentPage = getCurrentPage();
   const currentVolume = getCurrentVolume();

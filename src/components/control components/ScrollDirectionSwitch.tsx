@@ -1,13 +1,13 @@
 import { ContextType, useContext, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ScrollDirectionType } from "../../utils/types";
-import { ComicContext } from "../../context/ComicContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function ScrollDirectionSwitch() {
   const {
     getScrollDirection,
     changeScrollDirection,
-  }: ContextType<typeof ComicContext> = useContext(ComicContext);
+  }: ContextType<typeof AppContext> = useContext(AppContext);
   const [currentDirection, setCurrentDirection] = useState<ScrollDirectionType>(
     getScrollDirection()
   );

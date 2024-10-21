@@ -1,13 +1,13 @@
 import { ContextType, useContext, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { PreloadPolicyType } from "../../utils/types";
-import { ComicContext } from "../../context/ComicContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function PreloadOption() {
   const {
     getPreloadPolicy,
     changePreloadPolicy,
-  }: ContextType<typeof ComicContext> = useContext(ComicContext);
+  }: ContextType<typeof AppContext> = useContext(AppContext);
   const [currentPolicy, setCurrentPolicy] = useState<PreloadPolicyType>(
     getPreloadPolicy()
   );
