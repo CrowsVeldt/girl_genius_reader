@@ -40,8 +40,8 @@ export default function App() {
   return (
     <RootSiblingParent>
       <NavigationContainer>
-        <ComicProvider>
-          <AppProvider>
+        <AppProvider>
+          <ComicProvider>
             <StatusBar style="dark" />
             <Drawer.Navigator
               // Custom drawer content
@@ -108,8 +108,8 @@ export default function App() {
                 options={{ drawerItemStyle: { display: "none" } }}
               />
             </Drawer.Navigator>
-          </AppProvider>
-        </ComicProvider>
+          </ComicProvider>
+        </AppProvider>
       </NavigationContainer>
     </RootSiblingParent>
   );

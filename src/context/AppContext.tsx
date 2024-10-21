@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import { showToast } from "../utils/notifications";
 import { retrieveData, saveData } from "../utils/storage";
 import { PreloadPolicyType, ScrollDirectionType } from "../utils/types";
 
