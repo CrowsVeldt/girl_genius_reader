@@ -8,6 +8,7 @@ import { retrieveData, saveData } from "./src/utils/storage";
 import { getDateList, update } from "./src/utils/network";
 
 import ComicProvider from "./src/context/ComicContext";
+import AppProvider from "./src/context/AppContext";
 
 import { StatusBar } from "expo-status-bar";
 import DrawerContent from "./src/components/custom navigation components/CustomDrawer";
@@ -40,72 +41,74 @@ export default function App() {
     <RootSiblingParent>
       <NavigationContainer>
         <ComicProvider>
-          <StatusBar style="dark" />
-          <Drawer.Navigator
-            // Custom drawer content
-            drawerContent={(props) => <DrawerContent {...props} />}
-            initialRouteName="Girl Genius"
-            screenOptions={{
-              swipeEnabled: false,
-              drawerStyle: {
-                backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
-              },
-              header: ({ navigation, options, route, layout }) => (
-                // Custom header
-                <CustomHeader
-                  navigation={navigation}
-                  options={options}
-                  route={route}
-                  layout={layout}
-                />
-              ),
-              headerStyle: {
-                height: 60,
-                backgroundColor: process.env.EXPO_PUBLIC_LIGHT_HEAD_COLOR,
-              },
-            }}
-          >
-            <Drawer.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="ComicPage"
-              component={ComicPageScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Volume"
-              component={VolumeScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Bookmarks"
-              component={BookmarkScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Privacy Policy"
-              component={PrivacyScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Acknowledgements"
-              component={AckScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Options"
-              component={Options}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-            <Drawer.Screen
-              name="Changelog"
-              component={ChangeLogScreen}
-              options={{ drawerItemStyle: { display: "none" } }}
-            />
-          </Drawer.Navigator>
+          <AppProvider>
+            <StatusBar style="dark" />
+            <Drawer.Navigator
+              // Custom drawer content
+              drawerContent={(props) => <DrawerContent {...props} />}
+              initialRouteName="Girl Genius"
+              screenOptions={{
+                swipeEnabled: false,
+                drawerStyle: {
+                  backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
+                },
+                header: ({ navigation, options, route, layout }) => (
+                  // Custom header
+                  <CustomHeader
+                    navigation={navigation}
+                    options={options}
+                    route={route}
+                    layout={layout}
+                  />
+                ),
+                headerStyle: {
+                  height: 60,
+                  backgroundColor: process.env.EXPO_PUBLIC_LIGHT_HEAD_COLOR,
+                },
+              }}
+            >
+              <Drawer.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="ComicPage"
+                component={ComicPageScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="Volume"
+                component={VolumeScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="Bookmarks"
+                component={BookmarkScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="Privacy Policy"
+                component={PrivacyScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="Acknowledgements"
+                component={AckScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="Options"
+                component={Options}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+              <Drawer.Screen
+                name="Changelog"
+                component={ChangeLogScreen}
+                options={{ drawerItemStyle: { display: "none" } }}
+              />
+            </Drawer.Navigator>
+          </AppProvider>
         </ComicProvider>
       </NavigationContainer>
     </RootSiblingParent>
