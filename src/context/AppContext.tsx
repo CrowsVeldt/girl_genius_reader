@@ -1,11 +1,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import { retrieveData, saveData } from "../utils/storage";
 import { PreloadPolicyType, ScrollDirectionType } from "../utils/types";
+import { changeList } from "../../changelog";
 
 type AppContextType = {
   changePreloadPolicy: (policy: PreloadPolicyType) => void;
   changeScrollDirection: (dir: ScrollDirectionType) => void;
   getPreloadPolicy: () => PreloadPolicyType;
+  getNewVersionBool: () => boolean;
   getScrollDirection: () => ScrollDirectionType;
 };
 
@@ -17,6 +19,7 @@ const AppProvider = ({ children }: { children: any }) => {
   const [preloadPolicy, setPreloadPolicy] = useState<PreloadPolicyType>("wifi");
   const [scrollDirection, setScrollDirection] =
     useState<ScrollDirectionType>("vertical");
+  const [newVersion, setNewVersion] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -41,6 +44,33 @@ const AppProvider = ({ children }: { children: any }) => {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const savedVersionNumber: string = await retrieveData(
+        process.env.EXPO_PUBLIC_LAST_VERSION_NUMBER_KEY!
+      );
+
+      if (savedVersionNumber != null) {
+        console.log(savedVersionNumber);
+        const latestVersionNumber: string = changeList[0][0];
+        if (savedVersionNumber != latestVersionNumber) {
+          setNewVersion(true);
+          saveData(
+            process.env.EXPO_PUBLIC_LAST_VERSION_NUMBER_KEY!,
+            latestVersionNumber
+          );
+        } else {
+          setNewVersion(false);
+        }
+      } else {
+        saveData(
+          process.env.EXPO_PUBLIC_LAST_VERSION_NUMBER_KEY!,
+          changeList[0][0]
+        );
+      }
+    })();
+  }, []);
+
   const changePreloadPolicy: (policy: PreloadPolicyType) => void = (policy) => {
     saveData(process.env.EXPO_PUBLIC_PRELOAD_POLICY_KEY!, policy);
     setPreloadPolicy(policy);
@@ -50,12 +80,16 @@ const AppProvider = ({ children }: { children: any }) => {
     saveData(process.env.EXPO_PUBLIC_SCROLL_DIRECTION_KEY!, dir);
     setScrollDirection(dir);
   };
+
   const getPreloadPolicy: () => PreloadPolicyType = () => preloadPolicy;
+  const getNewVersionBool: () => boolean = () => newVersion;
   const getScrollDirection: () => ScrollDirectionType = () => scrollDirection;
+
   const value = {
     changePreloadPolicy,
     changeScrollDirection,
     getPreloadPolicy,
+    getNewVersionBool,
     getScrollDirection,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

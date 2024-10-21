@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Modal,
   StyleSheet,
@@ -8,11 +8,18 @@ import {
   Dimensions,
   ScaledSize,
 } from "react-native";
+import { AppContext } from "../context/AppContext";
 
 const window: ScaledSize = Dimensions.get("window");
 
 export default function ChangeLogModal() {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const { getNewVersionBool } = useContext(AppContext);
+
+  useEffect(() => {
+      setModalVisible(getNewVersionBool());
+  }, []);
+
   return (
     <View style={styles.centeredView}>
       <Modal
