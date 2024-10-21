@@ -9,6 +9,7 @@ import {
   ScaledSize,
 } from "react-native";
 import { AppContext } from "../context/AppContext";
+import { changeList } from "../../changelog";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -32,7 +33,7 @@ export default function ChangeLogModal() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>New update #x.x.x</Text>
+            <Text style={styles.modalText}>{`New Version ${changeList[0][0]}`}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}

@@ -51,7 +51,6 @@ const AppProvider = ({ children }: { children: any }) => {
       );
 
       if (savedVersionNumber != null) {
-        console.log(savedVersionNumber);
         const latestVersionNumber: string = changeList[0][0];
         if (savedVersionNumber != latestVersionNumber) {
           setNewVersion(true);
