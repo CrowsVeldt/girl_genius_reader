@@ -1,12 +1,15 @@
 import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
 import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { changeList } from "../../changelog";
+import ChangeLogModal from "../components/ChangeLogModal";
 
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
   return (
     <View style={styles.page}>
+      <ChangeLogModal />
       <View>
         <NetStatus />
         <TouchableOpacity
@@ -74,7 +77,7 @@ export default function Home({ navigation }: { navigation: any }) {
           <Text>Link to girl genius shops (not yet implemented)</Text>
         </TouchableOpacity>
       </View>
-      <Text>{`Version ${process.env.EXPO_PUBLIC_VERSION_NUMBER}`}</Text>
+      <Text>{`Version ${changeList[0][0]}`}</Text>
     </View>
   );
 }
