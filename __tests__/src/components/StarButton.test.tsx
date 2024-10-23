@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import StarButton from "../../../src/components/control components/StarButton";
+import StarButton from "../../../src/components/control components/BookmarkButton";
 import ComicProvider from "../../../src/context/ComicContext";
 
 describe("<StarButton />", () => {

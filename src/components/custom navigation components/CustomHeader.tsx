@@ -9,7 +9,7 @@ import {
 import { PageType } from "../../utils/types";
 import { ComicContext } from "../../context/ComicContext";
 import PullToRefresh from "../gesture components/PullToRefresh";
-import StarButton from "../control components/StarButton";
+import BookmarkButton from "../control components/BookmarkButton";
 
 export default function CustomHeader({
   navigation,
@@ -64,7 +64,7 @@ export default function CustomHeader({
       {routeName !== "ComicPage" && routeName !== "Volume" && (
         <Text style={styles.headerTitle}>{routeName}</Text>
       )}
-      {routeName === "ComicPage" && <StarButton page={page} />}
+      {routeName === "ComicPage" && <BookmarkButton page={page} />}
       {routeName !== "ComicPage" && <View style={styles.placeholderBox}></View>}
     </View>
   );
