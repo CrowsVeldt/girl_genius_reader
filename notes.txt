@@ -1,7 +1,9 @@
 TODO: 
+- Add volume list to homescreen
+- make bug report/comment form screen. With subject category dropdown. Send mail to a mailbox.
+- FIX: double spread eliyahu mentioned in the GG app chat group
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
-FIX: double spread eliyahu mentioned in the GG app chat group
 
 Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
@@ -148,4 +150,4 @@ x add version data to AppContext, along with net status, and options status
 ChangeLog modal:
 x track latest changelog update
 x if last saved update is different from current update, display modal on startup
-x when user exits the modal update the latest changelog update data
+- when user exits the modal update the latest changelog update data
