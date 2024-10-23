@@ -2,6 +2,7 @@ import { ContextType, useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { PageType } from "../../utils/types";
 import { ComicContext } from "../../context/ComicContext";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function StarButton({ page }: { page: PageType }) {
   const {
@@ -32,7 +33,7 @@ export default function StarButton({ page }: { page: PageType }) {
         setBookmarked(!bookmarked);
       }}
     >
-      <Text style={styles.star}>{bookmarked ? "★" : "☆"}</Text>
+      <MaterialIcons name={bookmarked ? "bookmark" : "bookmark-outline"} size={36} color={process.env.EXPO_PUBLIC_DARK_BG_COLOR}/>
     </TouchableOpacity>
   );
 }
