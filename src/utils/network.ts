@@ -99,6 +99,8 @@ export const update: () => void = async () => {
             dateList.push("20030106b");
           } else if (nextDate === "20040209") {
             // 20040209-20040209b (Double spread on same webpage)
+            // https://www.girlgeniusonline.com/ggmain/strips/ggmain20040209.jpg
+            // https://www.girlgeniusonline.com/ggmain/strips/ggmain20040209b.jpg
             dateList.push("20040209");
             dateList.push("20040209b");
           } else if (nextDate === "20060425") {
@@ -116,6 +118,7 @@ export const update: () => void = async () => {
             dateList.push("20141226a");
             dateList.push("20141226b");
           } else if (nextDate === "20240211") {
+            // no comic for this date
             console.log("Nothing to add");
           } else {
             dateList.push(nextDate);
