@@ -1,5 +1,4 @@
 TODO: 
-- change star button to a bookmark icon
 - Add volume list to homescreen
 - make bug report/comment form screen. With subject category dropdown. Send mail to a mailbox.
 - FIX: double spread eliyahu mentioned in the GG app chat group (Volume 3, Page 18)
@@ -151,4 +150,6 @@ x add version data to AppContext, along with net status, and options status
 ChangeLog modal:
 x track latest changelog update
 x if last saved update is different from current update, display modal on startup
-- when user exits the modal update the latest changelog update data
+x when user exits the modal update the latest changelog update data
+
+x change star button to a bookmark icon

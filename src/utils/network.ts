@@ -97,6 +97,10 @@ export const update: () => void = async () => {
           if (nextDate === "20030106") {
             // 20030106>20030106b (20030106 points to the wrong comic)
             dateList.push("20030106b");
+          } else if (nextDate === "20040209") {
+            // 20040209-20040209b (Double spread on same webpage)
+            dateList.push("20040209");
+            dateList.push("20040209b");
           } else if (nextDate === "20060425") {
             // 20060425b-20060425c (Authors added second page)
             dateList.push("20060425b");
