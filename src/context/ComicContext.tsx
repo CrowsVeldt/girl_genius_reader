@@ -182,33 +182,48 @@ const ComicProvider = ({ children }: { children: any }) => {
       (element: PageType) => element.date === page.date
     );
 
-    const pre1: Promise<boolean> = Image.prefetch(
-      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
-        pages[index - 2]?.date
-      }.jpg`
-    );
+    try {
+      if (pages[index - 2] != undefined) {
+        const pre1: Promise<boolean> = Image.prefetch(
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+            pages[index - 2].date
+          }.jpg`
+        );
+      }
 
-    const pre2: Promise<boolean> = Image.prefetch(
-      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
-        pages[index - 1]?.date
-      }.jpg`
-    );
+      if (pages[index - 1] != undefined) {
+        const pre2: Promise<boolean> = Image.prefetch(
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+            pages[index - 1].date
+          }.jpg`
+        );
+      }
 
-    const pre3: Promise<boolean> = Image.prefetch(
-      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${pages[index]?.date}.jpg`
-    );
+      if (pages[index] != undefined) {
+        const pre3: Promise<boolean> = Image.prefetch(
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${pages[index].date}.jpg`
+        );
+      }
 
-    const pre4: Promise<boolean> = Image.prefetch(
-      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
-        pages[index + 1]?.date
-      }.jpg`
-    );
+      if (pages[index + 1] != undefined) {
+        const pre4: Promise<boolean> = Image.prefetch(
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+            pages[index + 1].date
+          }.jpg`
+        );
+      }
 
-    const pre5: Promise<boolean> = Image.prefetch(
-      `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
-        pages[index + 2]?.date
-      }.jpg`
-    );
+      if (pages[index + 2] != undefined) {
+        const pre5: Promise<boolean> = Image.prefetch(
+          `https://www.girlgeniusonline.com/ggmain/strips/ggmain${
+            pages[index + 2].date
+          }.jpg`
+        );
+      }
+    } catch (error) {
+      console.warn("An error occurred prefetching images");
+      console.error(error);
+    }
   };
 
   const removeBookmark: (page: PageType) => void = async (page) => {
