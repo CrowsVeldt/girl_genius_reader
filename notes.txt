@@ -2,7 +2,20 @@
 
 TODO: 
 - debug/fix update function(s)
+
+BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
+BUG: Initial update still shit. Neet to restart multiple times for comics to be available
+BUG: On initial update newComics Constant may equal false even if lists are empty???
+- Add animation to opening and closing volumeSubMenu
+
+
+Ideas:
 - Add volume list to homescreen
+- Automatically have volume scroll horizontally when in landscape mode?
+- Implement two-page view for landscape mode, like reading the actual books
+- when user is scrolling the volume view, have the screen slide to showing the one full image 
+  when the user lifts their finger
+- implement light/dark mode support
 - in network functions, handle dates with letter suffixes
 
 - Bug report/comment screen
@@ -10,18 +23,6 @@ TODO:
 - - React Components: screen, form, input components: 
         mail(mail), title(text), subject/category(dropdown), message(text), send(button)
 - - modules: Mail composer, takes the info from the form and populates an email template for the user to send
-
-BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
-BUG: Initial update still shit. Neet to restart multiple times for comics to be available
-BUG: On initial update newcomics may equal false even if lists are empty???
-
-
-Ideas:
-- Automatically have volume scroll horizontally when in landscape mode?
-- Implement two-page view for landscape mode, like reading the actual books
-- when user is scrolling the volume view, have the screen slide to showing the one full image 
-  when the user lifts their finger
-- implement light/dark mode support
 
 
 ???
