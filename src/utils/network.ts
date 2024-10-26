@@ -120,7 +120,11 @@ export const update: () => void = async () => {
           } else if (nextDate === "20240211") {
             // no comic for this date
             console.log("Nothing to add");
-          } else {
+          } else if (nextDate === "20241023") {
+            dateList.push("20241023a")
+            dateList.push("20241023b")
+          }
+          else {
             dateList.push(nextDate);
           }
 
