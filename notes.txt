@@ -1,17 +1,25 @@
+- volume 25 started 25-10-2024
+
 TODO: 
 - Add volume list to homescreen
-- make bug report/comment form screen. With subject category dropdown. Send mail to a mailbox.
-- volume 25 apparently starts today
 
+- Bug report/comment screen
+- - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
+- - React Components: screen, form, input components: 
+        mail(mail), title(text), subject/category(dropdown), message(text), send(button)
+- - modules: Mail composer, takes the info from the form and populates an email template for the user to send
+
+BUG: Initial update still shit. Neet to restart multiple times for comics to be available
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
-
+BUG: On initial update newcomics may equal false even if lists are empty???
 
 
 Ideas:
+- Automatically have volume scroll horizontally when in landscape mode?
+- Implement two-page view for landscape mode, like reading the actual books
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
 - implement light/dark mode support
-
 
 
 ???
@@ -20,6 +28,7 @@ Ideas:
 - replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
 
+
 Date & Page exceptions:
  - 20030106>20030106b (20030106 points to the wrong comic)
  - 20040209-20040209b (double-spread)
@@ -27,6 +36,7 @@ Date & Page exceptions:
  - 20100224a-20100226a-20100301a
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
  - 20240211 doesn't exist
+ - 20241023a-20241023b (double-spread, only worse)
 
 
 

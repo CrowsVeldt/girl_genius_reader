@@ -122,7 +122,8 @@ export const update: () => void = async () => {
             console.log("Nothing to add");
           } else if (nextDate === "20241023") {
             dateList.push("20241023a")
-            dateList.push("20241023b")
+            // "b" is a double-width image
+            // dateList.push("20241023b")
           }
           else {
             dateList.push(nextDate);

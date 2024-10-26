@@ -1,6 +1,7 @@
 // Maybe change to a json file
 
 export const changeList = [
+  ["0.8.6", "Fix double-spread for 2024-10-23"],
   [
     "0.8.5",
     "Replace bookmark button's star with a bookmark icon",
