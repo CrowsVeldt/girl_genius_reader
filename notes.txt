@@ -39,7 +39,7 @@ Date & Page exceptions:
  - 20100224a-20100226a-20100301a
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
  - 20240211 doesn't exist
- - 20241023a-20241023b (double-spread, only worse)
+ - 20241023a-20241023b (double-spread, in one image)
 
 
 
