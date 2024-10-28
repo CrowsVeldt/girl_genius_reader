@@ -29,7 +29,7 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const data = await retrieveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!);
-      if (data === null) {
+      if (data !== null) {
         const fetchDates = await getDateList();
         saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, fetchDates);
       }
