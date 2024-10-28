@@ -26,6 +26,7 @@ type ComicContextType = {
   isPageBookmarked: (page: PageType) => boolean;
   refresh: () => void;
   removeBookmark: (page: PageType) => void;
+  triggerFinishedUpdate: () => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -46,13 +47,12 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   const [dataReady, setDataReady] = useState<boolean>(false);
+  const [finishedUpdate, setFinishedUpdate] = useState<boolean>(false);
   const netStatus = useNetInfo();
   const preloadPolicy = getPreloadPolicy();
-  const [finishedUpdate, setFinishedUpdate] = useState(false)
 
   useEffect(() => {
     (async () => {
-      // When finishedUpdate is true, retrieve lists from scratch so user gets the latest list
       try {
         const listsExist: boolean | undefined = await checkLists();
         if (listsExist) {
@@ -240,6 +240,8 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
+  const triggerFinishedUpdate = () => setFinishedUpdate(!finishedUpdate)
+
   const value = {
     addBookmark,
     changeCurrentPage,
@@ -256,6 +258,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     isPageBookmarked,
     refresh,
     removeBookmark,
+    triggerFinishedUpdate
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
