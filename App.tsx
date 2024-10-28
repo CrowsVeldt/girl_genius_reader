@@ -26,12 +26,6 @@ import Options from "./src/screens/OptionsScreen";
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  useEffect(() => {
-    (async () => {
-      update();
-    })();
-  }, []);
-
   return (
     <RootSiblingParent>
       <NavigationContainer>
