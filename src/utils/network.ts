@@ -67,31 +67,41 @@ export const getNextComicDate: (
 };
 
 export const update: () => void = async () => {
+  console.log("updating");
   try {
     // If new dates are found
     const newComics: boolean | undefined = await areThereNewComics();
     if (newComics != null && newComics) {
+      console.log("new comics found");
       // get date list
       const savedDateList: string[] = await retrieveData(
         process.env.EXPO_PUBLIC_DATE_LIST_KEY!
       );
       const networkDateList: string[] = await getDateList();
       let dateList: string[] =
-        savedDateList != null
-          ? savedDateList
-          : networkDateList != null
+        networkDateList != null
           ? networkDateList
+          : savedDateList != null
+          ? savedDateList
           : ["20021104"];
       // set current date to start search
       let currentDate: string = lastElement(dateList);
+      // set latest date
+      const latestDate = await getLatestDate();
       // while current date matches the date regex
-      while (stringOfEightNumbers(currentDate)) {
+      while (stringOfEightNumbers(currentDate) && currentDate !== latestDate) {
+        console.log("while");
         // get next date
         const nextDate: string | undefined = await getNextComicDate(
           currentDate
         );
         // if next date matches the date regex
-        if (nextDate != undefined && stringOfEightNumbers(nextDate)) {
+        if (
+          nextDate != undefined &&
+          stringOfEightNumbers(nextDate) &&
+          nextDate !== latestDate
+        ) {
+          console.log("next date exists");
           // add to date list
           // with exceptions handled below
           if (nextDate === "20030106") {
@@ -121,26 +131,29 @@ export const update: () => void = async () => {
             // no comic for this date
             console.log("Nothing to add");
           } else if (nextDate === "20241023") {
-            dateList.push("20241023a")
+            dateList.push("20241023a");
             // "b" is a double-width image
             // dateList.push("20241023b")
-          }
-          else {
+          } else {
             dateList.push(nextDate);
           }
 
           // set current date to next date, to progress the loop
           currentDate = nextDate;
+          console.log("looping");
           // save date list to memory
           saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, dateList);
         } else {
+          console.log("else");
           // if next date does not match the date regex
           // save current date to latestSavedDate in memory
           updateLists();
           saveData(process.env.EXPO_PUBLIC_LATEST_SAVED_DATE_KEY!, currentDate);
+          currentDate = latestDate!;
         }
       }
     }
+    return true;
   } catch (error) {
     console.warn("Error in update function");
     console.error(error);
