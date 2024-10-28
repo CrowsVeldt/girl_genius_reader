@@ -11,7 +11,10 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home({ navigation }: { navigation: any }) {
   useEffect(() => {
     (async () => {
+      // get setFinishedUpdate from ComicContext
+      // on startUp setFinishedUpdate to false
       const shit = await update();
+      // when update finishes return true from it, and set finishedUpdate to true
       console.log(shit);
     })();
   }, []);

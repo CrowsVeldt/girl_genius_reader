@@ -67,6 +67,10 @@ export const getNextComicDate: (
 };
 
 export const update: () => void = async () => {
+  // TODO: Break update up into smaller conditions
+  // Check for saved list, and for network list, and for new comics
+  // Compare saved and networks lists, so if there are any errors or updates they can be added
+  // If new comics are found update (and trigger update for data collector?)
   console.log("updating");
   try {
     // If new dates are found

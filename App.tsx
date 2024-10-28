@@ -1,11 +1,7 @@
 import "react-native-gesture-handler";
-import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
-
-import { retrieveData, saveData } from "./src/utils/storage";
-import { getDateList, update } from "./src/utils/network";
 
 import ComicProvider from "./src/context/ComicContext";
 import AppProvider from "./src/context/AppContext";

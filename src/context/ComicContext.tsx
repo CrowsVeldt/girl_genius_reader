@@ -52,6 +52,7 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
+      // When finishedUpdate is true, retrieve lists from scratch so user gets the latest list
       try {
         const listsExist: boolean | undefined = await checkLists();
         if (listsExist) {
