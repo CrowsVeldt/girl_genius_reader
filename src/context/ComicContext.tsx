@@ -48,6 +48,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [dataReady, setDataReady] = useState<boolean>(false);
   const netStatus = useNetInfo();
   const preloadPolicy = getPreloadPolicy();
+  const [finishedUpdate, setFinishedUpdate] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -65,7 +66,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         console.error(error);
       }
     })();
-  }, []);
+  }, [finishedUpdate]);
 
   useEffect(() => {
     (async () => {
