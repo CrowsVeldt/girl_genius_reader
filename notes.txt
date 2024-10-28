@@ -1,5 +1,13 @@
 - volume 25 started 25-10-2024
 
+
+- Initial install
+- - have dates etc. as file in project
+- - initalize storage variables
+- - check for updates
+- - just give up on data-collector service
+
+
 TODO: 
 - after update trigger app refresh so that page and volume data will be available ???
 - add case in update function for if networkDateList is null
