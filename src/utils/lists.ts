@@ -22,17 +22,23 @@ export const processDateList: (list: string[]) => string[] = (list) =>
   Array.from(new Set(list));
 
 export const updateLists: () => Promise<boolean> = async () => {
+  // console.log("updating lists")
   try {
     const dateArray: string[] = processDateList(
       await retrieveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!)
     );
     if (dateArray != null) {
+      // console.log("collecting lists")
       const lists: ListCollectionType = await collectVolumes(dateArray);
 
+      // console.log("saving lists")
       saveData(process.env.EXPO_PUBLIC_PAGE_LIST_KEY!, lists?.pageList);
       saveData(process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!, lists?.volumeList);
 
+    // console.log("lists updated")
       return true;
+    } else {
+      return false
     }
   } catch (error) {
     console.warn("An error occurred while updating comic data");
