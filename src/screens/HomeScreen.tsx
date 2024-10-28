@@ -3,10 +3,19 @@ import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeList } from "../../changelog";
 import ChangeLogModal from "../components/ChangeLogModal";
+import { useEffect } from "react";
+import { update } from "../utils/network";
 
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
+  useEffect(() => {
+    (async () => {
+      const shit = await update();
+      console.log(shit);
+    })();
+  }, []);
+
   return (
     <View style={styles.page}>
       <ChangeLogModal />
