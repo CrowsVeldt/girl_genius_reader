@@ -3,7 +3,6 @@
 TODO: 
 - debug/fix update function(s)
 BUG: Initial update still shit. Neet to restart multiple times for comics to be available
-BUG: On initial update newComics Constant may equal false even if lists are empty???
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -178,3 +177,5 @@ x - initalize storage variables
 x - check for updates
 x - just give up on data-collector service
 
+
+x BUG: On initial update newComics Constant may equal false even if lists are empty???
