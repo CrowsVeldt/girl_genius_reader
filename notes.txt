@@ -1,19 +1,11 @@
 - volume 25 started 25-10-2024
 
-
-- Initial install
-- - have dates etc. as file in project
-- - initalize storage variables
-- - check for updates
-- - just give up on data-collector service
-
-
 TODO: 
 - debug/fix update function(s)
-
-BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 BUG: Initial update still shit. Neet to restart multiple times for comics to be available
 BUG: On initial update newComics Constant may equal false even if lists are empty???
+
+BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
 
 
@@ -180,3 +172,9 @@ x when user exits the modal update the latest changelog update data
 x change star button to a bookmark icon
 x FIX: double spread eliyahu mentioned in the GG app chat group (Volume 3, Page 18)
 x handle promise rejection for reaching end of comic list
+x Initial install
+x - have dates etc. as file in project
+x - initalize storage variables
+x - check for updates
+x - just give up on data-collector service
+
