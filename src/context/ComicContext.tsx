@@ -2,8 +2,8 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { Image } from "react-native";
 import Toast from "react-native-root-toast";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { checkLists } from "../utils/lists";
-import { update } from "../utils/network";
+import { checkLists, processPageAndVolumeLists } from "../utils/lists";
+import { updateDateList } from "../utils/network";
 import { showToast } from "../utils/notifications";
 import { retrieveData, saveData } from "../utils/storage";
 import { PageType, VolumeType } from "../utils/types";
@@ -53,13 +53,31 @@ const ComicProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     (async () => {
+      // Initial check for list data
       try {
-        const listsExist: boolean | undefined = await checkLists();
+        const listsExist: boolean = await checkLists();
         if (listsExist) {
           setPages(await retrieveData(process.env.EXPO_PUBLIC_PAGE_LIST_KEY!));
           setVolumes(
             await retrieveData(process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!)
           );
+          setDataReady(true);
+        }
+      } catch (error) {
+        console.warn("An error occurred setting page and volume data");
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      // set page and volume data after update
+      try {
+        const lists = await processPageAndVolumeLists();
+        if (lists != undefined) {
+          setPages(lists.pageList);
+          setVolumes(lists.volumeList);
           setDataReady(true);
         }
       } catch (error) {
@@ -172,7 +190,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const refresh: () => void = async () => {
     try {
       showToast("Updating");
-      setFinishedUpdate(await update());
+      setFinishedUpdate(await updateDateList() != null);
     } catch (error) {
       console.warn("An error occurred refreshing data");
       console.error(error);
