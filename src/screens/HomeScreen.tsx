@@ -11,6 +11,7 @@ const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
   const { triggerFinishedUpdate } = useContext(ComicContext);
+
   useEffect(() => {
     (async () => {
       triggerFinishedUpdate(await update());

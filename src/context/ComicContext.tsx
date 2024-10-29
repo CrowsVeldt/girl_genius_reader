@@ -240,7 +240,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
-  const triggerFinishedUpdate = (trigger: boolean) =>
+  const triggerFinishedUpdate: (trigger: boolean) => void = (trigger) =>
     setFinishedUpdate(!finishedUpdate);
 
   const value = {

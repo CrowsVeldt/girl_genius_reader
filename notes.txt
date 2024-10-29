@@ -2,7 +2,8 @@
 
 TODO: 
 - debug/fix update function(s)
-BUG: Initial update still shit. Neet to restart multiple times for comics to be available
+- after update trigger app refresh so that page and volume data will be available ???
+- add case in update function for if networkDateList is null
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -179,3 +180,4 @@ x - just give up on data-collector service
 
 
 x BUG: On initial update newComics Constant may equal false even if lists are empty???
+x BUG: Initial update still shit. Neet to restart multiple times for comics to be available
