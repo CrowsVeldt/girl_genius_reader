@@ -65,7 +65,7 @@ export const getNextComicDate: (
   }
 };
 
-export const update: () => void = async () => {
+export const update: () => Promise<boolean> = async () => {
   try {
     const savedDateList: string[] = await retrieveData(
       process.env.EXPO_PUBLIC_DATE_LIST_KEY!
@@ -131,8 +131,10 @@ export const update: () => void = async () => {
       }     }
     updateLists();
     saveData(process.env.EXPO_PUBLIC_LATEST_SAVED_DATE_KEY!, currentDate);
+    return true
   } catch (error) {
     console.warn("Error in update function");
     console.error(error);
+    return false
   }
 };
