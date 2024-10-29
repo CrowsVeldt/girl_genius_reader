@@ -3,19 +3,17 @@ import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeList } from "../../changelog";
 import ChangeLogModal from "../components/ChangeLogModal";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { update } from "../utils/network";
+import { ComicContext } from "../context/ComicContext";
 
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
+  const { triggerFinishedUpdate } = useContext(ComicContext);
   useEffect(() => {
     (async () => {
-      // get setFinishedUpdate from ComicContext
-      // on startUp setFinishedUpdate to false
-      const shit = await update();
-      // when update finishes return true from it, and set finishedUpdate to true
-      console.log(shit);
+      triggerFinishedUpdate(await update());
     })();
   }, []);
 
