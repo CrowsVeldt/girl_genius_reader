@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import { updateLists } from "./lists";
 import { retrieveData, saveData } from "./storage";
 import { lastElement, stringOfEightNumbers } from "./utilFunctions";
 
@@ -65,7 +64,7 @@ export const getNextComicDate: (
   }
 };
 
-export const update: () => Promise<boolean> = async () => {
+export const updateDateList: () => Promise<string[] | undefined> = async () => {
   try {
     const savedDateList: string[] = await retrieveData(
       process.env.EXPO_PUBLIC_DATE_LIST_KEY!
@@ -128,13 +127,12 @@ export const update: () => Promise<boolean> = async () => {
         currentDate = nextDate;
         // save date list to memory
         saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, dateList);
-      }     }
-    updateLists();
+      }
+    }
     saveData(process.env.EXPO_PUBLIC_LATEST_SAVED_DATE_KEY!, currentDate);
-    return true
+    return dateList;
   } catch (error) {
     console.warn("Error in update function");
     console.error(error);
-    return false
   }
 };
