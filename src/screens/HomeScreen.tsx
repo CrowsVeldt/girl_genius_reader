@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeList } from "../../changelog";
 import ChangeLogModal from "../components/ChangeLogModal";
 import { useContext, useEffect } from "react";
-import { update } from "../utils/network";
+import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
 
 const window: ScaledSize = Dimensions.get("window");
@@ -14,7 +14,7 @@ export default function Home({ navigation }: { navigation: any }) {
 
   useEffect(() => {
     (async () => {
-      triggerFinishedUpdate(await update());
+      triggerFinishedUpdate(await updateDateList() != null);
     })();
   }, []);
 
