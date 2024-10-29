@@ -26,7 +26,7 @@ type ComicContextType = {
   isPageBookmarked: (page: PageType) => boolean;
   refresh: () => void;
   removeBookmark: (page: PageType) => void;
-  triggerFinishedUpdate: () => void;
+  triggerFinishedUpdate: (trigger: boolean) => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -172,7 +172,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const refresh: () => void = async () => {
     try {
       showToast("Updating");
-      update();
+      setFinishedUpdate(await update());
     } catch (error) {
       console.warn("An error occurred refreshing data");
       console.error(error);
@@ -240,7 +240,8 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
-  const triggerFinishedUpdate = () => setFinishedUpdate(!finishedUpdate)
+  const triggerFinishedUpdate = (trigger: boolean) =>
+    setFinishedUpdate(!finishedUpdate);
 
   const value = {
     addBookmark,
@@ -258,7 +259,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     isPageBookmarked,
     refresh,
     removeBookmark,
-    triggerFinishedUpdate
+    triggerFinishedUpdate,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>
