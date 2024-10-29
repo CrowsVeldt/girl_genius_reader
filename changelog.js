@@ -1,6 +1,7 @@
 // Maybe change to a json file
 
 export const changeList = [
+  ["0.8.7", "Fix needing to restart app after install for comics to display"],
   [
     "0.8.6",
     "Fix endless loop after initial install",

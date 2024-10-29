@@ -18,15 +18,13 @@ export type VolumeType = {
   pages: PageType[];
 };
 
-export type ListCollectionType =
-  | {
-      pageList: PageType[];
-      volumeList: VolumeType[];
-    }
-  | undefined;
+export type ListCollectionType = {
+  pageList: PageType[];
+  volumeList: VolumeType[];
+};
 
 export type SideType = "left" | "right";
 
 export type PreloadPolicyType = "wifi" | "never" | "always";
 
-export type ScrollDirectionType = "horizontal" | "vertical"
+export type ScrollDirectionType = "horizontal" | "vertical";
