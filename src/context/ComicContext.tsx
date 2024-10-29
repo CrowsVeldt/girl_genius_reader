@@ -26,6 +26,7 @@ type ComicContextType = {
   isPageBookmarked: (page: PageType) => boolean;
   refresh: () => void;
   removeBookmark: (page: PageType) => void;
+  triggerFinishedUpdate: (trigger: boolean) => void;
 };
 
 export const ComicContext = createContext<ComicContextType>(
@@ -46,6 +47,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   });
 
   const [dataReady, setDataReady] = useState<boolean>(false);
+  const [finishedUpdate, setFinishedUpdate] = useState<boolean>(false);
   const netStatus = useNetInfo();
   const preloadPolicy = getPreloadPolicy();
 
@@ -65,7 +67,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         console.error(error);
       }
     })();
-  }, []);
+  }, [finishedUpdate]);
 
   useEffect(() => {
     (async () => {
@@ -170,7 +172,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const refresh: () => void = async () => {
     try {
       showToast("Updating");
-      update();
+      setFinishedUpdate(await update());
     } catch (error) {
       console.warn("An error occurred refreshing data");
       console.error(error);
@@ -238,6 +240,9 @@ const ComicProvider = ({ children }: { children: any }) => {
     }
   };
 
+  const triggerFinishedUpdate: (trigger: boolean) => void = (trigger) =>
+    setFinishedUpdate(!finishedUpdate);
+
   const value = {
     addBookmark,
     changeCurrentPage,
@@ -254,6 +259,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     isPageBookmarked,
     refresh,
     removeBookmark,
+    triggerFinishedUpdate,
   };
   return (
     <ComicContext.Provider value={value}>{children}</ComicContext.Provider>

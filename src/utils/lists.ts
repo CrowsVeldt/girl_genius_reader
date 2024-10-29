@@ -33,6 +33,8 @@ export const updateLists: () => Promise<boolean> = async () => {
       saveData(process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!, lists?.volumeList);
 
       return true;
+    } else {
+      return false;
     }
   } catch (error) {
     console.warn("An error occurred while updating comic data");

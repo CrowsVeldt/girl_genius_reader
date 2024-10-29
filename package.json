@@ -1,6 +1,6 @@
 {
   "name": "girl_genius_reader",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -17,7 +17,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "axios": "^1.6.8",
-    "expo": "~51.0.31",
+    "expo": "~51.0.38",
     "expo-build-properties": "~0.12.5",
     "expo-dev-client": "~4.0.28",
     "expo-status-bar": "~1.12.1",

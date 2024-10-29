@@ -3,6 +3,7 @@
 export const changeList = [
   [
     "0.8.6",
+    "Fix endless loop after initial install",
     "Add exception for double-spread for 2024-10-23",
     "Fix unecessary warnings in development",
   ],
