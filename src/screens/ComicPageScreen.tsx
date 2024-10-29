@@ -1,4 +1,4 @@
-import { ContextType, useContext, useRef, useState } from "react";
+import { ContextType, useContext, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -24,10 +24,16 @@ export default function ComicPageScreen() {
     useContext(ComicContext);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [panEnabled, setPanEnabled] = useState<boolean>(false);
+  const [dataReady, setDataReady] = useState<boolean>(false);
   const imageRef = useRef<ImageZoomRef>(null);
   const page: PageType = getCurrentPage();
-  const dataReady: boolean = getDataStatus();
   const scale = useSharedValue<number>(1);
+
+  useEffect(() => {
+    (async () => {
+      setDataReady(getDataStatus());
+    })();
+  }, []);
 
   return (
     <View style={styles.comicPage}>
