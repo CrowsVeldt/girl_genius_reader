@@ -73,8 +73,11 @@ const parseTitles: () => Promise<DateAndTitleType[] | undefined> = async () => {
 
 const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
   titles
-) =>
-  titles.filter((item: DateAndTitleType) => item.title.includes("First Page"));
+) => {
+  return titles.filter((item: DateAndTitleType) =>
+    item.title.includes("First Page") || item.date === "20241025"
+  );
+};
 
 const getVolumeDates: (
   item: DateAndTitleType,
