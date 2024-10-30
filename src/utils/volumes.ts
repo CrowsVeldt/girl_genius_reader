@@ -18,7 +18,7 @@ export const collectVolumes: (dates: string[]) => Promise<
 
     if (parsedTitles != undefined) {
       const volumeStarts: DateAndTitleType[] = volumeStartDates(parsedTitles);
-      const lists: ListCollectionType = collectVolumeAndPageLists(
+      const lists: ListCollectionType | undefined = collectVolumeAndPageLists(
         dates,
         volumeStarts,
         parsedTitles
@@ -95,7 +95,7 @@ const collectVolumeAndPageLists: (
   dates: string[],
   startDates: DateAndTitleType[],
   titles: DateAndTitleType[]
-) => ListCollectionType = (dates, startDates, titles) => {
+) => ListCollectionType | undefined = (dates, startDates, titles) => {
   try {
     const pages: PageType[] = [];
 
