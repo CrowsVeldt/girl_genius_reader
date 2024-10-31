@@ -1,12 +1,11 @@
-- volume 25 started 25-10-2024
-
 TODO: 
 - after update trigger app refresh so that page and volume data will be available ???
 - add case in update function for if networkDateList is null
+- add centralized error handling. add more informative errors with error codes, etc.
+
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
-
 
 Ideas:
 - Add volume list to homescreen
@@ -181,3 +180,4 @@ x - just give up on data-collector service
 x BUG: On initial update newComics Constant may equal false even if lists are empty???
 x BUG: Initial update still shit. Neet to restart multiple times for comics to be available
 x debug/fix update function(s)
+x volume 25 started 25-10-2024
