@@ -118,6 +118,7 @@ export const updateDateList: () => Promise<string[] | undefined> = async () => {
         saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, dateList);
       }
     }
+    saveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!, dateList);
     saveData(process.env.EXPO_PUBLIC_LATEST_SAVED_DATE_KEY!, currentDate);
     return dateList;
   } catch (error) {

@@ -22,13 +22,17 @@ export const checkLists: () => Promise<boolean> = async () => {
 export const processDateList: (list: string[]) => string[] = (list) =>
   Array.from(new Set(list));
 
-export const processPageAndVolumeLists: () => Promise<ListCollectionType | undefined> = async () => {
+export const processPageAndVolumeLists: () => Promise<
+  ListCollectionType | undefined
+> = async () => {
   try {
     const dateArray: string[] = processDateList(
       await retrieveData(process.env.EXPO_PUBLIC_DATE_LIST_KEY!)
     );
     if (dateArray != null) {
-      const lists: ListCollectionType | undefined = await collectVolumes(dateArray);
+      const lists: ListCollectionType | undefined = await collectVolumes(
+        dateArray
+      );
 
       saveData(process.env.EXPO_PUBLIC_PAGE_LIST_KEY!, lists?.pageList);
       saveData(process.env.EXPO_PUBLIC_VOLUME_LIST_KEY!, lists?.volumeList);
