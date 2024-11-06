@@ -1,20 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import { retrieveData, saveData } from "./storage";
 import { lastElement, stringOfEightNumbers } from "./utilFunctions";
+import dates from "../../assets/dateList.json";
 
 const rootUrl: string = "https://www.girlgeniusonline.com";
-
-export const getDateList: () => Promise<string[]> = async () => {
-  try {
-    const dateList: AxiosResponse<any, any> = await axios.get(
-      "https://data-collector-yuw1.onrender.com/"
-    );
-    return dateList != null ? dateList.data.dates : [];
-  } catch (error) {
-    console.warn("Error in the getDateList function");
-    console.error(error);
-  }
-};
 
 export const getLatestDate: () => Promise<string | undefined> = async () => {
   try {
@@ -69,14 +58,14 @@ export const updateDateList: () => Promise<string[] | undefined> = async () => {
     const savedDateList: string[] = await retrieveData(
       process.env.EXPO_PUBLIC_DATE_LIST_KEY!
     );
-    const networkDateList: string[] = await getDateList();
+    const initialDateList: string[] = dates;
 
     const dateList =
       savedDateList != null &&
       savedDateList.length > 0 &&
-      savedDateList.length > networkDateList.length
+      savedDateList.length > initialDateList.length
         ? savedDateList
-        : networkDateList;
+        : initialDateList;
 
     // set current date to start search
     let currentDate: string = lastElement(dateList);

@@ -21,6 +21,7 @@ Ideas:
   when the user lifts their finger
 - implement light/dark mode support
 - in network functions, handle dates with letter suffixes
+- add notice on main page if GG site is down
 
 
 ???
