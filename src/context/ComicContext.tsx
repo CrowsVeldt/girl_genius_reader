@@ -74,6 +74,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     (async () => {
       // set page and volume data after update
       try {
+        updateDateList();
         const lists = await processPageAndVolumeLists();
         if (lists != undefined) {
           setPages(lists.pageList);
@@ -187,16 +188,6 @@ const ComicProvider = ({ children }: { children: any }) => {
   const isPageBookmarked: (page: PageType) => boolean = (page) =>
     bookmarks.find((item: PageType) => item.date === page.date) != undefined;
 
-  const refresh: () => void = async () => {
-    try {
-      showToast("Updating");
-      setFinishedUpdate(await updateDateList() != null);
-    } catch (error) {
-      console.warn("An error occurred refreshing data");
-      console.error(error);
-    }
-  };
-
   const prefetchFive: (page: PageType) => void = (page) => {
     const index: number = pages.findIndex(
       (element: PageType) => element.date === page.date
@@ -242,6 +233,17 @@ const ComicProvider = ({ children }: { children: any }) => {
       }
     } catch (error) {
       console.warn("An error occurred prefetching images");
+      console.error(error);
+    }
+  };
+
+  const refresh: () => void = async () => {
+    try {
+      showToast("Updating");
+      const updated = await updateDateList();
+      setFinishedUpdate(updated != null);
+    } catch (error) {
+      console.warn("An error occurred refreshing data");
       console.error(error);
     }
   };
