@@ -81,6 +81,9 @@ export const updateDateList: () => Promise<string[] | undefined> = async () => {
         if (nextDate === "20030106") {
           // 20030106>20030106b (20030106 points to the wrong comic)
           dateList.push("20030106b");
+        } else if (nextDate === "20041001") {
+          dateList.push("20041001");
+          dateList.push("20041001a");
         } else if (nextDate === "20040209") {
           // 20040209-20040209b (Double spread on same webpage)
           // https://www.girlgeniusonline.com/ggmain/strips/ggmain20040209.jpg

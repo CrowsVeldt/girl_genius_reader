@@ -6,8 +6,13 @@
 
 TODO: 
 ? after update trigger app refresh so that page and volume data will be available ???
-- add case in update function for if networkDateList is null
 - add centralized error handling. add more informative errors with error codes, etc.
+
+- FIX: page count, allow for exceptions.
+- - Volumes 1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 start at page 1
+- - Volume 4 starts on page 5
+- - Volume 6 starts on page 0
+- - Volume 13, page 2, is a kickstarter announcement
 
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
@@ -33,10 +38,13 @@ Ideas:
 
 Date & Page exceptions:
  - 20030106>20030106b (20030106 points to the wrong comic)
+ - 20041001-20041001a
  - 20040209-20040209b (double-spread)
  - 20060425b-20060425c
  - 20100224a-20100226a-20100301a
+ - 20121222 (Kickstarter announcement)
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
+ - 20151127a-20151127b (thankgsgiving page and cover sneak peak)
  - 20240211 doesn't exist
  - 20241023a-20241023b (double-spread, in one image)
 
@@ -182,3 +190,4 @@ x BUG: On initial update newComics Constant may equal false even if lists are em
 x BUG: Initial update still shit. Neet to restart multiple times for comics to be available
 x debug/fix update function(s)
 x volume 25 started 25-10-2024
+x add case in update function for if networkDateList is null
