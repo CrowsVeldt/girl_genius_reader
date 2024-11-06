@@ -1,5 +1,11 @@
+- Bug report/comment screen
+- - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
+- - React Components: screen, form, input components: 
+        mail(mail), title(text), subject/category(dropdown), message(text), send(button)
+- - modules: Mail composer, takes the info from the form and populates an email template for the user to send
+
 TODO: 
-- after update trigger app refresh so that page and volume data will be available ???
+? after update trigger app refresh so that page and volume data will be available ???
 - add case in update function for if networkDateList is null
 - add centralized error handling. add more informative errors with error codes, etc.
 
@@ -15,12 +21,6 @@ Ideas:
   when the user lifts their finger
 - implement light/dark mode support
 - in network functions, handle dates with letter suffixes
-
-- Bug report/comment screen
-- - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
-- - React Components: screen, form, input components: 
-        mail(mail), title(text), subject/category(dropdown), message(text), send(button)
-- - modules: Mail composer, takes the info from the form and populates an email template for the user to send
 
 
 ???
