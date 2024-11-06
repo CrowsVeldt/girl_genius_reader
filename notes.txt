@@ -9,10 +9,9 @@ TODO:
 - add centralized error handling. add more informative errors with error codes, etc.
 
 - FIX: page count, allow for exceptions.
-- - Volumes 1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 start at page 1
+- - Volumes 1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 start at page 1
 - - Volume 4 starts on page 5
-- - Volume 6 starts on page 0
-- - Volume 13, page 2, is a kickstarter announcement
+- - Volumes 6, 25 start on page 0
 
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again

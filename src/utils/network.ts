@@ -104,7 +104,12 @@ export const updateDateList: () => Promise<string[] | undefined> = async () => {
           // 20141226a-20141226b (a is the comic, b is a wallpaper)
           dateList.push("20141226a");
           dateList.push("20141226b");
-        } else if (nextDate === "20240211") {
+        } 
+        else if (nextDate === "20151127") {
+          dateList.push("20151127a")
+          dateList.push("20151127b")
+        }
+        else if (nextDate === "20240211") {
           // no comic for this date
           console.log("Nothing to add");
         } else if (nextDate === "20241023") {
