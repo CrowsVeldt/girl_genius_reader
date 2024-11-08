@@ -101,10 +101,46 @@ const getPageNumber: (pageNumber: number, volumeNumber: number) => number = (
   pageNumber,
   volumeNumber
 ) => {
+  switch (volumeNumber) {
+    case 4:
+      return pageNumber + 4;
+    case 6:
+      return pageNumber - 1;
+    case 24:
+      if (pageNumber === 23) {
+        return 0;
+      } else if (pageNumber > 23) {
+        if (pageNumber === 37) {
+          return 0;
+          // pagenumber returning differently when flipping pages than when coming from volume screen
+        } else if (pageNumber > 37 && pageNumber < 82) {
+          return pageNumber - 2;
+        } else if (pageNumber === 82) {
+          return 0;
+        } else if (pageNumber > 82 && pageNumber < 95) {
+          return pageNumber - 3;
+        } else if (pageNumber > 95 && pageNumber < 99) {
+          return 0;
+        } else if (pageNumber > 98) {
+          return pageNumber - 6;
+        } else {
+          return pageNumber - 1;
+        }
+      } else {
+        return pageNumber;
+      }
+    case 25:
+      return pageNumber - 1;
+    default:
+      return pageNumber;
+  }
+
   if (volumeNumber === 4) {
     return pageNumber + 4;
   } else if (volumeNumber === 6 || volumeNumber === 25) {
     return pageNumber - 1;
+  } else if (volumeNumber === 24) {
+    if (pageNumber > 23) return pageNumber - 1;
   } else {
     return pageNumber;
   }
