@@ -43,10 +43,23 @@ Date & Page exceptions:
  - 20241023a-20241023b (double-spread, in one image)
 
 pageNumber exceptions: 
-  - Volumes 1 & 2
+  - Volumes 1 & 2:
   - - None
-  - Volume 3
+  - Volume 3:
   - - page 40-41 (two pages in one image)
+  - Volume 4:
+  - - Starts on page 5
+
+  - Volume 6:
+  - - Starts on page 0
+
+  - Volume 24:
+  - - page 23
+  - - page 37
+  - - page 82
+  - - pages 95 to 98
+  - Volume 25:
+  - - Starts on page 0
 
 
 
