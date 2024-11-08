@@ -42,8 +42,11 @@ Date & Page exceptions:
  - 20240211 doesn't exist
  - 20241023a-20241023b (double-spread, in one image)
 
-
-
+pageNumber exceptions: 
+  - Volumes 1 & 2
+  - - None
+  - Volume 3
+  - - page 40-41 (two pages in one image)
 
 
 
