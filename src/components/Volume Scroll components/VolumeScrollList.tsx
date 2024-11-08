@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { Dimensions, ScaledSize, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { PageType } from "../../utils/types";
+import { PageType, ScrollDirectionType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
 import { ComicContext } from "../../context/ComicContext";
 import { AppContext } from "../../context/AppContext";
@@ -15,15 +15,15 @@ export default function VolumeScreenList(props: {
   const { getCurrentPage, getCurrentVolume } = useContext(ComicContext);
   const { getScrollDirection } = useContext(AppContext);
   const listRef = useRef<FlatList>(null);
-  const currentPage = getCurrentPage();
-  const currentVolume = getCurrentVolume();
-  const dir = getScrollDirection();
+  const currentPage: PageType = getCurrentPage();
+  const currentVolume: number = getCurrentVolume();
+  const dir: ScrollDirectionType = getScrollDirection();
 
   useEffect(() => {
     if (listRef.current) {
       if (currentPage.volumeNumber === currentVolume) {
         listRef.current.scrollToIndex({
-          index: currentPage.pageNumber - 1,
+          index: currentPage.index,
           viewPosition: 0,
           animated: false,
         });

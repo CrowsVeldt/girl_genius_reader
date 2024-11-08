@@ -103,6 +103,8 @@ const getPageNumber: (pageNumber: number, volumeNumber: number) => number = (
 ) => {
   if (volumeNumber === 4) {
     return pageNumber + 4;
+  } else if (volumeNumber === 6 || volumeNumber === 25) {
+    return pageNumber - 1;
   } else {
     return pageNumber;
   }
@@ -133,12 +135,12 @@ const collectVolumeAndPageLists: (
               (item: DateAndTitleType) => item.date === date
             );
             const page: PageType = {
+              index: pageIndex,
               date: date,
               title: title != null ? title.title : "",
               pageNumber: getPageNumber(pageIndex + 1, volumeIndex + 1),
               volumeNumber: volumeIndex + 1,
             };
-            console.log(page)
             pages.push(page);
             return page;
           }

@@ -4,6 +4,7 @@ export type DateAndTitleType = {
 };
 
 export type PageType = {
+  index: number;
   date: string;
   title: string;
   pageNumber: number;
