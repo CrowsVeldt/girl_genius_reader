@@ -97,6 +97,17 @@ const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
 
+const getPageNumber: (pageNumber: number, volumeNumber: number) => number = (
+  pageNumber,
+  volumeNumber
+) => {
+  if (volumeNumber === 4) {
+    return pageNumber + 4;
+  } else {
+    return pageNumber;
+  }
+};
+
 const collectVolumeAndPageLists: (
   dates: string[],
   startDates: DateAndTitleType[],
@@ -122,11 +133,12 @@ const collectVolumeAndPageLists: (
               (item: DateAndTitleType) => item.date === date
             );
             const page: PageType = {
-              pageNumber: pageIndex + 1,
               date: date,
               title: title != null ? title.title : "",
+              pageNumber: getPageNumber(pageIndex + 1, volumeIndex + 1),
               volumeNumber: volumeIndex + 1,
             };
+            console.log(page)
             pages.push(page);
             return page;
           }
