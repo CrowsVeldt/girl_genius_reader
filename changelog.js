@@ -1,7 +1,7 @@
 // Maybe change to a json file
 
 export const changeList = [
-  ["0.9.0", "Re-re-redo update function"],
+  ["0.8.9", "Fix update bug"],
   ["0.8.8", "Fix volume 25 start"],
   ["0.8.7", "Fix needing to restart app after install for comics to display"],
   [
