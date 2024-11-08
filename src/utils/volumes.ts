@@ -104,7 +104,7 @@ const getPageNumber: (pageNumber: number, volumeNumber: number) => number = (
   switch (volumeNumber) {
     case 3:
       if (pageNumber === 40) {
-        return 40.41
+        return 40.41;
       } else if (pageNumber > 40) {
         return pageNumber + 1;
       } else {
@@ -140,16 +140,6 @@ const getPageNumber: (pageNumber: number, volumeNumber: number) => number = (
       return pageNumber - 1;
     default:
       return pageNumber;
-  }
-
-  if (volumeNumber === 4) {
-    return pageNumber + 4;
-  } else if (volumeNumber === 6 || volumeNumber === 25) {
-    return pageNumber - 1;
-  } else if (volumeNumber === 24) {
-    if (pageNumber > 23) return pageNumber - 1;
-  } else {
-    return pageNumber;
   }
 };
 
