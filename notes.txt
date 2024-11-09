@@ -1,5 +1,3 @@
-- FIX: page numbers, allow for exceptions. finished volumes 1, 2, 3, and 24
-- FIX: show full image for Volume 5, Page 1
 
 - Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
@@ -12,6 +10,7 @@ TODO:
 - add centralized error handling. add more informative errors with error codes, etc.
 - Add toTop and toBottom buttons to volume screen
 - add nextVolume and prevVolume buttons to volume screen
+- FIX: page numbers, allow for exceptions. finished volumes 1-7
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -46,6 +45,7 @@ Date & Page exceptions:
  - 20061225a-20061225b (double-spread)
  - 20071015 (bonus image)
  - 20071017>20071017b
+ - 20071109b (first half of double-spread, full image at: https://www.girlgeniusonline.com/ggmain/doublespreads/ggcoll07_095_096.html)
  - 20100224a-20100226a-20100301a
  - 20121222 (Kickstarter announcement)
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
