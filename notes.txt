@@ -1,4 +1,3 @@
-
 - Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
 - - React Components: screen, form, input components: 
