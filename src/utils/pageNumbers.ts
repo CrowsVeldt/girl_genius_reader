@@ -1,90 +1,96 @@
 export const getPageNumber: (
-  pageNumber: number,
+  pageIndex: number,
   volumeNumber: number
-) => number = (pageNumber, volumeNumber) => {
-  switch (volumeNumber.toString()) {
-    case "1":
+) => string = (pageIndex, volumeNumber) => {
+  switch (volumeNumber) {
+    case 1:
       break;
-    case "2":
+    case 2:
       break;
-    case "3":
-      if (pageNumber > 40) {
-        return pageNumber + 1;
-      } else if (pageNumber === 40) {
-        return 40.41;
+    case 3:
+      if (pageIndex > 40) {
+        return (pageIndex + 1).toString();
+      } else if (pageIndex === 40) {
+        return "40-41";
       }
       break;
-    case "4":
-      if (pageNumber > 85) {
-        return pageNumber - 1;
-      } else if (pageNumber === 85) {
-        return 0;
+    case 4:
+      if (pageIndex > 85) {
+        return (pageIndex - 1).toString();
+      } else if (pageIndex === 85) {
+        return "Cover";
       }
-    case "5":
-      if (pageNumber >= 73) {
-        switch (pageNumber) {
+    case 5:
+      if (pageIndex > 1 && pageIndex < 73) {
+        return (pageIndex + 1).toString();
+      } else if (pageIndex > 72) {
+        switch (pageIndex) {
           case 73:
-            return 1.2;
+            return "1b";
           case 74:
-            return 2.2;
+            return "2b";
           case 75:
-            return 3.2;
+            return "3b";
           case 76:
-            return 4.2;
+            return "4b";
           case 77:
-            return 5.2;
+            return "5b";
           case 78:
-            return 6.2;
+            return "6b";
           case 79:
-            return 7.2;
+            return "7b";
           default:
-            return pageNumber - 6;
+            return (pageIndex - 6).toString();
         }
-      } else if (pageNumber === 1) {
-        return 1.2;
+      } else if (pageIndex === 1) {
+        return "1-2";
       }
-    case "6":
+    case 6:
+      if (pageIndex > 1) {
+        return (pageIndex - 1).toString();
+      } else if (pageIndex === 1) {
+        return "Cover"
+      }
+    case 7:
       break;
-    case "7":
+    case 8:
       break;
-    case "8":
+    case 9:
       break;
-    case "9":
+    case 10:
       break;
-    case "10":
+    case 11:
       break;
-    case "11":
+    case 12:
       break;
-    case "12":
+    case 13:
       break;
-    case "13":
+    case 14:
       break;
-    case "14":
+    case 15:
       break;
-    case "15":
+    case 16:
       break;
-    case "16":
+    case 17:
       break;
-    case "17":
+    case 18:
       break;
-    case "18":
+    case 19:
       break;
-    case "19":
+    case 20:
       break;
-    case "20":
+    case 21:
       break;
-    case "21":
+    case 22:
       break;
-    case "22":
+    case 23:
       break;
-    case "23":
+    case 24:
       break;
-    case "24":
-      break;
-    case "25":
+    case 25:
       break;
     default:
-      return pageNumber;
+      return pageIndex.toString();
   }
-  return pageNumber;
+  return pageIndex.toString();
 };

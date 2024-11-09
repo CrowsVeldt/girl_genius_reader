@@ -7,7 +7,7 @@ export type PageType = {
   index: number;
   date: string;
   title: string;
-  pageNumber: number;
+  pageNumber: string;
   volumeNumber: number;
 };
 
