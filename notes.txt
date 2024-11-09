@@ -44,6 +44,8 @@ Date & Page exceptions:
  - 20060425b-20060425c
  - 20061011-20061011b (double-spread)
  - 20061225a-20061225b (double-spread)
+ - 20071015 (bonus image)
+ - 20071017>20071017b
  - 20100224a-20100226a-20100301a
  - 20121222 (Kickstarter announcement)
  - 20141226a-20141226b (a is the comic, b is a wallpaper)

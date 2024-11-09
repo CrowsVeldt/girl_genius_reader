@@ -69,14 +69,9 @@ export const getPageNumber: (
         }
       } else if (pageIndex > 35 && pageIndex < 126) {
         return (pageIndex - 7).toString();
-      } 
-      
-      else if (pageIndex > 126) {
+      } else if (pageIndex > 126) {
         return (pageIndex - 8).toString();
-      }
-      else if (pageIndex === 126) {
-        return "squeak";
-      } else if (pageIndex === 23) {
+      } else if (pageIndex === 23 || pageIndex === 236) {
         return "squeak";
       } else if (pageIndex === 22) {
         return "bonk";
@@ -87,6 +82,11 @@ export const getPageNumber: (
       }
       break;
     case 7:
+      // between pages 78 and 79 is Revenge of the Weasel Queen part 1, pages 1 through 15
+      // between pages 84 and 85 there is a bonus image
+      // image for page 85 doesn't load
+      // between pages 115 & 116 there is a bonus image
+      // pages 117 and on are Revenge of the Weasel Queen part 2, pages 16 through end
       break;
     case 8:
       break;
