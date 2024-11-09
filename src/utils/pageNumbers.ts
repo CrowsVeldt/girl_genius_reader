@@ -46,10 +46,30 @@ export const getPageNumber: (
         return "1-2";
       }
     case 6:
-      if (pageIndex > 1) {
+      if (pageIndex > 2 && pageIndex < 30) {
+        return (pageIndex).toString();
+      } else if (pageIndex > 30) {
+        switch (pageIndex) {
+          case 31:
+            return "1b";
+          case 32:
+            return "2b";
+          case 33:
+            return "3b";
+          case 34:
+            return "4b";
+          default:
+            break;
+        }
+      } 
+      
+      // between pages 34 and 124 there is something missing
+      else if (pageIndex === 124) {
+        return "118b";
+      } else if (pageIndex === 2) {
         return (pageIndex - 1).toString();
       } else if (pageIndex === 1) {
-        return "Cover"
+        return "Cover";
       }
     case 7:
       break;

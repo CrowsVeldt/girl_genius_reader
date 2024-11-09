@@ -38,7 +38,9 @@ Date & Page exceptions:
  - 20030106>20030106b (20030106 points to the wrong comic)
  - 20041001-20041001a
  - 20040209-20040209b (double-spread)
+ - 20060313-20060313b (double-spread)
  - 20060425b-20060425c
+ - 20061225a-20061225b (double spread)
  - 20100224a-20100226a-20100301a
  - 20121222 (Kickstarter announcement)
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
@@ -50,15 +52,16 @@ pageNumber exceptions:
   - Volumes 1 & 2:
   - - None
   - Volume 3:
-  - - page 40-41 (two pages in one image)
+  - - page 40-41 (double spread)
   - Volume 4:
   - - Starts on page 5
   - Volume 5:
-  - - page 1-2 (two pages in one image)
+  - - page 1-2 (double spread)
   - - page 73-79 (side story)
   - Volume 6:
   - - Starts on page 0
-  
+  - - page 1-2 (double spread)
+  - - page 122-123 (double spread)
 
   - Volume 24:
   - - page 23
