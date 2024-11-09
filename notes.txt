@@ -1,3 +1,7 @@
+- FIX: page numbers, allow for exceptions. finished volumes 1, 2, 3, and 24
+- ? make pageNumber a string?
+- FIX: show full image for Volume 5, Page 1
+
 - Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
 - - React Components: screen, form, input components: 
@@ -7,7 +11,7 @@
 TODO: 
 ? after update trigger app refresh so that page and volume data will be available ???
 - add centralized error handling. add more informative errors with error codes, etc.
-- FIX: page numbers, allow for exceptions. finished volumes 1, 2, 3, and 24
+- Add toTop and toBottom buttons to volume screen
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -49,9 +53,12 @@ pageNumber exceptions:
   - - page 40-41 (two pages in one image)
   - Volume 4:
   - - Starts on page 5
-
+  - Volume 5:
+  - - page 1-2 (two pages in one image)
+  - - page 73-79 (side story)
   - Volume 6:
   - - Starts on page 0
+  
 
   - Volume 24:
   - - page 23
