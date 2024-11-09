@@ -15,11 +15,14 @@ export const getPageNumber: (
       }
       break;
     case 4:
-      if (pageIndex > 85) {
+      if (pageIndex < 85) {
+        return (pageIndex + 4).toString();
+      } else if (pageIndex > 85) {
         return (pageIndex - 1).toString();
       } else if (pageIndex === 85) {
         return "Cover";
       }
+      break;
     case 5:
       if (pageIndex > 1 && pageIndex < 73) {
         return (pageIndex + 1).toString();
@@ -45,32 +48,44 @@ export const getPageNumber: (
       } else if (pageIndex === 1) {
         return "1-2";
       }
+      break;
     case 6:
-      if (pageIndex > 2 && pageIndex < 30) {
-        return (pageIndex).toString();
-      } else if (pageIndex > 30) {
+      if (pageIndex > 2 && pageIndex < 22) {
+        return (pageIndex - 1).toString();
+      } else if (pageIndex > 23 && pageIndex < 32) {
+        return (pageIndex - 3).toString();
+      } else if (pageIndex > 30 && pageIndex < 36) {
         switch (pageIndex) {
-          case 31:
-            return "1b";
           case 32:
-            return "2b";
+            return "1b";
           case 33:
-            return "3b";
+            return "2b";
           case 34:
+            return "3b";
+          case 35:
             return "4b";
           default:
             break;
         }
+      } else if (pageIndex > 35 && pageIndex < 126) {
+        return (pageIndex - 7).toString();
       } 
       
-      // between pages 34 and 124 there is something missing
-      else if (pageIndex === 124) {
-        return "118b";
+      else if (pageIndex > 126) {
+        return (pageIndex - 8).toString();
+      }
+      else if (pageIndex === 126) {
+        return "squeak";
+      } else if (pageIndex === 23) {
+        return "squeak";
+      } else if (pageIndex === 22) {
+        return "bonk";
       } else if (pageIndex === 2) {
         return (pageIndex - 1).toString();
       } else if (pageIndex === 1) {
         return "Cover";
       }
+      break;
     case 7:
       break;
     case 8:

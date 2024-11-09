@@ -36,17 +36,20 @@ Ideas:
 
 Date & Page exceptions:
  - 20030106>20030106b (20030106 points to the wrong comic)
+ - 20040702-20040702b (double-spread)
  - 20041001-20041001a
  - 20040209-20040209b (double-spread)
+ - 20050627 (first half of double spread, full image found at: https://www.girlgeniusonline.com/ggmain/doublespreads/ggcoll05_001_002.html)
  - 20060313-20060313b (double-spread)
  - 20060425b-20060425c
- - 20061225a-20061225b (double spread)
+ - 20061011-20061011b (double-spread)
+ - 20061225a-20061225b (double-spread)
  - 20100224a-20100226a-20100301a
  - 20121222 (Kickstarter announcement)
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
  - 20151127a-20151127b (thankgsgiving page and cover sneak peak)
  - 20240211 doesn't exist
- - 20241023a-20241023b (double-spread, in one image)
+ - 20241023a-20241023b (first half of double-spread, or whole thing in one image)
 
 pageNumber exceptions: 
   - Volumes 1 & 2:
