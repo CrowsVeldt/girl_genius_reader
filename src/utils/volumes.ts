@@ -5,6 +5,7 @@ import {
   PageType,
   VolumeType,
 } from "./types";
+import { getPageNumber } from "./pageNumbers";
 
 export const collectVolumes: (dates: string[]) => Promise<
   | {
@@ -97,6 +98,33 @@ const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
 
+    // case 6:
+      // return pageNumber - 1;
+    // case 24:
+      // if (pageNumber === 23) {
+        // return 0;
+      // } else if (pageNumber > 23) {
+        // if (pageNumber === 37) {
+          // return 0;
+        // } else if (pageNumber > 37 && pageNumber < 82) {
+          // return pageNumber - 2;
+        // } else if (pageNumber === 82) {
+          // return 0;
+        // } else if (pageNumber > 82 && pageNumber < 96) {
+          // return pageNumber - 3;
+        // } else if (pageNumber > 95 && pageNumber < 99) {
+          // return 0;
+        // } else if (pageNumber > 98) {
+          // return pageNumber - 6;
+        // } else {
+          // return pageNumber - 1;
+        // }
+      // } else {
+        // return pageNumber;
+      // }
+    // case 25:
+      // return pageNumber - 1;
+
 const collectVolumeAndPageLists: (
   dates: string[],
   startDates: DateAndTitleType[],
@@ -122,9 +150,10 @@ const collectVolumeAndPageLists: (
               (item: DateAndTitleType) => item.date === date
             );
             const page: PageType = {
-              pageNumber: pageIndex + 1,
+              index: pageIndex,
               date: date,
               title: title != null ? title.title : "",
+              pageNumber: getPageNumber(pageIndex + 1, volumeIndex + 1),
               volumeNumber: volumeIndex + 1,
             };
             pages.push(page);

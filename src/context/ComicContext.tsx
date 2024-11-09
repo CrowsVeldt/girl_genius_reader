@@ -40,6 +40,7 @@ const ComicProvider = ({ children }: { children: any }) => {
   const [bookmarks, setBookmarks] = useState<PageType[]>([]);
   const [currentVolume, setCurrentVolume] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<PageType>({
+    index: 0,
     date: "20021104",
     title: "",
     pageNumber: 1,

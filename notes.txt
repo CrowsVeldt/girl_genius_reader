@@ -7,12 +7,9 @@
 TODO: 
 ? after update trigger app refresh so that page and volume data will be available ???
 - add centralized error handling. add more informative errors with error codes, etc.
-
-- FIX: page count, allow for exceptions.
-- - Volumes 1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 start at page 1
-- - Volume 4 starts on page 5
-- - Volumes 6, 25 start on page 0
-
+- Add toTop and toBottom buttons to volume screen
+- add nextVolume and prevVolume buttons to volume screen
+- FIX: page numbers, allow for exceptions. finished volumes 1-7
 
 BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -37,18 +34,46 @@ Ideas:
 
 Date & Page exceptions:
  - 20030106>20030106b (20030106 points to the wrong comic)
+ - 20040702-20040702b (double-spread)
  - 20041001-20041001a
  - 20040209-20040209b (double-spread)
+ - 20050627 (first half of double spread, full image found at: https://www.girlgeniusonline.com/ggmain/doublespreads/ggcoll05_001_002.html)
+ - 20060313-20060313b (double-spread)
  - 20060425b-20060425c
+ - 20061011-20061011b (double-spread)
+ - 20061225a-20061225b (double-spread)
+ - 20071015 (bonus image)
+ - 20071017>20071017b
+ - 20071109b (first half of double-spread, full image at: https://www.girlgeniusonline.com/ggmain/doublespreads/ggcoll07_095_096.html)
  - 20100224a-20100226a-20100301a
  - 20121222 (Kickstarter announcement)
  - 20141226a-20141226b (a is the comic, b is a wallpaper)
  - 20151127a-20151127b (thankgsgiving page and cover sneak peak)
  - 20240211 doesn't exist
- - 20241023a-20241023b (double-spread, in one image)
+ - 20241023a-20241023b (first half of double-spread, or whole thing in one image)
 
+pageNumber exceptions: 
+  - Volumes 1 & 2:
+  - - None
+  - Volume 3:
+  - - page 40-41 (double spread)
+  - Volume 4:
+  - - Starts on page 5
+  - Volume 5:
+  - - page 1-2 (double spread)
+  - - page 73-79 (side story)
+  - Volume 6:
+  - - Starts on page 0
+  - - page 1-2 (double spread)
+  - - page 122-123 (double spread)
 
-
+  - Volume 24:
+  - - page 23
+  - - page 37
+  - - page 82
+  - - pages 95 to 98
+  - Volume 25:
+  - - Starts on page 0
 
 
 
@@ -190,3 +215,8 @@ x BUG: Initial update still shit. Neet to restart multiple times for comics to b
 x debug/fix update function(s)
 x volume 25 started 25-10-2024
 x add case in update function for if networkDateList is null
+- FIX: page count, allow for exceptions.
+x - Volumes 1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 start at page 1
+x - Volume 4 starts on page 5
+x - Volumes 6, 25 start on page 0
+x ? make pageNumber a string?
