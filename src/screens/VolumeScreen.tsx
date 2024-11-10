@@ -1,5 +1,12 @@
 import { ContextType, useContext, useState } from "react";
-import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Dimensions,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Switch } from "react-native-gesture-handler";
 import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
@@ -15,7 +22,7 @@ export default function VolumeScreen({
   route: any;
   navigation: any;
 }) {
-  const { getVolume }: ContextType<typeof ComicContext> =
+  const { getVolume, changeCurrentVolume }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
 
   const [image, setImage] = useState<boolean>(true);
@@ -26,6 +33,13 @@ export default function VolumeScreen({
   return (
     <View style={styles.page}>
       <View style={styles.options}>
+        <Button
+          title="Previous Volume"
+          onPress={() => {
+            changeCurrentVolume(volumeNumber - 1);
+            navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
+          }}
+        />
         <View style={styles.toggle}>
           <Text>Links</Text>
           <Switch
@@ -34,6 +48,13 @@ export default function VolumeScreen({
             value={image}
           />
           <Text>Pages</Text>
+          <Button
+            title="Next Volume"
+            onPress={() => {
+              changeCurrentVolume(volumeNumber + 1);
+              navigation.navigate("Volume", { volumeNumber: volumeNumber + 1 });
+            }}
+          />
         </View>
       </View>
       {image && (
@@ -48,7 +69,7 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
   options: {
     flexDirection: "row",
