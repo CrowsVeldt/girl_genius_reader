@@ -3,15 +3,17 @@ TODO:
 - Add toTop and toBottom buttons to volume screen
 - add nextVolume and prevVolume buttons to volume screen
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
+- add link to girlgeniusonline.com to main page
+- add dropdown with links to GG shops and patreon to main page
 
-- Bug report/comment screen
+- FEATURE: Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
 - - React Components: screen, form, input components: 
-        mail(mail), title(text), subject/category(dropdown), message(text), send(button)
+        mail(mail), title(text), subject/category(dropdown), message(textarea), send(button)
 - - modules: Mail composer, takes the info from the form and populates an email template for the user to send
 
 
-BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
+BUG: if user double-taps immediately after changing comic page then panning will usually not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
 
 Ideas:
@@ -22,7 +24,7 @@ Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
 - implement light/dark mode support
-- in network functions, handle dates with letter suffixes
+- in network functions, handle dates with letter suffixes?
 
 
 ???
