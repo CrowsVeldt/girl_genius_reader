@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { Dimensions, ScaledSize, StyleSheet } from "react-native";
+import { Button, Dimensions, ScaledSize, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { PageType, ScrollDirectionType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
@@ -38,33 +38,55 @@ export default function VolumeScreenList(props: {
   }, [currentPage, currentVolume]);
 
   return (
-    <FlatList
-      ref={listRef}
-      horizontal={dir === "horizontal"}
-      contentContainerStyle={styles.list}
-      data={props.pages}
-      renderItem={({ item, index }: { item: PageType; index: number }) => (
-        <VolumeScrollImage
-          page={item}
-          navigation={props.navigation}
-          key={index}
-        />
-      )}
-      getItemLayout={(data, index) =>
-        dir === "vertical"
-          ? {
-              length: window.height - 200,
-              offset: (window.height - 200) * index,
-              index,
-            }
-          : {
-              length: window.width,
-              offset: window.width * index,
-              index,
-            }
-      }
-      initialNumToRender={5}
-    />
+    <View>
+      <Button
+        title="To Top"
+        onPress={() => {
+          if (listRef.current) {
+            listRef.current.scrollToIndex({
+              index: 0,
+              viewPosition: 0,
+              animated: true,
+            });
+          }
+        }}
+      />
+      <Button
+        title="To Bottom"
+        onPress={() => {
+          if (listRef.current) {
+            listRef.current.scrollToEnd();
+          }
+        }}
+      />
+      <FlatList
+        ref={listRef}
+        horizontal={dir === "horizontal"}
+        contentContainerStyle={styles.list}
+        data={props.pages}
+        renderItem={({ item, index }: { item: PageType; index: number }) => (
+          <VolumeScrollImage
+            page={item}
+            navigation={props.navigation}
+            key={index}
+          />
+        )}
+        getItemLayout={(data, index) =>
+          dir === "vertical"
+            ? {
+                length: window.height - 200,
+                offset: (window.height - 200) * index,
+                index,
+              }
+            : {
+                length: window.width,
+                offset: window.width * index,
+                index,
+              }
+        }
+        initialNumToRender={5}
+      />
+    </View>
   );
 }
 

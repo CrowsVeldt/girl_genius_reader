@@ -1,9 +1,10 @@
 TODO: 
-- add centralized error handling. add more informative errors with error codes, etc.
-- Add toTop and toBottom buttons to volume screen
-- FIX: page numbers, allow for exceptions. finished volumes 1-7
+- Improve top, bottom, next, and prev button layouts on volume screen
+- improve/fix test suite
 - add link to girlgeniusonline.com to main page
 - add dropdown with links to GG shops and patreon to main page
+- add centralized error handling. add more informative errors with error codes, etc.
+- FIX: page numbers, allow for exceptions. finished volumes 1-7
 
 - FEATURE: Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
@@ -224,3 +225,4 @@ x ? make pageNumber a string?
 
 x after update trigger app refresh so that page and volume data will be available ???
 x add nextVolume and prevVolume buttons to volume screen
+x Add toTop and toBottom buttons to volume screen
