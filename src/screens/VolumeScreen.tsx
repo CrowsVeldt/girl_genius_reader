@@ -36,8 +36,10 @@ export default function VolumeScreen({
         <Button
           title="Previous Volume"
           onPress={() => {
-            changeCurrentVolume(volumeNumber - 1);
-            navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
+            if (volumeNumber - 1 !== 0) {
+              changeCurrentVolume(volumeNumber - 1);
+              navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
+            }
           }}
         />
         <View style={styles.toggle}>
@@ -51,8 +53,13 @@ export default function VolumeScreen({
           <Button
             title="Next Volume"
             onPress={() => {
-              changeCurrentVolume(volumeNumber + 1);
-              navigation.navigate("Volume", { volumeNumber: volumeNumber + 1 });
+              // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
+              if (volumeNumber + 1 !== 26) {
+                changeCurrentVolume(volumeNumber + 1);
+                navigation.navigate("Volume", {
+                  volumeNumber: volumeNumber + 1,
+                });
+              }
             }}
           />
         </View>
