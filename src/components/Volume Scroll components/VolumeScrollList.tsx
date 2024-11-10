@@ -1,5 +1,13 @@
 import { useContext, useEffect, useRef } from "react";
-import { Button, Dimensions, ScaledSize, StyleSheet, View } from "react-native";
+import {
+  Button,
+  Dimensions,
+  Pressable,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { PageType, ScrollDirectionType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
@@ -39,8 +47,8 @@ export default function VolumeScreenList(props: {
 
   return (
     <View>
-      <Button
-        title="To Top"
+      <Pressable
+        style={[styles.listNavButton, styles.topNavButton]}
         onPress={() => {
           if (listRef.current) {
             listRef.current.scrollToIndex({
@@ -50,15 +58,19 @@ export default function VolumeScreenList(props: {
             });
           }
         }}
-      />
-      <Button
-        title="To Bottom"
+      >
+        <Text style={[styles.upButtonText, styles.navButtonText]}>V</Text>
+      </Pressable>
+      <Pressable
+        style={[styles.listNavButton, styles.bottomNavButton]}
         onPress={() => {
           if (listRef.current) {
             listRef.current.scrollToEnd();
           }
         }}
-      />
+      >
+        <Text style={styles.navButtonText}>V</Text>
+      </Pressable>
       <FlatList
         ref={listRef}
         horizontal={dir === "horizontal"}
@@ -93,5 +105,31 @@ export default function VolumeScreenList(props: {
 const styles = StyleSheet.create({
   list: {
     alignSelf: "center",
+  },
+  listNavButton: {
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80,
+    width: 80,
+    backgroundColor: "white",
+    opacity: 0.5,
+    borderBlockColor: "blue",
+    borderWidth: 1,
+    zIndex: 2,
+  },
+  topNavButton: {
+    top: 0,
+    end: 0,
+  },
+  bottomNavButton: {
+    bottom: 40,
+    end: 0,
+  },
+  upButtonText: {
+    transform: [{ rotate: "180deg" }],
+  },
+  navButtonText: {
+    fontSize: 60
   },
 });
