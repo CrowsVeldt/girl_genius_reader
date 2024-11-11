@@ -1,9 +1,10 @@
 TODO: 
 - improve/fix test suite
-- add link to girlgeniusonline.com to main page
-- add dropdown with links to GG shops and patreon to main page
 - add centralized error handling. add more informative errors with error codes, etc.
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
+- Implement two-page view for landscape mode, like reading the actual books
+- when user is scrolling the volume view, have the screen slide to showing the one full image when the user lifts their finger
+- implement light/dark mode support
 
 - FEATURE: Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
@@ -17,16 +18,11 @@ BUG: if user double-taps immediately after changing comic page then panning will
 
 Ideas:
 - add notice on main page if GG site is down
-- Add volume list to homescreen
 - Automatically have volume scroll horizontally when in landscape mode?
-- Implement two-page view for landscape mode, like reading the actual books
-- when user is scrolling the volume view, have the screen slide to showing the one full image 
-  when the user lifts their finger
-- implement light/dark mode support
+
+- Add volume list to homescreen
 - in network functions, handle dates with letter suffixes?
-
-
-???
+- replace store link on home screen with a dropdown with links to each individual site?
 - pan shouldn't count towards double-tap?
 - make sure bookmark list works well with many bookmarks
 - replace NetStatus component with toast?
@@ -226,3 +222,5 @@ x after update trigger app refresh so that page and volume data will be availabl
 x add nextVolume and prevVolume buttons to volume screen
 x Add toTop and toBottom buttons to volume screen
 x Improve top, bottom, next, and prev button layouts on volume screen
+x add link to girlgeniusonline.com to main page
+x add dropdown with links to GG shops and patreon to main page

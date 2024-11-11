@@ -5,6 +5,8 @@ export const changeList = [
     "0.8.11",
     "Add 'next' and 'previous' buttons to volume screen",
     "Add 'Top' and 'Bottom' buttons to volume screen",
+    "Add link to GG website on home screen",
+    "Add link to GG store page on home screen",
   ],
   ["0.8.10", "Fix page numbers from volumes 1 to 7"],
   ["0.8.9", "Fix update bug"],
