@@ -27,26 +27,10 @@ export const getPageNumber: (
     case 5:
       if (pageIndex > 1 && pageIndex < 73) {
         return (pageIndex + 1).toString();
-      } else if (pageIndex > 72) {
-        // return `${pageIndex - 132 + 16}b`;
-        switch (pageIndex) {
-          case 73:
-            return "1b";
-          case 74:
-            return "2b";
-          case 75:
-            return "3b";
-          case 76:
-            return "4b";
-          case 77:
-            return "5b";
-          case 78:
-            return "6b";
-          case 79:
-            return "7b";
-          default:
-            return (pageIndex - 6).toString();
-        }
+      } else if (pageIndex > 79) {
+        return (pageIndex - 6).toString();
+      } else if (pageIndex > 72 && pageIndex < 80) {
+        return `${pageIndex - 72}b`;
       } else if (pageIndex === 1) {
         return "1-2";
       }
@@ -57,19 +41,7 @@ export const getPageNumber: (
       } else if (pageIndex > 23 && pageIndex < 32) {
         return (pageIndex - 3).toString();
       } else if (pageIndex > 30 && pageIndex < 36) {
-        // return `${pageIndex - 132 + 16}b`;
-        switch (pageIndex) {
-          case 32:
-            return "1b";
-          case 33:
-            return "2b";
-          case 34:
-            return "3b";
-          case 35:
-            return "4b";
-          default:
-            break;
-        }
+        return `${pageIndex - 31}b`;
       } else if (pageIndex > 35 && pageIndex < 126) {
         return (pageIndex - 7).toString();
       } else if (pageIndex > 126) {
