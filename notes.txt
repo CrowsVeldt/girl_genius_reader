@@ -1,5 +1,4 @@
 TODO: 
-- Improve top, bottom, next, and prev button layouts on volume screen
 - improve/fix test suite
 - add link to girlgeniusonline.com to main page
 - add dropdown with links to GG shops and patreon to main page
@@ -226,3 +225,4 @@ x ? make pageNumber a string?
 x after update trigger app refresh so that page and volume data will be available ???
 x add nextVolume and prevVolume buttons to volume screen
 x Add toTop and toBottom buttons to volume screen
+x Improve top, bottom, next, and prev button layouts on volume screen

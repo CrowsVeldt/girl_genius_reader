@@ -1,7 +1,11 @@
 // Maybe change to a json file
 
 export const changeList = [
-  ["0.8.11", "Add 'next' and 'previous' buttons to volume screen"],
+  [
+    "0.8.11",
+    "Add 'next' and 'previous' buttons to volume screen",
+    "Add 'Top' and 'Bottom' buttons to volume screen",
+  ],
   ["0.8.10", "Fix page numbers from volumes 1 to 7"],
   ["0.8.9", "Fix update bug"],
   ["0.8.8", "Fix volume 25 start"],
