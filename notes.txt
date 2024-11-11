@@ -3,8 +3,6 @@ TODO:
 - add centralized error handling. add more informative errors with error codes, etc.
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
 - FIX: final volume number hardcoded in VolumeScreen.tsx
-- add link to girlgeniusonline.com to main page
-- add dropdown with links to GG shops and patreon to main page
 
 - FEATURE: Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
@@ -23,7 +21,6 @@ Ideas:
 - when user is scrolling the volume view, have the screen slide to showing the one full image 
   when the user lifts their finger
 - implement light/dark mode support
-- in network functions, handle dates with letter suffixes?
 
 - Add volume list to homescreen
 - in network functions, handle dates with letter suffixes?
