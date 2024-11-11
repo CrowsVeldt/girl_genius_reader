@@ -2,6 +2,7 @@ TODO:
 - improve/fix test suite
 - add centralized error handling. add more informative errors with error codes, etc.
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
+- FIX: final volume number hardcoded in VolumeScreen.tsx
 - add link to girlgeniusonline.com to main page
 - add dropdown with links to GG shops and patreon to main page
 

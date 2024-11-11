@@ -1,6 +1,5 @@
 import { ContextType, useContext, useState } from "react";
 import {
-  Button,
   Dimensions,
   Pressable,
   ScaledSize,
