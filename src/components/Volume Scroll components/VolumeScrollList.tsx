@@ -1,5 +1,12 @@
 import { useContext, useEffect, useRef } from "react";
-import { Dimensions, ScaledSize, StyleSheet } from "react-native";
+import {
+  Dimensions,
+  Pressable,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { PageType, ScrollDirectionType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
@@ -38,38 +45,90 @@ export default function VolumeScreenList(props: {
   }, [currentPage, currentVolume]);
 
   return (
-    <FlatList
-      ref={listRef}
-      horizontal={dir === "horizontal"}
-      contentContainerStyle={styles.list}
-      data={props.pages}
-      renderItem={({ item, index }: { item: PageType; index: number }) => (
-        <VolumeScrollImage
-          page={item}
-          navigation={props.navigation}
-          key={index}
-        />
-      )}
-      getItemLayout={(data, index) =>
-        dir === "vertical"
-          ? {
-              length: window.height - 200,
-              offset: (window.height - 200) * index,
-              index,
-            }
-          : {
-              length: window.width,
-              offset: window.width * index,
-              index,
-            }
-      }
-      initialNumToRender={5}
-    />
+    <View>
+      <Pressable
+        style={[styles.listNavButton, styles.topNavButton]}
+        onPress={() => {
+          if (listRef.current) {
+            listRef.current.scrollToIndex({
+              index: 0,
+              viewPosition: 0,
+              animated: true,
+            });
+          }
+        }}
+      >
+        <Text style={[styles.upButtonText, styles.navButtonText]}>V</Text>
+      </Pressable>
+      <Pressable
+        style={[styles.listNavButton, styles.bottomNavButton]}
+        onPress={() => {
+          if (listRef.current) {
+            listRef.current.scrollToEnd();
+          }
+        }}
+      >
+        <Text style={styles.navButtonText}>V</Text>
+      </Pressable>
+      <FlatList
+        ref={listRef}
+        horizontal={dir === "horizontal"}
+        contentContainerStyle={styles.list}
+        data={props.pages}
+        renderItem={({ item, index }: { item: PageType; index: number }) => (
+          <VolumeScrollImage
+            page={item}
+            navigation={props.navigation}
+            key={index}
+          />
+        )}
+        getItemLayout={(data, index) =>
+          dir === "vertical"
+            ? {
+                length: window.height - 200,
+                offset: (window.height - 200) * index,
+                index,
+              }
+            : {
+                length: window.width,
+                offset: window.width * index,
+                index,
+              }
+        }
+        initialNumToRender={5}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   list: {
     alignSelf: "center",
+  },
+  listNavButton: {
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80,
+    width: 80,
+    backgroundColor: "white",
+    opacity: 0.5,
+    borderBlockColor: "blue",
+    borderWidth: 1,
+    zIndex: 2,
+  },
+  topNavButton: {
+    top: 0,
+    end: 0,
+  },
+  bottomNavButton: {
+    bottom: 40,
+    end: 0,
+  },
+  upButtonText: {
+    transform: [{ rotate: "180deg" }],
+  },
+  navButtonText: {
+    fontSize: 60,
   },
 });

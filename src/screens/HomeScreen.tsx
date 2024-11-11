@@ -6,6 +6,7 @@ import ChangeLogModal from "../components/ChangeLogModal";
 import { useContext, useEffect } from "react";
 import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
+import { Link } from "expo-router";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -14,7 +15,7 @@ export default function Home({ navigation }: { navigation: any }) {
 
   useEffect(() => {
     (async () => {
-      triggerFinishedUpdate(await updateDateList() != null);
+      triggerFinishedUpdate((await updateDateList()) != null);
     })();
   }, []);
 
@@ -71,22 +72,18 @@ export default function Home({ navigation }: { navigation: any }) {
         >
           <Text>Change Log</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        <Link
+          href={"https:www.girlgeniusonline.com/comic.php"}
           style={styles.linkButton}
-          onPress={() => {
-            // navigation.navigate("Acknowledgements");
-          }}
         >
-          <Text>Link to girlgeniusonline.com (not yet implemented)</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          Go to the Girl Genius Website!
+        </Link>
+        <Link
+          href={"https://www.girlgeniusart.com/licensedgoods"}
           style={styles.linkButton}
-          onPress={() => {
-            // navigation.navigate("Acknowledgements");
-          }}
         >
-          <Text>Link to girl genius shops (not yet implemented)</Text>
-        </TouchableOpacity>
+          Support the artists and check out the Girl Genius Store(s)!
+        </Link>
       </View>
       <Text>{`Version ${changeList[0][0]}`}</Text>
     </View>
@@ -107,6 +104,8 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
+    textAlignVertical: "center",
     borderWidth: 1,
   },
 });

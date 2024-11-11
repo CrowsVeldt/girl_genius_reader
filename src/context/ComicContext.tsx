@@ -43,7 +43,7 @@ const ComicProvider = ({ children }: { children: any }) => {
     index: 0,
     date: "20021104",
     title: "",
-    pageNumber: 1,
+    pageNumber: "1",
     volumeNumber: 1,
   });
 

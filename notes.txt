@@ -1,31 +1,28 @@
 TODO: 
+- improve/fix test suite
 - add centralized error handling. add more informative errors with error codes, etc.
-- Add toTop and toBottom buttons to volume screen
-- add nextVolume and prevVolume buttons to volume screen
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
+- Implement two-page view for landscape mode, like reading the actual books
+- when user is scrolling the volume view, have the screen slide to showing the one full image when the user lifts their finger
+- implement light/dark mode support
 
-- Bug report/comment screen
+- FEATURE: Bug report/comment screen
 - - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
 - - React Components: screen, form, input components: 
-        mail(mail), title(text), subject/category(dropdown), message(text), send(button)
+        mail(mail), title(text), subject/category(dropdown), message(textarea), send(button)
 - - modules: Mail composer, takes the info from the form and populates an email template for the user to send
 
 
-BUG: if user double-taps immediately after changing comic page then panning will usuall not work until user zooms out again
+BUG: if user double-taps immediately after changing comic page then panning will usually not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
 
 Ideas:
 - add notice on main page if GG site is down
-- Add volume list to homescreen
 - Automatically have volume scroll horizontally when in landscape mode?
-- Implement two-page view for landscape mode, like reading the actual books
-- when user is scrolling the volume view, have the screen slide to showing the one full image 
-  when the user lifts their finger
-- implement light/dark mode support
-- in network functions, handle dates with letter suffixes
 
-
-???
+- Add volume list to homescreen
+- in network functions, handle dates with letter suffixes?
+- replace store link on home screen with a dropdown with links to each individual site?
 - pan shouldn't count towards double-tap?
 - make sure bookmark list works well with many bookmarks
 - replace NetStatus component with toast?
@@ -222,3 +219,8 @@ x - Volumes 6, 25 start on page 0
 x ? make pageNumber a string?
 
 x after update trigger app refresh so that page and volume data will be available ???
+x add nextVolume and prevVolume buttons to volume screen
+x Add toTop and toBottom buttons to volume screen
+x Improve top, bottom, next, and prev button layouts on volume screen
+x add link to girlgeniusonline.com to main page
+x add dropdown with links to GG shops and patreon to main page
