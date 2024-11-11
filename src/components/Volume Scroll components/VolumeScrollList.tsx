@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
 import {
-  Button,
   Dimensions,
   Pressable,
   ScaledSize,
@@ -130,6 +129,6 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "180deg" }],
   },
   navButtonText: {
-    fontSize: 60
+    fontSize: 60,
   },
 });
