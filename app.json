@@ -2,7 +2,7 @@
   "expo": {
     "name": "Girl Genius Reader",
     "slug": "girl_genius_reader",
-    "version": "0.8.11",
+    "version": "0.9.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -46,7 +44,15 @@
           }
         }
       ],
-      "expo-router"
+      "expo-router",
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "me-i-guess",
+          "project": "gg-app",
+          "url": "https://sentry.io/"
+        }
+      ]
     ]
   }
 }
