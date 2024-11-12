@@ -1,10 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import PreloadOption from "../components/control components/PreloadOptionSwitch";
 import ScrollDirectionSwitch from "../components/control components/ScrollDirectionSwitch";
+import NetStatus from "../components/NetStatus";
 
 export default function Options({ navigation }: { navigation: any }) {
   return (
     <View style={styles.screen}>
+      <NetStatus />
       <View style={styles.optionsContainer}>
         <ScrollDirectionSwitch />
         <PreloadOption />

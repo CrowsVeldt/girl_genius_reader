@@ -12,6 +12,7 @@ import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import { VolumeList } from "../components/VolumeList";
 import VolumeScreenList from "../components/Volume Scroll components/VolumeScrollList";
+import NetStatus from "../components/NetStatus";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -32,6 +33,7 @@ export default function VolumeScreen({
 
   return (
     <View style={styles.page}>
+      <NetStatus />
       <View style={styles.options}>
         <Pressable
         style={styles.navButton}
