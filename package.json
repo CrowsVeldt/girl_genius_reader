@@ -1,6 +1,6 @@
 {
   "name": "girl_genius_reader",
-  "version": "0.8.10",
+  "version": "0.8.11",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
