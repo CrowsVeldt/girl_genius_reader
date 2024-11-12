@@ -11,12 +11,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 97,
+      "versionCode": 100,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
@@ -37,6 +39,14 @@
     },
     "plugins": [
       [
+        "@sentry/react-native/expo",
+        {
+          "organization": "me-i-guess",
+          "project": "gg-app",
+          "url": "https://sentry.io/"
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "android": {
@@ -44,15 +54,7 @@
           }
         }
       ],
-      "expo-router",
-      [
-        "@sentry/react-native/expo",
-        {
-          "organization": "me-i-guess",
-          "project": "gg-app",
-          "url": "https://sentry.io/"
-        }
-      ]
+      "expo-router"
     ]
   }
 }

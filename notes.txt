@@ -8,6 +8,7 @@ TODO:
 - improve/fix test suite
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
 - FIX: final volume number hardcoded in VolumeScreen.tsx
+- FIX: changelog popup
 - Add more informative errors with error codes, etc.
 
 
