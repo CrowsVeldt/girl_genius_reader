@@ -4,18 +4,13 @@ import NetStatus from "../components/NetStatus";
 import { useState } from "react";
 import { composeAsync } from "expo-mail-composer";
 
-const sendMail: (body: string, subject: string) => void = (body, subject) => {
-  // fill in stuff here
-  composeAsync({ body, subject, recipients: ["johnzmith370@gmail.com"] });
-};
-
 export default function MessageScreen() {
   const [selectedTopic, setSelectedTopic] = useState<string>("");
-  const [text, setText] = useState<string>("");
+  const [inputText, setInputText] = useState<string>("");
   return (
     <View style={styles.screen}>
       <NetStatus />
-      <View style={styles.formContainer}>
+      <View>
         <View style={styles.dropdownContainer}>
           <Text>Subject:</Text>
           <Picker
@@ -34,10 +29,19 @@ export default function MessageScreen() {
           multiline
           numberOfLines={4}
           placeholder="Write your message here"
-          value={text}
-          onChangeText={(input) => setText(input)}
+          value={inputText}
+          onChangeText={(input) => setInputText(input)}
         />
-        <Button title="Send" onPress={() => sendMail(text, selectedTopic)} />
+        <Button
+          title="Send"
+          onPress={() =>
+            composeAsync({
+              body: inputText,
+              subject: selectedTopic,
+              recipients: ["johnzmith370@gmail.com"],
+            })
+          }
+        />
       </View>
     </View>
   );
@@ -51,7 +55,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
-  formContainer: {},
   textInput: {
     backgroundColor: "white",
     borderColor: "black",
