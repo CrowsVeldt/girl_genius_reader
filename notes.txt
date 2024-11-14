@@ -1,4 +1,5 @@
 TODO: 
+- !!!: Remove Sentry code, delete module, remove from project.json
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
 - trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
