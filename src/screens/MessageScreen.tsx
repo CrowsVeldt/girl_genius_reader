@@ -2,9 +2,11 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import NetStatus from "../components/NetStatus";
 import { useState } from "react";
+import { composeAsync } from "expo-mail-composer";
 
-const sendMail = () => {
+const sendMail: (body: string, subject: string) => void = (body, subject) => {
   // fill in stuff here
+  composeAsync({ body, subject, recipients: ["johnzmith370@gmail.com"] });
 };
 
 export default function MessageScreen() {
@@ -35,7 +37,7 @@ export default function MessageScreen() {
           value={text}
           onChangeText={(input) => setText(input)}
         />
-        <Button title="Send" onPress={() => sendMail()} />
+        <Button title="Send" onPress={() => sendMail(text, selectedTopic)} />
       </View>
     </View>
   );
@@ -49,9 +51,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
-  formContainer: {
-
-  },
+  formContainer: {},
   textInput: {
     backgroundColor: "white",
     borderColor: "black",
