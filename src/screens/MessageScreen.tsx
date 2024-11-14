@@ -3,32 +3,40 @@ import { Picker } from "@react-native-picker/picker";
 import NetStatus from "../components/NetStatus";
 import { useState } from "react";
 
-const sendMail = () => {};
+const sendMail = () => {
+  // fill in stuff here
+};
 
 export default function MessageScreen() {
   const [selectedTopic, setSelectedTopic] = useState<string>("");
-  const [text, setText] = useState<string>("Write your message here");
+  const [text, setText] = useState<string>("");
   return (
     <View style={styles.screen}>
       <NetStatus />
-      <Text>Send a message to the developer</Text>
-      <Text>Subject:</Text>
-      <Picker
-        selectedValue={selectedTopic}
-        onValueChange={(value, index) => setSelectedTopic(value)}
-      >
-        <Picker.Item label="Bug Report" value={"bug"} />
-        <Picker.Item label="Feature Request" value={"feature"} />
-        <Picker.Item label="Other" value={"other"} />
-      </Picker>
-      <Text>Message:</Text>
-      <TextInput
-        editable
-        multiline
-        value={text}
-        onChangeText={(input) => setText(input)}
-      />
-      <Button title="Send" onPress={() => sendMail()} />
+      <View style={styles.formContainer}>
+        <View style={styles.dropdownContainer}>
+          <Text>Subject:</Text>
+          <Picker
+            style={styles.dropdown}
+            selectedValue={selectedTopic}
+            onValueChange={(value, index) => setSelectedTopic(value)}
+          >
+            <Picker.Item label="Bug Report" value={"Bug Report"} />
+            <Picker.Item label="Feature Request" value={"Feature Request"} />
+            <Picker.Item label="Other" value={"Other"} />
+          </Picker>
+        </View>
+        <TextInput
+          style={styles.textInput}
+          editable
+          multiline
+          numberOfLines={4}
+          placeholder="Write your message here"
+          value={text}
+          onChangeText={(input) => setText(input)}
+        />
+        <Button title="Send" onPress={() => sendMail()} />
+      </View>
     </View>
   );
 }
@@ -40,5 +48,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
+  },
+  formContainer: {
+
+  },
+  textInput: {
+    backgroundColor: "white",
+    borderColor: "black",
+    borderWidth: 1,
+    textAlignVertical: "top",
+  },
+  dropdown: {
+    width: "80%",
+  },
+  dropdownContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
