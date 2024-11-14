@@ -1,7 +1,6 @@
 // Maybe change to a json file
 
 export const changeList = [
-  ["0.9.0", "Use Sentry for error tracking"],
   [
     "0.9.0",
     "Use Sentry for error tracking",
