@@ -1,5 +1,4 @@
 import "react-native-gesture-handler";
-import * as Sentry from "@sentry/react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootSiblingParent } from "react-native-root-siblings";
@@ -23,12 +22,7 @@ import MessageScreen from "./src/screens/MessageScreen";
 
 const Drawer = createDrawerNavigator();
 
-Sentry.init({
-  dsn: "https://ed8a42b2ba7424a0dcfd1ef4d9c810b9@o4508282626310144.ingest.de.sentry.io/4508282643087440",
-  debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
-});
-
-function App() {
+export default function App() {
   return (
     <RootSiblingParent>
       <NavigationContainer>
@@ -111,5 +105,3 @@ function App() {
     </RootSiblingParent>
   );
 }
-
-export default Sentry.wrap(App);
