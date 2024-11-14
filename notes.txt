@@ -2,7 +2,7 @@ TODO:
 - improve/fix test suite
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
 - FIX: final volume number hardcoded in VolumeScreen.tsx
-- FIX: changelog popup
+- FIX: changelog popup not appearing
 - Add more informative errors with error codes, etc.
 - Add accessibilityLabels to components
 - Improve color contrast (re: android pre-publishing report)
