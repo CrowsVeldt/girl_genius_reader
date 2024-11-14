@@ -94,6 +94,12 @@ export default function DrawerContent(props: any) {
           props.navigation.navigate("Changelog");
         }}
       />
+      <DrawerItem
+        label={"Message the Dev"}
+        onPress={() => {
+          props.navigation.navigate("Message");
+        }}
+      />
     </DrawerContentScrollView>
   );
 }
