@@ -5,6 +5,7 @@ export const changeList = [
     "0.9.1",
     "Disable send button when message field is empty",
     "Empty message field when send button is pressed",
+    "Remove Sentry code",
   ],
   ["0.9.0", "Use Sentry for error tracking", "Add message screen"],
   [
