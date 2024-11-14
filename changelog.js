@@ -1,7 +1,12 @@
 // Maybe change to a json file
 
 export const changeList = [
-  ["0.9.0", "Use Sentry for error tracking", "Add message screen"],
+  [
+    "0.9.0",
+    "Use Sentry for error tracking",
+    "Add message screen",
+    "Add option to send a message to the dev",
+  ],
   [
     "0.8.11",
     "Add 'next' and 'previous' buttons to volume screen",

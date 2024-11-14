@@ -1,9 +1,3 @@
-- FEATURE: Bug report/comment screen
-- - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
-- - React Components: screen, form, input components: 
-        mail(mail), title(text), subject/category(dropdown), message(textarea), send(button)
-- - modules: Mail composer, takes the info from the form and populates an email template for the user to send
-
 TODO: 
 - improve/fix test suite
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
@@ -12,7 +6,6 @@ TODO:
 - Add more informative errors with error codes, etc.
 - Add accessibilityLabels to components
 - Improve color contrast (re: android pre-publishing report)
-
 
 BUG: if user double-taps immediately after changing comic page then panning will usually not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -230,3 +223,8 @@ x Improve top, bottom, next, and prev button layouts on volume screen
 x add link to girlgeniusonline.com to main page
 x add dropdown with links to GG shops and patreon to main page
 x add centralized error handling. add more informative errors with error codes, etc.
+x FEATURE: Bug report/comment screen
+x - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-composer/)
+x - React Components: screen, form, input components: 
+        mail(mail), title(text), subject/category(dropdown), message(textarea), send(button)
+x - modules: Mail composer, takes the info from the form and populates an email template for the user to send
