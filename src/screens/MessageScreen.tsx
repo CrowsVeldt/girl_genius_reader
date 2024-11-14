@@ -34,6 +34,7 @@ export default function MessageScreen() {
         />
         <Button
           title="Send"
+          disabled={inputText === ""}
           onPress={() =>
             composeAsync({
               body: inputText,

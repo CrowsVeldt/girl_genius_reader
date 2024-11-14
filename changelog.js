@@ -1,6 +1,7 @@
 // Maybe change to a json file
 
 export const changeList = [
+  ["0.9.1", "Disable send button when message field is empty"],
   ["0.9.0", "Use Sentry for error tracking", "Add message screen"],
   [
     "0.8.11",
