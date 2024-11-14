@@ -35,13 +35,17 @@ export default function MessageScreen() {
         <Button
           title="Send"
           disabled={inputText === ""}
-          onPress={() =>
-            composeAsync({
+          onPress={async () => {
+            const result = await composeAsync({
               body: inputText,
               subject: selectedTopic,
               recipients: ["johnzmith370@gmail.com"],
-            })
-          }
+            });
+            if (result.status === "sent") {
+              // Will only wait for actual result on IOS, Android always returns "sent"
+              setInputText("");
+            }
+          }}
         />
       </View>
     </View>

@@ -1,8 +1,10 @@
 TODO: 
+- FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
+- FIX: changelog popup not appearing
+- trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
 - improve/fix test suite
 - FIX: page numbers, allow for exceptions. finished volumes 1-7
 - FIX: final volume number hardcoded in VolumeScreen.tsx
-- FIX: changelog popup not appearing
 - Add more informative errors with error codes, etc.
 - Add accessibilityLabels to components
 - Improve color contrast (re: android pre-publishing report)
@@ -25,6 +27,8 @@ Ideas:
 - make sure bookmark list works well with many bookmarks
 - replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
+
+Notes: Message form composeAsync always returns "sent" on Android due to platform limitations
 
 
 Date & Page exceptions:
