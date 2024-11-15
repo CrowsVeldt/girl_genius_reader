@@ -98,8 +98,6 @@ const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
 
-    // case 6:
-      // return pageNumber - 1;
     // case 24:
       // if (pageNumber === 23) {
         // return 0;
@@ -119,11 +117,6 @@ const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
         // } else {
           // return pageNumber - 1;
         // }
-      // } else {
-        // return pageNumber;
-      // }
-    // case 25:
-      // return pageNumber - 1;
 
 const collectVolumeAndPageLists: (
   dates: string[],

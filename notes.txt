@@ -1,5 +1,4 @@
 TODO: 
-- !!!: Remove Sentry code, delete module, remove from project.json
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
 - trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
@@ -233,3 +232,4 @@ x - use expo-mail-composer (https://docs.expo.dev/versions/latest/sdk/mail-compo
 x - React Components: screen, form, input components: 
         mail(mail), title(text), subject/category(dropdown), message(textarea), send(button)
 x - modules: Mail composer, takes the info from the form and populates an email template for the user to send
+x !!!: Remove Sentry code, delete module, remove from project.json
