@@ -75,10 +75,15 @@ const parseTitles: () => Promise<DateAndTitleType[] | undefined> = async () => {
 const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
   titles
 ) => {
-  const dates = titles.filter(
-    (item: DateAndTitleType) =>
-      item.title.includes("First Page") || item.date === "20241025"
-  );
+  const dates = titles.filter((item: DateAndTitleType) => {
+    if (
+      (item.title.includes("First Page") && item.date !== "20090116") ||
+      item.date === "20090114"
+    ) {
+      console.log(item);
+      return true;
+    }
+  });
   dates.push({ date: "20241025", title: "" });
   return dates;
 };
@@ -98,25 +103,25 @@ const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
 
-    // case 24:
-      // if (pageNumber === 23) {
-        // return 0;
-      // } else if (pageNumber > 23) {
-        // if (pageNumber === 37) {
-          // return 0;
-        // } else if (pageNumber > 37 && pageNumber < 82) {
-          // return pageNumber - 2;
-        // } else if (pageNumber === 82) {
-          // return 0;
-        // } else if (pageNumber > 82 && pageNumber < 96) {
-          // return pageNumber - 3;
-        // } else if (pageNumber > 95 && pageNumber < 99) {
-          // return 0;
-        // } else if (pageNumber > 98) {
-          // return pageNumber - 6;
-        // } else {
-          // return pageNumber - 1;
-        // }
+// case 24:
+// if (pageNumber === 23) {
+// return 0;
+// } else if (pageNumber > 23) {
+// if (pageNumber === 37) {
+// return 0;
+// } else if (pageNumber > 37 && pageNumber < 82) {
+// return pageNumber - 2;
+// } else if (pageNumber === 82) {
+// return 0;
+// } else if (pageNumber > 82 && pageNumber < 96) {
+// return pageNumber - 3;
+// } else if (pageNumber > 95 && pageNumber < 99) {
+// return 0;
+// } else if (pageNumber > 98) {
+// return pageNumber - 6;
+// } else {
+// return pageNumber - 1;
+// }
 
 const collectVolumeAndPageLists: (
   dates: string[],
