@@ -1,8 +1,7 @@
 import { ContextType, useContext, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Dimensions,
-  ScaledSize,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
@@ -15,9 +14,6 @@ import PageTurn from "../components/gesture components/PageTurn";
 import NetStatus from "../components/NetStatus";
 import { comicUrl } from "../utils/utilFunctions";
 import { useSharedValue } from "react-native-reanimated";
-
-const screen: ScaledSize = Dimensions.get("screen");
-const window: ScaledSize = Dimensions.get("window");
 
 export default function ComicPageScreen() {
   const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
@@ -36,7 +32,7 @@ export default function ComicPageScreen() {
   }, []);
 
   return (
-    <View style={styles.comicPage}>
+    <SafeAreaView style={styles.comicPage}>
       <NetStatus />
       {!loaded && (
         <View style={styles.spinner}>
@@ -78,21 +74,18 @@ export default function ComicPageScreen() {
           <PageTurn side={"right"} />
         </ScrollView>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   comicPage: {
-    height: screen.height,
-    width: screen.width,
+    flex: 1,
     alignContent: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
-    paddingTop: 50,
-    height: window.height - 150,
-    width: window.width,
+    flex: 1,
   },
   spinner: {
     position: "absolute",

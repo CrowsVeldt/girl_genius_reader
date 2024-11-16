@@ -1,21 +1,23 @@
 import { useNetInfo } from "@react-native-community/netinfo";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function NetStatus() {
+export default function NetStatus(props: { style?: any }) {
+  const { style: inheritedStyle } = props;
   const { isConnected } = useNetInfo();
 
   return (
-    <View style={styles.statusContainer}>
-      {!isConnected && <Text style={styles.status}>No Internet Connection</Text>}
+    <View
+      style={[
+        inheritedStyle,
+        styles.statusContainer,
+        { display: isConnected ? "none" : "flex" },
+      ]}
+    >
+      <Text>No Internet Connection</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  statusContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-  },
-  status: {},
+  statusContainer: {},
 });

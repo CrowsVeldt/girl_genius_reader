@@ -1,29 +1,28 @@
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import PreloadOption from "../components/control components/PreloadOptionSwitch";
 import ScrollDirectionSwitch from "../components/control components/ScrollDirectionSwitch";
 import NetStatus from "../components/NetStatus";
 
 export default function Options({ navigation }: { navigation: any }) {
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <NetStatus />
       <View style={styles.optionsContainer}>
         <ScrollDirectionSwitch />
         <PreloadOption />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    width: "100%",
+    alignItems: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
-    paddingVertical: 10,
   },
   optionsContainer: {
-    alignSelf: "center",
+    paddingTop: 10,
     alignItems: "stretch",
     width: "80%",
   },

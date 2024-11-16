@@ -1,4 +1,11 @@
-import { Dimensions, ScaledSize, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  SafeAreaView,
+  ScaledSize,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import NetStatus from "../components/NetStatus";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeList } from "../../changelog";
@@ -25,10 +32,10 @@ export default function Home({ navigation }: { navigation: any }) {
   }, []);
 
   return (
-    <View style={styles.page}>
+    <SafeAreaView style={styles.page}>
       <ChangeLogModal />
-      <View>
-        <NetStatus />
+      <NetStatus />
+      <View style={styles.mainPageButtonsContainer}>
         <View style={styles.comicButtonContainer}>
           <TouchableOpacity
             style={styles.comicButton}
@@ -37,15 +44,17 @@ export default function Home({ navigation }: { navigation: any }) {
               navigation.navigate("ComicPage");
             }}
           >
-            <Text>Start at the beginning,</Text>
+            <Text style={styles.comicButtonText}>Start at the Beginning!</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.continueButton]}
+            style={styles.continueButton}
             onPress={() => {
               navigation.navigate("ComicPage");
             }}
           >
-            <Text>Continue Where You Left Off, </Text>
+            <Text style={styles.comicButtonText}>
+              Continue Where You Left Off!
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.comicButton}
@@ -54,98 +63,123 @@ export default function Home({ navigation }: { navigation: any }) {
               navigation.navigate("ComicPage");
             }}
           >
-            <Text>Or go straight to the Latest Page!</Text>
+            <Text style={styles.comicButtonText}>
+              Or Go Straight to the Latest Comic!
+            </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => {
-            navigation.navigate("Bookmarks");
-          }}
-        >
-          <Text>Bookmarks</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => {
-            navigation.navigate("Privacy Policy");
-          }}
-        >
-          <Text>Privacy Policy</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => {
-            navigation.navigate("Acknowledgements");
-          }}
-        >
-          <Text>Acknowledgements</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => {
-            navigation.navigate("Options");
-          }}
-        >
-          <Text>Options</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => {
-            navigation.navigate("Changelog");
-          }}
-        >
-          <Text>Change Log</Text>
-        </TouchableOpacity>
-        <Link
-          href={"https:www.girlgeniusonline.com/comic.php"}
-          style={styles.linkButton}
-        >
-          Go to the Girl Genius Website!
-        </Link>
-        <Link
-          href={"https://www.girlgeniusart.com/licensedgoods"}
-          style={styles.linkButton}
-        >
-          Support the artists and check out the Girl Genius Store(s)!
-        </Link>
+        <View style={styles.otherButtonsContainer}>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => {
+              navigation.navigate("Bookmarks");
+            }}
+          >
+            <Text style={styles.navButtonText}>Bookmarks</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => {
+              navigation.navigate("Privacy Policy");
+            }}
+          >
+            <Text style={styles.navButtonText}>Privacy Policy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => {
+              navigation.navigate("Acknowledgements");
+            }}
+          >
+            <Text style={styles.navButtonText}>Acknowledgements</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => {
+              navigation.navigate("Options");
+            }}
+          >
+            <Text style={styles.navButtonText}>Options</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => {
+              navigation.navigate("Changelog");
+            }}
+          >
+            <Text style={styles.navButtonText}>Change Log</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navButton}>
+            <Link
+              style={styles.realLink}
+              href={"https:www.girlgeniusonline.com/comic.php"}
+            >
+              Go to the Girl Genius Website!
+            </Link>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navButton}>
+            <Link
+              style={styles.realLink}
+              href={"https://www.girlgeniusart.com/licensedgoods"}
+            >
+              Support the artists and check out the Girl Genius Store(s)!
+            </Link>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.versionText}>{`Version ${changeList[0][0]}`}</Text>
       </View>
-      <Text>{`Version ${changeList[0][0]}`}</Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  // NOTE: button sizes set via window dimension because flex property wasn't working right
   page: {
     flex: 1,
     alignItems: "center",
-    alignSelf: "center",
-    justifyContent: "space-between",
-    width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
+  mainPageButtonsContainer: {
+    flex: 1,
+  },
   comicButtonContainer: {
+    height: window.height / 4,
     flexDirection: "row",
-    width: window.width,
-    height: 100,
+  },
+  otherButtonsContainer: {
+    flex: 3,
   },
   comicButton: {
     flex: 1,
-    borderColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 1,
+    width: window.width / 3,
   },
   continueButton: {
-    flex: 2,
-    borderColor: "black",
-    borderWidth: 1,
-  },
-  linkButton: {
-    width: window.width,
-    height: 70,
-    alignItems: "center",
+    flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    width: window.width / 3,
+  },
+  comicButtonText: {
+    textAlign: "center",
+  },
+  navButton: {
+    justifyContent: "center",
+    borderWidth: 1,
+    height: window.height / 12,
+  },
+  navButtonText: {
+    textAlign: "center",
+  },
+  realLink: {
+    height: "100%",
     textAlign: "center",
     textAlignVertical: "center",
-    borderWidth: 1,
+  },
+  versionText: {
+    textAlign: "center",
   },
 });
