@@ -1,10 +1,10 @@
 TODO: 
-- FIX: volume 9 should start with "cover" and then go to page 1
+- Separate collect volume code into it's own function
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
 - trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
 - improve/fix test suite
-- FIX: page numbers, allow for exceptions. finished volumes 1-7
+- FIX: page numbers, allow for exceptions. finished volumes 1-8
 - FIX: final volume number hardcoded in VolumeScreen.tsx
 - Add more informative errors with error codes, etc.
 - Add accessibilityLabels to components
@@ -234,3 +234,4 @@ x - React Components: screen, form, input components:
         mail(mail), title(text), subject/category(dropdown), message(textarea), send(button)
 x - modules: Mail composer, takes the info from the form and populates an email template for the user to send
 x !!!: Remove Sentry code, delete module, remove from project.json
+x FIX: volume 9 should start with "cover" and then go to page 1
