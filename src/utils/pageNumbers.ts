@@ -120,3 +120,23 @@ export const getPageNumber: (
   }
   return pageIndex.toString();
 };
+
+// case 24:
+// if (pageNumber === 23) {
+// return 0;
+// } else if (pageNumber > 23) {
+// if (pageNumber === 37) {
+// return 0;
+// } else if (pageNumber > 37 && pageNumber < 82) {
+// return pageNumber - 2;
+// } else if (pageNumber === 82) {
+// return 0;
+// } else if (pageNumber > 82 && pageNumber < 96) {
+// return pageNumber - 3;
+// } else if (pageNumber > 95 && pageNumber < 99) {
+// return 0;
+// } else if (pageNumber > 98) {
+// return pageNumber - 6;
+// } else {
+// return pageNumber - 1;
+// }
