@@ -1,4 +1,11 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import NetStatus from "../components/NetStatus";
 import { useState } from "react";
@@ -8,7 +15,7 @@ export default function MessageScreen() {
   const [selectedTopic, setSelectedTopic] = useState<string>("");
   const [inputText, setInputText] = useState<string>("");
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <NetStatus />
       <View>
         <View style={styles.dropdownContainer}>
@@ -48,16 +55,14 @@ export default function MessageScreen() {
           }}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignSelf: "center",
     alignItems: "center",
-    width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   textInput: {
