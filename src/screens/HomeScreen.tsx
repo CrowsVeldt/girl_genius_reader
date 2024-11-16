@@ -44,7 +44,7 @@ export default function Home({ navigation }: { navigation: any }) {
               navigation.navigate("ComicPage");
             }}
           >
-            <Text style={styles.comicButtonText}>Start at the Beginning</Text>
+            <Text style={styles.comicButtonText}>Start at the Beginning!</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.continueButton}
@@ -53,7 +53,7 @@ export default function Home({ navigation }: { navigation: any }) {
             }}
           >
             <Text style={styles.comicButtonText}>
-              Continue Where You Left Off
+              Continue Where You Left Off!
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -126,15 +126,14 @@ export default function Home({ navigation }: { navigation: any }) {
             </Link>
           </TouchableOpacity>
         </View>
-        <Text
-        style={styles.versionText}
-        >{`Version ${changeList[0][0]}`}</Text>
+        <Text style={styles.versionText}>{`Version ${changeList[0][0]}`}</Text>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  // NOTE: button sizes set via window dimension because flex property wasn't working right
   page: {
     flex: 1,
     alignItems: "center",
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
   navButton: {
     justifyContent: "center",
     borderWidth: 1,
-    height: window.height / 12
+    height: window.height / 12,
   },
   navButtonText: {
     textAlign: "center",
@@ -181,6 +180,6 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   versionText: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

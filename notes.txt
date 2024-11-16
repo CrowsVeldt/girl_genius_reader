@@ -9,6 +9,7 @@ TODO:
 - Improve color contrast (re: android pre-publishing report)
 - Add accessibilityLabels to components
 - Add more informative errors with error codes, etc.
+- Add details for bug reports to message form, i.e.: type of bug
 
 BUG: if user double-taps immediately after changing comic page then panning will usually not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
@@ -16,8 +17,9 @@ BUG: if user double-taps immediately after changing comic page then panning will
 Ideas:
 - have changelog entries collapsed by default, click to open
 - make changelog a scroll list
-- trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
 - add a temporary currentPage constant to comicContext, to allow for jumping to different pages and then returning easily
+- Have first and last comic navigation buttons not update the main current comic page?
+- trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
 - add a "GoToPage" option to go to a specific page by number
 - add notice on main page if GG site is down
 - Automatically have volume scroll horizontally when in landscape mode?
@@ -26,7 +28,8 @@ Ideas:
   when the user lifts their finger
 - implement light/dark mode support
 
-- Add volume list to homescreen
+- Add message dev link to homescreen?
+- Add volume list to homescreen?
 - in network functions, handle dates with letter suffixes?
 - replace store link on home screen with a dropdown with links to each individual site?
 - pan shouldn't count towards double-tap?

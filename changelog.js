@@ -9,7 +9,9 @@ export const changeList = [
     "Fix volume 9 page numbers",
     "Update React Native to version 0.76, enable new architecture",
     "Update Expo SDK to version 52",
-    "Update dependencies for new Expo and RN versions"
+    "Update dependencies for new Expo and RN versions",
+    "Various code improvements and fixes",
+    "A new layout for the home screen!"
   ],
   ["0.9.0", "Use Sentry for error tracking", "Add message screen"],
   [
