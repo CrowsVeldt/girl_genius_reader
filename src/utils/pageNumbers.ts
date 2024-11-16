@@ -60,13 +60,15 @@ export const getPageNumber: (
       if (pageIndex > 48 && pageIndex < 80) {
         return (pageIndex - 1).toString();
       } else if (pageIndex > 79 && pageIndex < 95) {
-        return `${pageIndex - 79}b`;
+        // Revenge of the Weasel Queen pages 1-15
+        return `Weasel ${pageIndex - 79}`;
       } else if (pageIndex > 94 && pageIndex < 111) {
         return (pageIndex - 16).toString();
       } else if (pageIndex > 111 && pageIndex < 132) {
         return (pageIndex - 15).toString();
       } else if (pageIndex > 131) {
-        return `${pageIndex - 132 + 16}b`;
+        // Revenge of the Weasel Queen pages 16-32
+        return `Weasel ${pageIndex - 132 + 16}`;
       } else if (pageIndex === 111) {
         return "95-96";
       } else if (pageIndex === 48) {
@@ -78,9 +80,20 @@ export const getPageNumber: (
       break;
     case 9:
       if (pageIndex === 1) {
-        return "cover"
+        return "cover";
+      } else if (pageIndex > 59 && pageIndex < 73) {
+        // Revenge of the Weasel Queen pages 33-end
+        return `Weasel ${pageIndex - 27}`;
+      } else if (pageIndex > 72 && pageIndex < 93) {
+        return (pageIndex - 14).toString();
+      } else if (pageIndex > 94 && pageIndex < 145) {
+        return (pageIndex - 16).toString();
+      } else if (pageIndex === 93 || pageIndex === 94) {
+        return "Hugo Acceptance";
+      } else if (pageIndex === 145) {
+        return "Maxim's Hat";
       } else {
-        return (pageIndex - 1).toString()
+        return (pageIndex - 1).toString();
       }
       break;
     case 10:
