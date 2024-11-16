@@ -11,7 +11,12 @@ import { Link } from "expo-router";
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
-  const { triggerFinishedUpdate } = useContext(ComicContext);
+  const {
+    changeCurrentPage,
+    getFirstPage,
+    getLatestPage,
+    triggerFinishedUpdate,
+  } = useContext(ComicContext);
 
   useEffect(() => {
     (async () => {
@@ -24,14 +29,34 @@ export default function Home({ navigation }: { navigation: any }) {
       <ChangeLogModal />
       <View>
         <NetStatus />
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => {
-            navigation.navigate("ComicPage");
-          }}
-        >
-          <Text>Comic Page</Text>
-        </TouchableOpacity>
+        <View style={styles.comicButtonContainer}>
+          <TouchableOpacity
+            style={styles.comicButton}
+            onPress={() => {
+              changeCurrentPage(getFirstPage());
+              navigation.navigate("ComicPage");
+            }}
+          >
+            <Text>Start at the beginning,</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.continueButton]}
+            onPress={() => {
+              navigation.navigate("ComicPage");
+            }}
+          >
+            <Text>Continue Where You Left Off, </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.comicButton}
+            onPress={() => {
+              changeCurrentPage(getLatestPage());
+              navigation.navigate("ComicPage");
+            }}
+          >
+            <Text>Or go straight to the Latest Page!</Text>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
           style={styles.linkButton}
           onPress={() => {
@@ -98,6 +123,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
+  },
+  comicButtonContainer: {
+    flexDirection: "row",
+    width: window.width,
+    height: 100,
+  },
+  comicButton: {
+    flex: 1,
+    borderColor: "black",
+    borderWidth: 1,
+  },
+  continueButton: {
+    flex: 2,
+    borderColor: "black",
+    borderWidth: 1,
   },
   linkButton: {
     width: window.width,
