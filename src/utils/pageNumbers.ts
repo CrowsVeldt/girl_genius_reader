@@ -77,6 +77,11 @@ export const getPageNumber: (
     case 8:
       break;
     case 9:
+      if (pageIndex === 1) {
+        return "cover"
+      } else {
+        return (pageIndex - 1).toString()
+      }
       break;
     case 10:
       break;
