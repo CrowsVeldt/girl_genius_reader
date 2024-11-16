@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { changeList } from "../../changelog";
 import NetStatus from "../components/NetStatus";
 
@@ -17,19 +17,17 @@ const changeLogItem = (item: string[], index: number) => {
 
 export default function ChangeLogScreen() {
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <NetStatus />
       {changeList.map((item, index) => changeLogItem(item, index))}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignSelf: "center",
     alignItems: "center",
-    width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   changeItem: {
