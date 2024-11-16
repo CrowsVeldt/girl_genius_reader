@@ -1,9 +1,7 @@
 import { ContextType, useContext, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Dimensions,
   SafeAreaView,
-  ScaledSize,
   ScrollView,
   StyleSheet,
   View,
