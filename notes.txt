@@ -2,19 +2,21 @@ TODO:
 - PRIORITY: Fix zoom behaviour: Zoom should have animation, zoom should work reliably after page change
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
-- trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
-- improve/fix test suite
 - FIX: page numbers, allow for exceptions. finished volumes 1-9
 - FIX: final volume number hardcoded in VolumeScreen.tsx
-- Add more informative errors with error codes, etc.
-- Add accessibilityLabels to components
-- Improve color contrast (re: android pre-publishing report)
 - FIX: back button behaviour: changing page or volume screen should be pushed to the nav history
+- improve/fix test suite
+- Improve color contrast (re: android pre-publishing report)
+- Add accessibilityLabels to components
+- Add more informative errors with error codes, etc.
 
 BUG: if user double-taps immediately after changing comic page then panning will usually not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu
 
 Ideas:
+- have changelog entries collapsed by default, click to open
+- make changelog a scroll list
+- trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
 - add a temporary currentPage constant to comicContext, to allow for jumping to different pages and then returning easily
 - add a "GoToPage" option to go to a specific page by number
 - add notice on main page if GG site is down
