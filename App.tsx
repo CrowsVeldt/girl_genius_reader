@@ -32,7 +32,6 @@ export default function App() {
             <Drawer.Navigator
               // Custom drawer content
               drawerContent={(props) => <DrawerContent {...props} />}
-              initialRouteName="Girl Genius"
               screenOptions={{
                 swipeEnabled: false,
                 drawerStyle: {

@@ -80,7 +80,6 @@ const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
       (item.title.includes("First Page") && item.date !== "20090116") ||
       item.date === "20090114"
     ) {
-      console.log(item);
       return true;
     }
   });
