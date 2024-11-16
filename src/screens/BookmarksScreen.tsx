@@ -1,5 +1,5 @@
 import { ContextType, useContext } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, SafeAreaView } from "react-native";
 import { PageType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
 import BookmarkLink from "../components/link components/BookmarkLink";
@@ -15,19 +15,17 @@ export default function Bookmarks({ navigation }: any) {
   );
 
   return (
-    <View style={styles.list}>
+    <SafeAreaView style={styles.list}>
       <NetStatus />
       {bookmarks && <FlatList data={bookmarks} renderItem={renderItem} />}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    alignSelf: "center",
     alignItems: "center",
-    width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
 });

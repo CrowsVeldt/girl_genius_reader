@@ -1,15 +1,15 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, StyleSheet, SafeAreaView } from "react-native";
 import NetStatus from "../components/NetStatus";
 
 export default function Privacy() {
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <NetStatus />
       <Text style={styles.notice}>
         This app doesn't collect, save, share, or in anyway make use of any user
         data.
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
