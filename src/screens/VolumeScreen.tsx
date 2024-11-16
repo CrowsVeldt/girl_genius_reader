@@ -2,6 +2,7 @@ import { ContextType, useContext, useState } from "react";
 import {
   Dimensions,
   Pressable,
+  SafeAreaView,
   ScaledSize,
   StyleSheet,
   Text,
@@ -32,18 +33,20 @@ export default function VolumeScreen({
   const volume: VolumeType = getVolume(volumeNumber);
 
   return (
-    <View style={styles.page}>
+    <SafeAreaView style={styles.page}>
       <NetStatus />
       <View style={styles.options}>
         <Pressable
-        style={styles.navButton}
+          style={styles.navButton}
           onPress={() => {
             if (volumeNumber - 1 !== 0) {
               changeCurrentVolume(volumeNumber - 1);
               navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
             }
           }}
-        ><Text>Previous Volume</Text></Pressable>
+        >
+          <Text>Previous Volume</Text>
+        </Pressable>
         <View style={styles.toggle}>
           <Text>Links</Text>
           <Switch
@@ -53,32 +56,34 @@ export default function VolumeScreen({
           />
           <Text>Pages</Text>
         </View>
-          <Pressable
+        <Pressable
           style={styles.navButton}
-            onPress={() => {
-              // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
-              if (volumeNumber + 1 !== 26) {
-                changeCurrentVolume(volumeNumber + 1);
-                navigation.navigate("Volume", {
-                  volumeNumber: volumeNumber + 1,
-                });
-              }
-            }}
-          ><Text>Next Volume</Text></Pressable>
+          onPress={() => {
+            // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
+            if (volumeNumber + 1 !== 26) {
+              changeCurrentVolume(volumeNumber + 1);
+              navigation.navigate("Volume", {
+                volumeNumber: volumeNumber + 1,
+              });
+            }
+          }}
+        >
+          <Text>Next Volume</Text>
+        </Pressable>
       </View>
       {image && (
         <VolumeScreenList pages={volume.pages} navigation={navigation} />
       )}
       {!image && <VolumeList volume={volume} nav={navigation} />}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   page: {
+    flex: 1,
+    alignItems: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
-    height: "100%",
-    width: "100%",
   },
   options: {
     height: 50,
@@ -95,5 +100,5 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingHorizontal: 10,
     borderWidth: 1,
-  }
+  },
 });
