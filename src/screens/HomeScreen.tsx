@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   comicButtonContainer: {
-    flex: 1,
+    height: window.height / 4,
     flexDirection: "row",
   },
   otherButtonsContainer: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   navButton: {
     justifyContent: "center",
     borderWidth: 1,
-    height: 70,
+    height: window.height / 12
   },
   navButtonText: {
     textAlign: "center",
