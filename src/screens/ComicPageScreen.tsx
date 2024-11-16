@@ -17,9 +17,6 @@ import NetStatus from "../components/NetStatus";
 import { comicUrl } from "../utils/utilFunctions";
 import { useSharedValue } from "react-native-reanimated";
 
-const screen: ScaledSize = Dimensions.get("screen");
-const window: ScaledSize = Dimensions.get("window");
-
 export default function ComicPageScreen() {
   const { getCurrentPage, getDataStatus }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
