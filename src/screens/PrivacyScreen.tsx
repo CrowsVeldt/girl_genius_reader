@@ -16,9 +16,7 @@ export default function Privacy() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignSelf: "center",
     alignItems: "center",
-    width: "100%",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   notice: {
