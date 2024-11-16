@@ -1,5 +1,4 @@
 TODO: 
-- Separate collect volume code into it's own function
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
 - trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
@@ -28,6 +27,7 @@ Ideas:
 - make sure bookmark list works well with many bookmarks
 - replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
+- Refactor/Simplify collectPageAndVollumeLists()
 
 Notes: Message form composeAsync always returns "sent" on Android due to platform limitations
 

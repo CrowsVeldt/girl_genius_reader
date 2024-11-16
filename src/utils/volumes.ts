@@ -7,31 +7,6 @@ import {
 } from "./types";
 import { getPageNumber } from "./pageNumbers";
 
-export const collectVolumes: (dates: string[]) => Promise<
-  | {
-      pageList: PageType[];
-      volumeList: VolumeType[];
-    }
-  | undefined
-> = async (dates) => {
-  try {
-    const parsedTitles: DateAndTitleType[] | undefined = await parseTitles();
-
-    if (parsedTitles != undefined) {
-      const volumeStarts: DateAndTitleType[] = volumeStartDates(parsedTitles);
-      const lists: ListCollectionType | undefined = collectVolumeAndPageLists(
-        dates,
-        volumeStarts,
-        parsedTitles
-      );
-      return lists != null ? lists : { pageList: [], volumeList: [] };
-    }
-  } catch (error) {
-    console.warn("Error collecting volume/page data");
-    console.error(error);
-  }
-};
-
 const getTitles: () => Promise<string | undefined> = async () => {
   try {
     const page: AxiosResponse = await axios.get(
@@ -72,6 +47,11 @@ const parseTitles: () => Promise<DateAndTitleType[] | undefined> = async () => {
   }
 };
 
+const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
+  titles
+) =>
+  titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
+
 const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
   titles
 ) => {
@@ -96,11 +76,6 @@ const getVolumeDates: (
     dates.indexOf(item.date),
     lastDate != null ? dates.indexOf(lastDate) : dates.length
   );
-
-const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
-  titles
-) =>
-  titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
 
 const collectVolumePages: (
   dates: string[],
@@ -156,6 +131,31 @@ const collectVolumeAndPageLists: (
     return { pageList: pages, volumeList: volumeList };
   } catch (error) {
     console.warn("Error collecting volume and page lists");
+    console.error(error);
+  }
+};
+
+export const collectVolumes: (dates: string[]) => Promise<
+  | {
+      pageList: PageType[];
+      volumeList: VolumeType[];
+    }
+  | undefined
+> = async (dates) => {
+  try {
+    const parsedTitles: DateAndTitleType[] | undefined = await parseTitles();
+
+    if (parsedTitles != undefined) {
+      const volumeStarts: DateAndTitleType[] = volumeStartDates(parsedTitles);
+      const lists: ListCollectionType | undefined = collectVolumeAndPageLists(
+        dates,
+        volumeStarts,
+        parsedTitles
+      );
+      return lists != null ? lists : { pageList: [], volumeList: [] };
+    }
+  } catch (error) {
+    console.warn("Error collecting volume/page data");
     console.error(error);
   }
 };
