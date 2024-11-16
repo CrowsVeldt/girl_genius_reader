@@ -75,10 +75,14 @@ const parseTitles: () => Promise<DateAndTitleType[] | undefined> = async () => {
 const volumeStartDates: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
   titles
 ) => {
-  const dates = titles.filter(
-    (item: DateAndTitleType) =>
-      item.title.includes("First Page") || item.date === "20241025"
-  );
+  const dates = titles.filter((item: DateAndTitleType) => {
+    if (
+      (item.title.includes("First Page") && item.date !== "20090116") ||
+      item.date === "20090114"
+    ) {
+      return true;
+    }
+  });
   dates.push({ date: "20241025", title: "" });
   return dates;
 };
@@ -98,25 +102,25 @@ const filterTitles: (titles: DateAndTitleType[]) => DateAndTitleType[] = (
 ) =>
   titles.filter((item: DateAndTitleType) => !item.title.includes("First Page"));
 
-    // case 24:
-      // if (pageNumber === 23) {
-        // return 0;
-      // } else if (pageNumber > 23) {
-        // if (pageNumber === 37) {
-          // return 0;
-        // } else if (pageNumber > 37 && pageNumber < 82) {
-          // return pageNumber - 2;
-        // } else if (pageNumber === 82) {
-          // return 0;
-        // } else if (pageNumber > 82 && pageNumber < 96) {
-          // return pageNumber - 3;
-        // } else if (pageNumber > 95 && pageNumber < 99) {
-          // return 0;
-        // } else if (pageNumber > 98) {
-          // return pageNumber - 6;
-        // } else {
-          // return pageNumber - 1;
-        // }
+const collectVolumePages = (
+  dates: string[],
+  titles: DateAndTitleType[],
+  volume: number
+) => {
+  return dates.map((date: string, pageIndex: number) => {
+    const title: DateAndTitleType | undefined = titles.find(
+      (item: DateAndTitleType) => item.date === date
+    );
+    const page: PageType = {
+      index: pageIndex,
+      date: date,
+      title: title != null ? title.title : "",
+      pageNumber: getPageNumber(pageIndex + 1, volume + 1),
+      volumeNumber: volume + 1,
+    };
+    return page;
+  });
+};
 
 const collectVolumeAndPageLists: (
   dates: string[],
@@ -124,7 +128,7 @@ const collectVolumeAndPageLists: (
   titles: DateAndTitleType[]
 ) => ListCollectionType | undefined = (dates, startDates, titles) => {
   try {
-    const pages: PageType[] = [];
+    let pages: PageType[] = [];
 
     const volumeList: VolumeType[] = startDates.map(
       (item: DateAndTitleType, volumeIndex: number) => {
@@ -137,22 +141,13 @@ const collectVolumeAndPageLists: (
 
         const filteredTitles: DateAndTitleType[] = filterTitles(titles);
 
-        const volumePages: PageType[] = volumeDates.map(
-          (date: string, pageIndex: number) => {
-            const title: DateAndTitleType | undefined = filteredTitles.find(
-              (item: DateAndTitleType) => item.date === date
-            );
-            const page: PageType = {
-              index: pageIndex,
-              date: date,
-              title: title != null ? title.title : "",
-              pageNumber: getPageNumber(pageIndex + 1, volumeIndex + 1),
-              volumeNumber: volumeIndex + 1,
-            };
-            pages.push(page);
-            return page;
-          }
+        const volumePages: PageType[] = collectVolumePages(
+          volumeDates,
+          filteredTitles,
+          volumeIndex
         );
+
+        pages = [...pages, ...volumePages];
         return {
           volumeStart: item.date,
           volumeNumber: volumeIndex + 1,
