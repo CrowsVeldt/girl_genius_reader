@@ -2,6 +2,7 @@ import { ContextType, useContext, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
+  SafeAreaView,
   ScaledSize,
   ScrollView,
   StyleSheet,
@@ -36,7 +37,7 @@ export default function ComicPageScreen() {
   }, []);
 
   return (
-    <View style={styles.comicPage}>
+    <SafeAreaView style={styles.comicPage}>
       <NetStatus />
       {!loaded && (
         <View style={styles.spinner}>
@@ -78,21 +79,18 @@ export default function ComicPageScreen() {
           <PageTurn side={"right"} />
         </ScrollView>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   comicPage: {
-    height: screen.height,
-    width: screen.width,
+    flex: 1,
     alignContent: "center",
     backgroundColor: process.env.EXPO_PUBLIC_LIGHT_BG_COLOR,
   },
   comicContainer: {
-    paddingTop: 50,
-    height: window.height - 150,
-    width: window.width,
+    flex: 1,
   },
   spinner: {
     position: "absolute",
