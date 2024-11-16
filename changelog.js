@@ -6,7 +6,7 @@ export const changeList = [
     "Disable send button when message field is empty",
     "Empty message field when send button is pressed",
     "Remove Sentry code",
-    "Fix start of Volume 9",
+    "Fix volume 9 page numbers",
     "Update React Native to version 0.76, enable new architecture",
     "Update Expo SDK to version 52",
     "Update dependencies for new Expo and RN versions"
