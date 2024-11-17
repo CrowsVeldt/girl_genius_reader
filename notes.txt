@@ -15,6 +15,7 @@ BUG: if user double-taps immediately after changing comic page then panning will
 - Add animation to opening and closing volumeSubMenu
 
 Ideas:
+- make it so the user doesn't have to uninstall/reinstall to get an updated datelist
 - have changelog entries collapsed by default, click to open
 - make changelog a scroll list
 - add a temporary currentPage constant to comicContext, to allow for jumping to different pages and then returning easily
