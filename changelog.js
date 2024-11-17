@@ -1,6 +1,7 @@
 // Maybe change to a json file
 
 export const changeList = [
+  ["0.9.2", "Fix volume 10 page numbers"],
   [
     "0.9.1",
     "Disable send button when message field is empty",
@@ -11,7 +12,7 @@ export const changeList = [
     "Update Expo SDK to version 52",
     "Update dependencies for new Expo and RN versions",
     "Various code improvements and fixes",
-    "A new layout for the home screen!"
+    "A new layout for the home screen!",
   ],
   ["0.9.0", "Use Sentry for error tracking", "Add message screen"],
   [

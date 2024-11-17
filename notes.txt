@@ -1,8 +1,8 @@
 TODO: 
+- FIX: page numbers, allow for exceptions. finished volumes 1-10
 - PRIORITY: Fix zoom behaviour: Zoom should have animation, zoom should work reliably after page change
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
-- FIX: page numbers, allow for exceptions. finished volumes 1-9
 - FIX: final volume number hardcoded in VolumeScreen.tsx
 - FIX: back button behaviour: changing page or volume screen should be pushed to the nav history
 - improve/fix test suite
