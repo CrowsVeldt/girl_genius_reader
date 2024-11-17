@@ -97,6 +97,16 @@ export const getPageNumber: (
       }
       break;
     case 10:
+      if (pageIndex > 52 && pageIndex < 67) {
+        return (pageIndex - 1).toString()
+      } else if (pageIndex > 67 && pageIndex < 80) {
+        return `${pageIndex - 66}m`
+      } else if (pageIndex > 79) {
+        return (pageIndex - 13).toString()
+      }
+      else if (pageIndex === 52) {
+        return "EXHIBITION"
+      } 
       break;
     case 11:
       break;
