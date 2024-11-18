@@ -1,6 +1,5 @@
 import {
   Dimensions,
-  Pressable,
   SafeAreaView,
   ScaledSize,
   StyleSheet,
@@ -13,14 +12,18 @@ import ChangeLogModal from "../components/ChangeLogModal";
 import { useContext, useEffect } from "react";
 import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
-import { Link } from "expo-router";
+import {
+  HomeScreenComicButton,
+  HomeScreenContinueButton,
+  HomeScreenNavButton,
+  HomeScreenNavLink,
+} from "../components/HomeScreenComponents";
 
 const window: ScaledSize = Dimensions.get("window");
 
 export default function Home({ navigation }: { navigation: any }) {
   const {
     changeCurrentPage,
-    getCurrentPage,
     getFirstPage,
     getLatestPage,
     triggerFinishedUpdate,
@@ -38,144 +41,61 @@ export default function Home({ navigation }: { navigation: any }) {
       <NetStatus />
       <View style={styles.mainPageButtonsContainer}>
         <View style={styles.comicButtonContainer}>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.comicButton, styles.buttonPressed]
-                : styles.comicButton
-            }
+          <HomeScreenComicButton
             onPress={() => {
               changeCurrentPage(getFirstPage());
               navigation.navigate("ComicPage");
             }}
-          >
-            <Text style={styles.comicButtonText}>Start at the Beginning!</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.continueButton, styles.buttonPressed]
-                : styles.continueButton
-            }
+            title="Start at the Beginning!"
+          />
+          <HomeScreenContinueButton
             onPress={() => {
               navigation.navigate("ComicPage");
             }}
-          >
-            <Text style={styles.comicButtonText}>
-              Continue Where You Left Off!
-            </Text>
-            <Text style={styles.comicButtonText}>
-              {`(Volume ${getCurrentPage().volumeNumber},`}
-            </Text>
-            <Text style={styles.comicButtonText}>
-              {`Page ${getCurrentPage().pageNumber})`}
-            </Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.comicButton, styles.buttonPressed]
-                : styles.comicButton
-            }
+            title="Continue Where You Left Off!"
+          ></HomeScreenContinueButton>
+          <HomeScreenComicButton
             onPress={() => {
               changeCurrentPage(getLatestPage());
               navigation.navigate("ComicPage");
             }}
-          >
-            <Text style={styles.comicButtonText}>
-              Or Go Straight to the Latest Comic!
-            </Text>
-          </Pressable>
+            title="Or Go Straight to the Latest Comic!"
+          />
         </View>
         <View style={styles.otherButtonsContainer}>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Bookmarks");
-            }}
-          >
-            <Text style={styles.navButtonText}>Bookmarks</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Privacy Policy");
-            }}
-          >
-            <Text style={styles.navButtonText}>Privacy Policy</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Acknowledgements");
-            }}
-          >
-            <Text style={styles.navButtonText}>Acknowledgements</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Options");
-            }}
-          >
-            <Text style={styles.navButtonText}>Options</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Changelog");
-            }}
-          >
-            <Text style={styles.navButtonText}>Change Log</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-          >
-            <Link
-              style={styles.realLink}
-              href={"https:www.girlgeniusonline.com/comic.php"}
-            >
-              Go to the Girl Genius Website!
-            </Link>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-          >
-            <Link
-              style={styles.realLink}
-              href={"https://www.girlgeniusart.com/licensedgoods"}
-            >
-              Support the artists and check out the Girl Genius Store(s)!
-            </Link>
-          </Pressable>
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Bookmarks"}
+            title={"Bookmarks"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Privacy Policy"}
+            title={"Privacy Policy"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Acknowledgements"}
+            title={"Acknowledgements"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Options"}
+            title={"Options"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Changelog"}
+            title={"Change Log"}
+          />
+          <HomeScreenNavLink
+            target={"https:www.girlgeniusonline.com/comic.php"}
+            title="Go To The Girl Genius Website!"
+          />
+          <HomeScreenNavLink
+            target={"https://www.girlgeniusart.com/licensedgoods"}
+            title="Support the artists and check out the Girl Genius Store(s)!"
+          />
         </View>
         <Text style={styles.versionText}>{`Version ${changeList[0][0]}`}</Text>
       </View>
@@ -184,7 +104,6 @@ export default function Home({ navigation }: { navigation: any }) {
 }
 
 const styles = StyleSheet.create({
-  // NOTE: button sizes set via window dimension because flex property wasn't working right
   page: {
     flex: 1,
     alignItems: "center",
@@ -194,44 +113,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   comicButtonContainer: {
+    // NOTE: container height set via window dimension because flex property wasn't working right
     height: window.height / 4,
     flexDirection: "row",
   },
   otherButtonsContainer: {
     flex: 3,
-  },
-  comicButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    width: window.width / 3,
-  },
-  continueButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    width: window.width / 3,
-  },
-  buttonPressed: {
-    backgroundColor: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
-  },
-  comicButtonText: {
-    textAlign: "center",
-  },
-  navButton: {
-    justifyContent: "center",
-    borderWidth: 1,
-    height: window.height / 12,
-  },
-  navButtonText: {
-    textAlign: "center",
-  },
-  realLink: {
-    height: "100%",
-    textAlign: "center",
-    textAlignVertical: "center",
   },
   versionText: {
     textAlign: "center",
