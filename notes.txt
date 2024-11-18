@@ -1,5 +1,8 @@
 TODO: 
 - FIX: page numbers, allow for exceptions. finished volumes 1-10
+- VolumeScreen contols: 
+- - next/prev buttons should change color onPress.
+- - up/down buttons, remove the background, reduce opacity onPress
 - PRIORITY: Fix zoom behaviour: Zoom should have animation, zoom should work reliably after page change
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
