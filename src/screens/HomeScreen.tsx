@@ -20,6 +20,7 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home({ navigation }: { navigation: any }) {
   const {
     changeCurrentPage,
+    getCurrentPage,
     getFirstPage,
     getLatestPage,
     triggerFinishedUpdate,
@@ -54,6 +55,12 @@ export default function Home({ navigation }: { navigation: any }) {
           >
             <Text style={styles.comicButtonText}>
               Continue Where You Left Off!
+            </Text>
+            <Text style={styles.comicButtonText}>
+              {`(Volume ${getCurrentPage().volumeNumber},`}
+            </Text>
+            <Text style={styles.comicButtonText}>
+              {`Page ${getCurrentPage().pageNumber})`}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
