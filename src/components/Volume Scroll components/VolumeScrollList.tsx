@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { useFonts } from "expo-font";
 import { PageType, ScrollDirectionType } from "../../utils/types";
 import VolumeScrollImage from "./VolumeScrollImage";
 import { ComicContext } from "../../context/ComicContext";
@@ -21,6 +22,9 @@ export default function VolumeScreenList(props: {
 }) {
   const { getCurrentPage, getCurrentVolume } = useContext(ComicContext);
   const { getScrollDirection } = useContext(AppContext);
+  const [loaded, error] = useFonts({
+    ArielHollow: require("../../../assets/ArielHollow.ttf"),
+  });
   const listRef = useRef<FlatList>(null);
   const currentPage: PageType = getCurrentPage();
   const currentVolume: number = getCurrentVolume();
@@ -47,7 +51,15 @@ export default function VolumeScreenList(props: {
   return (
     <View>
       <Pressable
-        style={[styles.listNavButton, styles.topNavButton]}
+        style={({ pressed }) =>
+          pressed
+            ? [
+                styles.listNavButton,
+                styles.topNavButton,
+                styles.listNavButtonPressed,
+              ]
+            : [styles.listNavButton, styles.topNavButton]
+        }
         onPress={() => {
           if (listRef.current) {
             listRef.current.scrollToIndex({
@@ -58,17 +70,43 @@ export default function VolumeScreenList(props: {
           }
         }}
       >
-        <Text style={[styles.upButtonText, styles.navButtonText]}>V</Text>
+        <Text
+          style={[
+            styles.upButtonText,
+            styles.firstButtonV,
+            styles.navButtonText,
+          ]}
+        >
+          V
+        </Text>
+        <Text
+          style={[
+            styles.upButtonText,
+            styles.secondUpButtonV,
+            styles.navButtonText,
+          ]}
+        >
+          V
+        </Text>
       </Pressable>
       <Pressable
-        style={[styles.listNavButton, styles.bottomNavButton]}
+        style={({ pressed }) =>
+          pressed
+            ? [
+                styles.listNavButton,
+                styles.bottomNavButton,
+                styles.listNavButtonPressed,
+              ]
+            : [styles.listNavButton, styles.bottomNavButton]
+        }
         onPress={() => {
           if (listRef.current) {
             listRef.current.scrollToEnd();
           }
         }}
       >
-        <Text style={styles.navButtonText}>V</Text>
+        <Text style={[styles.navButtonText, styles.firstButtonV]}>V</Text>
+        <Text style={[styles.navButtonText, styles.secondDownButtonV]}>V</Text>
       </Pressable>
       <FlatList
         ref={listRef}
@@ -111,24 +149,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 80,
     width: 80,
-    backgroundColor: "white",
-    opacity: 0.5,
-    borderBlockColor: "blue",
-    borderWidth: 1,
+    opacity: 0.6,
     zIndex: 2,
   },
+  listNavButtonPressed: {
+    opacity: 1,
+  },
   topNavButton: {
-    top: 0,
+    top: 10,
     end: 0,
   },
   bottomNavButton: {
-    bottom: 40,
+    bottom: 50,
     end: 0,
+  },
+  navButtonText: {
+    fontFamily: "ArielHollow",
+    fontWeight: "bold",
   },
   upButtonText: {
     transform: [{ rotate: "180deg" }],
   },
-  navButtonText: {
+  firstButtonV: {
     fontSize: 60,
+  },
+  secondUpButtonV: {
+    position: "absolute",
+    fontSize: 40,
+    top: 25,
+  },
+  secondDownButtonV: {
+    position: "absolute",
+    fontSize: 40,
+    bottom: 25,
   },
 });

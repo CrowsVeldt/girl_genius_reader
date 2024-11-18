@@ -1,8 +1,5 @@
 TODO: 
 - FIX: page numbers, allow for exceptions. finished volumes 1-10
-- VolumeScreen contols: 
-- - next/prev buttons should change color onPress.
-- - up/down buttons, remove the background, reduce opacity onPress
 - PRIORITY: Fix zoom behaviour: Zoom should have animation, zoom should work reliably after page change
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
@@ -41,6 +38,10 @@ Ideas:
 - replace NetStatus component with toast?
 - set comic loading indicator with loadingIndicatorSource property?
 - Refactor/Simplify collectPageAndVollumeLists()
+
+__ Acknowledgments: 
+ - Image zoom component by (fill in here)
+ - Arialic Hollow font by GemFonts (https://www.urbanfonts.com/fonts/Arialic_Hollow.font)
 
 Notes: Message form composeAsync always returns "sent" on Android due to platform limitations
 
@@ -249,3 +250,6 @@ x - React Components: screen, form, input components:
 x - modules: Mail composer, takes the info from the form and populates an email template for the user to send
 x !!!: Remove Sentry code, delete module, remove from project.json
 x FIX: volume 9 should start with "cover" and then go to page 1
+x VolumeScreen contols: 
+x - next/prev buttons should change color onPress.
+x - up/down buttons, remove the background, reduce opacity onPress

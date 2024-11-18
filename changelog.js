@@ -5,7 +5,8 @@ export const changeList = [
     "0.9.2",
     "Fix volume 10 page numbers",
     "Show current volume and page number on homescreen continue button",
-    "Change background color on volumescreen prev and next buttons when pressed"
+    "Change background color on volumescreen prev and next buttons when pressed",
+    "Improve volume screen up/down button styles"
   ],
   [
     "0.9.1",
