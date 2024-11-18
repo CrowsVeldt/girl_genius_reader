@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 80,
     width: 80,
-    opacity: 0.6,
+    opacity: 0.7,
     zIndex: 2,
   },
   listNavButtonPressed: {
