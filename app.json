@@ -18,7 +18,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 104,
+      "versionCode": 105,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
@@ -54,7 +54,9 @@
         [
           "expo-font",
           {
-            "fonts": ["assets/ARIAH__.TTF"]
+            "fonts": [
+              "assets/ARIAH__.TTF"
+            ]
           }
         ]
       ]
