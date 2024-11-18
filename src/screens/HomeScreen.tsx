@@ -10,11 +10,10 @@ import {
 import NetStatus from "../components/NetStatus";
 import { changeList } from "../../changelog";
 import ChangeLogModal from "../components/ChangeLogModal";
-import { ElementType, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
 import { Link } from "expo-router";
-import { AnimatedRefOnUI } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 const window: ScaledSize = Dimensions.get("window");
 
