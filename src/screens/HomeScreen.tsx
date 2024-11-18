@@ -10,14 +10,20 @@ import {
 import NetStatus from "../components/NetStatus";
 import { changeList } from "../../changelog";
 import ChangeLogModal from "../components/ChangeLogModal";
-import { useContext, useEffect } from "react";
+import { ElementType, useContext, useEffect } from "react";
 import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
 import { Link } from "expo-router";
 
 const window: ScaledSize = Dimensions.get("window");
 
-const HomeScreenButton = ({ children, onPress }) => {
+const HomeScreenButton = ({
+  children,
+  onPress,
+}: {
+  children: any;
+  onPress: any;
+}) => {
   return (
     <Pressable
       style={({ pressed }) =>
