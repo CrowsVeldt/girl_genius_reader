@@ -14,6 +14,7 @@ import { ElementType, useContext, useEffect } from "react";
 import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
 import { Link } from "expo-router";
+import { AnimatedRefOnUI } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -87,6 +88,30 @@ const HomeScreenNavLink = ({
   );
 };
 
+const HomeScreenComicButton = ({
+  onPress,
+  children,
+  title,
+}: {
+  onPress: any;
+  title: string;
+  children?: any;
+}) => {
+  return (
+    <Pressable
+      style={({ pressed }) =>
+        pressed
+          ? [styles.comicButton, styles.buttonPressed]
+          : styles.comicButton
+      }
+      onPress={onPress}
+    >
+      <Text style={styles.comicButtonText}>{title}</Text>
+      {children != null && children}
+    </Pressable>
+  );
+};
+
 export default function Home({ navigation }: { navigation: any }) {
   const {
     changeCurrentPage,
@@ -108,54 +133,33 @@ export default function Home({ navigation }: { navigation: any }) {
       <NetStatus />
       <View style={styles.mainPageButtonsContainer}>
         <View style={styles.comicButtonContainer}>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.comicButton, styles.buttonPressed]
-                : styles.comicButton
-            }
+          <HomeScreenComicButton
             onPress={() => {
               changeCurrentPage(getFirstPage());
               navigation.navigate("ComicPage");
             }}
-          >
-            <Text style={styles.comicButtonText}>Start at the Beginning!</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.continueButton, styles.buttonPressed]
-                : styles.continueButton
-            }
+            title="Start at the Beginning!"
+          />
+          <HomeScreenComicButton
             onPress={() => {
               navigation.navigate("ComicPage");
             }}
+            title="Continue Where You Left Off!"
           >
-            <Text style={styles.comicButtonText}>
-              Continue Where You Left Off!
-            </Text>
             <Text style={styles.comicButtonText}>
               {`(Volume ${getCurrentPage().volumeNumber},`}
             </Text>
             <Text style={styles.comicButtonText}>
               {`Page ${getCurrentPage().pageNumber})`}
             </Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.comicButton, styles.buttonPressed]
-                : styles.comicButton
-            }
+          </HomeScreenComicButton>
+          <HomeScreenComicButton
             onPress={() => {
               changeCurrentPage(getLatestPage());
               navigation.navigate("ComicPage");
             }}
-          >
-            <Text style={styles.comicButtonText}>
-              Or Go Straight to the Latest Comic!
-            </Text>
-          </Pressable>
+            title="Or Go Straight to the Latest Comic!"
+          />
         </View>
         <View style={styles.otherButtonsContainer}>
           <HomeScreenNavButton
@@ -216,13 +220,6 @@ const styles = StyleSheet.create({
     flex: 3,
   },
   comicButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    width: window.width / 3,
-  },
-  continueButton: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
