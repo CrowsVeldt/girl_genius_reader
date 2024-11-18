@@ -17,18 +17,67 @@ import { Link } from "expo-router";
 
 const window: ScaledSize = Dimensions.get("window");
 
-const homeScreenNavButton = ({navigation, target, title}) => {
+const HomeScreenButton = ({ children, onPress }) => {
   return (
     <Pressable
       style={({ pressed }) =>
         pressed ? [styles.navButton, styles.buttonPressed] : styles.navButton
       }
-      onPress={() => {
-        navigation.navigate(target);
-      }}
+      onPress={onPress}
     >
-      <Text style={styles.navButtonText}>{title}</Text>
+      {children}
     </Pressable>
+  );
+};
+
+const HomeScreenNavButton = ({
+  navigation,
+  target,
+  title,
+}: {
+  navigation: any;
+  target: string;
+  title: string;
+}) => {
+  return (
+    <HomeScreenButton onPress={() => navigation.navigate(target)}>
+      <Text style={styles.navButtonText}>{title}</Text>
+    </HomeScreenButton>
+    // <Pressable
+    // style={({ pressed }) =>
+    // pressed ? [styles.navButton, styles.buttonPressed] : styles.navButton
+    // }
+    // onPress={() => {
+    // navigation.navigate(target);
+    // }}
+    // >
+    // <Text style={styles.navButtonText}>{title}</Text>
+    // </Pressable>
+  );
+};
+
+const HomeScreenNavLink = ({
+  target,
+  title,
+}: {
+  target: string;
+  title: string;
+}) => {
+  return (
+    <HomeScreenButton onPress={null}>
+      <Link style={styles.realLink} href={target}>
+        {title}
+      </Link>
+    </HomeScreenButton>
+    // <Pressable
+    // style={({ pressed }) =>
+    // pressed ? [styles.navButton, styles.buttonPressed] : styles.navButton
+    // }
+    // >
+    // <Link style={styles.realLink} href={target}>
+    // {title}
+    // </Link>
+    // </Pressable>
   );
 };
 
@@ -103,94 +152,39 @@ export default function Home({ navigation }: { navigation: any }) {
           </Pressable>
         </View>
         <View style={styles.otherButtonsContainer}>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Bookmarks");
-            }}
-          >
-            <Text style={styles.navButtonText}>Bookmarks</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Privacy Policy");
-            }}
-          >
-            <Text style={styles.navButtonText}>Privacy Policy</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Acknowledgements");
-            }}
-          >
-            <Text style={styles.navButtonText}>Acknowledgements</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Options");
-            }}
-          >
-            <Text style={styles.navButtonText}>Options</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-            onPress={() => {
-              navigation.navigate("Changelog");
-            }}
-          >
-            <Text style={styles.navButtonText}>Change Log</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-          >
-            <Link
-              style={styles.realLink}
-              href={"https:www.girlgeniusonline.com/comic.php"}
-            >
-              Go to the Girl Genius Website!
-            </Link>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) =>
-              pressed
-                ? [styles.navButton, styles.buttonPressed]
-                : styles.navButton
-            }
-          >
-            <Link
-              style={styles.realLink}
-              href={"https://www.girlgeniusart.com/licensedgoods"}
-            >
-              Support the artists and check out the Girl Genius Store(s)!
-            </Link>
-          </Pressable>
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Bookmarks"}
+            title={"Bookmarks"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Privacy Policy"}
+            title={"Privacy Policy"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Acknowledgements"}
+            title={"Acknowledgements"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Options"}
+            title={"Options"}
+          />
+          <HomeScreenNavButton
+            navigation={navigation}
+            target={"Changelog"}
+            title={"Change Log"}
+          />
+          <HomeScreenNavLink
+            target={"https:www.girlgeniusonline.com/comic.php"}
+            title="Go To The Girl Genius Website!"
+          />
+          <HomeScreenNavLink
+            target={"https://www.girlgeniusart.com/licensedgoods"}
+            title="Support the artists and check out the Girl Genius Store(s)!"
+          />
         </View>
         <Text style={styles.versionText}>{`Version ${changeList[0][0]}`}</Text>
       </View>
