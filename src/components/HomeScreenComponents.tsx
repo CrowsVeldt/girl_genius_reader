@@ -1,4 +1,5 @@
 import { Link } from "expo-router";
+import { useContext } from "react";
 import {
   Dimensions,
   Pressable,
@@ -6,6 +7,7 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
+import { ComicContext } from "../context/ComicContext";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -62,12 +64,10 @@ const HomeScreenNavLink = ({
 
 const HomeScreenComicButton = ({
   onPress,
-  children,
   title,
 }: {
   onPress: any;
   title: string;
-  children?: any;
 }) => {
   return (
     <Pressable
@@ -79,7 +79,30 @@ const HomeScreenComicButton = ({
       onPress={onPress}
     >
       <Text style={styles.comicButtonText}>{title}</Text>
-      {children != null && children}
+    </Pressable>
+  );
+};
+
+const HomeScreenContinueButton = ({
+  onPress,
+  title,
+}: {
+  onPress: any;
+  title: string;
+}) => {
+  const { getCurrentPage } = useContext(ComicContext);
+  return (
+    <Pressable
+      style={({ pressed }) =>
+        pressed
+          ? [styles.comicButton, styles.buttonPressed]
+          : styles.comicButton
+      }
+      onPress={onPress}
+    >
+      <Text style={styles.comicButtonText}>{title}</Text>
+      <Text>{`(Volume ${getCurrentPage().volumeNumber},`}</Text>
+      <Text>{`Page ${getCurrentPage().pageNumber})`}</Text>
     </Pressable>
   );
 };
@@ -115,8 +138,8 @@ const styles = StyleSheet.create({
 });
 
 export {
-  HomeScreenButton,
   HomeScreenComicButton,
+  HomeScreenContinueButton,
   HomeScreenNavButton,
   HomeScreenNavLink,
 };

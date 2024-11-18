@@ -14,6 +14,7 @@ import { updateDateList } from "../utils/network";
 import { ComicContext } from "../context/ComicContext";
 import {
   HomeScreenComicButton,
+  HomeScreenContinueButton,
   HomeScreenNavButton,
   HomeScreenNavLink,
 } from "../components/HomeScreenComponents";
@@ -23,7 +24,6 @@ const window: ScaledSize = Dimensions.get("window");
 export default function Home({ navigation }: { navigation: any }) {
   const {
     changeCurrentPage,
-    getCurrentPage,
     getFirstPage,
     getLatestPage,
     triggerFinishedUpdate,
@@ -48,19 +48,12 @@ export default function Home({ navigation }: { navigation: any }) {
             }}
             title="Start at the Beginning!"
           />
-          <HomeScreenComicButton
+          <HomeScreenContinueButton
             onPress={() => {
               navigation.navigate("ComicPage");
             }}
             title="Continue Where You Left Off!"
-          >
-            <Text style={styles.comicButtonText}>
-              {`(Volume ${getCurrentPage().volumeNumber},`}
-            </Text>
-            <Text style={styles.comicButtonText}>
-              {`Page ${getCurrentPage().pageNumber})`}
-            </Text>
-          </HomeScreenComicButton>
+          ></HomeScreenContinueButton>
           <HomeScreenComicButton
             onPress={() => {
               changeCurrentPage(getLatestPage());
@@ -126,9 +119,6 @@ const styles = StyleSheet.create({
   },
   otherButtonsContainer: {
     flex: 3,
-  },
-  comicButtonText: {
-    textAlign: "center",
   },
   versionText: {
     textAlign: "center",
