@@ -17,6 +17,21 @@ import { Link } from "expo-router";
 
 const window: ScaledSize = Dimensions.get("window");
 
+const homeScreenNavButton = ({navigation, target, title}) => {
+  return (
+    <Pressable
+      style={({ pressed }) =>
+        pressed ? [styles.navButton, styles.buttonPressed] : styles.navButton
+      }
+      onPress={() => {
+        navigation.navigate(target);
+      }}
+    >
+      <Text style={styles.navButtonText}>{title}</Text>
+    </Pressable>
+  );
+};
+
 export default function Home({ navigation }: { navigation: any }) {
   const {
     changeCurrentPage,
