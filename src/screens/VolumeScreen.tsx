@@ -27,8 +27,8 @@ export default function VolumeScreen({
   const { getVolume, changeCurrentVolume }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
 
-  const [image, setImage] = useState<boolean>(true);
   const { volumeNumber }: { volumeNumber: number } = route.params;
+  const [image, setImage] = useState<boolean>(true);
 
   const volume: VolumeType = getVolume(volumeNumber);
 
@@ -37,7 +37,11 @@ export default function VolumeScreen({
       <NetStatus />
       <View style={styles.options}>
         <Pressable
-          style={styles.navButton}
+          style={({ pressed }) =>
+            pressed
+              ? [styles.navButton, styles.navButtonPressed]
+              : styles.navButton
+          }
           onPress={() => {
             if (volumeNumber - 1 !== 0) {
               changeCurrentVolume(volumeNumber - 1);
@@ -57,7 +61,11 @@ export default function VolumeScreen({
           <Text>Pages</Text>
         </View>
         <Pressable
-          style={styles.navButton}
+          style={({ pressed }) =>
+            pressed
+              ? [styles.navButton, styles.navButtonPressed]
+              : styles.navButton
+          }
           onPress={() => {
             // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
             if (volumeNumber + 1 !== 26) {
@@ -101,5 +109,8 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingHorizontal: 10,
     borderWidth: 1,
+  },
+  navButtonPressed: {
+    backgroundColor: process.env.EXPO_PUBLIC_DARK_BG_COLOR,
   },
 });

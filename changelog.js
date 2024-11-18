@@ -1,7 +1,12 @@
 // Maybe change to a json file
 
 export const changeList = [
-  ["0.9.2", "Fix volume 10 page numbers"],
+  [
+    "0.9.2",
+    "Fix volume 10 page numbers",
+    "Show current volume and page number on homescreen continue button",
+    "Change background color on volumescreen prev and next buttons when pressed"
+  ],
   [
     "0.9.1",
     "Disable send button when message field is empty",
