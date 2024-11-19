@@ -11,7 +11,7 @@ import {
 import { Switch } from "react-native-gesture-handler";
 import { VolumeType } from "../utils/types";
 import { ComicContext } from "../context/ComicContext";
-import { VolumeList } from "../components/VolumeList";
+import { VolumeList } from "../components/Volume Scroll components/VolumeList";
 import VolumeScreenList from "../components/Volume Scroll components/VolumeScrollList";
 import NetStatus from "../components/NetStatus";
 

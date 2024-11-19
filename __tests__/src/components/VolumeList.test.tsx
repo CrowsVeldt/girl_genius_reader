@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import ComicProvider from "../../../src/context/ComicContext";
-import { VolumeList } from "../../../src/components/VolumeList";
+import { VolumeList } from "../../../src/components/Volume Scroll components/VolumeList";
 
 describe("<VolumeList />", () => {
   // always fails when GestureDetector is present

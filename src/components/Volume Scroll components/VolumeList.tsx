@@ -7,10 +7,10 @@ import {
   ScaledSize,
   Dimensions,
 } from "react-native";
-import { PageType, VolumeType } from "../utils/types";
+import { PageType, VolumeType } from "../../utils/types";
 import { FlatList } from "react-native-gesture-handler";
-import { ComicContext } from "../context/ComicContext";
-import { formatDate } from "../utils/utilFunctions";
+import { ComicContext } from "../../context/ComicContext";
+import { formatDate } from "../../utils/utilFunctions";
 
 const window: ScaledSize = Dimensions.get("window");
 
