@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { ContextType, useContext, useState } from "react";
 import {
   Dimensions,
@@ -17,13 +18,7 @@ import NetStatus from "../src/components/NetStatus";
 
 const window: ScaledSize = Dimensions.get("window");
 
-export default function VolumeScreen({
-  route,
-  navigation,
-}: {
-  route: any;
-  navigation: any;
-}) {
+export default function VolumeScreen({ route }: { route: any }) {
   const { getVolume, changeCurrentVolume }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
 
@@ -45,7 +40,8 @@ export default function VolumeScreen({
           onPress={() => {
             if (volumeNumber - 1 !== 0) {
               changeCurrentVolume(volumeNumber - 1);
-              navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
+              router.push("volume");
+              // navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
             }
           }}
         >
@@ -70,19 +66,18 @@ export default function VolumeScreen({
             // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
             if (volumeNumber + 1 !== 26) {
               changeCurrentVolume(volumeNumber + 1);
-              navigation.navigate("Volume", {
-                volumeNumber: volumeNumber + 1,
-              });
+              // navigation.navigate("Volume", {
+              // volumeNumber: volumeNumber + 1,
+              // });
+              router.push("volume");
             }
           }}
         >
           <Text>Next Volume</Text>
         </Pressable>
       </View>
-      {image && (
-        <VolumeScreenList pages={volume.pages} navigation={navigation} />
-      )}
-      {!image && <VolumeList volume={volume} nav={navigation} />}
+      {image && <VolumeScreenList pages={volume.pages} />}
+      {!image && <VolumeList volume={volume} />}
     </SafeAreaView>
   );
 }

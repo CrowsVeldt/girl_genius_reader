@@ -1,3 +1,5 @@
+import { composeAsync } from "expo-mail-composer";
+import { useState } from "react";
 import {
   Button,
   SafeAreaView,
@@ -8,8 +10,6 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import NetStatus from "../src/components/NetStatus";
-import { useState } from "react";
-import { composeAsync } from "expo-mail-composer";
 
 export default function MessageScreen() {
   const [selectedTopic, setSelectedTopic] = useState<string>("");

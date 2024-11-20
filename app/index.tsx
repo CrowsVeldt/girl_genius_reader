@@ -21,7 +21,7 @@ import {
 
 const window: ScaledSize = Dimensions.get("window");
 
-export default function Home({ navigation }: { navigation: any }) {
+export default function Home() {
   const {
     changeCurrentPage,
     getFirstPage,

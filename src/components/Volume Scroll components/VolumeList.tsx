@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { ContextType, useContext } from "react";
 import {
   Text,
@@ -16,10 +17,8 @@ const window: ScaledSize = Dimensions.get("window");
 
 export const VolumeList = ({
   volume,
-  nav,
 }: {
   volume: VolumeType;
-  nav: any;
 }) => {
   const { changeCurrentPage }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
@@ -30,7 +29,7 @@ export const VolumeList = ({
         style={styles.linkButton}
         onPress={() => {
           changeCurrentPage(item);
-          nav.navigate("ComicPage");
+          router.push("comicpage")
         }}
       >
         <Text style={styles.linkNumber}>{item.pageNumber}</Text>

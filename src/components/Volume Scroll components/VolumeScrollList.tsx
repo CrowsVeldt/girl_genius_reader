@@ -16,10 +16,7 @@ import { AppContext } from "../../context/AppContext";
 
 const window: ScaledSize = Dimensions.get("window");
 
-export default function VolumeScreenList(props: {
-  pages: PageType[];
-  navigation: any;
-}) {
+export default function VolumeScreenList(props: { pages: PageType[] }) {
   const { getCurrentPage, getCurrentVolume } = useContext(ComicContext);
   const { getScrollDirection } = useContext(AppContext);
   const [loaded, error] = useFonts({
@@ -114,11 +111,7 @@ export default function VolumeScreenList(props: {
         contentContainerStyle={styles.list}
         data={props.pages}
         renderItem={({ item, index }: { item: PageType; index: number }) => (
-          <VolumeScrollImage
-            page={item}
-            navigation={props.navigation}
-            key={index}
-          />
+          <VolumeScrollImage page={item} key={index} />
         )}
         getItemLayout={(data, index) =>
           dir === "vertical"
