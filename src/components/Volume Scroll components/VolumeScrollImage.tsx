@@ -14,7 +14,7 @@ function VolumeScrollImage({ page }: { page: PageType }) {
     <TouchableOpacity
       onPress={() => {
         changeCurrentPage(page);
-        router.push("comicpage")
+        router.push("comicpage");
       }}
     >
       <Image src={comicUrl(page.date)} style={styles.image} />

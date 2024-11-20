@@ -15,11 +15,7 @@ import { formatDate } from "../../utils/utilFunctions";
 
 const window: ScaledSize = Dimensions.get("window");
 
-export const VolumeList = ({
-  volume,
-}: {
-  volume: VolumeType;
-}) => {
+export const VolumeList = ({ volume }: { volume: VolumeType }) => {
   const { changeCurrentPage }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
 
@@ -29,7 +25,7 @@ export const VolumeList = ({
         style={styles.linkButton}
         onPress={() => {
           changeCurrentPage(item);
-          router.push("comicpage")
+          router.push("comicpage");
         }}
       >
         <Text style={styles.linkNumber}>{item.pageNumber}</Text>

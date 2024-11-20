@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { ContextType, useContext, useState } from "react";
 import {
   Dimensions,
@@ -18,14 +18,16 @@ import NetStatus from "../src/components/NetStatus";
 
 const window: ScaledSize = Dimensions.get("window");
 
-export default function VolumeScreen({ route }: { route: any }) {
-  const { getVolume, changeCurrentVolume }: ContextType<typeof ComicContext> =
-    useContext(ComicContext);
+export default function VolumeScreen() {
+  const {
+    getVolume,
+    getCurrentVolume,
+    changeCurrentVolume,
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
 
-  const { volumeNumber }: { volumeNumber: number } = route.params;
   const [image, setImage] = useState<boolean>(true);
 
-  const volume: VolumeType = getVolume(volumeNumber);
+  const volume: VolumeType = getVolume(getCurrentVolume());
 
   return (
     <SafeAreaView style={styles.page}>
@@ -38,10 +40,9 @@ export default function VolumeScreen({ route }: { route: any }) {
               : styles.navButton
           }
           onPress={() => {
-            if (volumeNumber - 1 !== 0) {
-              changeCurrentVolume(volumeNumber - 1);
-              router.push("volume");
-              // navigation.navigate("Volume", { volumeNumber: volumeNumber - 1 });
+            if (volume.volumeNumber - 1 !== 0) {
+              changeCurrentVolume(volume.volumeNumber - 1);
+              router.push(`volume`);
             }
           }}
         >
@@ -64,12 +65,9 @@ export default function VolumeScreen({ route }: { route: any }) {
           }
           onPress={() => {
             // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
-            if (volumeNumber + 1 !== 26) {
-              changeCurrentVolume(volumeNumber + 1);
-              // navigation.navigate("Volume", {
-              // volumeNumber: volumeNumber + 1,
-              // });
-              router.push("volume");
+            if (volume.volumeNumber + 1 !== 26) {
+              changeCurrentVolume(volume.volumeNumber + 1);
+              router.push(`volume`);
             }
           }}
         >
