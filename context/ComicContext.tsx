@@ -105,6 +105,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         }
         if (savedCurrentPage != null) {
           setCurrentPage(savedCurrentPage);
+          setCurrentVolume(savedCurrentPage.volumeNumber);
         }
       } catch (error) {
         console.warn(
