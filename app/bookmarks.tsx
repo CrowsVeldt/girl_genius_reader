@@ -1,9 +1,9 @@
 import { ContextType, useContext } from "react";
 import { FlatList, StyleSheet, SafeAreaView } from "react-native";
-import { PageType } from "../src/utils/types";
-import { ComicContext } from "../src/context/ComicContext";
-import BookmarkLink from "../src/components/link components/BookmarkLink";
-import NetStatus from "../src/components/NetStatus";
+import { PageType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
+import BookmarkLink from "../components/link components/BookmarkLink";
+import NetStatus from "../components/NetStatus";
 
 export default function Bookmarks() {
   const { getBookmarks }: ContextType<typeof ComicContext> =

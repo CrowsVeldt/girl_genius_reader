@@ -6,13 +6,13 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { PageType } from "../src/utils/types";
-import { ComicContext } from "../src/context/ComicContext";
-import { ImageZoomRef } from "../src/components/image_zoom_files/types";
-import ImageZoom from "../src/components/image_zoom_files/components/ImageZoom";
-import PageTurn from "../src/components/gesture components/PageTurn";
-import NetStatus from "../src/components/NetStatus";
-import { comicUrl } from "../src/utils/utilFunctions";
+import { PageType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
+import { ImageZoomRef } from "../components/image_zoom_files/types";
+import ImageZoom from "../components/image_zoom_files/components/ImageZoom";
+import PageTurn from "../components/gesture components/PageTurn";
+import NetStatus from "../components/NetStatus";
+import { comicUrl } from "../utils/utilFunctions";
 import { useSharedValue } from "react-native-reanimated";
 
 export default function ComicPageScreen() {

@@ -1,9 +1,9 @@
 import { Drawer } from "expo-router/drawer";
 import { StatusBar } from "expo-status-bar";
-import AppProvider from "../src/context/AppContext";
-import ComicProvider from "../src/context/ComicContext";
+import AppProvider from "../context/AppContext";
+import ComicProvider from "../context/ComicContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import CustomHeader from "../src/components/custom navigation components/CustomHeader";
+import CustomHeader from "../components/custom navigation components/CustomHeader";
 
 export default function Layout() {
   return (

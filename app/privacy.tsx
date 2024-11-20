@@ -1,5 +1,5 @@
 import { Text, StyleSheet, SafeAreaView } from "react-native";
-import NetStatus from "../src/components/NetStatus";
+import NetStatus from "../components/NetStatus";
 
 export default function Privacy() {
   return (

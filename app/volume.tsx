@@ -10,11 +10,11 @@ import {
   View,
 } from "react-native";
 import { Switch } from "react-native-gesture-handler";
-import { VolumeType } from "../src/utils/types";
-import { ComicContext } from "../src/context/ComicContext";
-import { VolumeList } from "../src/components/Volume Scroll components/VolumeList";
-import VolumeScreenList from "../src/components/Volume Scroll components/VolumeScrollList";
-import NetStatus from "../src/components/NetStatus";
+import { VolumeType } from "../utils/types";
+import { ComicContext } from "../context/ComicContext";
+import { VolumeList } from "../components/Volume Scroll components/VolumeList";
+import VolumeScreenList from "../components/Volume Scroll components/VolumeScrollList";
+import NetStatus from "../components/NetStatus";
 
 const window: ScaledSize = Dimensions.get("window");
 

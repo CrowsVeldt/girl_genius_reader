@@ -20,7 +20,7 @@ export default function VolumeScreenList(props: { pages: PageType[] }) {
   const { getCurrentPage, getCurrentVolume } = useContext(ComicContext);
   const { getScrollDirection } = useContext(AppContext);
   const [loaded, error] = useFonts({
-    ArielHollow: require("../../../assets/ArielHollow.ttf"),
+    ArielHollow: require("../../assets/ArielHollow.ttf"),
   });
   const listRef = useRef<FlatList>(null);
   const currentPage: PageType = getCurrentPage();

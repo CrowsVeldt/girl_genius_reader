@@ -9,7 +9,7 @@ import {
   ScaledSize,
 } from "react-native";
 import { AppContext } from "../context/AppContext";
-import { changeList } from "../../changelog";
+import { changeList } from "../changelog";
 
 const window: ScaledSize = Dimensions.get("window");
 

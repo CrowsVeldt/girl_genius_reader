@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import NetStatus from "../src/components/NetStatus";
+import NetStatus from "../components/NetStatus";
 
 export default function MessageScreen() {
   const [selectedTopic, setSelectedTopic] = useState<string>("");

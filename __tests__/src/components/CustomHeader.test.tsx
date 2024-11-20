@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import ComicProvider from "../../../src/context/ComicContext";
-import CustomHeader from "../../../src/components/custom navigation components/CustomHeader";
+import CustomHeader from "../../../components/custom navigation components/CustomHeader";
 
 describe("<CustomHeader />", () => {
   // always fails when GestureDetector is present

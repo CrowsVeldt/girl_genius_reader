@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, View } from "react-native";
-import PreloadOption from "../src/components/control components/PreloadOptionSwitch";
-import ScrollDirectionSwitch from "../src/components/control components/ScrollDirectionSwitch";
-import NetStatus from "../src/components/NetStatus";
+import PreloadOption from "../components/control components/PreloadOptionSwitch";
+import ScrollDirectionSwitch from "../components/control components/ScrollDirectionSwitch";
+import NetStatus from "../components/NetStatus";
 
 export default function Options({ navigation }: { navigation: any }) {
   return (

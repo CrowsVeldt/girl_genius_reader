@@ -9,15 +9,15 @@ import {
   Text,
   View,
 } from "react-native";
-import NetStatus from "../src/components/NetStatus";
+import NetStatus from "../components/NetStatus";
 import { changeList } from "../changelog";
-import ChangeLogModal from "../src/components/ChangeLogModal";
-import { updateDateList } from "../src/utils/network";
-import { ComicContext } from "../src/context/ComicContext";
+import ChangeLogModal from "../components/ChangeLogModal";
+import { updateDateList } from "../utils/network";
+import { ComicContext } from "../context/ComicContext";
 import {
   HomeScreenComicButton,
   HomeScreenContinueButton,
-} from "../src/components/HomeScreenComponents";
+} from "../components/HomeScreenComponents";
 
 const window: ScaledSize = Dimensions.get("window");
 
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   mainPageButtonsContainer: {
     flex: 1,
-    width: "100%"
+    width: "100%",
   },
   comicButtonContainer: {
     // NOTE: container height set via window dimension because flex property wasn't working right
