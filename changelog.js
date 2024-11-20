@@ -1,7 +1,7 @@
 // Maybe change to a json file
 
 export const changeList = [
-  ["0.9.3"],
+  ["0.9.3", "Implement expo-router in place of react-navigation"],
   [
     "0.9.2",
     "Fix volume 10 page numbers",
