@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 60,
     borderBottomColor: "black",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   headerTitle: {
     textAlignVertical: "center",
