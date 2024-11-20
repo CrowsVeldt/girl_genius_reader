@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
   },
   mainPageButtonsContainer: {
     flex: 1,
+    width: "100%"
   },
   comicButtonContainer: {
     // NOTE: container height set via window dimension because flex property wasn't working right
