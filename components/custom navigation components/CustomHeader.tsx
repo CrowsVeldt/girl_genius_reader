@@ -10,6 +10,17 @@ import { PageType } from "../../utils/types";
 import { ComicContext } from "../../context/ComicContext";
 import PullToRefresh from "../gesture components/PullToRefresh";
 import BookmarkButton from "../control components/BookmarkButton";
+import { router } from "expo-router";
+
+const names: any = {
+  index: "Home",
+  bookmarks: "Bookmarks",
+  privacy: "Privacy",
+  acknowledgments: "Acknowledgments",
+  options: "Options",
+  message: "Message",
+  changelog: "Changelog",
+};
 
 export default function CustomHeader({
   navigation,
@@ -41,14 +52,12 @@ export default function CustomHeader({
       >
         <Text style={styles.buttonText}>≡</Text>
       </TouchableOpacity>
-      {routeName === "ComicPage" && (
+      {routeName === "comicpage" && (
         <View style={styles.volumeLink}>
           <TouchableOpacity
             onPress={() => {
               changeCurrentVolume(page.volumeNumber);
-              navigation.navigate("Volume", {
-                volumeNumber: page.volumeNumber,
-              });
+              router.push("volume");
             }}
           >
             <Text style={styles.headerTitle}>
@@ -58,14 +67,14 @@ export default function CustomHeader({
           <Text style={styles.headerTitle}>{` - Page ${page.pageNumber}`}</Text>
         </View>
       )}
-      {routeName === "Volume" && (
+      {routeName === "volume" && (
         <Text style={styles.headerTitle}>{`Volume ${volumeNumber}`}</Text>
       )}
-      {routeName !== "ComicPage" && routeName !== "Volume" && (
-        <Text style={styles.headerTitle}>{routeName}</Text>
+      {routeName !== "comicpage" && routeName !== "volume" && (
+        <Text style={styles.headerTitle}>{names[routeName]}</Text>
       )}
-      {routeName === "ComicPage" && <BookmarkButton page={page} />}
-      {routeName !== "ComicPage" && <View style={styles.placeholderBox}></View>}
+      {routeName === "comicpage" && <BookmarkButton page={page} />}
+      {routeName !== "comicpage" && <View style={styles.placeholderBox}></View>}
     </View>
   );
 }
@@ -77,6 +86,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: StatusBar.currentHeight,
     width: "100%",
+    height: 60,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
   headerTitle: {
     textAlignVertical: "center",

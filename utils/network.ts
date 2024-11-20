@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { retrieveData, saveData } from "./storage";
 import { lastElement, stringOfEightNumbers } from "./utilFunctions";
-import dates from "../../assets/dateList.json";
+import dates from "../assets/dateList.json";
 
 const rootUrl: string = "https://www.girlgeniusonline.com";
 

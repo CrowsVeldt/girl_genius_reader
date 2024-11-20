@@ -1,15 +1,10 @@
+import { router } from "expo-router";
 import { ContextType, useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { PageType } from "../../utils/types";
 import { ComicContext } from "../../context/ComicContext";
 
-export default function BookmarkLink({
-  page,
-  nav,
-}: {
-  page: PageType;
-  nav: any;
-}) {
+export default function BookmarkLink({ page }: { page: PageType }) {
   const {
     removeBookmark,
     changeCurrentPage,
@@ -21,7 +16,7 @@ export default function BookmarkLink({
         style={styles.linkButton}
         onPress={() => {
           changeCurrentPage(page);
-          nav.navigate("ComicPage");
+          router.push("comicpage");
         }}
       >
         <Text>{`Volume ${page.volumeNumber} - Page ${page.pageNumber}`}</Text>

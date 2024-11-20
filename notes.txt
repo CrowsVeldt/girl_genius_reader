@@ -1,15 +1,17 @@
 TODO: 
+- FIX: back button behaviour: changing page or volume screen should be pushed to the nav history
 - FIX: page numbers, allow for exceptions. finished volumes 1-10
 - PRIORITY: Fix zoom behaviour: Zoom should have animation, zoom should work reliably after page change
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
 - FIX: final volume number hardcoded in VolumeScreen.tsx
-- FIX: back button behaviour: changing page or volume screen should be pushed to the nav history
 - improve/fix test suite
 - Improve color contrast (re: android pre-publishing report)
 - Add accessibilityLabels to components
 - Add more informative errors with error codes, etc.
 - Add details for bug reports to message form, i.e.: type of bug
+- replace axios with expo/fetch api?
+- re-add volume submenu to drawer?
 
 BUG: if user double-taps immediately after changing comic page then panning will usually not work until user zooms out again
 - Add animation to opening and closing volumeSubMenu

@@ -105,6 +105,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         }
         if (savedCurrentPage != null) {
           setCurrentPage(savedCurrentPage);
+          setCurrentVolume(savedCurrentPage.volumeNumber);
         }
       } catch (error) {
         console.warn(
@@ -140,6 +141,7 @@ const ComicProvider = ({ children }: { children: any }) => {
         }
 
         setCurrentPage(page);
+        setCurrentVolume(page.volumeNumber);
         saveData(process.env.EXPO_PUBLIC_CURRENT_PAGE_KEY!, page);
       } else if (page === undefined) {
         throw new Error("Cannot change page to 'undefined'");

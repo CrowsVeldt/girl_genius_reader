@@ -1,4 +1,3 @@
-import { Link } from "expo-router";
 import { useContext } from "react";
 import {
   Dimensions,
@@ -10,57 +9,6 @@ import {
 import { ComicContext } from "../context/ComicContext";
 
 const window: ScaledSize = Dimensions.get("window");
-
-const HomeScreenButton = ({
-  children,
-  onPress,
-}: {
-  children: any;
-  onPress: any;
-}) => {
-  return (
-    <Pressable
-      style={({ pressed }) =>
-        pressed ? [styles.navButton, styles.buttonPressed] : styles.navButton
-      }
-      onPress={onPress}
-    >
-      {children}
-    </Pressable>
-  );
-};
-
-const HomeScreenNavButton = ({
-  navigation,
-  target,
-  title,
-}: {
-  navigation: any;
-  target: string;
-  title: string;
-}) => {
-  return (
-    <HomeScreenButton onPress={() => navigation.navigate(target)}>
-      <Text style={styles.navButtonText}>{title}</Text>
-    </HomeScreenButton>
-  );
-};
-
-const HomeScreenNavLink = ({
-  target,
-  title,
-}: {
-  target: string;
-  title: string;
-}) => {
-  return (
-    <HomeScreenButton onPress={null}>
-      <Link style={styles.realLink} href={target}>
-        {title}
-      </Link>
-    </HomeScreenButton>
-  );
-};
 
 const HomeScreenComicButton = ({
   onPress,
@@ -122,24 +70,6 @@ const styles = StyleSheet.create({
   comicButtonText: {
     textAlign: "center",
   },
-  navButton: {
-    justifyContent: "center",
-    borderWidth: 1,
-    height: window.height / 12,
-  },
-  navButtonText: {
-    textAlign: "center",
-  },
-  realLink: {
-    height: "100%",
-    textAlign: "center",
-    textAlignVertical: "center",
-  },
 });
 
-export {
-  HomeScreenComicButton,
-  HomeScreenContinueButton,
-  HomeScreenNavButton,
-  HomeScreenNavLink,
-};
+export { HomeScreenComicButton, HomeScreenContinueButton };

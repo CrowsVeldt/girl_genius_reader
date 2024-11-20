@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { retrieveData, saveData } from "../utils/storage";
 import { PreloadPolicyType, ScrollDirectionType } from "../utils/types";
-import { changeList } from "../../changelog";
+import { changeList } from "../changelog";
 
 type AppContextType = {
   changePreloadPolicy: (policy: PreloadPolicyType) => void;

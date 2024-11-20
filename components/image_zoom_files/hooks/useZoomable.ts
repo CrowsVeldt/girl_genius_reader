@@ -1,6 +1,6 @@
-import { useGestures } from "../hooks/useGestures";
-import { useZoomableLayout } from "../hooks/useZoomableLayout";
-import { useZoomableHandle } from "../hooks/useZoomableHandle";
+import { useGestures } from "./useGestures";
+import { useZoomableLayout } from "./useZoomableLayout";
+import { useZoomableHandle } from "./useZoomableHandle";
 import type { UseZoomableProps } from "../types";
 
 export const useZoomable = ({

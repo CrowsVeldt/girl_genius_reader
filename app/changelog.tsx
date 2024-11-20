@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { changeList } from "../../changelog";
+import { changeList } from "../changelog";
 import NetStatus from "../components/NetStatus";
 
 const changeLogItem = (item: string[], index: number) => {
