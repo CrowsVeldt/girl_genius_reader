@@ -5,13 +5,13 @@ import { ComicContext } from "../src/context/ComicContext";
 import BookmarkLink from "../src/components/link components/BookmarkLink";
 import NetStatus from "../src/components/NetStatus";
 
-export default function Bookmarks({ navigation }: any) {
+export default function Bookmarks() {
   const { getBookmarks }: ContextType<typeof ComicContext> =
     useContext(ComicContext);
   const bookmarks: PageType[] = getBookmarks();
 
   const renderItem = ({ item, index }: { item: PageType; index: number }) => (
-    <BookmarkLink key={index} page={item} nav={navigation} />
+    <BookmarkLink key={index} page={item} />
   );
 
   return (
