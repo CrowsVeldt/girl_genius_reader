@@ -42,7 +42,7 @@ export default function VolumeScreen() {
           onPress={() => {
             if (volume.volumeNumber - 1 !== 0) {
               changeCurrentVolume(volume.volumeNumber - 1);
-              router.push(`volume`);
+              router.push("volume");
             }
           }}
         >
@@ -67,7 +67,7 @@ export default function VolumeScreen() {
             // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
             if (volume.volumeNumber + 1 !== 26) {
               changeCurrentVolume(volume.volumeNumber + 1);
-              router.push(`volume`);
+              router.push("volume");
             }
           }}
         >

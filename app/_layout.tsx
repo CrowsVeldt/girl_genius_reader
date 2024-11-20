@@ -1,8 +1,8 @@
 import { Drawer } from "expo-router/drawer";
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AppProvider from "../context/AppContext";
 import ComicProvider from "../context/ComicContext";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomHeader from "../components/custom navigation components/CustomHeader";
 
 export default function Layout() {
@@ -21,7 +21,6 @@ export default function Layout() {
                 backgroundColor: process.env.EXPO_PUBLIC_LIGHT_DRAWER_COLOR,
               },
               header: ({ navigation, options, route, layout }) => (
-                // Custom header
                 <CustomHeader
                   navigation={navigation}
                   options={options}
