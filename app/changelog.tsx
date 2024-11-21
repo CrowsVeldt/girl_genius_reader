@@ -1,8 +1,8 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { changeList } from "../changelog";
 import NetStatus from "../components/NetStatus";
 
-const changeLogItem = (item: string[], index: number) => {
+const renderElement = (item: string[], index: number, separators: any) => {
   return (
     <View key={index} style={styles.changeItem}>
       <Text>{item[0]}</Text>
@@ -19,7 +19,12 @@ export default function ChangeLogScreen() {
   return (
     <SafeAreaView style={styles.screen}>
       <NetStatus />
-      {changeList.map((item, index) => changeLogItem(item, index))}
+      <FlatList
+        data={changeList}
+        renderItem={({ item, index, separators }) =>
+          renderElement(item, index, separators)
+        }
+      />
     </SafeAreaView>
   );
 }
