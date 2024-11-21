@@ -1,5 +1,5 @@
 import { Link, router } from "expo-router";
-import { useContext, useEffect } from "react";
+import { ContextType, useContext, useEffect } from "react";
 import {
   Dimensions,
   Pressable,
@@ -27,7 +27,7 @@ export default function Home() {
     getFirstPage,
     getLatestPage,
     triggerFinishedUpdate,
-  } = useContext(ComicContext);
+  }: ContextType<typeof ComicContext> = useContext(ComicContext);
 
   useEffect(() => {
     (async () => {
