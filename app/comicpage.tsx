@@ -56,6 +56,7 @@ export default function ComicPageScreen() {
             onLoadStart={() => {
               setLoaded(false);
               imageRef.current?.quickReset();
+              setPanEnabled(false);
             }}
             onLoadEnd={() => {
               setLoaded(true);
