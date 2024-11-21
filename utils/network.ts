@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import { fetch } from "expo/fetch";
 import { retrieveData, saveData } from "./storage";
 import { lastElement, stringOfEightNumbers } from "./utilFunctions";
 import dates from "../assets/dateList.json";
@@ -7,8 +7,8 @@ const rootUrl: string = "https://www.girlgeniusonline.com";
 
 export const getLatestDate: () => Promise<string | undefined> = async () => {
   try {
-    const { data }: AxiosResponse = await axios.get(`${rootUrl}/comic.php`);
-    const index: string = data.search("javascript:setPage");
+    const data: string = await (await fetch(`${rootUrl}/comic.php`)).text();
+    const index: number = data.search("javascript:setPage");
     const date: string = data.slice(index + 19, index + 27);
     if (stringOfEightNumbers(date)) {
       return date;
@@ -39,9 +39,9 @@ export const getNextComicDate: (
 ) => Promise<string | undefined> = async (date) => {
   try {
     // fetch page markup
-    const { data }: AxiosResponse = await axios.get(
-      `${rootUrl}/comic.php?date=${date}`
-    );
+    const data: string = await (
+      await fetch(`${rootUrl}/comic.php?date=${date}`)
+    ).text();
     // get next date
     const index: number = data.search("topnext");
     const nextDate: string = data.slice(index - 14, index - 6);
@@ -104,12 +104,10 @@ export const updateDateList: () => Promise<string[] | undefined> = async () => {
           // 20141226a-20141226b (a is the comic, b is a wallpaper)
           dateList.push("20141226a");
           dateList.push("20141226b");
-        } 
-        else if (nextDate === "20151127") {
-          dateList.push("20151127a")
-          dateList.push("20151127b")
-        }
-        else if (nextDate === "20240211") {
+        } else if (nextDate === "20151127") {
+          dateList.push("20151127a");
+          dateList.push("20151127b");
+        } else if (nextDate === "20240211") {
           // no comic for this date
           console.log("Nothing to add");
         } else if (nextDate === "20241023") {
