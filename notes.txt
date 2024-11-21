@@ -1,4 +1,5 @@
 TODO: 
+- make changelog items collapsed by default except the first
 - FIX: page numbers, allow for exceptions. finished volumes 1-10
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
 - FIX: changelog popup not appearing
@@ -20,8 +21,6 @@ BUG: if user double-taps immediately after changing comic page then panning will
 
 Ideas:
 - make it so the user doesn't have to uninstall/reinstall to get an updated datelist
-- have changelog entries collapsed by default, click to open
-- make changelog a scroll list
 - add a temporary currentPage constant to comicContext, to allow for jumping to different pages and then returning easily
 - Have first and last comic navigation buttons not update the main current comic page?
 - trigger popup when send button is pressed on messagescreen, asking the user if they are really ready to send the message
@@ -258,3 +257,5 @@ x VolumeScreen contols:
 x - next/prev buttons should change color onPress.
 x - up/down buttons, remove the background, reduce opacity onPress
 x replace axios with expo/fetch api?
+x make changelog a scroll list
+x have changelog entries collapsed by default, click to open

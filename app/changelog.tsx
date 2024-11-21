@@ -1,16 +1,37 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { changeList } from "../changelog";
 import NetStatus from "../components/NetStatus";
+import { useState } from "react";
 
-const renderElement = (item: string[], index: number, separators: any) => {
+const RenderElement = ({
+  item,
+  index,
+  separators,
+}: {
+  item: string[];
+  index: number;
+  separators: any;
+}) => {
+  const [open, setOpen] = useState<boolean>(true);
   return (
     <View key={index} style={styles.changeItem}>
-      <Text>{item[0]}</Text>
-      <View style={styles.subItem}>
-        {item.slice(1).map((subItem, index) => (
-          <Text key={`item${index}`}>{`-- ${subItem}`}</Text>
-        ))}
-      </View>
+      <Pressable onPress={() => setOpen(!open)} style={{ width: "80%" }}>
+        <Text>{item[0]}</Text>
+        {open && (
+          <View style={styles.subItem}>
+            {item.slice(1).map((subItem, index) => (
+              <Text key={`item${index}`}>{`-- ${subItem}`}</Text>
+            ))}
+          </View>
+        )}
+      </Pressable>
     </View>
   );
 };
@@ -21,9 +42,9 @@ export default function ChangeLogScreen() {
       <NetStatus />
       <FlatList
         data={changeList}
-        renderItem={({ item, index, separators }) =>
-          renderElement(item, index, separators)
-        }
+        renderItem={({ item, index, separators }) => (
+          <RenderElement item={item} index={index} separators={separators} />
+        )}
       />
     </SafeAreaView>
   );
