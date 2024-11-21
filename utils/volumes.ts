@@ -1,4 +1,4 @@
-import { fetch } from "expo/fetch";
+import {fetch} from "expo/fetch"
 import {
   DateAndTitleType,
   ListCollectionType,
@@ -10,7 +10,7 @@ import { getPageNumber } from "./pageNumbers";
 const getTitles: () => Promise<string | undefined> = async () => {
   try {
     const data: string = await (
-      await fetch("http://www.girlgeniusonline.com/comic.php?date=20021104")
+      await fetch(`${process.env.EXPO_PUBLIC_ROOT_URL}/comic.php?date=20021104`)
     ).text();
     const startIndex: number = data.indexOf("<option value='20021104'>");
     const endIndex: number = data.indexOf("---Jump to a Scene---<");

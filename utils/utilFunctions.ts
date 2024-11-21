@@ -24,4 +24,4 @@ export const stringOfEightNumbers: (str: string) => boolean = (str) => {
 };
 
 export const comicUrl: (date: string) => string = (date) =>
-  `https://www.girlgeniusonline.com/ggmain/strips/ggmain${date}.jpg`;
+  `${process.env.EXPO_PUBLIC_ROOT_URL}/ggmain/strips/ggmain${date}.jpg`;
