@@ -1,4 +1,4 @@
-import {fetch} from "expo/fetch"
+import { fetch } from "expo/fetch";
 import {
   DateAndTitleType,
   ListCollectionType,

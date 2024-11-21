@@ -13,7 +13,7 @@ export const getLatestDate: () => Promise<string | undefined> = async () => {
     if (stringOfEightNumbers(date)) {
       return date;
     } else {
-      throw new Error("not a proper number");
+      throw new Error("Not a string of eight numbers");
     }
   } catch (error) {
     console.warn("Error in getLatestDate function");
