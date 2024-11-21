@@ -8,9 +8,9 @@ TODO:
 - Add accessibilityLabels to components
 - Add more informative errors with error codes, etc.
 - Add details for bug reports to message form, i.e.: type of bug
-- replace axios with expo/fetch api?
 - re-add volume submenu to drawer?
 - FIX: back button behaviour: changing page or volume screen should be pushed to the nav history
+- remove exception list from updateDateList, it's just a waste of space since the date list is bundled with the app
 
 TOCHECK: 
 - Still relevent? Fix zoom behaviour: Zoom should have animation, zoom should work reliably after page change
@@ -257,3 +257,4 @@ x FIX: volume 9 should start with "cover" and then go to page 1
 x VolumeScreen contols: 
 x - next/prev buttons should change color onPress.
 x - up/down buttons, remove the background, reduce opacity onPress
+x replace axios with expo/fetch api?

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import { fetch } from "expo/fetch";
 import {
   DateAndTitleType,
   ListCollectionType,
@@ -9,12 +9,12 @@ import { getPageNumber } from "./pageNumbers";
 
 const getTitles: () => Promise<string | undefined> = async () => {
   try {
-    const page: AxiosResponse = await axios.get(
-      `http://www.girlgeniusonline.com/comic.php?date=20021104`
-    );
-    const startIndex: number = page?.data.indexOf("<option value='20021104'>");
-    const endIndex: number = page?.data.indexOf("---Jump to a Scene---<");
-    const titles: string = page?.data.substring(startIndex, endIndex);
+    const data: string = await (
+      await fetch("http://www.girlgeniusonline.com/comic.php?date=20021104")
+    ).text();
+    const startIndex: number = data.indexOf("<option value='20021104'>");
+    const endIndex: number = data.indexOf("---Jump to a Scene---<");
+    const titles: string = data.substring(startIndex, endIndex);
     return titles;
   } catch (error) {
     console.warn("Error getting titles ");

@@ -3,7 +3,8 @@
 export const changeList = [
   [
     "0.9.3",
-    "Implement expo-router in place of react-navigation",
+    "Replace react-navigation with expo-router",
+    "Replace axios with expo/fetch",
     "Regression: Volume submenu in drawer doesn't work with expo router",
   ],
   [
