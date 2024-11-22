@@ -19,7 +19,7 @@ const RenderElement = ({
   index: number;
   separators: any;
 }) => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(index === 0 ? true : false);
   return (
     <View key={index} style={styles.changeItem}>
       <Pressable onPress={() => setOpen(!open)} style={{ width: "80%" }}>
