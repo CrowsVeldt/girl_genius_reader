@@ -1,7 +1,6 @@
 TODO: 
 - FIX: page numbers, allow for exceptions. finished volumes 1-10
 - FIX: check message box for unsafe/bad input: Escape code, ignore trailing whitespace, etc.
-- FIX: final volume number hardcoded in VolumeScreen.tsx
 - improve/fix test suite
 - Improve color contrast (re: android pre-publishing report)
 - Add accessibilityLabels to components
@@ -259,3 +258,4 @@ x make changelog a scroll list
 x have changelog entries collapsed by default, click to open
 x make changelog items collapsed by default except the first
 x remove exception list from updateDateList, it's just a waste of space since the date list is bundled with the app
+x FIX: final volume number hardcoded in VolumeScreen.tsx

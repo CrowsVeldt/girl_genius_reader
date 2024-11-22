@@ -23,11 +23,13 @@ export default function VolumeScreen() {
     getVolume,
     getCurrentVolume,
     changeCurrentVolume,
+    getLatestVolumeNumber,
   }: ContextType<typeof ComicContext> = useContext(ComicContext);
 
   const [image, setImage] = useState<boolean>(true);
 
   const volume: VolumeType = getVolume(getCurrentVolume());
+  const latestVolumeNumber: number = getLatestVolumeNumber();
 
   return (
     <SafeAreaView style={styles.page}>
@@ -65,7 +67,7 @@ export default function VolumeScreen() {
           }
           onPress={() => {
             // TOFIX!!!!! FINAL VOLUME NUMBER HARDCODED! FIX THIS!!!!
-            if (volume.volumeNumber + 1 !== 26) {
+            if (volume.volumeNumber + 1 <= latestVolumeNumber) {
               changeCurrentVolume(volume.volumeNumber + 1);
               router.push("volume");
             }
