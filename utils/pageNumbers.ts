@@ -98,17 +98,44 @@ export const getPageNumber: (
       break;
     case 10:
       if (pageIndex > 52 && pageIndex < 67) {
-        return (pageIndex - 1).toString()
+        return (pageIndex - 1).toString();
       } else if (pageIndex > 67 && pageIndex < 80) {
-        return `${pageIndex - 66}m`
+        return `${pageIndex - 66}m`;
       } else if (pageIndex > 79) {
-        return (pageIndex - 13).toString()
+        return (pageIndex - 13).toString();
+      } else if (pageIndex === 52) {
+        return "EXHIBITION";
       }
-      else if (pageIndex === 52) {
-        return "EXHIBITION"
-      } 
       break;
     case 11:
+      if (pageIndex > 46 && pageIndex < 75) {
+        return (pageIndex -1).toString()
+      } else if (pageIndex > 75 && pageIndex < 116) {
+        return (pageIndex - 2) .toString()
+      }
+      else if (pageIndex > 116 && pageIndex < 122) {
+        return (pageIndex - 3).toString()
+      }
+      else if (pageIndex > 119 && pageIndex < 135){
+        return (pageIndex - 7).toString()
+      }
+      else if (pageIndex > 135) {
+        return (pageIndex - 8).toString()
+      }
+      else if (pageIndex === 46) {
+        return "41b";
+        // after 41b return pageindex -1
+      } else if (pageIndex === 75) {
+        return "Hugo #2";
+        // numbering changes after page 115
+      } 
+      else if (pageIndex === 116) {
+        return "109b"
+      }
+      else if (pageIndex === 135) {
+        // page "136" is hugo acceptance speech #3
+        return "Hugo #3";
+      }
       break;
     case 12:
       break;

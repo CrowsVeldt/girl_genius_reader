@@ -3,6 +3,7 @@
 export const changeList = [
   [
     "0.9.3",
+    "Fix volume 11 page numbers",
     "Replace react-navigation with expo-router",
     "Replace axios with expo/fetch",
     "Make changelog a scrollable list",
